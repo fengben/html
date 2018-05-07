@@ -1,0 +1,972 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+ <!--<![endif]-->
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui" />
+  <meta name="author" content="(#)" />
+  <meta name="keywords" content=",在线教育,网校搭建,网校,网络教育,远程教育,云网校,在线学习,在线考试" />
+  <meta name="description" content="是一家专注“在线教育平台”的互联网公司，在国内属顶级在线教育解决方案提供商中的领跑者。为中、小型客户提供领先的在线教育平台方案服务。" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta content="telephone=no" name="format-detection" />
+  <link rel="shortcut icon" href="#" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/global.css" />
+  <link rel="stylesheet" type="text/css" href="css/web.css" />
+  <link rel="stylesheet" type="text/css" href="css/theme.css" />
+  <link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)" />
+  <title>首页-武汉大学出版社-中国在线教育平台第一品牌</title>
+  <!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
+  <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="js/webutils.js"></script>
+  <script type="text/javascript" src="js/headerh5searchcommon.js"></script>
+  <script type="text/javascript" src="js/header.js"></script>
+  <script type="text/javascript" src="js/login.js"></script>
+  <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+
+  <style type="text/css">
+    .n-i-m-bottom{display: block}
+    tt.vam.f-fM,a.bg.mr30.fsize14.f-fM,a.ku.fszie14.f-fM,input#u-email,input#u-password{font-family: "Microsoft YaHei", "Helvetica Neue", Helvetica, "Hiragino Sans GB",  Arial, sans-serif}
+    input#u-email{width: 200px}
+    input#u-password{width: 200px}
+    ol.e-login-options{margin-left: 15px;margin-top: 20px}
+    div.d3-b-r-top{background: #fff}
+    .d3-ba-r-login .c-fff{color: #212121}
+    em.icon20.d3-b-r-zx-ico{color: #212121}
+    div.d3-ba-r-login.undis{background: #fff}
+	</style>
+  <script type="text/javascript">
+  function killErrors() {
+  return true;
+  }
+  window.onerror = killErrors;
+
+  jQuery(document).ready(function() {
+  //首页轮播图展示
+  var recentHomeRotationMap = new Array();
+  var  HomeRotationMapResult = function () {
+
+  jQuery("#HomeRotationMap").html(recentHomeRotationMap[0]);
+
+  }
+  getFromWS("frontmooc/getPictureList.template", recentHomeRotationMap, HomeRotationMapResult);
+
+  //推荐194所高校
+  var recentUniversity =new Array();
+  var processUnResult = function () {
+
+  jQuery("#AllUniversity").html(recentUniversity[0]);
+  }
+  getFromWS("frontmooc/getUniversity.template", recentUniversity, processUnResult);
+  //	心理学"全部"部分图片展示
+  var recentPsychology = new Array();
+  var processPsyResult = function () {
+
+  jQuery("#AllPsychology").html(recentPsychology[0]);
+  jQuery("#FirstPsychology").html(recentPsychology[1]);
+  jQuery("#SecondPsychology").html(recentPsychology[2]);
+  jQuery("#ThirdPsychology").html(recentPsychology[3]);
+  }
+  getFromWS("frontmooc/getRecentPsychology.template", recentPsychology, processPsyResult);
+  //建筑师“全部”部分图片展示
+  var recentArchitect = new Array();
+  var processArchitectResult = function () {
+
+  jQuery("#AllArchitect").html(recentArchitect[0]);
+
+  }
+  getFromWS("frontmooc/getRecentArchitect.template", recentArchitect, processArchitectResult);
+  //建筑师一级、二级图片展示
+  var recentFirstArchitect = new Array();
+  var processFirstArchitectResult = function () {
+
+  jQuery("#FirstArchitect").html(recentFirstArchitect[0]);
+  jQuery("#SecondArchitect").html(recentFirstArchitect[1]);
+
+  }
+  getFromWS("frontmooc/getRecentFirstArchitect.template", recentFirstArchitect, processFirstArchitectResult);
+  //会计部分
+  var recentAccounting = new Array();
+  var processAccountingResult = function () {
+
+  jQuery("#AllAccounting").html(recentAccounting[0]);
+  jQuery("#AccountingBasis").html(recentAccounting[1]);
+  jQuery("#FinancialRegulations").html(recentAccounting[2]);
+
+  }
+  getFromWS("frontmooc/getRecentAccounting.template", recentAccounting, processAccountingResult);
+
+  //名师讲坛
+  var recentTeacher =new Array();
+  var processTeResult = function () {
+  jQuery("#AllTeacher").html(recentTeacher[0]);
+  }
+  // alert(recentTeacher);
+  getFromWS("frontmooc/getTeacher.template", recentTeacher, processTeResult);
+
+  //新闻资讯
+  var recentNewsConsulting = new Array();
+  var  NewsConsultingResult = function () {
+
+  jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
+  jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
+  }
+  getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
+  });
+
+
+        function userlogin() {
+
+            var loginName = $("#u-email").val();
+            var password = $("#u-password").val();
+            var autoThirty = $("#autoThirty").prop("checked");
+            $("#u-email").next().html('');
+            $("#u-password").next().html('');
+            $(".e-l-jy").html('');
+
+            function passResult(results) {
+                var fig = results[0].substring(0, 6);
+                if (fig == "failed") {
+                    alert("登录失败：" + results[0].substring(7));
+                } else {
+                    alert('success')
+                    if (jumpType == 'ucIndex') {
+                        window.location.href = "/uc/index";
+                    } else if (jumpType == 'reload') {
+                        window.location.reload();
+                    } else {
+                        $("#dClose").click();
+                        showUserInfo();//Í·²¿ÏÔÊ¾ÓÃ»§ÐÅÏ¢
+                        if ($("#limitLogin").val() == "ON") {
+                            //¼ÓÔØÏÞÖÆµÇÂ¼js
+                            limitLogin();
+                        }
+                    }
+                    // location.href="articleManagement.html";
+                }
+            }
+
+            // var loginName = "admin";//用户名
+            // var password = "qwer1234";//密码
+
+            login(loginName, password, passResult);  //登录login
+        }
+
+
+  </script>
+ </head>
+ <body class="W-body">
+  <div class="dialogWrap" id="loginfrom" style="position: absolute; overflow-x: hidden; overflow-y: auto; top: 264.5px; margin-left: -193px; display:none">
+   <div class="dialog-ele new-loigin">
+    <h4 class="d-s-head pr new-header" style="width: 380px;"><a id="dClose" onclick="closewin()" href="javascript:void(0)" title="关闭" class="dClose icon16 pa new-close">&nbsp;</a><span id="d-s-head-tab" class="d-s-head-tab">
+      <a href="javascript:void(0)" onclick="dialoglogin(this)" class="current">登录</a>
+      <a href="javascript:void(0)" onclick="dialogRegister(this)">注册</a></span></h4>
+    <div class="of">
+     <div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
+      <div id="d-s-head-cont" class="lrWrap">
+       <section class="dis e-login-ele" id="dl">
+        <div class="mt10">
+         <p class="e-l-jy"></p>
+        </div>
+        <div>
+         <ol class="e-login-options">
+          <li> <em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden" /> <input id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value="" onkeyup="$(this).next().html('');" type="text" /> <p class="lr-tip-wrap"></p> </li>
+          <li> <em class="zc-ico zc-dl-ioc"> </em> <input id="u-password" placeholder="请输入密码" name="" value="" onkeyup="$(this).next().html('');" type="password" /> <p class="lr-tip-wrap"></p> </li>
+         </ol>
+         <section class="hLh30 of pl10">
+          <label class="hand c-999 vam fl"> <input id="autoThirty" style="vertical-align: -2px;" checked="checked" type="checkbox" /> 自动登录 </label>
+          <a class="vam ml10 c-blue fr" title="" href="/front/passwordRecovery">忘记密码?</a>
+         </section>
+         <section class="mt20 tac mb50">
+          <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="dialogLogin()">登 录</a>
+         </section>
+        </div>
+       </section>
+       <section class="undis e-login-ele" id="zc" style="display: none;">
+        <div class="mt10">
+         <p class="e-l-jy"></p>
+        </div>
+        <div>
+         <ol class="e-login-options">
+          <li> <em class="lo-ico zc-dl-ioc"> </em> <input id="u-name-reg" placeholder="请输入账号" name="registerName" maxlength="50" value="" onkeyup="$(this).next().html('');" type="text" /> <p class="lr-tip-wrap"></p> </li>
+          <li> <em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-reg" placeholder="请输入密码" name="" value="" onkeyup="$(this).next().html('');" type="password" /> <p class="lr-tip-wrap"></p> </li>
+          <li> <p class="lr-tip-wrap" style="clear: both;"></p> </li>
+         </ol>
+         <section class="tac mt20">
+          <a class="e-login-btn" href="javascript: void(0)" onclick="dialogRegister()" title="注 册">注 册</a>
+         </section>
+        </div>
+       </section>
+       <div class="mt20 sf-lr-wrap tac">
+        <h6 class="hLh20 mb15"> <span class="c-666 fsize14">第三方快捷登录</span> </h6>
+        <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
+        <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
+        <a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <input type="hidden" id="mydomain" value="" />
+  <div class="in-wrap">
+   <div class="main-warp">
+    <div class="main-infor">
+     <!-- 公共头引入 -->
+     <!-- /global header begin-->
+     <header id="header-3" class="all-header">
+      <section class="hear-3-bottom">
+       <div class="container">
+        <h1 class="logo-3"> <a class="headerlogo" style="display: none;" href="#" title="武汉大学出版社"> <img src="picture/logo.png" width="170" alt="武汉大学出版社" /> </a> <a class="headerfanhui" style="display: none" href="javascript:void (0)" onclick="goHistory('')" title="武汉大学出版社"> <img src="picture/mo-back-3.png" /> </a> </h1>
+        <div class="h3-nav clearfix">
+         <div>
+          <aside class="fr">
+           <section class="search-3">
+            <div class="s-3-infor">
+             <form action="showcoulist.html" method="post" id="headerformSearch">
+              <input type="text" value="" id="headerSearchName" name="queryCourse.courseName" placeholder="请输入要查找的内容" />
+              <a href="javascript:$('#headerformSearch').submit()" type="submit" title="搜索" class="seach-3-btn"> <img src="picture/d3-shear-ico.png" /> </a>
+             </form>
+            </div>
+           </section>
+          </aside>
+          <ul class="h3-n-list clearfix fl">
+           <li><a href="default.html" title="首页">首页</a></li>
+           <li><a href="showcoulist.html" title="录播">课程</a></li>
+           <li><a href="shoollist.html" title="直播">名校</a></li>
+           <li><a href="teacherlist.html" title="班级">名师</a></li>
+           <li><a href="group.html" title="社区" target="_blank">学问</a></li>
+           <li><a href="article.html" title="资讯">资讯</a></li>
+          </ul>
+         </div>
+         <div class="n-item-menu undis">
+          <section class="n-item-left">
+           <div class="n-i-m-top">
+            <a href="javascript:void(0)"> <em class="icon20 n-i-kcall">&nbsp;</em> <tt class="vam f-fM">全部课程</tt> </a>
+           </div>
+           <div class="n-i-m-bottom">
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">计算机</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=211">OFFCIE</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=213">程序设计</a>
+              </div>
+             </div>
+            </section>
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">心理学</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=648">心理咨询一级</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=259">心理咨询二级</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=260">心理咨询三级</a>
+              </div>
+             </div>
+            </section>
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">会计</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=251">会计基础</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=256">财经法规</a>
+              </div>
+             </div>
+            </section>
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">生命科学</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=320">工业生态学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=323">国际名酒知识与品鉴</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=321">动物组织胚胎学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=328">医用物理学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=322">生物演化</a>
+              </div>
+             </div>
+            </section>
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">工学</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=326">工程热力学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=329">工程力学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=325">流体力学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=324">电机学</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=314">混凝土结构设计原理</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=327">高速铁路信号系统</a>
+              </div>
+             </div>
+            </section>
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">理学</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=317">基础化学实验（分析化学）</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=318">化学创造美好生活</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=319">数学竞赛选讲</a>
+              </div>
+             </div>
+            </section>
+            <section class="i-j-item i-j-it-all" style="visibility: hidden">
+             <div class="i-j-item-bx">
+              <div class="i-j-it-txt">
+               <span class="i-j-item-first-span fsize16 c-fff">IT互联网</span>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=250">计算机等级</a>
+               <a class="i-j-item-first-a fsize12 c-fff" href="showcoulist.html?queryCourse.subjectId=261">网络营销</a>
+              </div>
+             </div>
+            </section>
+            <section class="n-i-m-more i-j-it-all">
+             <div class="i-j-item-bx">
+              <div class="DT-arrow">
+               <em>◆</em>
+               <span>◆</span>
+              </div>
+              <a class="f-fM" href="showcoulist.html">更多课程</a>
+             </div>
+            </section>
+           </div>
+          </section>
+          <section class="n-item-right n-item-right-op">
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">建筑师</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=211" class="c-666 fsize14 f-fM">一级建造师<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=213" class="c-666 fsize14 f-fM">二级建造师</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">心理学</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=648" class="c-666 fsize14 f-fM">心理咨询一级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=259" class="c-666 fsize14 f-fM">心理咨询二级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=260" class="c-666 fsize14 f-fM">心理咨询三级</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">会计</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=251" class="c-666 fsize14 f-fM">会计基础<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=256" class="c-666 fsize14 f-fM">财经法规</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">程序</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=320" class="c-666 fsize14 f-fM">C#<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=323" class="c-666 fsize14 f-fM">java<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=321" class="c-666 fsize14 f-fM">VB<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=328" class="c-666 fsize14 f-fM">数据库<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=322" class="c-666 fsize14 f-fM">c++</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">心理</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=326" class="c-666 fsize14 f-fM">心理咨询一级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=329" class="c-666 fsize14 f-fM">心理咨询一级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=325" class="c-666 fsize14 f-fM">心理咨询一级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=324" class="c-666 fsize14 f-fM">心理咨询一级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=314" class="c-666 fsize14 f-fM">心理咨询一级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=327" class="c-666 fsize14 f-fM">心理咨询一级</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">数学</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM">数学竞赛选讲<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=318" class="c-666 fsize14 f-fM">数学论文<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=319" class="c-666 fsize14 f-fM">大数据分析</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+           <div class="j-cateright-wrap">
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+               <span class="c-master fsize16 f-fM">IT互联网</span>
+               <span class="f-fM fsize14 v-i-tab-line">|</span>
+              </dt>
+              <dd>
+               <a href="showcoulist.html?queryCourse.subjectId=250" class="c-666 fsize14 f-fM">计算机等级<tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?queryCourse.subjectId=261" class="c-666 fsize14 f-fM">网络营销</a>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+           </div>
+          </section>
+         </div>
+         <div class="d3-ba-r-login undis" style="width:300px">
+          <div class="d3-b-r-top">
+           <div class="d3-b-r-t-in">
+            <div>
+             <ol class="e-login-options">
+              <li> <em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden" /> <input id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value="" onkeyup="$(this).next().html('');" type="text" /> <p class="lr-tip-wrap"></p> </li>
+              <li> <em class="zc-ico zc-dl-ioc"> </em> <input id="u-password" placeholder="请输入密码" name="" value="" onkeyup="$(this).next().html('');" type="password" /> <p class="lr-tip-wrap"></p> </li>
+             </ol>
+            </div>
+           </div>
+          </div>
+          <div class="d3-b-r-bottom">
+           <section class="d3-b-r-b-in">
+            <div class="undis loginedLiShow">
+             <img src="#" class="pic vam picImg" />
+             <span class="name fszie14 f-fM c-666 vam"></span>
+            </div>
+            <div class="tac undis d3-b-r-btn mt20 no-login" style="display: block;">
+             <a href="javascript:showlogin()" class="bg mr30 fsize14 f-fM" title="登录" style="margin-right:80px;padding:5px 30px">登录</a>
+             <a href="javascript:showlogin()" class="ku fszie14 f-fM" title="注册" style="padding:5px 30px">注册</a>
+            </div>
+            <div class="tac undis d3-b-r-btn mt20 loginedLiShow">
+             <a href="javascript:exit()" class="ku fszie14 f-fM" title="退出">退出</a>
+            </div>
+           </section>
+          </div>
+         </div>
+         <aside class="mw-nav-btn">
+          <div class="mw-nav-icon"></div>
+         </aside>
+         <aside class="mw-nav-seach mw-nav-seach-d2 mw-nav-seach-d3">
+          <form action="http://wx..com" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+           <label> <input type="text" value="" placeholder="" class="f-fM h1-mw-seach-input i_h_gb_s_input" /> <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a> </label>
+          </form>
+          <div class="exam-mo-test-time tac">
+           <span class="time c-fff f-fM vam examTimer"></span>
+           <a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
+          </div>
+         </aside>
+         <div class="clear"></div>
+        </div>
+       </div>
+      </section>
+     </header>
+     <!-- /global header end-->
+     <!-- 公共头引入 -->
+     <!-- 模板切换 -->
+     <style>
+	.mbqh-qt{width:32px;position: fixed;top:70px;left: 0;z-index: 9999999;}
+	.mbqh-qt ul li{display: block;width: 34px;height: 82px;position: absolute;}
+	.mbqh-qt ul li a {color: #fff;display: block;font-size: 14px;line-height: 18px;margin-top: 14px;padding: 0 0 0 6px;width: 20px;}
+	.mbqh-qt ul li.li-1{background: url("images/li-3.png") no-repeat top left;z-index: 99;top:0px;right: 0;}
+	.mbqh-qt ul li.li-2{background: url("images/li-3.png") no-repeat top left;z-index: 100;top:75px;right: 0;}
+	.mbqh-qt ul li.li-3{background: url("images/li-3.png") no-repeat top left;z-index: 101;top:150px;right: 0;}
+
+	.mbqh-qt ul li.li-1:hover,.mbqh-qt ul li.li-1.current{background: url("images/li-3-xz.png") no-repeat top left;}
+	.mbqh-qt ul li.li-2:hover,.mbqh-qt ul li.li-2.current{background: url("images/li-3-xz.png") no-repeat top left;}
+	.mbqh-qt ul li.li-3:hover,.mbqh-qt ul li.li-3.current{background: url("images/li-3-xz.png") no-repeat top left;}
+	.mbqh-qt ul li:hover a{text-decoration: none;}
+</style>
+     <div class="i-slide banner-slide">
+      <section>
+       <!-- 如果需要导航按钮 -->
+       <a class="arrow-left s-arrow" href="javascript:void(0)"></a>
+       <a class="arrow-right s-arrow" href="javascript:void(0)"></a>
+       <!-- 图片位置 -->
+       <div class="swiper-container">
+        <div class="swiper-wrapper" id="HomeRotationMap">
+        </div>
+       </div>
+       <!-- 如果需要分页器 -->
+       <div class="pagination"></div>
+      </section>
+     </div>
+     <!-- /index slide -->
+     <div id="aCoursesList" class="of index-bg">
+      <!-- /直播课程 开始 -->
+      <div class="of bg-f8">
+       <section class="container">
+        <header class="comm-title">
+         <span class="fr mt20 mr10 hyh"><a href="javascript:void(0)" title="查看更多" class="c-master fsize14" onclick="window.location.href='shoollist.html'">更多&gt;&gt;</a></span>
+         <h2 class="fl tac tit-header"> <span class="c-333">全部194所合作高校 </span> </h2>
+        </header>
+        <div>
+         <article class="comm-course-list of demo2-i-live-list demo3-i-live-list">
+          <ul class="of" id="AllUniversity">
+           <li>
+            <div class="cc-l-wrap in-live-ing">
+             <div class="d3-liv-in-zt">
+             </div>
+             <div class="cc-l-wrap-top">
+              <section class="course-img">
+               <a href="shool.html"> <img xsrc="picture/bj.png" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt=" " /> </a>
+              </section>
+              <section class="d3-lv-in-b">
+               <h3 class="hLh30 txtOf mt5"> <a class="course-title fsize16 c-333" title=" " href="shool.html">北京大学</a> </h3>
+               <section class="mt10 hLh20 of">
+                <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
+               </section>
+              </section>
+             </div>
+            </div> </li>
+           <li>
+            <div class="cc-l-wrap in-live-ing">
+             <div class="d3-liv-in-zt">
+             </div>
+             <div class="cc-l-wrap-top">
+              <section class="course-img">
+               <a href="shool.html"> <img xsrc="picture/mz.png" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt=" " /> </a>
+              </section>
+              <section class="d3-lv-in-b">
+               <h3 class="hLh30 txtOf mt5"> <a class="course-title fsize16 c-333" title=" " href="shool.html">浙江大学</a> </h3>
+               <section class="mt10 hLh20 of">
+                <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
+               </section>
+              </section>
+             </div>
+            </div> </li>
+           <li>
+            <div class="cc-l-wrap in-live-ing">
+             <div class="d3-liv-in-zt">
+             </div>
+             <div class="cc-l-wrap-top">
+              <section class="course-img">
+               <a href="shool.html"> <img xsrc="picture/wh.png" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt=" " /> </a>
+              </section>
+              <section class="d3-lv-in-b">
+               <h3 class="hLh30 txtOf mt5"> <a class="course-title fsize16 c-333" title=" " href="shool.html">武汉大学</a> </h3>
+               <section class="mt10 hLh20 of">
+                <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
+               </section>
+              </section>
+             </div>
+            </div> </li>
+           <li>
+            <div class="cc-l-wrap in-live-ing">
+             <div class="d3-liv-in-zt">
+             </div>
+             <div class="cc-l-wrap-top">
+              <section class="course-img">
+               <a href="shool.html"> <img xsrc="picture/hgd.png" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt=" " /> </a>
+              </section>
+              <section class="d3-lv-in-b">
+               <h3 class="hLh30 txtOf mt5"> <a class="course-title fsize16 c-333" title=" " href="shool.html">哈尔滨大学</a> </h3>
+               <section class="mt10 hLh20 of">
+                <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
+               </section>
+              </section>
+             </div>
+            </div> </li>
+          </ul>
+         </article>
+        </div>
+       </section>
+      </div>
+      <!-- /直播课程 结束 -->
+      <!-- /班级 开始 -->
+      <div class="of bg-f8">
+       <section class="container">
+        <header class="comm-title">
+         <span class="fr mt15 mr10 hyh"><a href="classlist" title="更多" class="c-master fsize14">更多 &gt;</a></span>
+         <h2 class="fl tac tit-header"> <span class="c-333">推荐课程</span> </h2>
+        </header>
+        <div>
+         <article class="comm-course-list">
+          <ul id="goodClass" class="current">
+           <li>
+            <div class="cc-l-wrap">
+             <section class="course-img">
+              <a href="couinfo.html?id=/169"> <img xsrc="picture/1519464066951.jpg" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt="心理学培训班" /> </a>
+             </section>
+             <div class="coure-bg-g">
+              <h3 class="hLh30 txtOf"> <a href="couinfo.html?id=/169" title="心理学培训班" class="course-title fsize16 c-333">心理学培训班</a> </h3>
+              <section class="mt10 hLh20 of">
+               <div class="fl">
+                <span class="c-666 fsize12 f-fM vam">开班时间：</span>
+                <span class="c-666 fsize12 f-fM vam">03-16---05-03</span>
+               </div>
+              </section>
+              <section class="mt10 hLh20 of">
+               <span class="fr"><tt class="c-green fsize12 f-fA">免费</tt></span>
+               <span class="fl jgAttr c-ccc f-fA"> <tt class="c-999 f-fA mr10">0人购买</tt> <tt class="c-999 f-fA span-2">0浏览</tt> </span>
+              </section>
+             </div>
+            </div> </li>
+           <li>
+            <div class="cc-l-wrap">
+             <section class="course-img">
+              <a href="couinfo.html?id=/173"> <img xsrc="picture/1519466305824.jpg" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt="建设工程法规学习班" /> </a>
+             </section>
+             <div class="coure-bg-g">
+              <h3 class="hLh30 txtOf"> <a href="couinfo.html?id=/173" title="建设工程法规学习班" class="course-title fsize16 c-333">建设工程法规学习班</a> </h3>
+              <section class="mt10 hLh20 of">
+               <div class="fl">
+                <span class="c-666 fsize12 f-fM vam">开班时间：</span>
+                <span class="c-666 fsize12 f-fM vam">02-28---03-28</span>
+               </div>
+              </section>
+              <section class="mt10 hLh20 of">
+               <span class="fr"><tt class="c-master fsize14 f-fM">￥10.00</tt></span>
+               <span class="fl jgAttr c-ccc f-fA"> <tt class="c-999 f-fA mr10">0人购买</tt> <tt class="c-999 f-fA span-2">0浏览</tt> </span>
+              </section>
+             </div>
+            </div> </li>
+           <li>
+            <div class="cc-l-wrap">
+             <section class="course-img">
+              <a href="couinfo.html?id=/172"> <img xsrc="picture/1519464713400.jpg" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt="高中化学学习班" /> </a>
+             </section>
+             <div class="coure-bg-g">
+              <h3 class="hLh30 txtOf"> <a href="couinfo.html?id=/172" title="高中化学学习班" class="course-title fsize16 c-333">高中化学学习班</a> </h3>
+              <section class="mt10 hLh20 of">
+               <div class="fl">
+                <span class="c-666 fsize12 f-fM vam">开班时间：</span>
+                <span class="c-666 fsize12 f-fM vam">05-10---07-10</span>
+               </div>
+              </section>
+              <section class="mt10 hLh20 of">
+               <span class="fr"><tt class="c-master fsize14 f-fM">￥380.00</tt></span>
+               <span class="fl jgAttr c-ccc f-fA"> <tt class="c-999 f-fA mr10">0人购买</tt> <tt class="c-999 f-fA span-2">0浏览</tt> </span>
+              </section>
+             </div>
+            </div> </li>
+           <li>
+            <div class="cc-l-wrap">
+             <section class="course-img">
+              <a href="couinfo.html?id=/171"> <img xsrc="picture/1519466287884.jpg" src="http://wx..com/static/inxweb/img/coures.gif" class="img-responsive" alt="高中零基础小提琴班" /> </a>
+             </section>
+             <div class="coure-bg-g">
+              <h3 class="hLh30 txtOf"> <a href="couinfo.html?id=/171" title="高中零基础小提琴班" class="course-title fsize16 c-333">高中零基础小提琴班</a> </h3>
+              <section class="mt10 hLh20 of">
+               <div class="fl">
+                <span class="c-666 fsize12 f-fM vam">开班时间：</span>
+                <span class="c-666 fsize12 f-fM vam">02-25---03-24</span>
+               </div>
+              </section>
+              <section class="mt10 hLh20 of">
+               <span class="fr"><tt class="c-master fsize14 f-fM">￥0.01</tt></span>
+               <span class="fl jgAttr c-ccc f-fA"> <tt class="c-999 f-fA mr10">0人购买</tt> <tt class="c-999 f-fA span-2">0浏览</tt> </span>
+              </section>
+             </div>
+            </div> </li>
+          </ul>
+          <div class="clear"></div>
+         </article>
+        </div>
+       </section>
+      </div>
+      <!-- /班级 结束 -->
+      <!--/分类课程开始  -->
+      <div class="of bg-fff  ">
+       <section class="container">
+        <header class="comm-title">
+         <div class="live-small-tit">
+          <span class="fr mt15 mr10 hyh"> <a class="c-master" href="showcoulist.html?queryCourse.subjectId=210" title="更多" onclick="">更多&gt;&gt;</a> </span>
+          <h2 class="fl tac tit-header"> <span class="c-master">建筑师</span> </h2>
+          <ul class="clearfix">
+           <li class="current"> <a href="javascript:void(0)" onclick="selectSubject(210,this)">全部</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(211,this)">一级建造师</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(213,this)">二级建造师</a> </li>
+          </ul>
+         </div>
+        </header>
+        <section class="live-moblie-fl">
+         <a onclick="selectSubject(211,this)" href="javascript:void(0)">一级建造师</a>
+         <a onclick="selectSubject(213,this)" href="javascript:void(0)">二级建造师</a>
+        </section>
+        <article class="live-no-title">
+         <div class="comm-course-list of">
+          <div class="com-live-no-box">
+           <div class="c-l-n-left">
+            <ul>
+             <li class="liv-fist-box">
+              <div class="d3-left-pic">
+               <img src="picture/1484291737351.jpg" />
+              </div> </li>
+            </ul>
+           </div>
+           <div class="c-l-n-right d3-in-right">
+            <ul class="clearfix subject210" id="AllArchitect">
+            </ul>
+            <ul style="display:none" class="clearfix subject211" id="FirstArchitect">
+            </ul>
+            <ul style="display:none" class="clearfix subject213" id="SecondArchitect">
+            </ul>
+           </div>
+          </div>
+          <div class="clearfix"></div>
+         </div>
+        </article>
+       </section>
+      </div>
+      <div class="of bg-f8  ">
+       <section class="container">
+        <header class="comm-title">
+         <div class="live-small-tit">
+          <span class="fr mt15 mr10 hyh"> <a class="c-master" href="showcoulist.html?queryCourse.subjectId=221" title="更多" onclick="">更多&gt;&gt;</a> </span>
+          <h2 class="fl tac tit-header"> <span class="c-master">心理学</span> </h2>
+          <ul class="clearfix">
+           <li class="current"> <a href="javascript:void(0)" onclick="selectSubject(221,this)">全部</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(648,this)">心理咨询一级</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(259,this)">心理咨询二级</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(260,this)">心理咨询三级</a> </li>
+          </ul>
+         </div>
+        </header>
+        <section class="live-moblie-fl">
+         <a onclick="selectSubject(648,this)" href="javascript:void(0)">心理咨询一级</a>
+         <a onclick="selectSubject(259,this)" href="javascript:void(0)">心理咨询二级</a>
+         <a onclick="selectSubject(260,this)" href="javascript:void(0)">心理咨询三级</a>
+        </section>
+        <article class="live-no-title">
+         <div class="comm-course-list of">
+          <div class="com-live-no-box">
+           <div class="c-l-n-left">
+            <ul>
+             <li class="liv-fist-box">
+              <div class="d3-left-pic">
+               <img src="picture/1484291811920.jpg" />
+              </div> </li>
+            </ul>
+           </div>
+           <div class="c-l-n-right d3-in-right">
+            <ul class="clearfix subject221" id="AllPsychology"></ul>
+            <ul style="display:none" class="clearfix subject648" id="FirstPsychology">
+            </ul>
+            <ul style="display:none" class="clearfix subject259" id="SecondPsychology"></ul>
+            <ul style="display:none" class="clearfix subject260" id="ThirdPsychology" >
+            </ul>
+           </div>
+          </div>
+          <div class="clearfix"></div>
+         </div>
+        </article>
+       </section>
+      </div>
+      <div class="of bg-fff  ">
+       <section class="container">
+        <header class="comm-title">
+         <div class="live-small-tit">
+          <span class="fr mt15 mr10 hyh"> <a class="c-master" href="showcoulist.html?queryCourse.subjectId=223" title="更多" onclick="">更多&gt;&gt;</a> </span>
+          <h2 class="fl tac tit-header"> <span class="c-master">会计</span> </h2>
+          <ul class="clearfix">
+           <li class="current"> <a href="javascript:void(0)" onclick="selectSubject(223,this)">全部</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(251,this)">会计基础</a> </li>
+           <li> <a href="javascript:void(0)" onclick="selectSubject(256,this)">财经法规</a> </li>
+          </ul>
+         </div>
+        </header>
+        <section class="live-moblie-fl">
+         <a onclick="selectSubject(251,this)" href="javascript:void(0)">会计基础</a>
+         <a onclick="selectSubject(256,this)" href="javascript:void(0)">财经法规</a>
+        </section>
+        <article class="live-no-title">
+         <div class="comm-course-list of">
+          <div class="com-live-no-box">
+           <div class="c-l-n-left">
+            <ul>
+             <li class="liv-fist-box">
+              <div class="d3-left-pic">
+               <img src="picture/1484291821155.jpg" />
+              </div> </li>
+            </ul>
+           </div>
+           <div class="c-l-n-right d3-in-right">
+            <ul class="clearfix subject223" id="AllAccounting">
+            </ul>
+            <ul style="display:none" class="clearfix subject251" id="AccountingBasis">
+            </ul>
+            <ul style="display:none" class="clearfix subject256" id="FinancialRegulations">
+            </ul>
+           </div>
+          </div>
+          <div class="clearfix"></div>
+         </div>
+        </article>
+       </section>
+      </div>
+      <!--分类课程结束  -->
+      <!-- /网校名师 开始 -->
+      <div class="of bg-f8">
+       <section class="container">
+        <header class="comm-title">
+         <span class="fr mt15 mr10 hyh"><a href="teacherlist.html" title="更多" class="c-master fsize14">更多 &gt;</a></span>
+         <h2 class="fl tac tit-header"> <span class="c-333">名家讲师</span> </h2>
+        </header>
+        <article class="live-no-title">
+         <div class="demo-teach-warp">
+          <ul class="clearfix demo-teach-list" id="AllTeacher">
+          </ul>
+         </div>
+        </article>
+       </section>
+      </div>
+      <!-- /网校名师 结束 -->
+     <input type="hidden" id="theme_color" value="" />
+     <script type="text/javascript" src="js/swiper-2.1.0.js"></script>
+     <script type="text/javascript" src="js/index.js"></script>
+     <script type="text/javascript" src="js/index3.js"></script>
+     <script type="text/javascript" src="js/index_theme_color.js"></script>
+     <!-- 换肤 -->
+     <script type="text/javascript">
+		$(function () {
+            leftPicH();
+        })
+	</script>
+    </div>
+   </div>
+  </div>
+  <div class="mo-footer">
+   <!-- 公共底引入 -->
+   <script type="text/javascript" src="js/footer.js"></script>
+   <footer id="footer">
+    <section class="container">
+     <div class="b-foot">
+      <section class="fl col-80">
+       <section class="mr20">
+        <div class="find-box">
+         <h4 class="hLh30 txtOf"> <span class="fsize18 f-fM c-fff">友情链接</span> </h4>
+         <ul class="flink-list clearfix">
+          <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学出版社</a></li>
+			 <li><a href="http://cse.whu.edu.cn/" title="武汉大学国家网络安全学院">武汉大学国家网络安全学院</a></li>
+			 <li><a href="#" title="武汉大学出版社" target="_blank">武汉樱顶网络安全技术中心</a></li>
+			 <li><a href="../mainmooc/login.html" title="武汉大学出版社" target="_blank">后台管理</a></li>
+         </ul>
+         <div class="clear"></div>
+        </div>
+        <section class="b-f-link mt20">
+         <a href="/front/helpCenter" title="帮助中心" target="_blank">帮助中心</a>|
+         <a href="/front/helpCenter?id=194" title="联系我们" target="_blank">联系我们</a>|
+         <a href="/front/helpCenter?id=193" title="关于我们" target="_blank">关于我们</a>|
+         <span>服务热线：027-87215590</span>
+         <span>Email：cbs22@whu.edu.cn</span>
+        </section>
+        <section class="b-f-link mt10">
+         <span>Copyright &copy;2013-2017 版权所有武大出版传媒股份公司</span>
+         <span class="c-666">Powered by<a title="武汉大学出版社" target="_blank" href="#" class="c-666">武汉大学国家网络安全学院</a></span>
+         <!-- 统计代码 -->
+        </section>
+       </section>
+      </section>
+      <aside class="fl col-20 tar ewm-box">
+       <span class="disIb tac"> <img src="picture/1481617339900.jpg" alt="" class="dis" width="140" height="140" /> <p class="hLh30 fsize14 c-999 f-fM mt10 tac">关注微信</p> </span>
+      </aside>
+      <div class="clear"></div>
+     </div>
+    </section>
+   </footer>
+   <div class="r-fixed-wrap">
+    <div class="pr r-fix-box">
+     <ul class="r-fixed-ul">
+      <li id="goTopBtn" class="undis"> <a href="javascript: void(0)" title="返回顶部" class="bg-orange"> <em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span> </a> </li>
+      <li class="foot-zixun" id="shopCart"> <a href="javascript:shopCartHtml()" title="查看详情" class="bg-orange pr" id="v-nav-first"> <em class="r-f-icon-4">&nbsp;</em>
+        <!-- <span>查看详情</span> --> <tt class="shop-car-num" id="shopCartNum">0</tt> </a> </li>
+      <li class="foot-zixun"> <a href="#" target="_blank" title="在线咨询" class="bg-orange"> <em class="r-f-icon-1">&nbsp;</em><span>在线咨询</span> </a> </li>
+      <li class="foot-zixun"> <a href="JavaScript:void(0)" title="扫描关注" class="bg-orange"> <em class="r-f-icon-2">&nbsp;</em><span>扫描关注</span>
+        <div class="smgz-pic">
+         <img src="picture/1481617339900.jpg" width="150" height="150" class="dis" />
+         <p class=" fsize14 f-fM c-666 tac">扫一扫，关注我们</p>
+        </div> </a> </li>
+     </ul>
+     <div class="shopcar-box fr" id="shopcarthtml">
+     </div>
+    </div>
+   </div>
+   <!--手机端回到顶部 开始-->
+   <div class="m-go-top-box">
+    <ul class="r-fixed-ul">
+     <li id="goTopBtn2" class=""> <a href="javascript: void(0)" title="返回顶部" class="bg-orange"> <em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span> </a> </li>
+    </ul>
+   </div>
+   <!--手机端回到顶部 开始-->
+   <script>
+	setTimeout(function () {
+		try {
+			headerIndexSubject();//第二三版首页 专业 显示 处理
+		}catch (err){}
+
+	},100)
+
+function showlogin()
+{
+$("#loginfrom").show();
+$("#dl").show()
+	$("#zc").hide()
+}
+function closewin()
+{
+	$("#loginfrom").hide();
+}
+function dialogRegister(obj)
+{
+ $('#d-s-head-tab').find('a').each(function() {
+           //tmp = $(this).text();
+
+        $(this).attr("class","");
+         });
+
+	$(obj).attr("class","current")
+	$("#dl").hide()
+	$("#zc").show()
+}
+function dialoglogin(obj)
+{
+	 $('#d-s-head-tab').find('a').each(function() {
+           //tmp = $(this).text();
+
+        $(this).attr("class","");
+         });
+	$(obj).attr("class","current")
+	$("#dl").show()
+	$("#zc").hide()
+}
+</script>
+   <!-- 公共底引入 -->
+  </div>
+  <input type="hidden" id="limitLogin" value="OFF" />
+ </body>
+</html>

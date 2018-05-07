@@ -1,0 +1,42 @@
+<%If :id == ""
+	Exit ""
+Else
+      :id == 2018100820720025503
+      :sql = "select id, title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = '武汉大学' limit 8 "
+      changeRecordSet(:sql, :id);
+EndIf
+If recordCount()>0
+	Repeat
+%>
+      <li class="" >
+        		<div class="cc-l-wrap">
+        			<section class="course-img" style="height:153px">
+        				<a href="couinfo.html?id=<%=id%>" target="_blank">
+        <%If pic_id!=0%>
+        					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive"  style="width:218px;height:130.59px">
+        <%Else%>
+                            <img src="/pages/resouce/image/default.png"  width="218" height="129.41">
+        <%EndIf%>
+///        <span><%=title%></span>
+        				</a>
+        			</section>
+        			<div class="bg-f8 coure-bg-g">
+        				<h3 class="hLh30 txtOf">
+        					<a class="course-title fsize16 c-333" href="couinfo.html?id=<%=id%>" target="_blank"><%=title%></a>
+        				</h3>
+        					<section class="mt10 hLh20 of">
+                          						<span class="fr">
+                          							<tt class="c-green fsize12 f-fA">免费</tt>
+                          						</span>
+  					      	<span class="fl jgAttr c-ccc f-fA">
+  ///							<tt class="c-999 f-fA mr10">0人购买</tt>
+  ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
+  						   </span>
+                          </section>
+        			</div>
+        		</div>
+        </li>
+<%
+EndRepeat
+EndIf
+%>

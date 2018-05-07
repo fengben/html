@@ -1,0 +1,25 @@
+ 
+<%
+	:sql = "select A.id,A.urlstr,A.title,B.filename from mooc_index_pic_info A,uploadedfiles B where A.id=B.filetuid order by A.id_index"
+	changeRecordSet(:sql)
+    :totalNumber = recordCount()
+    If :totalNumber >0
+     Repeat
+	%>
+<div class="swiper-slide"　>
+
+        <a href="<%=urlstr%>" target="_blank">
+<%If pic_id!=0%>
+			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="1583" height="460" >
+<%Else%>
+			<img src="/pages/resouce/image/default.png" >
+<%EndIf%>
+		</a>
+
+</div>
+
+	<%EndRepeat
+	EndIf
+
+EndIf%>
+

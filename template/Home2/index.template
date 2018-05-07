@@ -1,0 +1,5 @@
+
+I'm index.template
+<%:i="\"ab%>
+<%=:i%>
+

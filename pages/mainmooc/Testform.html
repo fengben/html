@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testform</title>
+</head>
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        //ajax提交
+        $("#ajaxBtn").click(function() {
+            var params = $("#myform").serialize();
+            $.ajax( {
+                type : "POST",
+                url : "RegisterAction.action",
+                data : params,
+                success : function(msg) {
+                    alert("success: " + msg);
+                }
+            });
+        })
+        //jQuery提交
+        $("#jqueryBtn").click(function(){
+            $("#myform").submit();
+        })
+
+        //js提交
+        $("#jsBtn").click(function(){
+            document.myform.action="RegisterAction.action";
+            document.myform.submit();
+        })
+    })
+    function sumbitTest(){
+        return true; //return false则不会提交
+    }
+</script>
+<body>
+<form id="myform" name="myform" method="post" onsubmit="return sumbitTest();"
+      action="/template/mainmooc/savetest.template">
+    <table>
+        <tr>
+            <td>姓名:</td>
+            <td> <input type="text" name="name" /> </td>
+        </tr>
+        <tr>
+            <td>性别:</td>
+            <td>
+                <input type="radio" name="sex" value="1"> 男
+                <input type="radio" name="sex" value="0"> 女
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" value="Submit普通提交">
+                <input type="button" id="ajaxBtn" value="AJAX提交" />
+                <input type="button" id="jqueryBtn" value="jQuery提交" />
+                <input type="button" id="jsBtn" value="JS提交" />
+                <input type="submit" value="onSubmit提交" />
+            </td>
+        </tr>
+    </table>
+</form>
+<script>
+    function testform() {
+        $("#id")
+    }
+getFromWS("mainmooc/getArticleList.template", "operation=getSomeArticle$^@^$typeId=" + node.id + "$^@^$classification="+classification + "$^@^$loginName="+loginName, obj, processResult);
+</script>
+</body>
+</html>

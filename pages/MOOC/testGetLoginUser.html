@@ -1,0 +1,42 @@
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<!--<script type="text/javascript" src="js/jquery.cookie.js"></script>-->
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+
+<script type="text/javascript" src="js/webutils.js"></script>
+<!--<script type="text/javascript" src="js/headerh5searchcommon.js"></script>-->
+<!--<script type="text/javascript" src="js/header.js"></script>-->
+<!--<script type="text/javascript" src="js/login.js"></script>-->
+
+<script>
+    function getLoginUser() {
+        // alert('in getLoginUser')
+        var user = null;
+        $.ajax({
+            // url:baselocation+'/user/ajax/getloginUser',
+            url: homeAddress() + "one/mainmooc/getLoginUser.template",
+            type: 'post',
+            async: false,
+            dataType: 'json',
+            data: {
+                "account": 'admin',
+            },
+            //采坑提示,template返回json数据,全部显示[object],使用result.key才可以正常读取
+            success: function (result) {
+                user = result;//.entity;
+                alert(user.userId)
+                //                 alert(typeof(user))
+                //
+                // user1=JSON.parse(user)
+                // //user1= $.parseJSON( user );
+                // alert(user1);
+                // alert(typeof(user1))
+            },
+            error:function (result) {
+                alert('eror')
+            }
+        });
+        // user=$.cookie('mooc_login_name');
+        return user;
+    }
+</script>
+<button onclick="getLoginUser()">AAA</button>

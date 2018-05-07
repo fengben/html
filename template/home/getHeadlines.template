@@ -1,0 +1,90 @@
+
+<%
+:sql = "select id, title, content_text, pic_id ,publish_date from article where article_type=2018056520280003672 order by on_top desc,id desc limit 3 offset 0 "
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber>0	
+	:i=1
+	Repeat
+		If :i==1	///放置在本周热点导读左侧
+%>
+				<div id="deanrbl" class="area">
+					<a href="view.html?id=<%=id%>" target="_blank">
+					<img src="./resouce/image/hotpoint_bgk1.png" width="280" height="390">
+					<div class="deannewsAd_layer1">
+					    <h6><%=shortTitle(title,0,80)%></h6>
+					    <p>
+					    	<%:recContent=replace(content_text,"\r"," ")%>
+					    	<%:recContent=replace(:recContent,"\n"," ")%>
+					    	<%:recContent=replace(:recContent,"img","span")%>
+							<%=shortTitle(:recContent,0,100)%>
+					    </p>
+					</div>
+					<div class="deannewsAd_layer2"></div>
+					</a>
+				</div>
+
+$_@_$
+<%
+		Else
+			If :i==2	///放置在头条报道（左）
+%>
+			 	<div class="deanbtrpics" >
+ 				<a href="view.html?id=<%=id%>" target="_blank">
+		<%If pic_id!=0%>
+					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  width="200" height="150">
+		<%Else%>
+					<img src="/pages/resouce/image/default.png"  width="200" height="150">
+		<%EndIf%>
+							    <i></i>
+							    <p>头条报道</p>
+                                </a>
+                                    </div>
+                                    <div class="deanbtrinfos" style="height:140px">
+                                        <h5><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,12)%></a></h5>
+                                        <p style="height: 88px;">
+                                            <%:recContent=replace(content_text,"\r"," ")%>
+							    		    <%:recContent=replace(:recContent,"\n"," ")%>
+									    	<%=shortTitle(:recContent,0,54)%>
+										</p>
+                                        
+					 				</div>
+ 
+$_@_$ 
+<%   
+			Else 		///放置在头条报道（右）
+%>
+				
+				 <div class="deanbtrinfos" >
+  					<h5><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,12)%></a></h5>
+                    <p style="height: 88px;"><%:recContent=replace(content_text,"\r"," ")%>
+			    		    <%:recContent=replace(:recContent,"\n"," ")%>
+					    	<%=shortTitle(:recContent,0,54)%>
+					</p>
+                                        
+                                    </div>
+                                    <div class="deanbtrpics deanbtrpicsx">
+                                        <a href="view.html?id=<%=id%>" target="_blank">
+								<%If pic_id!=0%>
+											<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  width="200" height="150">
+								<%Else%>
+											<img src="/pages/resouce/image/default.png"  width="200" height="150">
+								<%EndIf%>
+                                    
+                                            <i></i>
+                                            <p>头条报道</p>
+                                        </a>
+			            </div> 
+
+			<%EndIf
+	EndIf
+	:i = :i+1
+   EndRepeat
+EndIf
+%>
+
+
+
+  
+
+

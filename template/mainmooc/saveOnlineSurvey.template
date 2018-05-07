@@ -1,0 +1,8 @@
+<%
+	If :operation=="deleteOnlineSurvey"
+	:sql = "delete from onlinesurvey where id = ?"
+	:x = execSQL(:sql, :id)
+	Exit(:x)
+	EndIf
+%>
+

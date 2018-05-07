@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+  <title>文章内容</title>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/common.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/view.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/index.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/viewimportant.css">
+  <script src="./resouce/common.js" type="text/javascript"></script>
+  <script src="./resouce/portal.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+   <script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script type="text/javascript">
+    var jq = jQuery.noConflict();
+  </script>
+  <script src="./resouce/deanactions.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/animate.min.css">
+  <script>
+    var wow = new WOW({
+      boxClass: 'deanactions',
+    });
+    wow.init();
+  </script>
+  <script src="./resouce/jquery.flexslider-min.js" type="text/javascript"></script>
+
+  <script src="./resouce/jquery.easing.1.3.js" type="text/javascript"></script>
+  <script src="./resouce/jquery.skitter.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+
+		var id = getUrlString("id");
+		var parasId = "operation=getArticleFromId";
+		parasId += "$^@^$id=" + id;
+		var content = new Array();
+		var contentResult = function(){
+			jQuery("#articleContentAndComment").html(content[0]);
+			
+		}
+		getFromWS("home/getArticleContentAndComment.template",parasId,content,contentResult);
+
+
+		var parasComment = "operation=getComment";;
+		parasComment += "$^@^$id=" + id;
+		var obj = new Array();
+		var commentResult = function(){
+			jQuery("#comment_list").append(obj[0]);
+		}
+		getFromWS("home/getComment.template", parasComment, obj, commentResult);   
+
+   });
+
+	function doSubmit()
+	    {
+		var comment = jQuery("#comment").val();
+		if(comment == "")
+		{
+		  alert("您的看法不能为空");
+		  location.reload();
+		  return false;
+		}
+		var id = getUrlString("id");
+		var ip = returnCitySN.cip;
+		var paras = "operation=saveOnlineSurvey";
+		paras += "$^@^$id=" + id;
+		paras += "$^@^$comment=" + comment;
+		paras += "$^@^$ip=" + ip;
+		var obj = new Array();
+		var surveyResult = function(){
+		  if(obj[0] == "ok")
+		  {
+		    alert("恭喜您提交成功");
+		    location.reload();
+		  }
+		  else
+		  {
+		    alert("提交失败");
+		    return false;
+		  }
+		}
+		getFromWS("home/saveOnlineSurvey.template", paras, obj, surveyResult);
+	    }
+
+
+///新增 修改字体的函数（ 陈 ）
+	function fontZoom(){//中形字体
+	 document.getElementById('article_content').style.fontSize='18px';
+	 document.getElementById('article_content').style.lineHeight='40px';
+	 allChanges("18px","40px");
+	}
+
+	function fontZoomA(){//小形字体
+	 document.getElementById('article_content').style.fontSize='14px';
+	 document.getElementById('article_content').style.lineHeight='26px';
+	 allChanges("14px","40px");
+	}
+	function fontZoomC(){//大形字体
+	 document.getElementById('article_content').style.fontSize='23px';
+	 document.getElementById('article_content').style.lineHeight='30px';
+	 allChanges("23px","40px");
+	}
+	function allChanges(_fontSize,_lineHeight){//查看文章时，改变字体的大小
+		 var allSpan=document.getElementById('article_content').getElementsByTagName('*');
+		
+		 for(var i=0;i<allSpan.length;i++){
+			 allSpan.item(i).style.fontSize=_fontSize;
+			 allSpan.item(i).style.lineHeight=_lineHeight;
+		 }
+		
+	 }
+
+  </script>
+  <script src="./resouce/jquery.pagnation.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery.SuperSlide.2.1.1.js"></script>
+  <script language="javascript" type="text/javascript">
+    function killErrors() {
+      return true;
+    }
+    window.onerror = killErrors;
+  </script>
+
+<!--新增style （ 陈 ）--><!--新增style （ 丘 ）-->
+<style type="text/css">
+        #article_content p {padding: 10px 0px;}
+	#article_content { 
+		font-size: 16px;font-family: '宋体';line-height: 40px;text-indent:2em;width:900px;
+	}
+	.fontstyle {     font-style: italic; color: #333;font-size: 14px;}
+	i.fontstyle:hover {
+	    color: #1396FF;
+	}
+
+    dl{
+      font-size: 16px;
+    }
+    .ipaddr{
+      padding-right: 50px;
+      width: 200px;
+      display: inline-block;
+    }
+    .time{
+      margin-left: 50px;
+      color: #ccc;
+      display: inline-block;
+    }
+    .floor_num{
+      margin-left:600px;
+      display: inline-block;
+    }
+    dd{
+      margin-top: 5px;
+      margin-bottom: 5px;
+      border-bottom: 1px dashed #e5e5e5;
+    }
+
+  </style>
+
+</head>
+<body>
+<div id="header">
+</div>
+  <div id="wp" class="wp">
+    <script src="./resouce/viewthread.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      zoomstatus = parseInt(1), imagemaxwidth = '600', aimgcount = new Array();
+    </script>
+    <div id="ct" class="ct2 wp cl" style="width:1180px!important; margin:20px auto;">
+      <div class="mn">
+        <div class="deanneirong_c" id="articleContentAndComment">
+
+        </div>
+	     <div class="deanneirong_c" id="comment_list">
+              <h4 style="font-size: 18px;color: #333;font-weight: normal;padding-left: 15px;border-left: 4px solid #1396FF; display: none">最新评论</h4>
+
+        </div>
+
+
+      </div>
+      <div class="clear"></div>
+    </div>
+    <input type="hidden" id="portalview" value="1">
+    <script type="text/javascript">
+      jQuery(function() {
+        var elm = jQuery('.deanguanzhu');
+        var startPos = jQuery(elm).offset().top;
+        jQuery.event.add(window, "scroll", function() {
+          var p = jQuery(window).scrollTop();
+          jQuery(elm).css('position', ((p) > startPos) ? 'fixed' : 'relative');
+          jQuery(elm).css('top', ((p) > startPos) ? '75px' : '');
+          jQuery(elm).css('box-shadow', ((p) > startPos) ? '0px 2px 4px 2px #eaeaea' : '');
+          jQuery(elm).css('z-index', ((p) > startPos) ? '2' : '');
+        });
+      });
+    </script>
+  </div>
+<div id="footer">
+</div>
+  <div id="ft" style="margin:0;padding:0; height:0;"></div>
+  <div id="scrolltop" style="display:none;">
+    <span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" id="scrolltopa"><b>返回顶部</b></a></span>
+  </div>
+  <script type="text/javascript">
+    _attachEvent(window, 'scroll', function() {
+      showTopLink();
+    });
+    checkBlind();
+  </script>
+</body>
+</html>
+

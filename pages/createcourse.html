@@ -1,0 +1,66 @@
+<meta http-equiv="Content-Type" content="text/html"/>
+<script src="mainmooc/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script>
+    jQuery(document).ready(function () {
+            para = new Object();
+            para = GetRequest();
+            course_id = para['courseid'];
+            course_name = para['coursename'];
+
+            //course_name = '测试';
+            //course_id = 'test01';
+            //alert('_id' + course_id);
+            //alert('_name' + course_name);
+            var title = course_name;
+            var publisher = localStorage.getItem("loginName");
+
+            var paras = "";
+            paras += "$^@^$title=" + title;
+            paras += "$^@^$publisher=" + publisher;
+            paras += "$^@^$course_addr=" + course_id;
+            var objs = new Array();
+
+            //如果不存在课程，创建课程，否则直接进入课程管理界面
+            getFromWS("mainmooc/getCourse.template", paras, objs, '')
+            // alert('res'+objs[0])
+            if (objs[0]== "bad") {
+                getFromWS("mainmooc/saveCourse.template", paras, objs, "");
+                // alert("save");
+            }else {
+                // alert("no operation");
+            }
+            location.href = "/pages/mainmooc/articleManagement.html"
+
+        }
+    );
+
+    function GetRequest() {
+
+        var url = location.search; //获取url中含"?"符后的字串
+        url=decodeURI(decodeURI(url));
+        // alert(url);
+        var theRequest = new Object();
+
+        if (url.indexOf("?") != -1) {
+
+            var str = url.substr(1);
+
+            strs = str.split("&");
+
+            for (var i = 0; i < strs.length; i++) {
+
+                theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+
+            }
+
+        }
+        else {
+            // alert('None')
+        }
+
+        return theRequest;
+    }
+
+</script>
+

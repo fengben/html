@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻测试</title>
+    <meta http-equiv="MSThemeCompatible" content="Yes">
+    <base href=".">
+    <link rel="stylesheet" type="text/css" href="./resouce/css/common.css">
+    <link rel="stylesheet" type="text/css" href="./resouce/css/index.css">
+    <script src="./resouce/common.js" type="text/javascript"></script>
+    <script src="./resouce/portal.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./resouce/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript">
+        var jq = jQuery.noConflict();
+    </script>
+    <script src="./resouce/deanactions.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./resouce/css/animate.min.css">
+    <script>
+        var wow = new WOW({
+            boxClass: 'deanactions',
+        });
+        wow.init();
+        jQuery(document).ready(function () {
+
+            jQuery(".deannav #mn_portal").addClass("a");
+            //头条报道
+            var headlines = new Array();
+            var processHeadlinesResult = function () {
+
+                jQuery("#headline1").html(headlines[1]);
+                jQuery("#headline2").html(headlines[2]);
+                jQuery("#headline3").html(headlines[0]);//本周热点导读的左边放最新的头条报道
+
+            }
+            getFromWS("home/getHeadlines.template", "", headlines, processHeadlinesResult);
+
+            //首页静态图展示 （陈）
+            var indexPictures = new Array();
+            var processPicResult = function () {
+                //从上至下依次放置首页的静态图
+                jQuery("#indexPic1").html(indexPictures[0]);
+                jQuery("#indexPic2").html(indexPictures[1]);
+                jQuery("#indexPic3").html(indexPictures[2]);
+                jQuery("#indexPic4").html(indexPictures[3]);//中部的微信公众号图片
+                jQuery("#indexPic5").html(indexPictures[4]);
+                jQuery("#indexPic6").html(indexPictures[5]);
+                jQuery("#indexPic7").html(indexPictures[6]);
+                jQuery("#indexPic8").html(indexPictures[3]);//底部微信公众号图片
+            }
+            getFromWS("home/getPictureList.template", "", indexPictures, processPicResult);
+
+    </script>
+</head>
+<body>
+<div id="header">
+
+</div>
+
+</body>
+</html>

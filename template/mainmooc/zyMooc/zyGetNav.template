@@ -1,0 +1,231 @@
+<!-- databaseName=moocdb -->
+<!--
+<%If :classification=="超级管理员"%>
+	<script>
+	function provinceProxyManagement(){
+	  $("#mainContent").html("");
+	  var paras = "pageNumber=1";
+	  paras += "$^@^$pageSize=9";
+	  paras += "$^@^$infoType=";
+	  loadFromWS("adminUsers/setProvinceProxy.template",paras,"mainContent");
+        }
+	function fileSpaceController(){
+	   $("#mainContent").html("");
+	   var paras = "pageNumber=1";
+	   paras += "$^@^$pageSize=9";
+	   paras += "$^@^$infoType=";
+	   loadFromWS("adminUsers/setFileSpaceController.template",paras,"mainContent");
+	}
+	function registerUser(){
+		$("#mainContent").html("");
+		var paras = "pageNumber=1";
+		paras += "$^@^$pageSize=9";
+		paras += "$^@^$infoType=";
+		paras += "$^@^$province=";
+		paras += "$^@^$city=";
+		paras += "$^@^$district=";
+		paras += "$^@^$steps=0-100000";
+		paras += "$^@^$deepTime=0-10000";
+		loadFromWS("adminUsers/setMobileUser.template",paras,"mainContent");
+	}
+    function messagePush(){
+		$("#mainContent").html("");
+		var loginName = localStorage.getItem('loginName');
+		var paras = "pageNumber=1";
+		paras += "$^@^$pageSize=9";
+		paras += "$^@^$loginName="+loginName;
+		paras += "$^@^$titleMode=";
+		paras += "$^@^$articleType=";
+
+		loadFromWS("adminUsers/setMessagePush.template",paras,"mainContent");
+        }
+
+	</script>
+	<li class="menu-list">
+		<a href="#" onclick="provinceProxyManagement()" ><i class="lnr lnr-user"></i> <span>省级代理管理员</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="fileSpaceController()" ><i class="lnr lnr-database"></i> <span>资源库管理员</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="registerUser()" ><i class="lnr lnr-users"></i> <span>用户查询</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="messagePush()" ><i class="lnr lnr-envelope"></i> <span>推送管理</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+<%EndIf%>
+<%If :classification=="省级代理管理员"%>
+	<script>
+    function areaProxyManagement(){
+	  $("#mainContent").html("");
+	  var paras = "pageNumber=1";
+	  paras += "$^@^$pageSize=9";
+	  paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+	  paras += "$^@^$infoType=";
+	  loadFromWS("adminUsers/setAreaProxy.template",paras,"mainContent");
+        }
+    function queryMessagePush(){
+	$("#mainContent").html("");
+	var loginName = localStorage.getItem('loginName');
+	var paras = "pageNumber=1";
+	paras += "$^@^$pageSize=9";
+	paras += "$^@^$loginName="+loginName;
+        paras += "$^@^$titleMode=";
+	loadFromWS("adminUsers/queryMessagePush.template",paras,"mainContent");
+        }
+    function messagePush(){
+		$("#mainContent").html("");
+		var loginName = localStorage.getItem('loginName');
+		var paras = "pageNumber=1";
+		paras += "$^@^$pageSize=9";
+		paras += "$^@^$loginName="+loginName;
+		paras += "$^@^$titleMode=";
+		paras += "$^@^$articleType=";
+		loadFromWS("adminUsers/setMessagePush.template",paras,"mainContent");
+        }
+	</script>
+	<li class="menu-list">
+		<a href="#" onclick="areaProxyManagement()" ><i class="lnr lnr-user"></i> <span>市县代理管理员</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="queryMessagePush()" ><i class="lnr lnr-magnifier"></i> <span>推送查询</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="messagePush()" ><i class="lnr lnr-envelope"></i> <span>推送管理</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+<%EndIf%>
+<%If :classification=="市县代理管理员"%>
+	<script>
+    function customerManagement(){
+	  $("#mainContent").html("");
+	  var paras = "pageNumber=1";
+	  paras += "$^@^$pageSize=9";
+	  paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+	  paras += "$^@^$infoType=";
+	  loadFromWS("adminUsers/setCustomerService.template",paras,"mainContent");
+        }
+    function messagePush(){
+		$("#mainContent").html("");
+		var loginName = localStorage.getItem('loginName');
+		var paras = "pageNumber=1";
+		paras += "$^@^$pageSize=9";
+		paras += "$^@^$loginName="+loginName;
+		paras += "$^@^$titleMode=";
+		paras += "$^@^$articleType=";
+		loadFromWS("adminUsers/setMessagePush.template",paras,"mainContent");
+        }
+	</script>
+	<li class="menu-list">
+		<a href="#" onclick="customerManagement()" ><i class="lnr lnr-user"></i> <span>客服管理</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="messagePush()" ><i class="lnr lnr-envelope"></i> <span>推送管理</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+<%EndIf%>
+<%If :classification=="客服管理员"%>
+	<script>
+    function messagePush(){
+	$("#mainContent").html("");
+	var loginName = localStorage.getItem('loginName');
+	var paras = "pageNumber=1";
+	paras += "$^@^$pageSize=9";
+	paras += "$^@^$loginName="+loginName;
+	paras += "$^@^$titleMode=";
+	paras += "$^@^$articleType=";
+	loadFromWS("adminUsers/setMessagePush.template",paras,"mainContent");
+    }
+    function customerMessage(){
+		$("#mainContent").html("");
+		var paras = "pageNumber=1";
+		paras += "$^@^$pageSize=9";
+		paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+	        paras += "$^@^$infoType=";
+		loadFromWS("adminUsers/setCustomerMessage.template",paras,"mainContent");
+       }
+	function registerUser(){
+		$("#mainContent").html("");
+		var paras = "pageNumber=1";
+		paras += "$^@^$pageSize=9";
+		paras += "$^@^$infoType=";
+		paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+		loadFromWS("adminUsers/queryMobileUser.template",paras,"mainContent");
+	}
+	</script>
+	<li class="menu-list">
+		<a href="#" onclick="messagePush()" ><i class="lnr lnr-envelope"></i> <span>推送管理</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="customerMessage()" ><i class="lnr lnr-smile"></i> <span>留言管理</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+	<li class="menu-list">
+		<a href="#" onclick="registerUser()" ><i class="lnr lnr-user"></i> <span>用户查询</span></a>
+		<ul class="sub-menu-list">
+			<li><a href="#">操作说明</a> </li>
+		</ul>
+	</li>
+<%EndIf%>
+-->
+<%If 2>1 %>
+	<script>
+      function fileSpaceManagement(){
+	  $("#mainContent").html("");
+	  var paras = "pageNumber=1";
+	  paras += "$^@^$pageSize=9";
+	  paras += "$^@^$infoType=";
+	  //loadFromWS("adminUsers/fileSpaceManagement.template",paras,"mainContent");
+	  loadFromWS("zyMooc/zyFileSpaceManagement.template",paras,"mainContent");
+        }
+    window.onload = fileSpaceManagement;
+	</script>
+	
+<%EndIf%>
+<!--
+<%If true %>
+<script>
+      function fileSpaceManagement(){
+	  $("#mainContent").html("");
+	  var paras = "pageNumber=1";
+	  paras += "$^@^$pageSize=9";
+	  paras += "$^@^$infoType=";
+	  //loadFromWS("adminUsers/fileSpaceManagement.template",paras,"mainContent");
+	  loadFromWS("zyMooc/zyFileSpaceManagement.template",paras,"mainContent");
+        }
+      $(document).ready(
+        fileSpaceManagement();`
+      );
+	</script>
+	<%EndIf%>
+	-->

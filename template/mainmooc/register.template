@@ -1,0 +1,41 @@
+<%debugMsg("---------------------------------------"#:JSON)
+If :JSON==""
+	:errJson = jsonAddItem("","error",1)
+	:errJson = jsonAddItem(:errJson,"error_info",S("参数不足"))
+	:errJson = jsonAddItem(:errJson,"data","")
+	=:errJson
+Else
+
+		:account = JSON_GetObjectItem(:JSON,"account")
+		:name = JSON_GetObjectItem(:JSON,"name")
+		:pwd = JSON_GetObjectItem(:JSON,"pwd")
+
+		:sqlStr = "select count(account) as countUser from user_passports where account=? "
+		:countUser = execSQL(:sqlStr,S(:account))
+		:idx=lastIndexOf(:countUser,"=")
+		:countUser = mid(:countUser,:idx+1)
+		If :countUser>0
+			:errJson = jsonAddItem("","error",1)
+			:errJson = jsonAddItem(:errJson,"error_info",S("已注册"))
+			:errJson = jsonAddItem(:errJson,"data","")
+			=:errJson
+		Else
+
+				:sqlStr = "insert into user_passports(login_name,pwd) values(?,md5(?)) "
+				:x=execSQL(:sqlStr,S(:account),S(:pwd))
+				If :x=="ok"
+						:returnJson = jsonAddItem("","error",0)
+						:returnJson = jsonAddItem(:returnJson,"error_info",S(""))
+						:returnJson = jsonAddItem(:returnJson,"data","")
+						=:returnJson
+				Else
+						:errJson = jsonAddItem("","error",1)
+						:errJson = jsonAddItem(:errJson,"error_info",S("注册失败"))
+						:errJson = jsonAddItem(:errJson,"data","")
+						=:errJson
+
+				EndIf
+
+		EndIf
+
+EndIf%>

@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+  <title>下载中心</title>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/common.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/news_list.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/index.css">
+  <script src="./resouce/common.js" type="text/javascript"></script>
+  <script src="./resouce/portal.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+  <script type="text/javascript">
+    var jq = jQuery.noConflict();
+  </script>
+  <script src="./resouce/deanactions.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/animate.min.css">
+  <script>
+    var wow = new WOW({
+      boxClass: 'deanactions',
+    });
+    wow.init();
+  </script>
+  <script src="./resouce/jquery.flexslider-min.js" type="text/javascript"></script>
+  <script src="./resouce/jquery.easing.1.3.js" type="text/javascript"></script>
+  <script src="./resouce/jquery.skitter.js" type="text/javascript"></script>
+
+  <script src="./resouce/jquery.pagnation.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery.SuperSlide.2.1.1.js"></script>
+  <script language="javascript" type="text/javascript">
+    function killErrors() {
+      return true;
+    }
+    window.onerror = killErrors;
+
+    jQuery(document).ready(function() {
+
+		jQuery(".deannav #mn_P6").addClass("a");			
+		var id = getUrlString("id");
+
+		var downloadSecond = new Array();
+		var downloadSecondResult = function(){
+			jQuery("#downloadSecond").html(downloadSecond[0]);
+		}
+		getFromWS("home/getColumn.template","type=downloadSecond$^@^$id=" + id,downloadSecond,downloadSecondResult);
+
+		var articleList = new Array();
+		var articleListResult = function(){
+			jQuery("#articleList").html(articleList[0]);
+			jQuery("#deanpage").html(articleList[1]);
+
+		}
+
+		var paras = "operation=getArticleList";
+		paras += "$^@^$type=" + id;
+		paras += "$^@^$pageNumber=1";
+		getFromWS("home/getDownloadItem.template",paras,articleList,articleListResult);
+   });
+
+
+  </script>
+</head>
+
+<body>
+<div id="header">
+
+</div>
+  <div id="wp" class="wp" style="width:1180px">
+    <div id="pt" class="bm cl">
+      <div class="z">
+        <a href="view.html" class="nvhm" title="首页">首页</a> <em>&#8250;</em>
+        <a href="view.html">新闻中心</a> </div>
+    </div>
+    <div id="ct" class="ct2 wp cl" style="width:1180px!important; margin:20px auto!important;">
+      <div class="mn">
+
+        <div class="deanmn_left">
+          <div class="deanwzpdtitle">
+            <h4>新闻中心</h4>
+            <div class="clear"></div>
+          </div>
+          <!--下家分类-->
+          <div class="clear"></div>
+          <div class="deannextnav">
+            <h4>下载分类:</h4>
+            <ul id="downloadSecond">
+
+            </ul>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="deanartice">
+            <ul id="articleList">
+
+            </ul>
+          </div>
+          <div class="clear"></div>
+          <div class="pgs cl" id="deanpage">
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    _attachEvent(window, 'load', getForbiddenFormula, document);
+
+    function getForbiddenFormula() {
+      var toGetForbiddenFormulaFIds = function() {
+        ajaxget('search.php');
+      };
+      var a = document.body.getElementsByTagName('a');
+      for (var i = 0; i < a.length; i++) {
+        if (a[i].getAttribute('sc')) {
+          a[i].setAttribute('mid', hash(a[i].href));
+          a[i].onmousedown = function() {
+            toGetForbiddenFormulaFIds();
+          };
+        }
+      }
+      var btn = document.body.getElementsByTagName('button');
+      for (var i = 0; i < btn.length; i++) {
+        if (btn[i].getAttribute('sc')) {
+          btn[i].setAttribute('mid', hash(btn[i].id));
+          btn[i].onmousedown = function() {
+            toGetForbiddenFormulaFIds();
+          };
+        }
+      }
+    }
+  </script>
+<div id="footer">
+
+</div>
+  <div id="ft" style="margin:0;padding:0; height:0;"></div>
+  <div id="scrolltop" style="display:none;">
+    <span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" id="scrolltopa"><b>返回顶部</b></a></span>
+  </div>
+  <script type="text/javascript">
+    _attachEvent(window, 'scroll', function() {
+      showTopLink();
+    });
+    checkBlind();
+  </script>
+</body>
+
+</html>

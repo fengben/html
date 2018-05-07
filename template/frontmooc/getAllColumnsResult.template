@@ -1,0 +1,32 @@
+
+<%
+:sql = "SELECT NAME,id  FROM mooccolumns WHERE parent_id =  2018112858180021535 ORDER BY ID LIMIT 5 OFFSET 0"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+           <section class="i-j-item i-j-it-all" style="visibility: hidden">
+               <div class="i-j-item-bx">
+                <div class="i-j-it-txt">
+                 <a class="i-j-item-first-a fsize16 c-fff" href="showcoulist.html?id=<%=id%>"><%=name%></a>
+                </div>
+               </div>
+   </section>
+<%
+EndRepeat
+EndIf
+%>
+<section class="n-i-m-more i-j-it-all">
+                <div class="i-j-item-bx">
+                 <div class="DT-arrow">
+                  <em>◆</em>
+                  <span>◆</span>
+                 </div>
+                 <a class="f-fM" href="showcoulist.html?id=2018112858180021535">更多分类</a>
+                </div>
+                </section>
+
+
+
+

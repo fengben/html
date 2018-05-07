@@ -1,0 +1,136 @@
+
+<%
+If :operation == "getTravelList"
+:sql  = "select B.theme, B.district, B.money, B.address, B.article_id, A.title, A.pic_id from article as A , travel_info as B where B.article_id=A.id and A.article_type = ? order by A.on_top desc,A.id desc"
+changeRecordSet(:sql, L(:id));
+	If recordCount()>0
+	Repeat
+%>
+		<dd>
+			<div class="deankcfgpic">
+<%If pic_id!=0%>
+			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>">
+<%Else%>
+			<img src="/pages/resouce/image/default.png" >
+<%EndIf%>
+			</div>
+			<div class="deankchiddenbox">
+				<h5>
+					<a href="view.html?id=<%=article_id%>" target="_blank"><%=title%></a>
+				</h5>
+				<div class="deankcpridec">门票费用：<span><%=money%></span></div>
+				<p style="height:auto">地址：<%=address%></p>
+
+				<div class="deanbottomsdkc">
+				<div class="deanbottomsdkcl"><a href="view.html?id=<%=article_id%>" target="_blank">查看详情</a></div>
+
+				<div class="clear"></div>
+				</div>
+			</div>
+		</dd>
+<%
+	EndRepeat
+	EndIf
+
+EndIf
+%>
+
+
+<%
+If :operation == "getTravelListBySelect"
+:idx = indexOf(:money,"-");
+:money1 = mid(:money,0,:idx)
+:money2 = mid(:money,:idx+1);
+
+:sql  = "select B.theme, B.district, B.money, B.address, B.article_id, A.title, A.pic_id from article as A , travel_info as B where B.article_id=A.id and A.article_type = ? and B.district like ? and B.money>=? and B.money<=? order by A.on_top desc,A.id desc "
+changeRecordSet(:sql, L(:id),"'%"#:district#"%'",:money1,:money2);
+	If recordCount()>0
+	Repeat
+%>
+		<dd>
+			<div class="deankcfgpic">
+<%If pic_id!=0%>
+			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>">
+<%Else%>
+			<img src="/pages/resouce/image/default.png" >
+<%EndIf%>
+			</div>
+			<div class="deankchiddenbox">
+				<h5>
+					<a href="view.html?id=<%=article_id%>" target="_blank"><%=title%></a>
+				</h5>
+				<div class="deankcpridec">门票费用：<span><%=money%></span></div>
+				<p style="height:auto">地址：<%=address%></p>
+
+				<div class="deanbottomsdkc">
+				<div class="deanbottomsdkcl"><a href="view.html?id=<%=article_id%>" target="_blank">查看详情</a></div>
+
+				<div class="clear"></div>
+				</div>
+			</div>
+		</dd>
+<%
+	EndRepeat
+	EndIf
+
+EndIf
+%>
+///获取旅游推荐页面的所有旅游栏目的展示
+<%
+If :operation == "getTravelInfoShow"
+
+	:sql = "select id from columns where parent_id=2018057419600005917"
+	changeRecordSet(:sql)
+	If recordCount()>0
+		:column_ids = ""
+		Repeat
+			:column_ids = :column_ids # id #";"
+		EndRepeat
+		split(:column_ids,";", &columnIdsArray);
+		:i = 1;
+		While :i<arrayLength(&columnIdsArray) - 1
+debugMsg("---column_ids---------"#:column_ids);
+
+			:sql = "select name from columns where id=?"
+			:result = execSQL(:sql,:columnIdsArray[:i])
+			:idx = lastIndexOf(:result,"=");
+			:result = mid(:result,:idx+1);			
+%>
+		    <div class="title">
+		    	<b><%=:result%></b>精彩纷呈，不容错过
+				<a href="travelInfo.html?id=<%=:columnIdsArray[:i]%>" target="_blank" class="more js-more">更多&gt;</a>
+		    </div>
+			<div class="container">
+
+<%
+			:sql = "select id, title,pic_id from article where article_type=? order by on_top desc,id desc limit 7 offset 0"
+			changeRecordSet(:sql,:columnIdsArray[:i])
+			:j = 1
+			Repeat
+				If :j<=3
+%>
+				    <a href="view.html?id=<%=id%>" target="_blank" class="travels__box1 js-travelBox">
+			<%If pic_id!=0%>
+						<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>">
+			<%Else%>
+						<img src="/pages/resouce/image/default.png" >
+			<%EndIf%>
+						<div class="box1__title js-travelTitle" ><%=title%></div>
+					</a>
+<%				Else%>
+				    <a href="view.html?id=<%=id%>" target="_blank" class="travels__box2 js-travelBox">
+						<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>">
+						<div class="box2__title js-travelTitle" ><%=title%></div>
+					</a>
+<%				EndIf
+			:j = :j+1	
+			EndRepeat
+%>
+</div>
+$_@_$
+<%
+		:i = :i +1;
+		EndWhile
+	EndIf
+EndIf%>
+

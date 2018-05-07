@@ -1,0 +1,41 @@
+
+<%
+If :operation == "ifTravelInfoColumn"
+	:sql = "select parent_id from mooccolumns where id=?"
+	changeRecordSet(:sql,L(:columnId));
+
+	Repeat
+		If parent_id=="2018057419600005917" || :columnId=="2018057419600005917"
+			Exit("yes");
+		Else
+			Exit("no");
+		EndIf
+	EndRepeat
+
+EndIf
+%>
+
+<%
+If :operation == "queryTravelInfo"
+
+	:sql = "select parent_id from mooccolumns where id=?"
+	:x = execSQL(:sql,L(:columnId));
+	:idx = lastIndexOf(:x,"=");
+	:parent_id = mid(:x,:idx+1);
+debugMsg("parent_id============="#:parent_id);
+	If :parent_id=="2018057419600005917" || :columnId=="2018057419600005917"
+		:sql = "select theme,district,money,address from travel_info where article_id=?"
+		changeRecordSet(:sql,L(:id));
+		Repeat
+			Exit(theme#";"#district#";"#money#";"#address);
+		EndRepeat
+	Else
+		Exit("no");
+	EndIf
+
+
+
+EndIf
+%>
+
+

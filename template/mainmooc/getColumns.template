@@ -1,0 +1,161 @@
+
+
+<%If :operation == "getAllColumnsReadOnly"
+    :allcolumnData=""
+   If :classification == 1
+	:selectSql = "select id, name, parent_id from mooccolumns where id != 1 "
+   Else
+    :selectStr="select column_ids from role where id= ? "
+    		:column_ids=execSQL(:selectStr,:classification)
+    		:idx = indexOf(:column_ids,"=");
+    		:column_ids = mid(:column_ids,:idx+1);
+    		split(:column_ids,";",&columnIdsArray);
+    		:columnIdsStr = :columnIdsArray[0];
+    		:selectSql="select id, name, parent_id from mooccolumns where "
+    		:i=0;
+    	While :i<arrayLength(&columnIdsArray) %>
+    <%
+    			If :i == 0
+    				:selectSql = :selectSql # "id = "#:columnIdsArray[:i];
+    			Else
+    				:selectSql = :selectSql # " or id = "#:columnIdsArray[:i];
+    			EndIf
+    			:i = :i+1;
+    		EndWhile
+   EndIf
+	changeRecordSet(:selectSql)
+	If recordCount()>0
+		Repeat
+		:allcolumnData = :allcolumnData#"{'id':'"#id#"','pId':'"#parent_id#"','text':'"#name#"'},"
+		EndRepeat
+		Exit(:allcolumnData)
+	EndIf
+EndIf
+If :operation == "getGrantColumns"
+	If :classification == 1
+		:querystr="select id, name,parent_id from mooccolumns where id != 1 "
+	Else
+		:selectStr="select column_ids from role where id= ? "
+		:column_ids=execSQL(:selectStr,:classification)
+		:idx = indexOf(:column_ids,"=");
+		:column_ids = mid(:column_ids,:idx+1);
+		split(:column_ids,";",&columnIdsArray);
+		:columnIdsStr = :columnIdsArray[0];
+		:querystr="select id, name, parent_id from mooccolumns where "
+		:i=0;
+
+		While :i<arrayLength(&columnIdsArray) %>
+<%
+			If :i == 0
+				:querystr = :querystr # "id = "#:columnIdsArray[:i];
+			Else
+				:querystr = :querystr # " or id = "#:columnIdsArray[:i];
+			EndIf
+			:i = :i+1;			
+		EndWhile
+		debugMsg(":querystr=========="#:querystr);
+	EndIf
+	changeRecordSet(:querystr)
+	:i=0
+	:parentIds = ""
+	:typelist = ""
+///构造json，用来显示类型(栏目)的下拉列表树(ztree实现)
+	If recordCount()>0
+		Repeat
+			:data = jsonAddItem("","id",S(id))
+			:data = jsonAddItem(:data,"pId",S(parent_id))
+			:data = jsonAddItem(:data,"name",S(name))
+			If :i !=0
+        		:typelist = jsonAddArrayItem(:typelist,:data)
+			Else
+        		:typelist = jsonAddArrayItem("",:data)
+			EndIf
+			:i=:i+1
+		EndRepeat
+		Exit (:typelist)
+	EndIf
+EndIf
+
+If :operation=="getTree"
+:res = ""
+:treeStr="select id, name, parent_id from mooccolumns where id != 1 "
+changeRecordSet(:treeStr)
+	If recordCount() > 0
+		Repeat
+		:res = :res#id#":"#parent_id#";"#name#"&"
+		EndRepeat
+	EndIf
+Exit(:res)
+EndIf
+%>
+<% ///后台栏目管理页面获取所有一级栏目id及数量 供下面两个If getFirstColumCount & getAllColumns 共同使用（陈）
+If :operation == "getFirstColumCount"||:operation == "getAllColumns"
+	:i=0
+	:firstselectSql = "select id from mooccolumns where parent_id = 0"
+	changeRecordSet(:firstselectSql)
+	:firstColumCount=recordCount()
+	If recordCount()>0
+		Repeat
+			:firstColumn[:i]=id
+			:i=:i+1
+		EndRepeat
+	EndIf
+EndIf
+%>
+///后台栏目管理页面获取一级栏目数量（陈）
+<%If :operation == "getFirstColumCount"
+	Exit(:firstColumCount) 
+EndIf%>
+
+///后台栏目管理页面获取所有栏目	（陈）
+<%If :operation == "getAllColumns"
+	:allcolumnData=""
+	:selectSql = "select id, name, parent_id,sort from mooccolumns order by sort,id"///按sort升序排列
+	changeRecordSet(:selectSql)
+	If recordCount()>0	
+	Repeat
+		
+		:j=0
+		:flag=0
+		While :j<:i
+			///debugMsg(id#"-----"#parent_id#"================="#:firstColumn[:j])
+			If parent_id !=:firstColumn[:j] && parent_id!=0		  
+			Else 
+			   :flag=1		
+			EndIf		
+			:j=:j+1
+		EndWhile
+
+		If :flag==0
+		   debugMsg(id#"查询如果是三级==================")
+		   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(\'"#id#"\')&><i class=&fa-trash& ></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(\'"#id#"\',\'"#name#"\',\'"#sort#"\')&><i class=&fa-edit&></i>修改</span>'},"
+
+		Else
+			If parent_id ==0
+			   debugMsg(id#"查询如果是一级=================")
+			   ///查询出该id的子栏目数量
+			   :selectChildCountSql = "select count(id) from mooccolumns where parent_id = ?"
+			   :childCount=execSQL(:selectChildCountSql,id)
+			   :idxc = indexOf(:childCount,"=")
+			   :countChild = mid(:childCount,:idxc+1)
+			   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(\'"#id#"\',\'"#name#"\',\'"#sort#"\')&><i class=&fa-edit&></i>修改</span><span class=&editorgan&  style=&color:#5ca323& onclick=&addmodal(\'"#id#"\',\'"#:countChild#"\')&><i class=&fa-plus&></i>新增</span>'},"
+			Else
+			   debugMsg(id#"查询如果是二级=================")
+			   ///查询出该id的子栏目数量
+			   :selectChildCountSql = "select count(id) from mooccolumns where parent_id = ?"
+			   :childCount=execSQL(:selectChildCountSql,id)
+			   :idxc = indexOf(:childCount,"=")
+			   :countChild = mid(:childCount,:idxc+1)
+			   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(\'"#id#"\')&><i class=&fa-trash&></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(\'"#id#"\',\'"#name#"\',\'"#sort#"\')&><i class=&fa-edit&></i>修改</span><span class=&editorgan& style=&color:#5ca323& onclick=&addmodal(\'"#id#"\',\'"#:countChild#"\')&><i class=&fa-plus&></i>新增</span>'},"
+			EndIf
+
+		EndIf
+
+    	EndRepeat
+	///debugMsg(:allcolumnData#"=================")
+	Exit(:allcolumnData)
+	
+	EndIf
+
+EndIf%>
+

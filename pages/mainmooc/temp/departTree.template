@@ -1,0 +1,9 @@
+<!--databaseName=single_database -->
+<!-- SQL={select type,departdetail,pid from sl_departTypeMap ;}-->
+
+<%Repeat%>
+ 
+<%="{ 'id':"#type#",'pId':"#pid#",'text':'<span id=&text&>"#departdetail#"</span><span class=&editorgan& onclick=&deleteModalshow("#type#")&><i class=&fa-trash&></i>删除</span><span class=&editorgan& onclick=&digmodal("#type#")&><i class=&fa-edit&></i>修改</span><span class=&editorgan& onclick=&addmodal("#type#")&><i class=&fa-plus&></i>新增</span>'},"%>
+<%EndRepeat%>
+
+

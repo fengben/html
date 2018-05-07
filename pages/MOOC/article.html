@@ -1,0 +1,1047 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="css/act/reset.css">
+<link rel="stylesheet" type="text/css" href="css/act/global.css">
+<link rel="stylesheet" type="text/css" href="css/act/web.css">
+<link rel="stylesheet" type="text/css" href="css/act/theme.css">
+<link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
+<title>资讯列表-因酷在线教育软件-中国在线教育平台第一品牌</title>
+	<!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/webutils.js"></script>
+<script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script type="text/javascript">
+   
+</script>
+
+	<script>
+		var subjectType = 'article';
+
+		function queryData(subjectId) {
+			$("#articleQuerySubjectId").val(subjectId);
+			$("#searchForm").submit();
+        }
+	</script>
+</head>
+<body class="W-body line-mo-body">
+<div class="dialogWrap"  id="loginfrom" style="position: absolute; overflow-x: hidden; overflow-y: auto; top: 264.5px; margin-left: -193px; display:none"><div class="dialog-ele new-loigin"><h4 class="d-s-head pr new-header" style="width: 380px;"><a id="dClose" onclick="closewin()" href="javascript:void(0)" title="关闭" class="dClose icon16 pa new-close">&nbsp;</a><span id="d-s-head-tab" class="d-s-head-tab"><a href="javascript:void(0)" onclick="dialoglogin()" class="current">登录</a><a href="javascript:void(0)" onclick="dialogRegister()">注册</a></span></h4><div class="of"><div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
+<div id="d-s-head-cont" class="lrWrap">
+    <section class="dis e-login-ele" id="dl">
+        <div class="mt10">
+            <p class="e-l-jy"></p>
+        </div>
+        <div>
+            <ol class="e-login-options">
+                <li>
+                    <em class="lo-ico zc-dl-ioc"> </em>
+                    <input id="focusId" type="hidden">
+                    <input id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value="" onkeyup="$(this).next().html('');" type="text">
+                    <p class="lr-tip-wrap"></p>
+                </li>
+                <li>
+                    <em class="zc-ico zc-dl-ioc"> </em>
+                    <input id="u-password" placeholder="请输入密码" name="" value="" onkeyup="$(this).next().html('');" type="password">
+                    <p class="lr-tip-wrap"></p>
+                </li>
+            </ol>
+            <section class="hLh30 of pl10">
+                <label class="hand c-999 vam fl">
+                    <input id="autoThirty" style="vertical-align: -2px;" checked="checked" type="checkbox">
+                    自动登录
+                </label>
+                <a class="vam ml10 c-blue fr" title="" href="/front/passwordRecovery">忘记密码?</a>
+            </section>
+            <section class="mt20 tac mb50">
+                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="#">登 录</a>
+            </section>
+        </div>
+    </section>
+    <section class="undis e-login-ele" id="zc" style="display: none;">
+        <div class="mt10">
+            <p class="e-l-jy"></p>
+        </div>
+        <div>
+            <ol class="e-login-options">
+                <li>
+                        <em class="lo-ico zc-dl-ioc"> </em>
+                        <input id="u-name-reg" placeholder="请输入账号" name="registerName" maxlength="50" value="" onkeyup="$(this).next().html('');" type="text">
+                        <p class="lr-tip-wrap"></p>
+                    </li>
+                <li>
+                    <em class="zc-ico zc-dl-ioc"> </em>
+                    <input id="u-password-reg" placeholder="请输入密码" name="" value="" onkeyup="$(this).next().html('');" type="password">
+                    <p class="lr-tip-wrap"></p>
+                </li>
+                <li>
+                   
+                    
+                    <p class="lr-tip-wrap" style="clear: both;"></p>
+                </li>
+                </ol>
+            <section class="tac mt20">
+                <a class="e-login-btn" href="javascript: void(0)" onclick="dialogRegister()" title="注 册">注 册</a>
+            </section>
+        </div>
+    </section>
+    <div class="mt20 sf-lr-wrap tac">
+            <h6 class="hLh20 mb15">
+                <span class="c-666 fsize14">第三方快捷登录</span>
+            </h6>
+            <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
+            <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
+            <a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>
+            </div>
+    </div></div></div></div></div>
+	<input type="hidden" id="mydomain" value=""/>
+	<div class="in-wrap" >
+		<div class="h-mobile-mask"></div>
+		<div class="head-mobile">
+			<div class="head-mobile-box">
+				<section class="clearfix">
+					<div class="u-face-pic">
+						<img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
+					</div>
+					<h4 class="hLh30 txtOf mo-uc-login-name">
+						<span class="vam ml5 fsize16 c-ccc userNameClass" style="cursor:pointer;" onclick="lrFun()">登录</span>
+					</h4>
+					<div class="hLh30 mt10">
+						<a href="#" title="购物车" class="c-999 u-c-shopcar">购物车</a>
+					</div>
+				</section>
+				<nav class="mw-nav">
+					<ul class="clearfix">
+							<li><a href="default.html" title="首页" >首页</a></li>
+						<li><a href="showcoulist.html" title="录播" >课程</a></li>
+						<li><a href="shoollist.html" title="直播" >名校</a></li>
+						<li><a href="teacherlist.html" title="班级" >名师</a></li>
+						<li><a href="group.html" title="社区" target="_blank">学问</a></li>
+						<li><a href="article.html" title="资讯" >资讯</a></li>
+
+						</ul>
+				</nav>
+				
+			</div>
+		</div>
+		<div class="main-warp">
+			<div class="main-infor" >
+				<!-- 公共头引入 -->
+				<!-- /global header begin-->
+<header id="header" class="all-header">
+	<section class="container">
+		<h1 id="logo" class="logo">
+			<a class="headerlogo" style="display: none;"  href="#" title="澄汰科技">
+				<img src="picture/logo.png" width="100%" alt="澄汰科技">
+			</a>
+			<a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="澄汰科技">
+				<img src="picture/mo-back.png">
+			</a>
+		</h1>
+		<div class="h-r-nsl">
+			<ul class="nav">
+					<li><a href="default.html" title="首页" >首页</a></li>
+						<li><a href="showcoulist.html" title="录播" >课程</a></li>
+						<li><a href="shoollist.html" title="直播" >名校</a></li>
+						<li><a href="teacherlist.html" title="班级" >名师</a></li>
+						<li><a href="group.html" title="社区" target="_blank">学问</a></li>
+						<li><a href="article.html" title="资讯" >资讯</a></li>
+
+				</ul>
+			<!-- / nav -->
+			<ul class="h-r-login clearfix">
+				<li class="undis h-login-li" id="no-login">
+					<a href="javascript:login()" title="登录">
+						<em class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span>
+					</a>
+				</li>
+				<li class="tit-new-list undis h-login-li" id="is-login-one">
+					<a href="#" title="消息" id="headerMsgCountId">
+						<em class="news-icon">&nbsp;</em>
+					</a>
+					<q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+						<div class="tit-n-warp">
+							<ol id="letter">
+							
+							</ol>
+							<div class="new-tit-box tac mt10 mb20" style="display:none">
+								<a href="#" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+							</div>
+						</div>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="#" title="">
+						<img src="" width="30" height="30" class="vam picImg" alt="">
+						<span class="vam disIb c-master" id="userName"></span>
+					</a>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="#" title="帮助" class="vam">
+						<span class="vam disIb c-fff">帮助</span>
+					</a>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
+						<span class="vam disIb c-fff">退出</span>
+					</a>
+				</li>
+				<!-- /未登录显示第1 li；登录后显示第2，3 li -->
+			</ul>
+			<aside class="h-r-search">
+		
+			</aside>
+		</div>
+		<aside class="mw-nav-btn">
+			<div class="mw-nav-icon"></div>
+		</aside>
+		<aside class="mw-nav-seach mw-nav-seach-d1">
+			<form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+				<label>
+					<input type="text" value="" placeholder="" id="h5HeaderSearchName" class="f-fM h1-mw-seach-input i_h_gb_s_input">
+					<a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+				</label>
+			</form>
+
+				<div class="exam-mo-test-time tac">
+					<span class="time c-fff f-fM vam examTimer"></span>
+					<a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
+					</div>
+
+		</aside>
+		<div class="clear mobile-clear"></div>
+	</section>
+</header>
+<!-- /global header end-->
+<!-- 公共头引入 -->
+				
+	<div id="aCoursesList" class="bg-fa of">
+		<section class="container">
+			<section class="mt30 article-new-title clearfix">
+					<article class="a-n-l-box fl w50pre">
+						<div class="mr5">
+							<div class="big-pic pic-box-zx">
+								<div class="nr-infor">
+									<a href="articleinfo.html?id=9" target="_blank">
+										<section class="n-i-sebox">
+											<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+											<div class="nr-i-zy">
+												<p class="c-fff fsize14">
+													
+		陈年将凡客2015的春夏新品发布会放在了五棵松——这个开演唱会的地方继798之后成了互联网公司的新宠，两个星期后，乐视的手机和新电视也要在这里发布。	
+........
+												</p>
+											</div>
+											<p class="nr-i-zy-btn tac">
+												查看详情
+											</p>
+										</section>
+									</a>
+								</div>
+								<a href="articleinfo.html?id=9" target="_blank" class="pic-a-n">
+									<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1442305533342.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1442305533342.jpg" alt="嘲讽陈年是很容易的事，但我更愿意祝他成功">
+								</a>
+								<a href="articleinfo.html?id=9" target="_blank" class="name-a-n">
+									<span class="txtOf">嘲讽陈年是很容易的事，但我更愿意祝他成功</span>
+								</a>
+							</div>
+						</div>
+					</article>
+					<article class="a-n-r-box fl w50pre">
+						<div class="ml10">
+							<div class="small-pic clearfix mb10">
+								<div class="w50pre fl">
+											<div class="mr5 pic-box-zx">
+												<div class="nr-infor">
+													<a href="articleinfo.html?id=38" target="_blank">
+														<section class="n-i-sebox">
+															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+															<div class="nr-i-zy">
+																<p class="c-fff fsize14">
+																	近期，中国第一起侵犯网络课件著作权的刑事案件做出判决，苏州工业园区法院一审判决认定，颜某侵犯沪江网著作权罪的事实清楚、证据确实、充分，判决颜某有期徒刑一年，缓刑........
+																</p>
+															</div>
+															<p class="nr-i-zy-btn tac">
+																查看详情
+															</p>
+														</section>
+													</a>
+												</div>
+												<a href="articleinfo.html?id=38" target="_blank" class="pic-a-n">
+													<img xsrc="http://wx.inxedu.com/images/upload/article/20161223/1482459616819.jpeg" src="http://wx.inxedu.com/images/upload/article/20161223/1482459616819.jpeg" alt="中国在线教育发展现状分析">
+												</a>
+												<a href="articleinfo.html?id=38" target="_blank" class="name-a-n">
+													<span class="txtOf">中国在线教育发展现状分析</span>
+												</a>
+											</div>
+										</div>
+									<div class="w50pre fl">
+											<div class="mr5 pic-box-zx">
+												<div class="nr-infor">
+													<a href="articleinfo.html?id=7" target="_blank">
+														<section class="n-i-sebox">
+															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+															<div class="nr-i-zy">
+																<p class="c-fff fsize14">
+																	
+	“学习中国”APP界面。
+	记者2日获悉，中共最高学府中央党校已研发推出一款“学习中国”APP，网民可利用手机和平板电脑方便地学习查阅中共中央总书记习近........
+																</p>
+															</div>
+															<p class="nr-i-zy-btn tac">
+																查看详情
+															</p>
+														</section>
+													</a>
+												</div>
+												<a href="articleinfo.html?id=7" target="_blank" class="pic-a-n">
+													<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" alt="中国首款学习习近平重要讲话APP上线">
+												</a>
+												<a href="articleinfo.html?id=7" target="_blank" class="name-a-n">
+													<span class="txtOf">中国首款学习习近平重要讲话APP上线</span>
+												</a>
+											</div>
+										</div>
+									</div>
+							<div class="small-pic clearfix">
+								<div class="w50pre fl">
+											<div class="mr5 pic-box-zx">
+												<div class="nr-infor">
+													<a href="articleinfo.html?id=11" target="_blank">
+														<section class="n-i-sebox">
+															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+															<div class="nr-i-zy">
+																<p class="c-fff fsize14">
+																		凡客之路，兴于衬衫，成于T恤。2015年的春夏之交，凡客再次发布了自己的T恤，种种迹象表明，陈年与他的凡客，这一次要，归来。凡客能否重温2011年的T恤辉煌？.....
+																</p>
+															</div>
+															<p class="nr-i-zy-btn tac">
+																查看详情
+															</p>
+														</section>
+													</a>
+												</div>
+												<a href="articleinfo.html?id=11" target="_blank" class="pic-a-n">
+													<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853211287.jpg" target="_blank" src="http://wx.inxedu.com/images/upload/article/20150910/1441853211287.jpg" alt="陈年重回T恤大战：凡客归来">
+												</a>
+												<a href="articleinfo.html?id=11" class="name-a-n">
+													<span class="txtOf">陈年重回T恤大战：凡客归来</span>
+												</a>
+											</div>
+										</div>
+									<div class="w50pre fl">
+											<div class="mr5 pic-box-zx">
+												<div class="nr-infor">
+													<a href="articleinfo.html?id=13" target="_blank">
+														<section class="n-i-sebox">
+															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+															<div class="nr-i-zy">
+																<p class="c-fff fsize14">
+																		【环球网综合报道】德国汉莎航空公司旗下的德国之翼(Germanwings)一架A320客机，3月24日从巴塞罗那飞往杜塞尔多夫途中，在法国南部阿尔卑斯山脉坠机。........
+																</p>
+															</div>
+															<p class="nr-i-zy-btn tac">
+																查看详情
+															</p>
+														</section>
+													</a>
+												</div>
+												<a href="articleinfo.html?id=13" target="_blank" class="pic-a-n">
+													<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" target="_blank" src="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" alt="法国总理证实失事客机无人生还">
+												</a>
+												<a href="articleinfo.html?id=13" class="name-a-n">
+													<span class="txtOf">法国总理证实失事客机无人生还</span>
+												</a>
+											</div>
+										</div>
+									</div>
+						</div>
+					</article>
+				</section>
+			<section class="i-article mt30">
+				<div class="fl col-7">
+					<section class="bg-fff artil-list-box">
+                        <div class="c-s-dl-li c-s-dl-li-newatc">
+                                <ul class="clearfixon">
+                                            <li class="current">
+                                                <a href="javascript:void(0)" onclick="queryData(this)" class="">全部</a>
+                                            </li>
+                                            <li>
+                                                    <a href="javascript:void(0)" onclick="queryData(this)" class="">IT</a>
+                                                </li>
+                                            <li>
+                                                    <a href="javascript:void(0)" onclick="queryData(this)" class="">热门</a>
+                                                </li>
+                                            <li>
+                                                    <a href="javascript:void(0)" onclick="queryData(this)" class="">国内</a>
+                                                </li>
+                                            <li>
+                                                    <a href="javascript:void(0)" onclick="queryData(this)" class="">国际</a>
+                                                </li>
+                                            </ul>
+                            </div>
+                        <!-- /无数据提示 开始-->
+						<!-- /无数据提示 结束-->
+						<article class="i-article-list">
+							<!-- /资讯列 开始-->
+								<ul>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=22" title="哈佛商学院院长：21世纪人人都需要创业精神" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150928/1443424120422.jpg" src="http://wx.inxedu.com/images/upload/article/20150928/1443424120422.jpg" alt="哈佛商学院院长：21世纪人人都需要创业精神">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/22 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=22" target="_blank" title="哈佛商学院院长：21世纪人人都需要创业精神" class="i-art-title">哈佛商学院院长：21世纪人人都需要创业精神</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	哈佛商学院现任院长尼汀·诺里亚(Nitin Nohria)的背景迥异于所有前任院长：身为印度裔美国人，他是哈佛商学院百年历史上第一位出生在美国之外的院长；...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:23</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=22">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('22',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise22_3 praiseCount vam fsize12 f-fM">( 2 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=23" title="雅思阅读能力提高有方法 文章精读可以这样做" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150928/1443424285823.jpg" src="http://wx.inxedu.com/images/upload/article/20150928/1443424285823.jpg" alt="雅思阅读能力提高有方法 文章精读可以这样做">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/23 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=23" target="_blank" title="雅思阅读能力提高有方法 文章精读可以这样做" class="i-art-title">雅思阅读能力提高有方法 文章精读可以这样做</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	关于雅思(课程)精读，首先，认真选择精读文章，只需10篇剑桥文章，你的成绩就可以在7.5以上。但这一前提是你不是流于形式，而是认真走心的读。
+	我一直认...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:23</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=23">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('23',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise23_3 praiseCount vam fsize12 f-fM">( 5 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=7" title="中国首款学习习近平重要讲话APP上线" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" alt="中国首款学习习近平重要讲话APP上线">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/7 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=7" target="_blank" title="中国首款学习习近平重要讲话APP上线" class="i-art-title">中国首款学习习近平重要讲话APP上线</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	“学习中国”APP界面。
+	记者2日获悉，中共最高学府中央党校已研发推出一款“学习中国”APP，网民可利用手机和平板电脑方便地学习查阅中共中央总书记习近...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:22</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=7">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('7',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise7_3 praiseCount vam fsize12 f-fM">( 0 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=13" title="法国总理证实失事客机无人生还" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" alt="法国总理证实失事客机无人生还">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/13 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=13" target="_blank" title="法国总理证实失事客机无人生还" class="i-art-title">法国总理证实失事客机无人生还</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">【环球网综合报道】德国汉莎航空公司旗下的德国之翼(Germanwings)一架A320客机，3月24日从巴塞罗那飞往杜塞尔多夫途中，在法国南部阿尔卑斯山脉坠机。...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:22</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=13">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('13',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise13_3 praiseCount vam fsize12 f-fM">( 0 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=14" title="背水一战的任天堂" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853318496.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853318496.jpg" alt="背水一战的任天堂">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/14 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=14" target="_blank" title="背水一战的任天堂" class="i-art-title">背水一战的任天堂</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	3月17日，任天堂与合作方DENA召开共同记者会，宣布两家将进行合作，将任天堂的经典游戏与人物形象带到手机上。
+DeNA表示，已经获得了任天堂全部人物的...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:22</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=14">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('14',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise14_3 praiseCount vam fsize12 f-fM">( 1 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=15" title="渠道之殇：三星手机中国没落背后" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853391646.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853391646.jpg" alt="渠道之殇：三星手机中国没落背后">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/15 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=15" target="_blank" title="渠道之殇：三星手机中国没落背后" class="i-art-title">渠道之殇：三星手机中国没落背后</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	在过去的2014年，在苹果手机大屏化和中国“高性价比军团”崛起的背景下，三星电子的手机业务已经步入窘境。日前，有
+国外分析师明确表示，三星电子正在成为下...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:22</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=15">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('15',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise15_3 praiseCount vam fsize12 f-fM">( 0 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=17" title="中国军舰协助英、德等10国从也门撤侨225人" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853445008.jpg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="中国军舰协助英、德等10国从也门撤侨225人">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/17 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=17" target="_blank" title="中国军舰协助英、德等10国从也门撤侨225人" class="i-art-title">中国军舰协助英、德等10国从也门撤侨225人</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	【环球时报记者郭媛丹报道】乘坐中国海军临沂舰撤离也门的225名外国公民当地时间2日19时15分平安抵达吉布提港。
+	此次撤离的225名外国公民来自巴基斯...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-06-08 17:22</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=17">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('17',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise17_3 praiseCount vam fsize12 f-fM">( 3 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=9" title="嘲讽陈年是很容易的事，但我更愿意祝他成功" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1442305533342.jpg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="嘲讽陈年是很容易的事，但我更愿意祝他成功">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/9 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=9" target="_blank" title="嘲讽陈年是很容易的事，但我更愿意祝他成功" class="i-art-title">嘲讽陈年是很容易的事，但我更愿意祝他成功</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+		陈年将凡客2015的春夏新品发布会放在了五棵松——这个开演唱会的地方继798之后成了互联网公司的新宠，两个星期后，乐视的手机和新电视也要在这里发布。	
+...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-05-23 09:27</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=9">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 1 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('9',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise9_3 praiseCount vam fsize12 f-fM">( 3 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=27" title="在线教育调查:时薪上万完全可能 有时上课到凌晨" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20160429/1461896485213.jpg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="在线教育调查:时薪上万完全可能 有时上课到凌晨">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/27 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=27" target="_blank" title="在线教育调查:时薪上万完全可能 有时上课到凌晨" class="i-art-title">在线教育调查:时薪上万完全可能 有时上课到凌晨</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">
+	中新网北京4月24日电 
+“在线教师1小时挣万元，收入超网红”，近日，这则新闻引发公众关注。在线教育现状究竟如何？连日来，记者采访了多位业内人士。在他们...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-05-23 09:24</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=27">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('27',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise27_3 praiseCount vam fsize12 f-fM">( 5 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=38" title="中国在线教育发展现状分析" target="_blank">
+														<img xsrc="http://wx.inxedu.com/images/upload/article/20161223/1482459616819.jpeg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="中国在线教育发展现状分析">
+													</a>
+												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/38 -->
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=38" target="_blank" title="中国在线教育发展现状分析" class="i-art-title">中国在线教育发展现状分析</a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA">近期，中国第一起侵犯网络课件著作权的刑事案件做出判决，苏州工业园区法院一审判决认定，颜某侵犯沪江网著作权罪的事实清楚、证据确实、充分，判决颜某有期徒刑一年，缓刑...</span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															2017-05-23 09:24</tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=38">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 1 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('38',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise38_3 praiseCount vam fsize12 f-fM">( 99 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+										</ul>
+								<!-- /资讯列表 结束-->
+						</article>
+						<article>
+							</article>
+						<!-- 公共分页 开始 -->
+						<form action="#" method="post" id="searchForm">
+							<input type="hidden" name="page.currentPage" id="pageCurrentPage" value="1">
+							<input type="hidden" name="queryArticle.queryKey" id="articleQueryKey" value="">
+							<input type="hidden" name="queryArticle.subjectId" id="articleQuerySubjectId" value="0">
+						</form>
+						<div>
+							<script type="text/javascript" src="http://wx.inxedu.com/static/common/web/js/page.js"></script>
+<div class="paging"> 
+		<a href="javascript:goPage(1);" title="">首</a>
+		<a id="backpage" class="undisable" href="javascript:void(0)" title="">&lt;</a>
+			<a href="javascript:void(0)" title="" class="current undisable">1</a><a href="#" title="">2</a><a id="nextpage" href="#" title="">&gt;</a>
+			<a href="#" title="">末</a>
+		<div class="clear"></div>
+	</div>
+
+
+<script type="text/javascript">
+    var totalPageSize =2;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = 2;
+    showPageNumber();
+</script><div class="clear"></div>
+						</div>
+						<!-- 公共分页 结束 -->
+					</section>
+				</div>
+				<!-- 好文推荐 -->
+				<aside class="fl col-3 articleRecommend"><div class="ml30 artil-list-box bg-fff">
+	<header class="comm-title all-article-title new-a-tit-r">
+		<h2 class="fl tac">
+			<span class="c-333">资讯排行榜</span>
+		</h2>
+		</header>
+	<section class="i-article-list r-art-wrap">
+		<ul>
+			<li class="lt2">
+						<aside class="orderNum"><span>1</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=38" target="_blank" title="中国在线教育发展现状分析" class="i-art-title">中国在线教育发展现状分析</a>
+						</h3>
+						</li>
+				<li class="lt2">
+						<aside class="orderNum"><span>2</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=23" target="_blank" title="雅思阅读能力提高有方法 文章精读可以这样做" class="i-art-title">雅思阅读能力提高有方法 文章精读可以这样做</a>
+						</h3>
+						</li>
+				<li class="lt2">
+						<aside class="orderNum"><span>3</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=27" target="_blank" title="在线教育调查:时薪上万完全可能 有时上课到凌晨" class="i-art-title">在线教育调查:时薪上万完全可能 有时上课到凌晨</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>4</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=17" target="_blank" title="中国军舰协助英、德等10国从也门撤侨225人" class="i-art-title">中国军舰协助英、德等10国从也门撤侨225人</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>5</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=9" target="_blank" title="嘲讽陈年是很容易的事，但我更愿意祝他成功" class="i-art-title">嘲讽陈年是很容易的事，但我更愿意祝他成功</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>6</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=15" target="_blank" title="渠道之殇：三星手机中国没落背后" class="i-art-title">渠道之殇：三星手机中国没落背后</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>7</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=7" target="_blank" title="中国首款学习习近平重要讲话APP上线" class="i-art-title">中国首款学习习近平重要讲话APP上线</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>8</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=14" target="_blank" title="背水一战的任天堂" class="i-art-title">背水一战的任天堂</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>9</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=22" target="_blank" title="哈佛商学院院长：21世纪人人都需要创业精神" class="i-art-title">哈佛商学院院长：21世纪人人都需要创业精神</a>
+						</h3>
+						</li>
+				<li>
+						<aside class="orderNum"><span>10</span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=20" target="_blank" title="MBA过来人亲述：联考英语复习经验" class="i-art-title">MBA过来人亲述：联考英语复习经验</a>
+						</h3>
+						</li>
+				</ul>
+	</section>
+	</div>
+</aside>
+				<div class="clear"></div>
+			</section>
+		</section>
+		<!-- /资讯列表 结束 -->
+	</div>
+				
+<!--手机端回到顶部 开始-->
+<div class="m-go-top-box">
+	<ul class="r-fixed-ul">
+		<li id="goTopBtn2" class="">
+			<a href="javascript: void(0)" title="返回顶部" class="bg-orange">
+				<em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
+			</a>
+		</li>
+	</ul>
+</div>
+<!--手机端回到顶部 开始-->
+<section class="mo-foot">
+	<article class="mo-f-warp">
+		<ul class="clearfix mo-f-w-list" id="gn-ul">
+			<li style="width: 20.0%">
+					<a href="/">
+							<svg t="1486257228474" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="2464"  width="32" height="32">
+						<path d="M978.221 507.167l-469.737-439.203-469.737 437.913c-9.189 8.567-9.702 22.975-1.114 32.155 8.579 9.173 23.004 9.692 32.187 1.105l438.629-408.894 438.649 410.139c4.401 4.112 9.987 6.144 15.563 6.144 6.070 0 12.143-2.411 16.623-7.209 8.596-9.173 8.123-23.568-1.065-32.149v0zM978.221 507.167z" fill="#333333" p-id="2465"></path>
+						<path d="M834.88 516.187c-12.573 0-22.772 10.193-22.772 22.75v348.839h-182.185v-242.67h-242.91v242.67h-182.178v-348.839c0-12.557-10.189-22.75-22.771-22.75-12.59 0-22.777 10.193-22.777 22.75v394.338h273.275v-242.669h151.819v242.669h273.268v-394.338c0.001-12.557-10.201-22.75-22.768-22.75v0zM834.88 516.187z" fill="#333333" p-id="2466"></path>
+						<path d="M675.472 190.101h136.635v121.332c0 12.576 10.201 22.755 22.772 22.755 12.569 0 22.769-10.179 22.769-22.755v-166.831h-182.177c-12.576 0-22.777 10.174-22.777 22.75-0.001 12.572 10.201 22.75 22.777 22.75v0zM675.472 190.101z" fill="#333333" p-id="2467"></path>
+					</svg><p>首页</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="/front/showcoulist">
+							<svg t="1486257362855" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="5482" width="30" height="30">
+						<path d="M229.499951 913.188218c-48.914036-7.229658-80.168878-68.500117-58.45432-114.993011 17.700127-37.899168 77.866439-44.274366 114.710578-43.379996 12.209066 0.296759 22.588461-10.589173 22.588461-22.588461 0-214.33967 0-428.679339 0-643.020032 0-12.211113-10.349719-22.588461-22.588461-22.588461-79.519078 0-156.825768 13.127995-188.981119 97.637738-14.056134 36.941354-9.794064 79.658248-9.794064 118.503974 0 140.217509 0 280.435017 0 420.652526 0 34.616402-1.300622 69.511143 0 104.108103 3.175319 84.488253 66.817802 147.707087 151.284565 150.829194 116.201535 1.707898 521.665127 0.956791 671.114904 0 21.049409 0 27.852348-24.02723 15.972786-38.561247-39.46278-48.27754-42.548048-113.524566 0-161.04793 19.342534-21.60404-12.502755-53.66013-31.94455-31.94455-60.080354 67.105351-56.141648 156.255787 0 224.937029 5.324262-12.853749 10.648524-25.707498 15.972786-38.561247-208.42496 0-416.84992 0-625.27488 0-45.63434 0-90.661859 2.997264-124.948757-35.18843-31.254841-34.808784-26.997887-78.81709-26.997887-121.741715 0-125.962853 0-251.925706 0-377.88856 0-50.012044-1.000793-100.139721 0-150.142555 0.601704-30.04427 6.29231-57.972343 26.997887-81.227999 34.031071-38.22151 80.371492-35.18843 126.600373-35.18843-7.529487-7.529487-15.058974-15.058974-22.588461-22.588461 0 214.33967 0 428.679339 0 643.020032 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-60.922535-1.479701-144.667867 18.272155-161.406087 86.262666-16.9613 68.895113 19.038612 149.897985 93.140307 160.850431C245.930155 960.955128 258.202667 917.430846 229.499951 913.188218L229.499951 913.188218z" p-id="5483" fill="#333333"></path>
+						<path d="M361.056196 111.795179c137.728828 0 277.028431-6.541997 414.573063 0 56.018851 8.659217 110.147656 42.715871 112.727411 105.47217 0.642636 15.646352 0 31.460526 0 47.115064 0 88.575338 0 177.150676 0 265.72499 0 68.37732 0 136.75464 0 205.130937 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-183.296653 0-366.592282 0-549.888935 0 7.529487 7.529487 15.058974 15.058974 22.588461 22.588461 0-215.344556 0-430.688089 0-646.032646 0-29.069059-45.176922-29.117155-45.176922 0 0 215.344556 0 430.688089 0 646.032646 0 12.211113 10.349719 22.588461 22.588461 22.588461 183.296653 0 366.592282 0 549.888935 0 12.211113 0 22.588461-10.349719 22.588461-22.588461 0-156.952658 0-313.904293 0-470.856951 0-82.908268-11.682064-153.384389-102.450347-182.328605-30.673603-9.781784-66.485227-13.762445-102.756315-15.243169-69.480444-0.192382-73.621764-0.192382-116.468618-0.192382-83.601046 0-167.202093 0-250.802116 0C331.987137 66.618257 331.939041 111.795179 361.056196 111.795179z" p-id="5484" fill="#333333"></path><path d="M510.185678 94.477768c0 113.695458 0 227.390917 0 341.086375 0 24.375154 29.352515 28.110221 42.092677 11.400654 29.27986-38.400588 58.559721-76.801177 87.840604-115.201765-11.825326 1.523703-23.651676 3.047406-35.477003 4.571109 29.826306 38.400588 59.652612 76.801177 89.479941 115.201765 12.533454 16.136515 38.561247 1.967818 38.561247-15.972786 0-113.695458 0-227.390917 0-341.086375 0-29.069059-45.176922-29.117155-45.176922 0 0 113.695458 0 227.390917 0 341.086375 12.853749-5.324262 25.707498-10.648524 38.561247-15.972786-29.826306-38.400588-59.652612-76.801177-89.479941-115.201765-9.933233-12.788258-27.79095-5.508457-35.477003 4.572132-29.27986 38.400588-58.559721 76.801177-87.839581 115.201765 14.030551 3.800559 28.062126 7.600095 42.092677 11.400654 0-113.695458 0-227.390917 0-341.086375C555.3626 65.408709 510.185678 65.360614 510.185678 94.477768L510.185678 94.477768z" p-id="5485" fill="#333333"></path><path d="M361.056196 879.8049c165.349909 0 330.700841 0 496.05075 0 29.069059 0 29.117155-45.176922 0-45.176922-165.349909 0-330.700841 0-496.05075 0C331.987137 834.627978 331.939041 879.8049 361.056196 879.8049L361.056196 879.8049z" p-id="5486" fill="#333333"></path>
+					</svg><p>课程</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="/front/liveIndex">
+							<svg t="1486257689517" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="11329" width="32" height="32">
+						<path d="M438.615 605.87L629.76 438.615l-191.145-168.96V605.87z m240.635 332.8H344.745c-13.655 0-25.6-11.95-25.6-25.6 0-13.66 11.945-25.6 25.6-25.6H679.25c13.66 0 25.6 11.94 25.6 25.6 0 13.65-11.94 25.6-25.6 25.6z m179.538-453.14c-37.31 0.384-63.191 18.35-79.683 38.65-16.19-20.561-42.122-38.65-80.379-38.65-25.277 0-46.264 8.181-62.366 24.37-29.481 29.6-30.085 74.184-29.773 75.567-0.737 4.505-15.975 111.585 162.954 200.745a21.658 21.658 0 0 0 9.651 2.294 21.453 21.453 0 0 0 10.133-2.555C897.53 728.515 953.8 658.959 952.064 583.214c0.046-39.26-24.494-97.684-93.276-97.684z m-77.819 263.03c-144.297-75.736-136.213-154.287-135.542-160.953-0.046-8.356 3.226-35.63 18.335-50.785 8.161-8.213 19.01-12.206 33.213-12.206 48.057 0 60.396 43.878 61.573 48.737a22.62 22.62 0 0 0 21.602 17.423c9.933-1.09 19.553-6.625 22.369-16.558 0.594-2.002 14.474-49.1 63.483-49.602 50.642 0 51.185 54.722 51.236 59.714 1.275 56.5-47.007 114.54-136.269 164.23z" fill="#333333" p-id="11330"></path>
+						<path d="M177.495 738.99c-32.425 0-58.025-25.6-58.025-58.03v-486.4c0-32.425 25.6-58.025 58.025-58.025H846.51c32.42 0 58.02 25.6 58.02 58.025v228.623a319.078 319.078 0 0 1 49.5 7.133V194.56c1.7-59.735-47.79-109.225-107.52-109.225H177.495c-59.735 0-109.23 49.49-109.23 109.225v486.4c0 59.73 49.495 109.23 109.225 109.23h443.76a264.433 264.433 0 0 1-23.24-51.2H177.496z" fill="#333333" p-id="11331"></path>
+					</svg><p>直播</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="/group/index">
+							<svg t="1486258789373" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="23121" width="32" height="32">
+						<path d="M464.2 622c0.8 0 1.6 0 2.4-0.1 96.3-9 120.4-71.5 119.8-103.3-0.3-14.1-11.5-24.9-26-24.9-14 0.3-25.2 11.9-24.9 26 0 0.5 0.1 44.7-73.7 51.6-14 1.3-24.3 13.7-22.9 27.7 1.3 13.1 12.4 23 25.3 23z" p-id="23122"></path>
+						<path d="M910.3 414.9c55.7-99.1 64.3-180.3 24-228.6-39.7-47.6-119.6-54.3-225.1-19-0.6 0.2-1 0.7-1.6 0.9-65.5-43.5-143.9-68.9-228.3-68.9-228.3-0.1-414 185.7-414 414 0 67.7 16.7 131.5 45.6 188-34.8 89.8-16.1 140 5.8 166.3 23.4 28.1 60.4 41.6 106.9 41.6 28.2 0 60-5 94.3-14.7 46.4 19.7 97.2 30.9 150.4 32.3v0.6h425.2V502.2h-0.6c-0.5-17.3-2.1-34.3-4.6-51 7.9-12.2 15.3-24.4 22-36.3z m-15.1-196.1c23.9 28.7 14.6 88.7-24.2 161.3-23-67.5-63-127.1-114.9-173.9 67.5-17.8 117.4-13.5 139.1 12.6z m-415.9-68.7c174.9 0 321.2 124.2 355.6 289.1-49.5 72.4-119.4 147.6-202.1 216.6-113.6 94.7-224.4 155.6-311.9 183.9-121-59-204.8-182.9-204.8-326.3 0-200.4 163-363.3 363.2-363.3z m-323.6 685c-13.7-16.4-16.7-43-9.3-76.6 28.1 38.1 62.3 71.5 101.6 98.1-43.6 5-76-2.1-92.3-21.5z m323.6 41.4c-28.8 0-56.6-3.7-83.5-10.1 83.6-36.2 176.8-94.4 269.5-171.7 68.6-57.2 129-118.9 177.2-180.2v361.9H479.3z" p-id="23123"></path>
+					</svg><p>社区</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="javascript:h5FooterMyLogin();">
+							<svg t="1486257862430" class="icon" style="" viewBox="0 0 1024 1024" p-id="17785" width="32" height="32">
+						<path d="M511.674589 64.696488c-246.847038 0-446.956611 200.109574-446.956611 446.956611 0 94.231151 29.160133 181.651177 78.95012 253.727749 0 0 15.517415 21.547759 35.803437 9.270131 19.442818-11.768021 7.554046-34.44551 7.554046-34.44551-18.063401-24.635073-28.063149-46.14497-40.059368-74.507948-20.624736-48.762587-31.081902-100.589976-31.081902-154.044422 0-53.454446 10.457166-105.281835 31.081902-154.044422 19.931958-47.124274 48.477085-89.457428 84.842317-125.82266 36.365232-36.365232 78.698386-64.910359 125.82266-84.842317 48.762587-20.624736 100.589976-31.081902 154.044422-31.081902 53.454446 0 105.281835 10.457166 154.044422 31.081902 41.683355 17.630542 79.609129 42.012859 112.981191 72.572876l21.829168 21.586644c32.097022 34.219359 57.598836 73.345472 75.854619 116.506481 20.624736 48.762587 31.081902 100.589976 31.081902 154.044422 0 53.454446-10.457166 105.281835-31.081902 154.044422-19.931958 47.124274-48.477085 89.457428-84.842317 125.82266-5.247514 5.247514-10.634198 10.31288-16.127306 15.232936-7.247054-53.594639-33.886785-103.058191-76.816526-141.627624-24.589025-22.092158-53.120848-39.295981-84.133166-51.097772 46.131667-32.394804 76.2885-85.996606 76.2885-146.646941 0-98.902544-80.176041-179.078585-179.078585-179.078585s-179.078585 80.176041-179.078585 179.078585c0 60.651358 30.156834 114.252137 76.2885 146.646941-31.013341 11.80179-59.544141 29.005614-84.133166 51.097772-50.834782 45.671179-78.82937 106.616226-78.82937 171.609473 0 8.114818 0.179079 13.518898 1.193175 22.279423 0.470721 4.068665 1.876744 7.79964 3.970428 11.011798 4.293793 7.453762 10.69048 12.249999 10.69048 12.249999 71.334675 48.192605 157.330258 76.333526 249.897513 76.333526 246.848061 0 446.956611-200.109574 446.956611-446.956611S758.521626 64.696488 511.674589 64.696488zM383.761314 467.379757c0-34.167171 13.305027-66.288752 37.465287-90.447988 24.159236-24.159236 56.281841-37.465287 90.447988-37.465287s66.288752 13.305027 90.447988 37.465287c24.159236 24.159236 37.465287 56.281841 37.465287 90.447988s-13.305027 66.288752-37.465287 90.447988c-24.159236 24.159236-56.281841 37.465287-90.447988 37.465287s-66.288752-13.305027-90.447988-37.465287C397.066341 533.668509 383.761314 501.546927 383.761314 467.379757zM511.674589 907.444401c-53.454446 0-105.281835-10.457166-154.044422-31.081902-21.145599-8.943696-41.312918-19.643386-60.423161-31.984459-0.094144-2.240017-0.119727-4.589528-0.119727-7.643074 0-104.875582 96.263437-190.19783 214.58731-190.19783s214.58731 85.322248 214.58731 190.19783c0 2.555196-0.076748 5.127787-0.193405 7.701402-19.086707 12.319583-39.232536 22.99369-60.349483 31.92613C616.956424 896.987235 565.128011 907.444401 511.674589 907.444401z" p-id="17786"></path>
+					</svg><p>我的</p>
+					</a>
+				</li>
+			</ul>
+	</article>
+</section>
+<script>
+	setTimeout(function () {
+		try {
+			headerIndexSubject();//第二三版首页 专业 显示 处理
+		}catch (err){}
+
+	},100)
+</script>
+<!-- 公共底引入 -->
+	</div>
+	<div class="exam-foot-kst">
+		<div class="undis exam-f-kst-list clearfix h5ExamDatika">
+			<div class="dtk-box fl f-kst-fl-box fot-box-btn-js">
+				<div class="lin-right tac">
+					<svg t="1508738291238" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="2257" width="48" height="48"><defs><style type="text/css"></style></defs><path d="M816.655 962.058h-609.165c-56.524 0-102.506-46.111-102.506-102.806v-694.316c0-56.695 45.982-102.806 102.506-102.806h609.165c56.524 0 102.549 46.41 102.549 103.406v450.265c0 11.828-9.599 21.426-21.426 21.426s-21.426-9.599-21.426-21.426v-450.265c0-33.383-26.783-60.553-59.695-60.553h-609.165c-32.869 0-59.652 26.912-59.652 59.952v694.273c0 33.040 26.783 59.952 59.652 59.952h609.165c32.911 0 59.695-27.212 59.695-60.596v-81.25c0-11.828 9.599-21.426 21.426-21.426s21.426 9.599 21.426 21.426v81.25c0 57.082-45.982 103.491-102.549 103.491zM746.246 726.362h-182.171c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.171c11.828 0 21.426 9.599 21.426 21.426s-9.599 21.426-21.426 21.426zM446.27 726.362h-182.214c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.214c11.828 0 21.426 9.599 21.426 21.426s-9.556 21.426-21.426 21.426zM746.246 554.948h-182.171c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.171c11.828 0 21.426 9.599 21.426 21.426s-9.599 21.426-21.426 21.426zM446.27 554.948h-182.214c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.214c11.828 0 21.426 9.599 21.426 21.426s-9.556 21.426-21.426 21.426zM746.246 383.533h-182.171c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.171c11.828 0 21.426 9.599 21.426 21.426s-9.599 21.426-21.426 21.426zM446.27 383.533h-182.214c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.214c11.828 0 21.426 9.599 21.426 21.426s-9.556 21.426-21.426 21.426z" p-id="2258" ></path></svg>
+					<span class="f-fM c-666 fsize16 vam">答题卡</span>
+				</div>
+				<div class="gscz-ej-li gscz-ej-li-big">
+					<div class="n-test-right-card bg-fff">
+						<div class="title f-fM c-333 fsize16 disFw">
+							答题卡
+						</div>
+						<div class="card-da">
+							<div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tjsj-box fl f-kst-fl-box">
+				<div class="lin-right tac" onclick="formSubmit()">
+					<svg t="1508738342428" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="4141"  width="48" height="48"><defs><style type="text/css"></style></defs><path d="M872.30464 499.22048l0 417.18784L75.84768 916.40832 75.84768 157.89056l606.8224 0L682.67008 82.04288 37.92896 82.04288C16.95744 82.04288 0 99.0208 0 119.9616l0 834.36544C0 975.29856 16.95744 992.256 37.92896 992.256l872.2944 0c20.97152 0 37.92896-16.95744 37.92896-37.92896L948.15232 499.22048 872.30464 499.22048 872.30464 499.22048z" p-id="4142"></path><path d="M1024 69.00736c0-13.74208-11.15136-24.89344-24.89344-24.89344-6.52288 0-12.17536 2.82624-16.66048 6.94272L493.4144 600.17664 303.4112 411.41248 171.40736 540.70272l53.77024 0 267.48928 249.71264L1020.5184 81.07008C1022.58688 77.44512 1024 73.44128 1024 69.00736L1024 69.00736z" p-id="4143"></path></svg>
+					<span class="f-fM c-666 fsize16 vam">交卷</span>
+				</div>
+			</div>
+			<div class="gscz-box fl f-kst-fl-box fot-box-btn-js">
+				<div class="tac">
+					<svg t="1508738466385" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="10466"  width="48" height="48"><defs><style type="text/css"></style></defs><path d="M307.1 833.1c-14.1 0-26.4-19.3-26.4-41.3s12.3-41.3 26.4-41.3h627.8c14.1 0 26.4 19.3 26.4 41.3s-12.3 41.3-26.4 41.3H307.1z m0-282.7c-14.1 0-26.4-19.3-26.4-41.3 0-22 12.3-41.3 26.4-41.3h627.8c14.1 0 26.4 19.3 26.4 41.3 0 22-12.3 41.3-26.4 41.3H307.1z m0-282.6c-14.1 0-26.4-19.3-26.4-41.3s12.3-41.3 26.4-41.3h627.8c14.1 0 26.4 19.3 26.4 41.3s-12.3 41.3-26.4 41.3H307.1z" p-id="10467"></path><path d="M125.5 853.5c-10.8 0-21.4-2.9-30.8-8.3-19-11-30.9-31.5-30.8-53.4 0-22 11.8-42.5 30.8-53.4 9.4-5.4 20-8.3 30.8-8.3s21.5 2.9 30.8 8.3c19 11 30.8 31.5 30.8 53.4 0 10.8-2.9 21.5-8.3 30.9-10.8 19-31.3 30.8-53.3 30.8z m0.1-279.5c-10.8 0-21.5-2.9-30.8-8.3-19-11-30.9-31.5-30.8-53.4 0-22 11.8-42.4 30.8-53.4 9.4-5.4 20-8.3 30.8-8.3s21.5 2.9 30.8 8.3c19 11 30.8 31.5 30.8 53.4 0 22-11.8 42.5-30.8 53.4-9.3 5.4-20 8.3-30.8 8.3z m0-279.6c-10.8 0-21.5-2.9-30.8-8.3-19-11-30.9-31.5-30.9-53.4 0-22 11.8-42.5 30.8-53.4 9.4-5.4 20-8.3 30.8-8.3s21.5 2.9 30.8 8.3c19 11 30.8 31.5 30.8 53.4 0 22-11.8 42.4-30.8 53.4-9.2 5.5-19.9 8.3-30.7 8.3z" p-id="10468"></path></svg>
+					<span class="f-fM c-666 fsize16 vam">更多</span>
+				</div>
+				<div class="gscz-ej-li">
+					<ul class="gscz-ej-li-ul">
+						<li>
+								<a href="javascript:void(0)" onclick="dialog('温馨提示','练习题库',19);" title="" class="f-fM fsize16 c-666 current">下次再做</a>
+							</li>
+						<li>
+							<a href="javascript:void(0)" onclick="danti(this)" id="h5dantiATag" title="" class="f-fM fsize16 c-666">单题模式</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="exam-f-kst-tc-btn undis">
+			<a href="javascript:void(0)" onclick="dialog('提示','',20);" titile="退出">退出</a>
+		</div>
+	</div>
+	<section class="mo-all-seach-warp">
+		<div class="mo-all-seach-infor">
+			<header class="comm-title">
+				<span class="fr mt5 sech-qx-all"><a href="javascript:void(0)" title="清空"  class="c-master">取消</a></span>
+				<h2 class="fl tac tit-header">
+					<span class="c-333">近期搜索</span>
+				</h2>
+			</header>
+			<section class="no-data-wrap">
+				<section class="no-data-wrap">
+					<em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在整理中...</span>
+				</section>
+			</section>
+			<section class="seach-group-all">
+				<ul>
+					</ul>
+			</section>
+		</div>
+	</section>
+	<input type="hidden" id="limitLogin" value="OFF"/>
+<script type="text/javascript">
+        var winW=$(window).width();
+        var boyH=$(window).height()-98;
+        $(".fot-box-btn-js").click(function () {
+            if($(this).hasClass("cur")){
+                $(".fot-box-btn-js").removeClass("cur");
+                $(this).children(".gscz-ej-li").hide();
+				//h5滚动时，右侧菜单定位有问题被隐藏，需要清除高度
+                $("body").css("height","");
+            }else {
+                $(".fot-box-btn-js").removeClass("cur");
+                $(this).addClass("cur");
+                $(".fot-box-btn-js").children(".gscz-ej-li").hide();
+                $(this).children(".gscz-ej-li").show();
+                $("body").css({"height":winW});
+            }
+        })
+        $(".gscz-ej-li-big").css({"width":winW,"height":boyH});
+function login()
+{
+$("#loginfrom").show();
+$("#dl").show()
+	$("#zc").hide()
+}
+function closewin()
+{
+	$("#loginfrom").hide();
+}
+function dialogRegister()
+{
+	$("#dl").hide()
+	$("#zc").show()
+}
+function dialoglogin()
+{
+	$("#dl").show()
+	$("#zc").hide()
+}
+
+function queryData(obj)
+
+{
+	
+         //var tmp;  
+  
+         $('.clearfixon').find('li').each(function() {  
+           //tmp = $(this).text();  
+            
+        $(this).attr("class","");  
+         });  
+  
+
+	$(obj).parent().attr("class","current")
+//$(obj).parent.attr("class","current")
+//	obj.parent().attr("class","current");
+}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Xenon Boostrap Admin Panel" />
+    <meta name="author" content="" />
+    <title>Ucha- 财务管理系统</title>
+    <link rel="stylesheet" href="/assets/css/fonts/linecons/css/linecons.css">
+    <link rel="stylesheet" href="/assets/css/fonts/fontawesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="/assets/css/xenon-core.css">
+    <link rel="stylesheet" href="/assets/css/xenon-forms.css">
+    <link rel="stylesheet" href="/assets/css/xenon-components.css">
+    <link rel="stylesheet" href="/assets/css/xenon-skins.css">
+    <link rel="stylesheet" href="/assets/css/systemManage.css">
+    <script src="/assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/StationJSLib.js"></script>
+    <script src="/Scripts/angular-1.6.7/angular.min.js "></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
+
+    <![endif]-->
+</head>
+<body class="page-body">
+    <div class="page-container">
+        <div class="sidebar-menu toggle-others fixed">
+            <div class="sidebar-menu-inner" id="sidebar-menu-inner">
+            </div>
+        </div>
+        <div class="main-content">
+             <!-- User Info, Notifications and Menu Bar -->
+            <!--相应的顶部导航区相应的内容-->
+            <div id="nav-content-inner">
+            </div>
+
+
+            <div class="page-title">
+
+
+                <div class="title-env">
+
+
+                    <h1 class="title">人员管理</h1>
+
+
+                    <p class="description">People List Manage</p>
+
+
+                </div>
+
+
+                <div class="breadcrumb-env">
+
+
+                    <ol class="breadcrumb bc-1">
+
+
+                        <li>
+
+
+                            <a href="main.html"><i class="fa-home"></i>Home</a>
+
+
+                        </li>
+
+                        <li>
+
+                            <a href="systemManage.html">System Manage</a>
+                        </li>
+
+
+                        <li class="active">
+
+
+                            <strong>People List Manage</strong>
+
+
+                        </li>
+
+
+                    </ol>
+
+
+                </div>
+
+            </div>
+
+
+            <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                //inittable();
+
+                $("#s2example-1").select2
+                ({
+                    placeholder: '11',
+                }).on('select2-open', function () {
+                    // Adding Custom Scrollbar
+                    $(this).data('select2').results.addClass('overflow-hidden').perfectScrollbar();
+                });
+                $("#sex").selectBoxIt().on('open', function () {
+                    // Adding Custom Scrollbar
+                    $(this).data('selectBoxSelectBoxIt').list.perfectScrollbar();
+                });
+
+                var defaultData;
+                var obj_tree = new Array();
+                var processResult_tree = function () {
+                    var jsonData = obj_tree[0].replace(/\'/g, '\"');
+                    jsonData = jsonData.substr(0, jsonData.length - 1 - 1);
+                    var str = '[' + jsonData + ']';
+                    ////////////
+                    var zNodes = JSON.parse(str);
+                    var newTree = new Array();
+                    var toDelete = new Array();
+                    for (var i = 0; i < zNodes.length; i++) {
+                        var json = {};
+                        json['text'] = zNodes[i].name;
+                        json['id'] = zNodes[i].id;
+                        json['nodes'] = new Array;
+                        newTree.push(json);
+                    }
+                    for (var i = 0; i < zNodes.length; i++) {
+                        if (zNodes[i].id != zNodes[i].pId) {
+                            toDelete.push(zNodes[i].id);
+                            var pId = zNodes[i].pId;
+                            newTree[pId].nodes.push(newTree[i]);
+                        }
+                    }
+                    //var b = toDelete.join('-');                        alert(b);
+                    var idelete = 0;
+                    for (var i = 0; i < newTree.length; i++) {
+                        if (newTree[i].id == (toDelete[idelete])) {
+                            newTree.splice(i, 1);
+                            idelete++;
+                            i--;
+                        }
+                    }
+                    var defaultData = JSON.stringify(newTree);
+                    var initSelectableTree = function () {
+                        return $('#treeview-selectable').treeview
+                        ({
+                            data: defaultData,
+                            backColor: '#fff',
+                            borderColor: '#eeeeee',
+                            // collapseIcon:'glyphicon glyphicon-indent-left',
+                            // emptyIcon:'glyphicon glyphicon-sort-by-attributes-alt',
+                            // nodeIcon:'glyphicon glyphicon-bookmark',
+                            nodeIcon: 'glyphicon glyphicon-indent-left',
+                            selectedIcon: 'glyphicon glyphicon-bookmark',
+                            selectedBackColor: '#efebeb',
+                            selectedColor: '#8f1fdc',
+                            showIcon: true,
+                            showTags: true,
+
+                            onNodeSelected: function (event, node) {
+                                //alert('你点击了' + node.text + 'id为' + node.id);
+                                loadFromWS("person_manage/loadPersons.template", "sid=" + node.id, "wholetable");
+                                var obj_html = new Array();
+                                var process_html = function () {
+                                    //var html = obj_html[0];
+                                    //$('#memberinfo').append(html);
+                                    //alert(obj_html[1]);
+                                    curDepart = obj_html[1];
+                                }
+                                getFromWS("person_manage/treeGetPersons.template", "sid=" + node.id, obj_html, process_html);
+
+                                //$('#example-2').dataTable().fnDestroy();
+                                //debugger
+                                //$('#memberinfo').html(html);
+                                //inittable();
+                            },
+
+                            onNodeUnselected: function (event, node) {
+                                console.log('1111' + node.text);
+                            }
+                        });
+                    };
+
+                    var $selectableTree = initSelectableTree();
+                    $('#treeview-selectable').treeview('collapseAll', {silent: true});
+                    var nid = 0;
+                    loadFromWS("person_manage/loadPersons.template", "sid=" + nid, "wholetable");
+                }
+                getFromWS("person_manage/list.template", "", obj_tree, processResult_tree);
+            });
+
+            </script>
+
+
+            <div class="panel panel-default">
+
+                <div class="panel-heading">Simple nesting example</div>
+
+
+                <div class="panel-body">
+
+
+                    <div class="row">
+
+
+                        <div class="col-sm-4">
+
+
+                            <h4 class="school">学校组织架构</h4>
+
+
+                            <div id="treeview-selectable" class=""></div>
+
+
+                        </div>
+
+                        <script type="text/javascript">
+                        function trim(str) { //删除左右两端的空格
+                            return str.replace(/(^\s*)|(\s*$)/g, "");
+                        }
+
+                        function ltrim(str) { //删除左边的空格
+                            return str.replace(/(^\s*)/g, "");
+                        }
+
+                        function rtrim(str) { //删除右边的空格
+                            return str.replace(/(\s*$)/g, "");
+                        }
+
+
+                        function isNull(str) {
+                            /*
+                            var pat = /\s+/;：有空格就不行
+                            str.match(/^\s+$/) ：全空格才不行
+                            */
+                            if (str == "" || str.match(/^\s+$/))
+                                return true;
+                            else
+                                return false;
+                        }
+
+                        
+
+                        var curDepart;
+                        var opts = {
+                            "closeButton": true,
+                            "debug": false,
+                            "positionClass": "toast-bottom-right",
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        };
+
+                        function addmember() {
+                            $('#addmodal').modal('show');
+                            //
+                            var objNI = new Array();
+                            var processResultNI = function () 
+                            {
+                            	var newid = objNI[0];
+                            	alert(newid);
+                            	$("#addsid").val(newid);                            	     
+                            }
+                            getFromWS("person_manage/getNewID.template", "", objNI, processResultNI);
+                            //
+                            $("#adddepartdetail").val(curDepart)
+                            $('#addsave').on('click', function () {
+                                var login_name = $("#addsid").val();
+                                var name = $("#addname").val();
+                                var gender = $("#addgender").val();
+                                var departdetail = $("#adddepartdetail").val();
+                                var divide = $("#adddivide").val();
+                                var stafftype = $("#addstafftype").val();
+                                var title = $("#addtitle").val();
+                                var rank = $("#addrank").val();
+                                var fid = $("#addfid").val();
+                                var hxid = $("#addhxid").val();
+                                var zsid = $("#addzsid").val();
+                                var phonenumber = $("#addphonenumber").val();
+                                var sfid = $("#addsfid").val();
+                                var ybid = $("#addybid").val();
+                                var classification = "000000";
+                                var classarr = new Array();
+                                var chks = document.getElementsByName("addchk");
+                                for (var i = 0; i < chks.length; i++) {
+                                    if (chks[i].checked)
+                                        classarr.push(1);
+                                    else
+                                        classarr.push(0);
+                                }
+                                classification = classarr.join('');
+                                //var pat =new RegExp("\\s*","g");
+                                if (isNull(login_name) || isNull(name) || isNull(gender) || isNull(departdetail) || isNull(divide) || isNull(stafftype) || isNull(title) || isNull(rank)) {
+                                    //alert("用户名不可以为空！！");
+                                    toastr.error("信息填写不完整", "添加职员失败！", opts);
+                                    return;
+                                }
+
+                                var obj = new Array();
+                                var processResult = function () {
+                                    if(obj[0]=="rpt")
+                                    {
+                                        toastr.error("职员ID重复", "添加职员失败！", opts);
+                                        return;
+                                    }
+                                    else
+                                    {
+                                    	
+                                    //location.reload(true);
+                                    $('#addmodal').modal('hide');
+                                        toastr.success("添加完成", "添加人员成功！", opts);
+                                    }
+
+
+                                }
+                                var postdata = "login_name=" + login_name + "$^@^$name=" + name + "$^@^$gender=" + gender + "$^@^$departname=" + departdetail + "$^@^$divide=" + divide + "$^@^$stafftype=" + stafftype + "$^@^$title=" + title + "$^@^$rank=" + rank + "$^@^$fid=" + fid + "$^@^$hxid=" + hxid + "$^@^$zsid=" + zsid + "$^@^$phonenumber=" + phonenumber + "$^@^$classification=" + classification + "$^@^$sfid=" + sfid+ "$^@^$ybid=" + ybid;
+                                getFromWS("person_manage/pmAdd.template", postdata, obj, processResult);
+
+
+                            })
+                        }
+
+                        function editmember(sid) {
+                            var obj = new Array();
+                            var processResult = function () {
+                                var str = obj[0].replace(/\'/g, '\"');
+                                var person = JSON.parse(str);
+                                $("#editsid").val(person.login_name);
+                                $("#editname").val(person.name);
+                                //$("#editgender").val(person.gender);
+                                if (person.gender == "男")
+                                    $("#editgender").val("男");
+                                else
+                                    $("#editgender").val("女");
+                                $("#editdepartdetail").val(person.departdetail);
+                                //$("#editdivide").val(person.divide);
+                                if (person.divide == "行政")
+                                    $("#editdivide").val("行政");
+                                else
+                                    $("#editdivide").val("教学");
+                                //$("#editstafftype").val(person.stafftype);
+                                if (person.stafftype == "在职员工")
+                                    $("#editstafftype").val("在职员工");
+                                else if (person.stafftype == "合同制员工")
+                                    $("#editstafftype").val("合同制员工");
+                                else if (person.stafftype == "退休员工")
+                                    $("#editstafftype").val("退休员工");
+                                else
+                                    $("#editstafftype").val("离职员工");
+
+                                $("#edittitle").val(person.title);
+                                $("#editrank").val(person.rank);
+                                $("#editfid").val(person.fid);
+                                $("#edithxid").val(person.hxid);
+                                $("#editzsid").val(person.zsid);
+                                $("#editphonenumber").val(person.phonenumber);
+                                $("#editsfid").val(person.sfid);
+                                $("#editybid").val(person.ybid);
+                                var editchks = document.getElementsByName("editchk");
+                                for (var i = 0; i < person.classification.length; i++) {
+                                    if (person.classification[i] == '1')
+                                        editchks[i].checked = true;
+                                    else
+                                        editchks[i].checked = false;
+                                }
+                                $('#edit').modal('show');
+                            }
+                            getFromWS("person_manage/treeGetDetail.template", "sid=" + sid, obj, processResult);
+                            //+ "$^@^$userId=" + sessionStorage.getItem('userId') + "$^@^$userToken=" + sessionStorage.getItem('userToken')
+                            $('#editsave').on('click', function () {
+                                var login_name = $("#editsid").val();
+                                var name = $("#editname").val();
+                                var gender = $("#editgender").val();
+                                var departdetail = $("#editdepartdetail").val();
+                                var divide = $("#editdivide").val();
+                                var stafftype = $("#editstafftype").val();
+                                var title = $("#edittitle").val();
+                                var rank = $("#editrank").val();
+                                var fid = $("#editfid").val();
+                                var hxid = $("#edithxid").val();
+                                var zsid = $("#editzsid").val();
+                                var phonenumber = $("#editphonenumber").val();
+                                var sfid = $("#editsfid").val();
+                                var ybid = $("#editybid").val();
+                                var classification = "000000";
+                                var classarr = new Array();
+                                var chks = document.getElementsByName("editchk");
+                                for (var i = 0; i < chks.length; i++) {
+                                    if (chks[i].checked)
+                                        classarr.push(1);
+                                    else
+                                        classarr.push(0);
+                                }
+                                classification = classarr.join('');
+                                //            缺少信息不成功
+                                if (isNull(login_name) || isNull(name) || isNull(gender) || isNull(departdetail) || isNull(divide) || isNull(stafftype) || isNull(title) || isNull(rank)) {
+                                    toastr.error("信息填写不完整", "修改失败！", opts);
+                                }
+                                else {
+
+                                    var obj_save = new Array();
+                                    var processResult_save = function () {
+                                        //alert(obj_save[0]);
+                                        //location.reload(true);
+                                        /*样式*/
+                                        $('#addmodal').modal('hide');
+                                        toastr.success("修改完成", "修改信息成功！", opts);
+
+                                        $('#edit').modal('hide');
+
+                                    }
+
+                                    var postdata = "login_name=" + login_name + "$^@^$name=" + name + "$^@^$gender=" + gender + "$^@^$departname=" + departdetail + "$^@^$divide=" + divide + "$^@^$stafftype=" + stafftype + "$^@^$title=" + title + "$^@^$rank=" + rank + "$^@^$fid=" + fid + "$^@^$hxid=" + hxid + "$^@^$zsid=" + zsid + "$^@^$phonenumber=" + phonenumber + "$^@^$classification=" + classification+ "$^@^$sfid=" + sfid+ "$^@^$ybid=" + ybid;
+                                    // + "$^@^$classification=" + $scope.udclassification + "$^@^$userId=" + sessionStorage.getItem('userId') + "$^@^$userToken=" + sessionStorage.getItem('userToken')
+                                    getFromWS("person_manage/pmUpdate.template", postdata, obj_save, processResult_save);
+
+                                }
+
+                            })
+
+
+                        }
+
+                        function detailmember(sid) {
+                        
+                            var obj = new Array();
+                            var processResult = function () {
+                                var str = obj[0].replace(/\'/g, '\"');
+                                var person = JSON.parse(str);
+                                $("#detailsid").val(person.login_name);
+                                $("#detailname").val(person.name);
+                                $("#detailgender").val(person.gender);
+                                $("#detaildepartdetail ").val(person.departdetail);
+                                $("#detaildivide").val(person.divide);
+                                $("#detailstafftype").val(person.stafftype);
+                                $("#detailtitle").val(person.title);
+                                $("#detailrank").val(person.rank);
+                                $("#detailfid").val(person.fid);
+                                $("#detailhxid").val(person.hxid);
+                                $("#detailzsid").val(person.zsid);
+                                $("#detailphonenumber").val(person.phonenumber);
+                                $("#detailsfid").val(person.sfid);
+                                $("#detailybid").val(person.ybid);
+
+                                var pclassification = new Array();
+                                if (person.classification.substr(0, 1) == '1')
+                                    pclassification.push('通知管理');
+                                if (person.classification.substr(1, 1) == '1')
+                                    pclassification.push('⼈员经费申报');
+                                if (person.classification.substr(2, 1) == '1')
+                                    pclassification.push('⼈员⼯资申报');
+                                if (person.classification.substr(3, 1) == '1')
+                                    pclassification.push('薪酬审核');
+                                if (person.classification.substr(4, 1) == '1')
+                                    pclassification.push('财务统计');
+                                if (person.classification.substr(5, 1) == '1')
+                                    pclassification.push('⼈员管理及机构管理功能');
+                                var perclassification = pclassification.join(',');
+                                $("#detailclassification").val(perclassification);
+
+                                $('#preview').modal('show');
+
+
+                            }
+                            getFromWS("person_manage/treeGetDetail.template", "sid=" + sid, obj, processResult);
+                            //+ "$^@^$userId=" + sessionStorage.getItem('userId') + "$^@^$userToken=" + sessionStorage.getItem('userToken')
+
+                        }
+
+
+                        function delmember(sid) {
+                            $('#deleteModal').modal('show');
+                            $("#removeItem").on('click', function () {
+                                var obj = new Array();
+                                var processResult = function () {
+                                    alert(obj[0]);
+                                    location.reload(true);
+                                }
+                                getFromWS("person_manage/pmDelete.template", "login_name=" + sid, obj, processResult);
+                                //+ $scope.deletePerson + "$^@^$userId=" + sessionStorage.getItem('userId') + "$^@^$userToken=" + sessionStorage.getItem('userToken')
+                                $('#deleteModal').modal('hide');
+                            });
+                        }
+
+                        function exportPersons(){
+                            if (typeof(curDepart) == "undefined") {
+                                toastr.error("请先选择一个部门！", "导出失败", opts);
+                            }
+                            else{
+                                window.location.href="/person_manage/getPersonsExcel.template?nid="+curDepart;
+                            }
+                            //curDepart是js中的一个全局变量，表示当前点击的机构的id
+                        }
+
+                        </script>
+                        <div class="col-sm-8" id="wholetable">
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+            <footer class="main-footer sticky footer-type-1">
+
+
+                <div class="footer-inner">
+
+
+                    <div class="footer-text">
+
+
+                        &copy; 2017
+
+
+                        <strong>UCHA</strong>
+
+
+                        财务处理系统<a href="http:/http://sdev.whu.edu.cn/" target="_blank">武汉软件工程职业学院</a> - Collect from <a href="http://sdev.whu.edu.cn/" title="网页模板" target="_blank">武汉大学</a>
+
+
+                    </div>
+
+
+                    <div class="go-up">
+
+
+                        <a href="#" rel="go-top">
+
+
+                            <i class="fa-angle-up"></i>
+
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </footer>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="modal fade" id="deleteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header noborder">
+                    <h4 class="modal-title">确定删除此职员？</h4>
+                </div>
+                <div class="modal-footer noborder">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" style="margin-left:40px" id="removeItem">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="addmodal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">新增员工</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">工号</label>
+                                <input type="text" class="form-control" name='name' id="addsid" required>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">姓名</label>
+                                <input type="text" class="form-control" name='name' id="addname" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">性别</label>
+                                <select class="form-control" id="addgender" required>
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">部门</label>
+                                <input type="text" class="form-control" name='name' disabled id="adddepartdetail" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">分类</label>
+                                <select class="form-control" id="adddivide" required>
+                                    <option value="行政">行政</option>
+                                    <option value="教学">教学</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">员工类型</label>
+                                <select class="form-control" id="addstafftype" required>
+                                    <option value="在职员工">在职员工</option>
+                                    <option value="合同制员工">合同制员工</option>
+                                    <option value="离职员工">离职员工</option>
+                                    <option value="退休员工">退休员工</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">职称</label>
+                                <input type="text" class="form-control" name='name' id="addtitle" required>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">级别</label>
+                                <input type="text" class="form-control" name='name' id="addrank" required>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">招商银行卡号</label>
+                                <input type="text" class="form-control" name='name' id="addzsid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">华夏银行卡号</label>
+                                <input type="text" class="form-control" name='name' id="addhxid">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">公积金账号</label>
+                                <input type="text" class="form-control" name='name' id="addfid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">手机号</label>
+                                <input type="text" class="form-control" name='name' id="addphonenumber">
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                                                            <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">身份证号</label>
+                                <input type="text" class="form-control" name='name' id="addsfid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">医保帐号</label>
+                                <input type="text" class="form-control" name='name' id="addybid">
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">权限</label></br>
+                                <input type="checkbox" name='addchk' id="addcka">通知管理
+                                <input type="checkbox" name='addchk' id="addckb">⼈员经费申报
+                                <input type="checkbox" name='addchk' id="addckc">⼈员⼯资申报
+                                <input type="checkbox" name='addchk' id="addckd">薪酬审核
+                                <input type="checkbox" name='addchk' id="addcke">财务统计
+                                <input type="checkbox" name='addchk' id="addckf">⼈员管理及机构管理
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" id="addsave">确定</button>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div><!--add-->
+
+
+    <div class="modal fade" id="preview" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">查看员工</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">工号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailsid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">姓名</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailname">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">性别</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailgender">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">部门</label>
+                                <input type="text" class="form-control" name='name' disabled id="detaildepartdetail">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">分类</label>
+                                <input type="text" class="form-control" name='name' disabled id="detaildivide">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">员工类型</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailstafftype">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">职称</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailtitle">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">级别</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailrank">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">招商银行卡号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailzsid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">华夏银行卡号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailhxid">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">公积金账号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailfid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">手机号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailphonenumber">
+                            </div>
+                        </div>
+
+                    </div>
+                                                            <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">身份证号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailsfid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">医保帐号</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailybid">
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">权限</label>
+                                <input type="text" class="form-control" name='name' disabled id="detailclassification">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div><!--preview-->
+
+
+    <div class="modal fade" id="edit" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">修改员工信息</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">工号</label>
+                                <input type="text" class="form-control" name='name' disabled id="editsid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">姓名</label>
+                                <input type="text" class="form-control" name='name' id="editname">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">性别</label>
+                                <select class="form-control" id="editgender">
+                                    <option value="男">男</option>
+                                    <option value="女">女</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">部门</label>
+                                <input type="text" class="form-control" name='name' disabled id="editdepartdetail">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">分类</label>
+                                <select class="form-control" id="editdivide">
+                                    <option value="行政">行政</option>
+                                    <option value="教学">教学</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">员工类型</label>
+                                <select class="form-control" id="editstafftype">
+                                    <option value="在职员工">在职员工</option>
+                                    <option value="合同制员工">合同制员工</option>
+                                    <option value="离职员工">离职员工</option>
+                                    <option value="退休员工">退休员工</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">职称</label>
+                                <input type="text" class="form-control" name='name' id="edittitle">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">级别</label>
+                                <input type="text" class="form-control" name='name' id="editrank">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">招商银行卡号</label>
+                                <input type="text" class="form-control" name='name' id="editzsid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">华夏银行卡号</label>
+                                <input type="text" class="form-control" name='name' id="edithxid">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">公积金账号</label>
+                                <input type="text" class="form-control" name='name' id="editfid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">手机号</label>
+                                <input type="text" class="form-control" name='name' id="editphonenumber">
+                            </div>
+                        </div>
+
+                    </div>
+                                        <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">身份证号</label>
+                                <input type="text" class="form-control" name='name' id="editsfid">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">医保帐号</label>
+                                <input type="text" class="form-control" name='name' id="editybid">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    
+                    
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">权限</label></br>
+                                <input type="checkbox" name='editchk' id="editcka">通知管理
+                                <input type="checkbox" name='editchk' id="editckb">⼈员经费申报
+                                <input type="checkbox" name='editchk' id="editckc">⼈员⼯资申报
+                                <input type="checkbox" name='editchk' id="editckd">薪酬审核
+                                <input type="checkbox" name='editchk' id="editcke">财务统计
+                                <input type="checkbox" name='editchk' id="editckf">⼈员管理及机构管理
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" id="editsave">确定</button><!---to do-->
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div><!--edit-->
+
+
+    <link rel="stylesheet" href="/assets/js/uikit/uikit.css">
+
+
+    <link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css">
+
+
+    <link rel="stylesheet" href="/assets/js/select2/select2.css">
+
+
+    <link rel="stylesheet" href="/assets/js/select2/select2-bootstrap.css">
+
+
+    <link rel="stylesheet" href="/assets/js/multiselect/css/multi-select.css">
+
+
+    <div class="bottom-script-inner" id="bottom-script-inner">
+
+
+    </div>
+
+
+    <script>
+    jQuery(document).ready(function($) {
+        var loadBottomScripts = function () {
+            loadFromWS("Home/bottomscripts.template", "", "bottom-script-inner");
+        };
+        loadFromWS("Home/leftsidemenu.template", "type=系统管理$^@^$item=人员管理$^@^$loginname="+sessionStorage.getItem('loginName'), "sidebar-menu-inner", loadBottomScripts);
+        //加载相应的公共页头
+        loadFromWS("Home/topNavContent.template", "name=" + sessionStorage.getItem('_userName') + "$^@^$loginname=" + sessionStorage.getItem('loginName'), "nav-content-inner");
+    });
+    </script>
+
+
+    <!-- Bottom Scripts -->
+
+
+    <script src="/assets/js/bootstrap.min.js"></script>
+
+
+    <script src="/assets/js/TweenMax.min.js"></script>
+
+
+    <script src="/assets/js/resizeable.js"></script>
+
+
+    <script src="/assets/js/joinable.js"></script>
+
+
+    <script src="/assets/js/xenon-api.js"></script>
+
+
+    <script src="/assets/js/xenon-toggles.js"></script>
+
+
+    <script src="/assets/js/datatables/js/jquery.dataTables.min.js"></script>
+
+
+    <!-- Imported scripts on this page -->
+
+
+    <script src="/assets/js/toastr/toastr.min.js"></script>
+
+
+    <script src="/assets/js/uikit/js/uikit.min.js"></script>
+
+
+    <script src="/assets/js/bootstrap-treeview.min.js"></script>
+
+
+    <script src="/assets/js/datatables/dataTables.bootstrap.js"></script>
+
+
+    <script src="/assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+
+
+    <script src="/assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+
+
+    <script src="/assets/js/select2/select2.min.js"></script>
+
+
+    <script src="/assets/js/jquery-ui/jquery-ui.min.js"></script>
+
+
+    <script src="/assets/js/selectboxit/jquery.selectBoxIt.min.js"></script>
+
+
+    <script src="/assets/js/multiselect/js/jquery.multi-select.js"></script>
+
+
+</body>
+
+
+</html>
+
+

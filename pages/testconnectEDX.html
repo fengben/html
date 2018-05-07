@@ -1,0 +1,70 @@
+<script>
+    function setCookie(c_name, value, expiredays) {
+        var exdate = new Date()
+        exdate.setDate(exdate.getDate() + expiredays)
+        document.cookie = c_name + "=" + escape(value) +
+            ((expiredays == null) ? "" : ";expires=" + exdate.toGMTString())
+    }
+
+    function getCookie(c_name) {
+        if (document.cookie.length > 0) {
+            c_start = document.cookie.indexOf(c_name + "=")
+            if (c_start != -1) {
+                c_start = c_start + c_name.length + 1
+                c_end = document.cookie.indexOf(";", c_start)
+                if (c_end == -1) c_end = document.cookie.length
+                return unescape(document.cookie.substring(c_start, c_end))
+            }
+        }
+        return ""
+    }
+
+    function tt() {
+        setCookie('email', 'staff@example.com', 1)
+        setCookie('pws', 'edx', 1)
+    }
+
+    function f() {
+        var a = getCookie('login_name');
+        alert(a)
+
+    }
+
+    function checkCookie() {
+        username = getCookie('username')
+        if (username != null && username != "") {
+            alert('Welcome again ' + username + '!')
+        }
+        else {
+            username = prompt('Please enter your name:', "")
+            if (username != null && username != "") {
+                setCookie('username', username, 365)
+            }
+        }
+    }
+</script>
+<button onclick="tt()"> AAA</button>
+<button onclick="f()">con</button>
+<form action="http://192.168.10.138/mylogin/" method="get">
+    <input  id="test" name="email" value=""/>
+    <script type="text/javascript">
+        function f() {
+            val = getCookie('email');
+            val=decodeURI(decodeURI(val))
+            document.getElementById('test').value = val;
+        }
+
+        f();
+    </script>
+     <input type="password" id="test1" name="password" value=""/>
+    <script type="text/javascript">
+        function ff() {
+            val = getCookie('pws');
+            document.getElementById('test1').value = val;
+        }
+
+        ff();
+    </script>
+    <input type="text" name="redirect_url" value="course-v1:whu+cs002+2017_T1"/>
+    <input type="submit" value="Submit"/>
+</form>

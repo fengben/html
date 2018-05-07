@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script>
+
+            var indexPictures = new Array();
+            var processPicResult = function () {
+                alert(indexPictures);
+                jQuery("#indexPic1").html(indexPictures[0]);
+                jQuery("#indexPic2").html(indexPictures[1]);
+
+            }
+            getFromWS("frontmooc/getPictureList.template", "", indexPictures, processPicResult);
+
+</script>
+</head>
+
+<body>
+<div id="indexPic1">
+</div>
+<div id="indexPic2">
+</div>
+</body>
+</html>

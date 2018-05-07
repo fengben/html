@@ -1,0 +1,16 @@
+<%
+	If :operation=="deleteGovEmail"
+	:delSql="delete from govemail where id = ?"
+	:x = execSQL(:delSql, :id)
+	Exit(:x)
+	EndIf
+%>
+
+<%
+	If :operation=="insertGovEmail"
+	:insertSql="insert into govemail values(?, ?, ?, now(), ?)"
+	:id = tuid();
+	:x = execSQL(:insertSql, L(:id), S(:name), S(:content), :appeal_open)
+	Exit(:x)
+	EndIf
+%>

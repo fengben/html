@@ -1,0 +1,8 @@
+    ///如果数据库中没有课程，根据edx传的信息创建课程   title:课程名,    publisher:课程创建者,     course_addr:课程唯一地址
+	<%:insertSql = "insert into moocarticle(id,title,publisher,course_addr)values(?,?,?,?)" %>
+	<%
+	:aid = tuid();
+	debugMsg("-----++++++++++-------------------"#:aid#:title#:publisher#:course_addr)
+	:x=execSQL(:insertSql,L(:aid),S(:title),S(:publisher),S(:course_addr))
+    debugMsg("---------------------------------------"#:x)
+	%>

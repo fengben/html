@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!--[if lt IE 7]>
+<html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="shortcut icon" href="#favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/web.css">
+    <link rel="stylesheet" type="text/css" href="css/theme.css">
+    <link href="css/mw_320_768.css" rel="stylesheet" type="text/css"
+          media="screen and (min-width: 320px) and (max-width: 768px)">
+    <title>观看视频</title>
+    <!--[if lt IE 9]>
+    <!--<script src="js/html5.js"></script><![endif]&ndash;&gt;-->
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/webutils.js"></script>
+    <script type="text/javascript" src="js/headerh5searchcommon.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <!--<script type="text/javascript" src="js/common.js"></script>-->
+
+    <!--<script type="text/javascript" src="js/teacher.js"></script>-->
+</head>
+
+<header id="header" class="all-header">
+    <section class="container">
+        <h1 id="logo" class="logo">
+            <a class="headerlogo" style="display: none;" href="#" title="武汉大学出版社">
+                <img src="picture/logo.png" width="100%" alt="武汉大学出版社">
+            </a>
+            <a class="headerfanhui" style="display: none" href="javascript:void (0)" onclick="goHistory('')"
+               title="武汉大学出版社">
+                <img src="picture/mo-back.png">
+            </a>
+        </h1>
+        <div class="h-r-nsl">
+            <ul class="nav">
+                <li><a href="#" title="首页">首页</a></li>
+                <li><a href="#" title="录播">课程</a></li>
+                <li><a href="#" title="直播">名校</a></li>
+                <li><a href="#" title="班级">名师</a></li>
+                <li><a href="#" title="社区" target="_blank">学问</a></li>
+                <li><a href="#" title="资讯">资讯</a></li>
+
+                <!-- / nav -->
+                <ul class="h-r-login clearfix">
+                    <li class="undis h-login-li" id="no-login">
+                        <a href="javascript:#" title="登录">
+                            <em class="icon18 login-icon">&nbsp;</em><span class="vam ml5"
+                                                                           onclick='login()'>登录</span>
+                        </a>
+                    </li>
+                    <li class="tit-new-list undis h-login-li" id="is-login-one">
+                        <a href="#uc/letter" title="消息" id="headerMsgCountId">
+                            <em class="news-icon">&nbsp;</em>
+                        </a>
+                        <q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+                        <div class="tit-n-warp">
+                            <ol id="letter">
+
+                            </ol>
+                            <div class="new-tit-box tac mt10 mb20" style="display:none">
+                                <a href="#uc/letter" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="h-r-user undis h-login-li loginedLiShow">
+                        <a href="#uc/index" title="">
+                            <img src="" width="30" height="30" class="vam picImg" alt="">
+                            <span class="vam disIb c-master" id="userName"></span>
+                        </a>
+                    </li>
+                    <li class="h-r-user undis h-login-li loginedLiShow">
+                        <a href="#front/helpCenter" title="帮助" class="vam">
+                            <span class="vam disIb c-fff">帮助</span>
+                        </a>
+                    </li>
+                    <li class="h-r-user undis h-login-li loginedLiShow">
+                        <a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
+                            <span class="vam disIb c-fff">退出</span>
+                        </a>
+                    </li>
+                    <!-- /未登录显示第1 li；登录后显示第2，3 li -->
+                </ul>
+                <aside class="h-r-search">
+                    <div class="pr h-r-s-box-cx">
+                        <form action="#front/showcoulist" method="post" id="headerformSearch"
+                              onsubmit="return toSearch()">
+                            <label class="h-r-s-box"><input type="text" value="" id="headerSearchName"
+                                                            name="queryCourse.courseName" placeholder="搜索...">
+                                <button class="s-btn" type="submit"><em class="icon18">&nbsp;</em></button>
+                            </label>
+                        </form>
+                    </div>
+                </aside>
+        </div>
+        <aside class="mw-nav-btn">
+            <div class="mw-nav-icon"></div>
+        </aside>
+        <aside class="mw-nav-seach mw-nav-seach-d1">
+
+
+            <div class="exam-mo-test-time tac">
+                <span class="time c-fff f-fM vam examTimer"></span>
+                <a href="javascript:void(0)" onclick="timePause(this)" title=""
+                   class="de-over-btn timePauseTag"></a>
+            </div>
+
+        </aside>
+        <div class="clear mobile-clear"></div>
+    </section>
+</header>
+<!-- /global header end-->
+<!-- 公共头引入 -->

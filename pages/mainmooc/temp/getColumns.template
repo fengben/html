@@ -1,0 +1,22 @@
+<!-- databaseName=placenamedb -->
+<%
+///If :operation == "getAllColumns"
+	:allcolumnData=""
+	:selectSql = "select id, name, parent_id from columns"
+	changeRecordSet(:selectSql)
+	///:count=recordCount()
+	If recordCount()>0
+		Repeat
+		:allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& onclick=&deleteModalshow("#id#")&><i class=&fa-trash&></i>删除</span><span class=&editorgan& onclick=&digmodal("#id#")&><i class=&fa-edit&></i>修改</span><span class=&editorgan& onclick=&addmodal("#id#")&><i class=&fa-plus&></i>新增</span>'},"
+		
+		EndRepeat
+		Exit(:allcolumnData)
+		
+debugMsg(:allcolumnData#"=================")
+	EndIf
+///EndIf
+%>
+
+
+
+

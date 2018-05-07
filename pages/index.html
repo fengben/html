@@ -1,0 +1,548 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+    <title>地名</title>
+    <meta http-equiv="MSThemeCompatible" content="Yes">
+    <base href=".">
+    <link rel="stylesheet" type="text/css" href="./resouce/css/common.css">
+    <link rel="stylesheet" type="text/css" href="./resouce/css/index.css">
+    <script src="./resouce/common.js" type="text/javascript"></script>
+    <script src="./resouce/portal.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./resouce/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="./js/main.js"></script>
+    <script type="text/javascript">
+        var jq = jQuery.noConflict();
+    </script>
+    <script src="./resouce/deanactions.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="./resouce/css/animate.min.css">
+    <script>
+        var wow = new WOW({
+            boxClass: 'deanactions',
+        });
+        wow.init();
+        jQuery(document).ready(function () {
+		
+		jQuery(".deannav #mn_portal").addClass("a");	
+		//头条报道
+ 			var headlines = new Array();
+            var processHeadlinesResult = function () {
+
+                jQuery("#headline1").html(headlines[1]);
+                jQuery("#headline2").html(headlines[2]);
+                jQuery("#headline3").html(headlines[0]);//本周热点导读的左边放最新的头条报道
+           
+            		}
+            getFromWS("home/getHeadlines.template", "", headlines, processHeadlinesResult);
+
+		//首页静态图展示 （陈）
+	    var indexPictures = new Array();
+            var processPicResult = function () {
+				//从上至下依次放置首页的静态图
+                jQuery("#indexPic1").html(indexPictures[0]);
+                jQuery("#indexPic2").html(indexPictures[1]);
+                jQuery("#indexPic3").html(indexPictures[2]);
+				jQuery("#indexPic4").html(indexPictures[3]);//中部的微信公众号图片
+				jQuery("#indexPic5").html(indexPictures[4]);
+				jQuery("#indexPic6").html(indexPictures[5]);
+				jQuery("#indexPic7").html(indexPictures[6]);
+				jQuery("#indexPic8").html(indexPictures[3]);//底部微信公众号图片
+            		}
+            getFromWS("home/getPictureList.template", "", indexPictures, processPicResult);
+
+//本周热点导读新闻展示（陈）
+            var recentNews = new Array();
+            var processResult = function () {
+
+				//本周热点导读的右边，查看新闻子栏目的文章各一篇
+				jQuery("#recentNews1").html(recentNews[0]);//国务院要闻
+				jQuery("#recentNews2").html(recentNews[1]);//湖北要闻
+				jQuery("#recentNews3").html(recentNews[2]);//天门要闻
+				jQuery("#recentNews4").html(recentNews[3]);//地名新闻
+				jQuery("#recentNews5").html(recentNews[4]);//基层动态
+				jQuery("#carouselPics").html(recentNews[5]);//首页轮播图新闻
+
+				jQuery(".box_skitter_large").skitter({
+				  animation: "random",
+				  interval: 3000,
+				  numbers: false,
+				  numbers_align: "right",
+				  hideTools: true,
+				  controls: false,
+				  focus: false,
+				  focus_position: true,
+				  width_label: '340px',
+				  enable_navigation_keys: true,
+				  progressbar: false
+				});
+
+           	 	}
+            getFromWS("home/getRecentNews.template", "", recentNews, processResult);
+
+
+//自然地理和人文历史的轮播图
+            var recentCulture = new Array();
+            var processCulResult = function () {
+
+                jQuery("#cultureGeogra").html(recentCulture[0]);
+                jQuery("#cultureHistory").html(recentCulture[1]);
+
+			    jQuery(".deanslideshow").slide({
+					mainCell: ".deanftrsd",
+					effect: "leftLoop",
+					vis: 3,
+					scroll: 1,
+					autoPlay: true,
+					autoPage: true,
+					switchLoad: "_src"
+			    	});
+                jQuery("#cultureGeograRight").html(recentCulture[2]);
+                jq(".deanranklistbox ul li").each(function (s) {
+                     jq(this).hover(function () {
+                     	jq(this).addClass("on").siblings().removeClass("on");
+                                    	  })
+                                })
+           		}
+            getFromWS("home/getRecentCulture.template", "", recentCulture, processCulResult);
+///旅游推荐的轮播图
+            var recentTravelInfo = new Array();
+            var processTravelResult = function () {
+
+                jQuery("#travelInfo").html(recentTravelInfo[0]);
+
+           		}
+            getFromWS("home/getRecentTravelInfo.template", "", recentTravelInfo, processTravelResult);
+
+//获取首页右侧关于在线访谈的内容OnlineInterview（陈）
+            var OnlineInterview = new Array();
+            var processOnlineInterviewResult = function () {
+
+                jQuery("#OnlineInterviewBox").html(OnlineInterview[0]);//将查询的在线访谈内容放入首页侧边栏的在线访谈框中展示
+             
+           		}
+            getFromWS("home/getOnlineInterview.template", "", OnlineInterview, processOnlineInterviewResult);
+
+
+//获取首页右侧关于公众互动的内容
+            var recentPublicInteraction = new Array();
+            var processPubResult = function () {
+
+                jQuery("#publicNotice").html(recentPublicInteraction[0]);
+                jQuery("#policyInterpretation").html(recentPublicInteraction[1]);
+                jQuery("#respondConcerns").html(recentPublicInteraction[2]);
+
+           		}
+            getFromWS("home/getRecentPublicInteraction.template", "", recentPublicInteraction, processPubResult);
+
+            var latestNews = new Array();
+            var newsResult = function () {
+
+                jQuery("#latestNews").html(latestNews[0]);
+			    (function (dfsj_jq) {
+					var dfsj_items = dfsj_jq('.deannewslists li');
+					var dfsj_items2 = 9; //每页显示数量；
+					var total = dfsj_items.size();
+					total > 0 && dfsj_jq('.jquery_pagnation').pagination({
+					    pagetotal: total,
+					    target: dfsj_items,
+					    perpage: dfsj_items2
+					});
+			    })(jQuery);
+            		}
+            getFromWS("home/getLatestNews.template", "", latestNews, newsResult);
+
+        });
+    </script>
+    <script src="./resouce/jquery.flexslider-min.js" type="text/javascript"></script>
+
+    <style media="screen">
+        .deanbtrtig {
+            float: left;
+        }
+    </style>
+    <script src="./resouce/jquery.easing.1.3.js" type="text/javascript"></script>
+    <script src="./resouce/jquery.skitter.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+    </script>
+    <script src="./resouce/jquery.pagnation.js" type="text/javascript"></script>
+    <script type="text/javascript" src="./resouce/jquery.SuperSlide.2.1.1.js"></script>
+    <script language="javascript" type="text/javascript">
+        function killErrors() {
+            return true;
+        }
+        window.onerror = killErrors;
+    </script>
+</head>
+<body>
+<div id="header">
+
+</div>
+<div id="wp" class="wp">
+    <div class="wp">
+        <div class="deanpartone">
+            <div class="w1180">
+                <div class="deanads_index" id="indexPic2">
+                   
+                </div>
+                <!--左侧-->
+                <div class="deanleftmain">
+                    <!--顶部-->
+                    <div class="deanboxtops">
+                        <div class="deanbtl">
+                            <div id="deanbtl" class="area">
+                                <div id="slider-container">
+                                    <div class="box_skitter box_skitter_large">
+                                        <ul style="display: none;" id="carouselPics">
+                                           
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="deanbtr">
+                            <ul>                                                           
+                                <li id="headline1">
+                   
+                                </li>
+                                <li id="headline2">
+                
+                                </li>
+                                <div class="clear"></div>
+
+                            </ul>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <!--本周热点导读-->
+                    <div class="deanrollbox">
+                        <div class="deantoptitles">
+                            <h5>本周热点导读</h5>
+                            <span>Weekly Hots Reading</span>
+                            <a href="news.html" target="_blank">更多+</a>
+                            <div class="clear"></div>
+
+                        </div>
+                        <div class="deanreadboxs">
+
+                            <div class="deanrbl" id="headline3"><!--本周热点导读第一篇放的是头条 （陈）-->
+                            </div>
+                            <div class="deanrbr">
+                                <div class="deantopgrids" id="recentNews1">
+                                </div>
+                                <div class="deanbgrids">
+								   <ul>
+									<li class="deanbgf1" id="recentNews2"></li>
+									<li class="deanbgf2" id="recentNews3"></li>
+									<li class="deanbgf1" id="recentNews4"></li>
+									<li class="deanbgf2" id="recentNews5"></li>
+									<div class="clear"></div>
+								   </ul>
+
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                    </div>
+                    <div class="deanrollbox">
+                        <div class="deantoptitles">
+                            <h5>自然地理</h5>
+                            <span>Freshing News</span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="deanslideshow">
+                            <div id="deanslideshow" class="area">
+                                <div class="tempWrap" style="overflow:hidden; position:relative; width:852px">
+                                    <ul id="cultureGeogra" class="deanftrsd"
+                                        style="width: 5396px; position: relative; overflow: hidden; padding: 0px; margin: 0px; left: -3124px;">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <a class="prev" href="javascript:void(0)"></a>
+                            <a class="next" href="javascript:void(0)"></a>
+                        </div>
+
+                    </div>
+                    <div class="deanrollbox">
+                        <div class="deantoptitles">
+                            <h5>人文历史</h5>
+                            <span>Freshing News</span>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="deanslideshow showside">
+                            <div id="deanslideshow" class="area">
+                                <div class="tempWrap" style="overflow:hidden; position:relative; width:852px">
+                                    <ul class="deanftrsd" id="cultureHistory"
+                                        style="width: 5396px; position: relative; overflow: hidden; padding: 0px; margin: 0px; left: -3124px;">
+
+                                    </ul>
+                                </div>
+                            </div>
+                            <a class="prev showsideprev" href="javascript:void(0)"></a>
+                            <a class="next showsidenext" href="javascript:void(0)"></a>
+                        </div>
+                        <script type="text/javascript">
+                            jQuery(".showside").slide({
+                                mainCell: ".deanftrsd",
+                                effect: "leftLoop",
+                                vis: 3,
+                                scroll: 1,
+                                autoPlay: true,
+                                autoPage: true,
+                                switchLoad: "_src"
+                            });
+                        </script>
+                    </div>
+                    <div class="deanads">
+                        <div id="deanadsx" class="area">
+                            <div class="portal_block_summary" id="indexPic5">
+							</div>
+                        </div>
+                    </div>
+                    <!--列表-->
+                    <div class="deanlistbox">
+                        <div class="deantoptitles">
+                            <h5>新闻中心</h5>
+                            <span>The Latest News</span>
+                            <a href="news.html" target="_blank">更多+</a>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="deannewslists">
+                           	<ul id="latestNews">
+
+							</ul>
+                        </div>
+                        <div class="jquery_pagnation">
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <!--右侧-->
+                <div class="deanrightmain">
+                    <div class="deanguanzhu">
+                        <div id="deanguanzhu" class="area">
+                            <div class="portal_block_summary">
+								<span id="indexPic3"></span>
+                                <div class="deangzbox">
+                                    <div class="deangzewm" id="indexPic4"></div>
+                                    <div class="deangzret">
+                                        <h3>天门微信公众号码</h3>
+                                        <div class="dean_des">
+                                            <i class="decorate-top-left"></i>
+                                            <i class="decorate-top-right"></i>
+                                            <i class="decorate-bottom-left"></i>
+                                            <i class="decorate-bottom-right"></i>
+                                            <p>扫码微信公众号<br>获取天门信息</p>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                    <div class="deangzlists">
+                                        <a href="view.html" target="_blank" class="deansina">
+                                            <span class="deansinaicon"></span>
+                                            <span class="deansinatxt">关注官方微博</span>
+                                            <div class="clear"></div>
+                                        </a>
+                                        <a href="govEmail.html" target="_blank" class="deanqqqun">
+                                            <span class="deanqqqunicon"></span>
+                                            <span class="deanqqquntxt">政府信箱</span>
+                                            <div class="clear"></div>
+                                        </a>
+                                        <div class="clear"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--热点推荐-->
+                    <div class="deansidebox">
+                        <div class="deantoptitles deantoptitles_side">
+                            <h5>便民公告</h5>
+                            <span>Recommended</span>
+                            <a href="publicInteraction.html" target="_blank">更多+</a>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="deanhotboxs">
+                            <ul id="publicNotice">
+                               
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="deansideads">
+                        <div id="deansideads" class="area">
+                            <div id="portal_block_267_content" class="dxb_bc">
+                                <div class="portal_block_summary"><a href="publicInteraction.html?id=2018054028560000893" target="_blank"><img
+                                        src="./resouce/image/s4.jpg"></a></div>
+                            </div>
+                        </div>
+                        <div class="deansideads">
+                            <div id="deanhotboxs2" class="area">
+                                <div class="portal_block_summary"><a href="publicInteraction.html?id=2018054028760000896" target="_blank"><img
+                                        src="./resouce/image/s5.jpg"></a></div>
+                            </div>
+                            <!--[/diy]-->
+                        </div>
+                        <!--头条推送-->
+                        <div class="deansidebox">
+                            <div class="deantoptitles deantoptitles_side">
+                                <h5>政策解读</h5>
+                                <span>Pushing</span>
+                                <a href="publicInteraction.html" target="_blank">更多+</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="deanpushbox">
+                                <ul id="policyInterpretation">
+ 
+                                </ul>
+                            </div>
+                        </div>
+                        <!--最新评论-->
+                        <div class="deansidebox">
+                            <div class="deantoptitles deantoptitles_side">
+                                <h5>回应关切</h5>
+                                <span>New Comments</span>
+                                <a href="publicInteraction.html" target="_blank">更多+</a>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="deanpushbox">
+
+                                <ul id="respondConcerns">
+
+
+                                </ul>
+                            </div>
+
+                        </div>
+                        <!--ads-->
+                        <div class="deansideads">
+                            <!--[diy=deansideadsxx]-->
+                            <div id="deansideadsxx" class="area">
+                                <div class="portal_block_summary" id="indexPic6">
+								</div>
+                            </div>
+                            <!--[/diy]-->
+                        </div>
+                        <!--排行榜-->
+                        <div class="deansidebox">
+                            <div class="deantoptitles deantoptitles_side">
+                                <h5>自然地理</h5>
+                                <span>Ranklists</span>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="deanranklistbox">
+                                <ul id="cultureGeograRight">
+
+                                </ul>
+                            </div>
+
+                        </div>
+						<!--在线访谈开始 （陈）-->
+	 					<div class="deansidebox" id="OnlineInterviewBox">
+                            
+                        </div>
+						<!--在线访谈结束-->                   
+
+
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+            <!--ads-->
+            <div class="deanparttwo" style="margin-top: -20px;">
+                <div class="w1180">
+                    <div class="deanads_index" style="padding-top: 10px;">
+                        <!--[diy=deanads_indexx]-->
+                        <div id="deanads_indexx" class="deankejichao">
+                            <div class="portal_block_summary" id="indexPic7" style="margin-left: -10px;">
+							</div>
+                        </div>
+                        <!--[/diy]-->
+                    </div>
+                    <!--讲堂 · 精选-->
+                    <div class="deankejichao" id="travelInfo">
+
+                    </div>
+
+ 
+                    <!--合作伙伴-->
+                    <div class="deankejichao">
+                        <div class="deantoptitles">
+                            <h5>友情链接</h5>
+                            <span>其他地区地名普查展示</span>
+                            <a href="view.html" target="_blank">更多+</a>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="deanhezuo">
+                            <ul>
+                                <li><a href="http://www.gzdm.gzmz.gov.cn" target="_blank">广州市地名普查网</a></li>
+                                <li><a href="http://dm.hzmz.gov.cn/HZ_DMWeb/html/hzmz_dmpc.html" target="_blank">杭州市地名普查网</a></li>
+                                <li><a href="http://dmpc.gymz.gov.cn/" target="_blank">贵阳市地名普查网</a></li>
+                                <li><a href="http://dmw.zzsmzj.gov.cn/" target="_blank">郑州市地名普查网</a></li>
+                                <li><a href="http://dmw.sz-map.com/" target="_blank">苏州市地名普查网</a></li>
+                                <li><a href="http://www.ks.gov.cn/zt/rkpc/rkpc1.html" target="_blank">昆山市地名普查网</a></li>
+                                <li><a href="http://mzj.nc.gov.cn/id_dmpczt201508041719337905/column.shtml" target="_blank">南昌市图名普查网</a></li>
+                                <li><a href="http://www.rzdm.gov.cn/news/project/pucha/" target="_blank">日照市地名普查网</a></li>
+                                <li><a href="http://www.fujin.gov.cn/dmpc/index.html" target="_blank">富锦市地名普查网</a></li>
+                                <li><a href="http://www.ybmz.gov.cn/column/col619.html" target="_blank">渝北区地名普查网</a></li>
+                                <li><a href="http://www.chibi.gov.cn/Category_856/Index.aspx" target="_blank">赤壁市地名普查网</a></li>
+                                <li><a href="http://www.jxdmpc.com/" target="_blank">江夏区地名普查网</a></li>
+                                <li><a href="http://fcdm.feicheng.gov.cn/channels/4029.html" target="_blank">肥城市地名普查网</a></li>
+                                <li><a href="http://www.xfxc.gov.cn/list-586-1.html" target="_blank">襄城区地名普查网</a></li>
+                                <li><a href="http://www.yatv.tv/yavmsv2/index.php?mod=web&ctl=index&act=videodatail&t=special&id=23328" target="_blank">雅安市地名普查网</a></li>
+                                <li><a href="http://hgq.lanzhou.gov.cn/col/col7855/index.html" target="_blank">红古区地名普查网</a></li>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        _attachEvent(window, 'load', getForbiddenFormula, document);
+        function getForbiddenFormula() {
+            var toGetForbiddenFormulaFIds = function () {
+                ajaxget('plugin.php?id=cloudsearch&formhash=1f64a232');
+            };
+            var a = document.body.getElementsByTagName('a');
+            for (var i = 0; i < a.length; i++) {
+                if (a[i].getAttribute('sc')) {
+                    a[i].setAttribute('mid', hash(a[i].href));
+                    a[i].onmousedown = function () {
+                        toGetForbiddenFormulaFIds();
+                    };
+                }
+            }
+            var btn = document.body.getElementsByTagName('button');
+            for (var i = 0; i < btn.length; i++) {
+                if (btn[i].getAttribute('sc')) {
+                    btn[i].setAttribute('mid', hash(btn[i].id));
+                    btn[i].onmousedown = function () {
+                        toGetForbiddenFormulaFIds();
+                    };
+                }
+            }
+        }
+    </script>
+	<div id="footer">
+
+	</div>
+    <div id="ft" style="margin:0;padding:0; height:0;"></div>
+    <div id="scrolltop" style="display:none;">
+        <span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo(&#39;0&#39;,&#39;0&#39;)" id="scrolltopa"><b>返回顶部</b></a></span>
+    </div>
+    <script type="text/javascript">
+        _attachEvent(window, 'scroll', function () {
+            showTopLink();
+        });
+        checkBlind();
+    </script>
+</div>
+</body>
+</html>

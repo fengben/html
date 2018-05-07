@@ -1,0 +1,37 @@
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+
+<script>
+    function dialogLogin() {
+
+
+        // alert("aaaaa");
+
+        $.ajax({
+            // url: 'https://192.168.10.199/template/mainmooc/login.template',
+            url: homeAddress()+"one/mainmooc/login.template",
+            type: 'post',
+            dataType: 'json',
+            data: {
+                "account": 'admin',
+                "password": 'qwer1234',
+            },
+
+            success: function (result) {
+                if(result==1){
+                    alert('yes')
+                }else (
+                    alert('no')
+                )
+            },
+            error: function (error) {
+                alert("error");
+            }
+        });
+        // alert("after ajax");
+    }
+
+</script>
+
+<h1>AAA</h1>
+<button onclick="dialogLogin()">submin</button>

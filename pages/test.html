@@ -1,0 +1,27 @@
+<meta http-equiv="Content-Type" content="text/html"/>
+<script src="mainmooc/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script>
+    jQuery(document).ready(function () {
+            para = new Object();
+
+            var id = 0;
+            var title = '';
+            var publisher = 'admin';
+            var course_id='';
+            var paras = "id=" + id;
+            paras += "$^@^$title=" + title;
+            paras += "$^@^$publisher=" + publisher;
+            paras += "$^@^$course_addr=" + course_id;
+            var objs = new Array();
+
+            alert('in')
+            getFromWS("/test/testGet.template", paras, objs, '')
+
+
+        }
+    );
+
+
+</script>
+

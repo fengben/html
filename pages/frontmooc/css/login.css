@@ -1,0 +1,268 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	background: transparent
+}
+html{height: 100%;}
+body {
+	font-size: 12px;
+	line-height: 160%;
+	font-family: "Helvetica Neue", \5FAE\8F6F\96C5\9ED1, "SimHei", Tohoma;
+	word-break: normal;
+	word-wrap: break-word;
+	position: relative
+}
+
+html, body {
+	-webkit-touch-callout: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+	overflow-x: hidden;
+}
+.clearfix:after{ content: '';display: block;height: 0;clear: both;overflow: visible; }
+.clearfix{display:inline-block;}
+* html .clearfix{height:1%;}
+.clearfix{display:block;}
+.clear {clear:both;font-size:0;content: " ";line-height:1px;height:1px;_height:1%;margin-top:-1px;}
+ol, ul, li {
+	list-style: none
+}
+
+blockquote, q {
+	quotes: none
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none
+}
+
+:focus {
+	outline: 0
+}
+
+ins, s {
+	text-decoration: none
+}
+
+del {
+	text-decoration: line-through
+}
+
+em, i {
+	font-style: normal
+}
+
+a, img {
+	border: 0;
+	text-decoration: none
+}
+
+a {
+	text-decoration: none
+}
+
+a:hover {
+	text-decoration: underline
+}
+
+a:focus {
+	outline: 0;
+	-moz-outline: 0
+}
+
+a:active {
+	outline: 0;
+	blr: expression(this.onFocus=this.blur())
+}
+
+h1 {
+	font-size: 36px;
+	line-height: 45px;
+	font-weight: normal
+}
+
+h2 {
+	font-size: 24px;
+	line-height: 30px;
+	font-weight: normal
+}
+
+h3 {
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: normal
+}
+
+h4 {
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: normal
+}
+
+h5 {
+	font-size: 14px;
+	line-height: 18px;
+	font-weight: normal
+}
+
+h6 {
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: normal
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block
+}
+
+
+.fl {
+	float: left
+}
+
+.fr {
+	float: right
+}
+.disFw{font-weight: bold;}
+.pr {
+	position: relative
+}
+
+.pa {
+	position: absolute
+}
+
+.f-fH {
+	font-family: SimHei
+}
+
+.f-fM {
+	font-family: 'Microsoft YaHei'
+}
+
+.f-fA {
+	font-family: SimSun
+}
+
+.f-fG {
+	font-family: Georgia
+}
+
+.unBg {
+	background: 0 0!important
+}
+
+.unBr {
+	border: none!important
+}
+
+.unFw {
+	font-weight: normal;
+}
+.disFw{font-weight: bold;}
+.dis {
+	display: block
+}
+
+.disIb {
+	display: inline-block
+}
+
+.undis {
+	display: none
+}
+
+.of {
+	overflow: hidden
+}
+
+.ov {
+	overflow: visible
+}
+
+.vam {
+	vertical-align: middle
+}
+
+.tal {
+	text-align: left
+}
+
+.tac {
+	text-align: center
+}
+
+.tar {
+	text-align: right
+}
+
+.hand {
+	cursor: pointer
+}
+
+.fsize12 {
+	font-size: 12px
+}
+
+.fsize14 {
+	font-size: 14px
+}
+.fsize13 {
+	font-size: 13px
+}
+.fsize16 {
+	font-size: 16px
+}
+
+.fsize18 {
+	font-size: 18px
+}
+
+.fsize20 {
+	font-size: 20px
+}
+
+.fsize24 {
+	font-size: 24px
+}
+
+.fsize34 {
+	font-size: 34px
+}
+.sass-login-ico{ background: url("../../inxweb/img/icon.png")/*tpa=http://saas.inxedu.com/static/inxweb/img/icon.png*/ no-repeat}
+.new-sass-big{position: relative;padding-bottom: 80px;height: 780px;}
+.new-sass-bg img{display: block;height: 100%;width:100%;margin: 0 auto;}
+.container {width: 1100px;margin: 0 auto; }
+.new-sass-foot{position: absolute;width: 100%;height: 80px;background: #fff;left: 0;bottom:0;z-index: 99;}
+.new-sass-foot p{line-height: 80px;text-align: center;color: #666;font-size: 12px;}
+.new-sass-body{position: absolute;width: 100%;top:0;left: 0;z-index: 99;}
+.sass-body-box{width: 90%;background: #fff;margin: 50px auto 0;}
+.sass-body-b-r{float: right;width:40%;}
+.sass-body-b-r img{display: block;width: 100%;}
+.sass-body-b-l{float: left;width: 60%;}
+.sass-body-l-warp{margin: 70px 90px 0;}
+.sass-body-l-w-title{border-bottom: 1px solid #cdcdcd;height: 46px;}
+.sass-body-l-w-title span{display: inline-block;line-height: 46px;border-bottom: 2px solid #ec4715;padding: 0 15px;font-size: 24px;color: #333;}
+.sass-body-ul{margin-top: 30px;}
+.sass-body-ul li{margin-bottom: 20px;}
+.sass-body-ul li label{position: relative;display: block;padding:0 10px 0 40px;border: 1px solid #cdcdcd;height: 40px;background: #fff;}
+.sass-login-ico{display: block;width: 40px;height: 40px;position: absolute;top:0;left: 0;}
+.sass-body-ul li label .sass-body-ul-input{border: 0;background: transparent;height: 40px;padding: 0;width: 100%;}
+.sass-login-ico-1{background-position: 3px -738px;}
+.sass-login-ico-2{background-position: -34px -738px;}
+.sass-login-ico-3{background-position: -75px -738px;}
+.small-lable{width: 46%;float: left;}
+.yzm-pic{width: 35%;display: block;float: right;height: 42px;}
+.yzm-pic img{display: block;width: 100%;height: 42px;}
+.sass-login-btn{width: 150px;height: 38px;border-radius: 40px;background: #ed5a2e;line-height: 38px;text-align: center;color: #fff;font-size: 14px;display: block;}
+.sass-login-btn:hover{text-decoration: none;opacity: 0.9;}
+input:-webkit-autofill{-webkit-box-shadow: 0 0 0 1000px white inset !important;}

@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gbk">
+  <title>搜索地名信息</title>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/common.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/news_list.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/index.css">
+  <script src="./resouce/common.js" type="text/javascript"></script>
+  <script src="./resouce/portal.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+  <script type="text/javascript">
+    var jq = jQuery.noConflict();
+  </script>
+  <script src="./resouce/deanactions.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/animate.min.css">
+  <script>
+    var wow = new WOW({
+      boxClass: 'deanactions',
+    });
+    wow.init();
+  </script>
+  <script src="./resouce/jquery.flexslider-min.js" type="text/javascript"></script>
+  <script src="./resouce/jquery.easing.1.3.js" type="text/javascript"></script>
+  <script src="./resouce/jquery.skitter.js" type="text/javascript"></script>
+
+  <script src="./resouce/jquery.pagnation.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery.SuperSlide.2.1.1.js"></script>
+  <script language="javascript" type="text/javascript">
+    function killErrors() {
+      return false;
+    }
+    window.onerror = killErrors;
+
+    jQuery(document).ready(function() {
+		jQuery('.flexslider').flexslider({
+			directionNav: true,
+			pauseOnAction: false
+		    });
+
+		var searchCategory = decodeURI(getUrlString("searchCategory"));
+		document.getElementById("search_category").innerHTML = searchCategory;
+
+		var searchPreResult = new Array();
+			var processPreSearchResult = function(){
+				
+				jQuery("#searchResultList").html(searchPreResult[0]);					
+				jQuery("#deanpage").html(searchPreResult[1]);
+				document.getElementById("showResultCount").innerHTML =  "所有记录共："+ jQuery("#searchCountHidden").val() +"个"+"，以下为您显示"; 
+									
+			}
+			var parash = "operation=" + searchCategory;
+			parash += "$^@^$search_placeName=" + "";
+			parash += "$^@^$pageNumber=1"; 
+		  	getFromWS("home/getSearchPlaceNameList.template",parash,searchPreResult,processPreSearchResult);	
+
+	});
+
+	function searchPlaceInfoBtnAction(){
+
+		var search_placeName = "";
+		search_placeName = jQuery("#search_placeName").val().trim();	//alert("hhh:"+search_placeName);
+		
+			var searchResult = new Array();
+			var processSearchResult = function(){
+					//var reg = new RegExp("(" + search_placeName + ")", "g"); 			
+					//jQuery("#searchResultList").html(searchResult[0].replace(reg, "<font color=red>$1</font>"));				
+					jQuery("#searchResultList").html(searchResult[0]);
+					jQuery("#search_placeName").val(search_placeName);
+					jQuery("#search_content").html(search_placeName);
+					jQuery("#deanpage").html(searchResult[1]);
+					document.getElementById("showResultCount").innerHTML =  "为您找到相关结果约"+ jQuery("#searchCountHidden").val() +"个"
+					+"，<span style=\"color:#333333;\">以下为您显示&nbsp;&nbsp;\""+search_placeName+"\"&nbsp;&nbsp;的搜索结果。</span>"; 
+									
+			}
+			var parash = "operation=" + document.getElementById("search_category").innerHTML;
+			parash += "$^@^$search_placeName=" + search_placeName;
+			parash += "$^@^$pageNumber=1"; 
+		  	getFromWS("home/getSearchPlaceNameList.template",parash,searchResult,processSearchResult);	
+		
+	}
+
+
+	function searchInMap(str){
+		//alert("进入点击事件");
+		window.location.href = encodeURI(encodeURI("showPlaceInMap.html?placename="+str));		
+	}
+
+
+  </script>
+<style type="text/css">
+.placeInfobtn{
+	width: 80px;height: 34px;color:white;background: #0075a9; border:0;font: bolder 16px/35px Microsoft Yahei;padding: 0px;margin:-7px 0px 0px -4px;vertical-align: middle;display: inline-block;align-items: flex-start;text-align: center;cursor:default;-webkit-appearance: push-button;text-transform: none;text-indent: 0px;text-shadow: none;
+}
+
+.showInMap{
+	outline:medium;background-color:transparent;border:none;width: 80px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #a5c951;font: normal 12px/20px Microsoft Yahei;
+
+}
+
+#search_placeName{
+	border: 1px solid #0075a9;margin:0px 0px 0px 100px;width: 350px;height: 32px;font: normal 16px/35px Microsoft Yahei;color: #333;text-indent: 1em; display: inline-block;
+}
+	
+    </style>
+
+</head>
+
+<body>
+<div id="header">
+</div>
+  <div id="wp" class="wp" style="width:1180px">
+    <div id="pt" class="bm cl" style="text-align:left">
+
+	<span  id="search_category" style="font-size:16px;font-weight: bold;color:#0075a9;"></span>&nbsp;&nbsp;
+	<a style="font-size:16px;font-weight: bold;color:grey;" href="placeQuery.html" >返回上级</a>
+	<input type="text" id="search_placeName"  placeholder="请输入地名相关信息"  />               
+	<input type="button"  class="placeInfobtn" value="搜&nbsp;索" onclick="searchPlaceInfoBtnAction()" />
+
+    </div>
+    <div id="ct" class="ct2 wp cl" >
+      <div >
+        <div class="deansideadswz" >
+         	
+        </div>
+        <div class="deanmn_left" >
+          <div class="deanwzpdtitle" >        
+		<h4 style="display:inline;font-size:16px;">您想要查询的地名:</h4>&nbsp;&nbsp;
+			<span id="search_content" style="width:400px;font-size:16px;"></span>
+            <div class="clear"></div>
+          </div>
+          <!--下家分类-->
+          <div class="clear"></div>
+          <div class="deannextnav" >
+            <h4 id="showResultCount" style="width: 1000px;height:40px;overflow:hidden;font-weight:normal;color:#999;font-size:14px;"></h4>		
+            <ul >
+            </ul>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+          <div class="deanartice">
+            <ul id="searchResultList" >
+
+            </ul>
+          </div>
+          <div class="clear"></div>
+          <div class="pgs cl" id="deanpage">
+
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script type="text/javascript">
+    _attachEvent(window, 'load', getForbiddenFormula, document);
+
+    function getForbiddenFormula() {
+      var toGetForbiddenFormulaFIds = function() {
+        //ajaxget('search.php');
+      };
+      var a = document.body.getElementsByTagName('a');
+      for (var i = 0; i < a.length; i++) {
+        if (a[i].getAttribute('sc')) {
+          a[i].setAttribute('mid', hash(a[i].href));
+          a[i].onmousedown = function() {
+            toGetForbiddenFormulaFIds();
+          };
+        }
+      }
+      var btn = document.body.getElementsByTagName('button');
+      for (var i = 0; i < btn.length; i++) {
+        if (btn[i].getAttribute('sc')) {
+          btn[i].setAttribute('mid', hash(btn[i].id));
+          btn[i].onmousedown = function() {
+            toGetForbiddenFormulaFIds();
+          };
+        }
+      }
+    }
+  </script>
+<div id="footer">
+</div>
+  <div id="ft" style="margin:0;padding:0; height:0;"></div>
+  <div id="scrolltop" style="display:none;">
+    <span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" id="scrolltopa"><b>返回顶部</b></a></span>
+  </div>
+  <script type="text/javascript">
+    _attachEvent(window, 'scroll', function() {
+      showTopLink();
+    });
+    checkBlind();
+  </script>
+</body>
+
+</html>

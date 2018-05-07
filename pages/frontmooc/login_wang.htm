@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Meta -->
+	<meta charset="utf-8" />
+	<!-- End of Meta -->
+<!-- Page title -->
+<title>登录 -MOOC平台</title>
+<!-- End of Page title -->
+<meta name="author" content="INXEDU(http://www.inxedu.com)" />
+<meta name="keywords" content="INXEDU,在线教育,网校搭建,网校,网络教育,远程教育,云网校,在线学习,在线考试" />
+<meta name="description" content="inxedu是一家专注“在线教育平台”的互联网公司，在国内属顶级在线教育解决方案提供商中的领跑者。为中、小型客户提供领先的在线教育平台方案服务。" />
+<link rel="shortcut icon" href="http://saas.inxedu.com/favicon.ico" type="image/x-icon">
+<!-- Libraries -->
+<script type="text/javascript" src="static/common/jquery-1.7.2.min.js" tppabs="http://saas.inxedu.com/static/common/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="static/common/webutils.js-v=1" tppabs="http://saas.inxedu.com/static/common/webutils.js?v=1"></script>
+<link type="text/css" href="static/admin/css/login.css" tppabs="http://saas.inxedu.com/static/admin/css/login.css" rel="stylesheet" />
+<script type="text/javascript">
+	$(function () {
+	    /*登录超时时，防止登录页面嵌套，处理*/
+	    if(window.location!="admin.htm"/*tpa=http://saas.inxedu.com/admin*/&&window.location!="admin/main/login.htm"/*tpa=http://saas.inxedu.com/admin/main/login*/){/*当前地址不等于*/
+            window.location.href = "admin.htm"/*tpa=http://saas.inxedu.com/admin*/;
+		}
+        if (self.frameElement && self.frameElement.tagName == "IFRAME") {/*登录页面在iframe里*/
+            window.parent.location.href = "admin.htm"/*tpa=http://saas.inxedu.com/admin*/;
+        }
+    })
+			function enterSubmit(event) {
+				var keyCode = event.keyCode ? event.keyCode : event.which ? event.which : event.charCode;
+				if (keyCode == 13) {
+					$("#loginForm").submit();
+					return false;
+				}
+			}
+            function submitLogin() {
+                $("#loginForm").submit();
+            }
+		</script>
+</head>
+<body>
+	<div class="new-sass-big">
+		<div class="new-sass-bg">
+			<img src="static/inxweb/img/sass-login-bg.jpg" tppabs="http://saas.inxedu.com/static/inxweb/img/sass-login-bg.jpg">
+		</div>
+		<div class="new-sass-body">
+			<div class="">
+				<div class="container">
+					<div class="sass-body-box clearfix">
+						<div class="sass-body-b-l">
+							<div class="sass-body-l-warp">
+								<div class="sass-body-l-w-title">
+									<span>登录</span>
+								</div>
+								<form action="http://saas.inxedu.com/admin/main/login" method="POST" id="loginForm">
+									<ul class="sass-body-ul">
+										<li>
+											<label>
+												<em class="sass-login-ico sass-login-ico-1"></em>
+												<input class="sass-body-ul-input" name="sysUser.loginName" onkeyup="enterSubmit(event)" value="" placeholder="输入用户名" />
+											</label>
+										</li>
+										<li>
+											<label>
+												<em class="sass-login-ico sass-login-ico-2"></em>
+												<input class="sass-body-ul-input" type="password" onkeyup="enterSubmit(event)" name="sysUser.loginPwd" placeholder="输入密码">
+											</label>
+										</li>
+										<li class="of">
+											<label class="small-lable">
+												<em class="sass-login-ico sass-login-ico-3"></em>
+												<input class="sass-body-ul-input" name="randomCode" onkeyup="enterSubmit(event)" placeholder="验证码" style="width: 105px;"  maxlength="4"/>
+											</label>
+											<span class="yzm-pic">
+												<img src="ran/ajax/random.png" tppabs="http://saas.inxedu.com/ran/ajax/random" alt="验证码，点击图片更换" onclick="this.src='http://saas.inxedu.com/ran/ajax/random?random='+Math.random();" />
+											</span>
+										</li>
+										<li>
+											<a class="sass-login-btn" href="javascript:void (0)" onclick="submitLogin()">立即登录</a>
+											<p></p>
+										</li>
+									</ul>
+								</form>
+							</div>
+						</div>
+						<div class="sass-body-b-r">
+							<img src="static/inxweb/img/sass-login-right.jpg" tppabs="http://saas.inxedu.com/static/inxweb/img/sass-login-right.jpg">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="new-sass-foot">
+			<section class="container">
+				<p class="tac f-fM">Copyright ©2013-2018 版权所有 武汉大学国家网络安全学院</p>
+			</section>
+		</div>
+	</div>
+<script type="text/javascript">
+	$(".new-sass-big").height($(window).height()-80);
+	$(".new-sass-bg").height($(window).height()-80);
+	var sassBg = $(".new-sass-bg").height();
+	$(".sass-body-box").find("img").load(function () {
+        var sassLogin = $(".sass-body-box").height();
+        var newH=(sassBg-sassLogin)/2;
+        $(".sass-body-box").css("margin-top",newH);
+    })
+
+</script>
+</body>
+</html>

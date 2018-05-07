@@ -1,0 +1,959 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+<meta name="author" content="INXEDU(http://www.inxedu.com)" />
+<meta name="keywords" content="INXEDU,在线教育,网校搭建,网校,网络教育,远程教育,云网校,在线学习,在线考试" />
+<meta name="description" content="inxedu是一家专注“在线教育平台”的互联网公司，在国内属顶级在线教育解决方案提供商中的领跑者。为中、小型客户提供领先的在线教育平台方案服务。" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta content="telephone=no" name="format-detection" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/global.css">
+<link rel="stylesheet" type="text/css" href="css/web.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
+<title>理综卷做题技巧详情-因酷在线教育软件-中国在线教育平台第一品牌</title>
+	<!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/webutils.js"></script>
+<script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+<script type="text/javascript">
+    var baselocation = "";
+    var keuploadSimpleUrl='/image/keupload?';
+    var uploadServerUrl='';
+    var uploadSimpleUrl="/image/plupload?";
+    var pdfUploadAndImg='/image/pdfUploadAndImg?';
+    var uploadShrinkDiagram='/image/shrinkDiagram?';//å¾çä¸ä¼ å¸¦ç¼©åå¾
+    var staticServer='';//éææå¡å¨ åå
+    var mobileRegex=/^1[0-9]{10}$/; //éªè¯ææºæ­£å
+    var emailRegex=/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //éªè¯é®ç®±æ­£å
+    var usernameRegex=/^[\u4e00-\u9fa5_a-zA-Z0-9-]{1,50}$/; //éªè¯é®ç®±æ­£å
+    var usernameRegex_info='账号支持英文、数字、减号或下划线，不能超过50位'; //éªè¯é®ç®±æ­£å
+    var numberRegex=/^[0-9]*$/; //éªè¯æ°å­æ­£å
+</script>
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bfcloud.js"></script>
+	<script src='js/polyvplayer.min.js'></script>
+
+	<link rel="stylesheet" href="css/index.css" />
+	<script type="text/javascript" src="js/player.js"></script>
+	<script type="text/javascript" src="js/hlsplayer.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/player.css">
+		<script type="text/javascript" src="js/player.js"></script>
+		<script type="text/javascript" src="js/prism-flash-min.js"></script>
+
+	<style type="text/css">
+		/*引用百家云点播，导致页面滚动条失效处理*/
+		html,body{height: auto;}
+	</style>
+</head>
+<body class="W-body line-mo-body">
+	<input type="hidden" id="mydomain" value=""/>
+	<div class="in-wrap" >
+		<div class="h-mobile-mask"></div>
+		<div class="head-mobile">
+			<div class="head-mobile-box">
+				<section class="clearfix">
+					<div class="u-face-pic">
+						<img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
+					</div>
+					<h4 class="hLh30 txtOf mo-uc-login-name">
+						<span class="vam ml5 fsize16 c-ccc userNameClass" style="cursor:pointer;" onclick="#">登录</span>
+					</h4>
+					<div class="hLh30 mt10">
+						<a href="/shopcart?command=queryShopCart" title="购物车" class="c-999 u-c-shopcar">购物车</a>
+					</div>
+				</section>
+				<nav class="mw-nav">
+					<ul class="clearfix">
+						<li><a href="/" title="首页" >首页</a></li>
+						<li><a href="showcoulist" title="录播" >录播</a></li>
+						<li><a href="liveIndex" title="直播" >直播</a></li>
+						<li><a href="classlist" title="班级" >班级</a></li>
+						<li><a href="/lineclass/index" title="面授" >面授</a></li>
+						<li><a href="teacherlist" title="名师" >名师</a></li>
+						<li><a href="/exam/index" title="考试" >考试</a></li>
+						<li><a href="/group/index" title="社区" target="_blank">社区</a></li>
+						<li><a href="articlelist/article" title="资讯" >资讯</a></li>
+						</ul>
+				</nav>
+				<section class="u-m-dd">
+					<ul class="uM-list">
+						<li>
+							<a href="/uc/index" title="我的课程">
+								我的课程
+							</a>
+						</li>
+						<li>
+								<a href="/uc/ucExam" title="我的考试">
+									我的考试
+								</a>
+							</li>
+						<li>
+								<a href="/uc/myClass" title="我的班级">
+									我的班级
+								</a>
+							</li>
+							<li>
+								<a href="/uc/myCertificate" title="我的证书">
+									我的证书
+								</a>
+							</li>
+						<li>
+								<a href="/uc/lineCourse" title="我的面授">
+									我的面授
+								</a>
+							</li>
+						<li>
+							<a href="/uc/courseNote?sign=COURSE" title="我的笔记">
+								我的笔记
+							</a>
+						</li>
+						<li>
+							<a href="/uc/myFavorites?sign=COURSE&type=COURSE" title="我的收藏">
+								我的收藏
+							</a>
+						</li>
+						<li>
+							<a href="/uc/letter" title="消息中心">
+								消息中心
+							</a>
+						</li>
+					</ul>
+					<ul class="uM-list">
+						<li>
+							<a href="/uc/order/myOrderList" title="我的订单">
+								我的订单
+							</a>
+						</li>
+						<li>
+								<a href="/uc/myAccount" title="个人账户">
+									个人账户
+								</a>
+							</li>
+						<li>
+								<a href="/uc/myInvite" title="邀请好友">
+									邀请好友
+								</a>
+							</li>
+						<li>
+							<a href="/uc/initUpdateUser/0" title="个人资料">
+								个人资料
+							</a>
+						</li>
+						</ul>
+					<div  id="mobileExitDiv" class="mt15 undis tac">
+						<a href="javascript:void(0)" title="退出" onclick="exit();" class="u-loginout">退出登录</a>
+					</div>
+				</section>
+			</div>
+		</div>
+		<div class="main-warp">
+			<div class="main-infor" >
+				<!-- 公共头引入 -->
+				<!-- /global header begin-->
+<header id="header" class="all-header">
+	<section class="container">
+		<h1 id="logo" class="logo">
+			<a class="headerlogo" style="display: none;"  href="/" title="因酷在线教育软件">
+				<img src="picture/1489113507015.png" width="100%" alt="因酷在线教育软件">
+			</a>
+			<a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="因酷在线教育软件">
+				<img src="picture/mo-back.png">
+			</a>
+		</h1>
+		<div class="h-r-nsl">
+			<ul class="nav">
+				<li><a href="/" title="首页" >首页</a></li>
+				<li><a href="showcoulist" title="录播" >录播</a></li>
+				<li><a href="liveIndex" title="直播" >直播</a></li>
+				<li><a href="classlist" title="班级" >班级</a></li>
+				<li><a href="/lineclass/index" title="面授" >面授</a></li>
+				<li><a href="teacherlist" title="名师" >名师</a></li>
+				<li><a href="/exam/index" title="考试" >考试</a></li>
+				<li><a href="/group/index" title="社区" target="_blank">社区</a></li>
+				<li><a href="articlelist/article" title="资讯" >资讯</a></li>
+				</ul>
+			<!-- / nav -->
+			<ul class="h-r-login clearfix">
+				<li class="undis h-login-li" id="no-login">
+					<a href="javascript:lrFun()" title="登录">
+						<em class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span>
+					</a>
+				</li>
+				<li class="tit-new-list undis h-login-li" id="is-login-one">
+					<a href="/uc/letter" title="消息" id="headerMsgCountId">
+						<em class="news-icon">&nbsp;</em>
+					</a>
+					<q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+						<div class="tit-n-warp">
+							<ol id="letter">
+							
+							</ol>
+							<div class="new-tit-box tac mt10 mb20" style="display:none">
+								<a href="/uc/letter" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+							</div>
+						</div>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="/uc/index" title="">
+						<img src="" width="30" height="30" class="vam picImg" alt="">
+						<span class="vam disIb c-master" id="userName"></span>
+					</a>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="helpCenter" title="帮助" class="vam">
+						<span class="vam disIb c-fff">帮助</span>
+					</a>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
+						<span class="vam disIb c-fff">退出</span>
+					</a>
+				</li>
+				<!-- /未登录显示第1 li；登录后显示第2，3 li -->
+			</ul>
+			<aside class="h-r-search">
+				<div class="pr h-r-s-box-cx">
+					<form action="showcoulist" method="post" id="headerformSearch" onsubmit="return toSearch()">
+						<label class="h-r-s-box"><input type="text" value="" id="headerSearchName" name="queryCourse.courseName" placeholder="搜索...">
+						<button class="s-btn" type="submit"> <em class="icon18">&nbsp;</em> </button></label>
+					</form>
+				</div>
+			</aside>
+		</div>
+		<aside class="mw-nav-btn">
+			<div class="mw-nav-icon"></div>
+		</aside>
+		<aside class="mw-nav-seach mw-nav-seach-d1">
+			<form action="" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+				<label>
+					<input type="text" value="" placeholder="" id="h5HeaderSearchName" class="f-fM h1-mw-seach-input i_h_gb_s_input">
+					<a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+				</label>
+			</form>
+
+				<div class="exam-mo-test-time tac">
+					<span class="time c-fff f-fM vam examTimer"></span>
+					<a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
+					</div>
+
+		</aside>
+		<div class="clear mobile-clear"></div>
+	</section>
+</header>
+<!-- /global header end-->
+<!-- 公共头引入 -->
+				
+<div id="sourceqrcode" class="QRcode-lt-ie9" style="display: none;"></div>
+<div id="qrcode" class="QRcode-lt-ie9"></div>
+	<div id="aCoursesList" class="bg-f8 of cours-in-bigbox">
+		<!-- /课程详情 开始 -->
+		<section class="container">
+			<section class="path-wrap txtOf hLh30">
+				<a href="" title="" class="c-999 fsize14">首页</a>
+				\
+				<a href="showcoulist" title="" class="c-999 fsize14">课程列表</a>
+				\ <span class="c-333 fsize14">理综卷做题技巧</span>
+			</section>
+			<div class="cours-big-box">
+				<article class="c-v-pic-wrap">
+					<section class="p-h-video-box" id="videoPlay">
+						<img src="picture/1485230352811.jpg" alt="理综卷做题技巧" class="dis c-v-pic" />
+							<section class="zhz-bg"></section>
+					</section>
+					<section class="p-h-video-tip">
+						<img src="picture/v-loading.gif">
+						<p class="hLh20"><span class="c-999">加载中...</span></p>
+					</section>
+
+				</article>
+				<aside class="c-attr-wrap">
+					<section class="c-attr-wrap-infor">
+						<h2 class="hLh30 txtOf">
+							<span class="c-333 fsize24">理综卷做题技巧</span>
+						</h2>
+						<section class="hLh30 mt5 of c-th-box">
+							<ol class="thr-attr-ol clearfix">
+								<li>
+									<aside>
+										<em class="icon16 gms-ico">&nbsp;</em>
+										<tt class="c-666 f-fM fsize14 mr5 vam">购买数</tt>
+										<tt class="c-333 f-fM fsize14 vam">25</tt>
+									</aside>
+								</li>
+								<li>
+									<aside>
+										<em class="icon16 kss-ico">&nbsp;</em>
+										<tt class="c-666 f-fM vam fsize14 mr5">课时数</tt>
+										<tt class="c-333 f-fM vam fsize14">20</tt>
+									</aside>
+								</li>
+								<li>
+									<aside>
+										<em class="icon16 lls-ico">&nbsp;</em>
+										<tt class="c-666 f-fM vam fsize14 mr5">浏览数</tt>
+										<tt class="c-333 f-fM vam fsize14">291</tt>
+									</aside>
+								</li>
+							</ol>
+						</section>
+						<section class="c-attr-mt hLh30 of mt10">
+							<tt class="c-999 fsize14 f-fM vam">主讲：</tt>
+							<tt class="c-999 fsize14 f-fM vam">
+								李诚</tt>
+							</section>
+						<section class="c-attr-mt mt10">
+							<tt class="c-999 fsize14 f-fM vam">开课时间： 2018年03月13日 ~ 2018年06月30日</tt>
+							<tt class="c-999 fsize14 f-fM vam">
+								
+																	</tt>
+						</section>
+						<section class="c-attr-jg mt15 c-attr-jg-vip">
+							<tt class="c-red fsize14 f-fM vam">底价：</tt>
+									<big class="c-red">￥20.00</big>
+													<section class="kcShare pr fl hand vam">
+								<span>
+															</span>
+																						</section>
+						</section>
+						<section class="c-attr-mt new-cours-btnbox mt30">
+							<a href="javascript:void(0)" id="cou-shopcar" title="我要砍价" class="comm-btn c-btn-3 cou-buy-btn" onclick="bargain('135','COURSE','18')">
+											立即参加</a>
+										<section class="ml15 c-shop-car-wrap disIb">
+																			</section>
+									</section>
+					</section>
+				</aside>
+				<div class="clear"></div>
+			</div>
+			<!-- /课程封面介绍 -->
+			<div class="mt25 c-infor-box">
+				<article class="fl col-7">
+					<section class="mr25">
+						<div class="i-box cou-in-boc ">
+							<div class="clearfix c-infor-tabTitle c-tab-title">
+								<section id="c-i-tabTitle" class=" fl">
+									<a name="c-i" class="current" onclick="selectCourseInfo('courseContext')"  title="课程详情" href="javascript: void(0)">课程详情</a>
+									<a name="c-g" title="课程目录" onclick="selectCourseInfo('courseList')" href="javascript: void(0)">课程目录</a>
+									<a name="c-c" title="课程评论" onclick="selectCourseInfo('courseComment')" href="javascript: void(0)">课程评论</a>
+								</section>
+								<section class="fr m-check-box">
+									<a href="javascript:;"><span class="fsize16 vam" style="font-size: 14px;">手机查看</span><img width="18" height="18" class="vam ml5" src="picture/wxewm.png"><em class="icon14 ml5 phone-check"> </em></a>
+									<div id="output" class="m-ewm"></div>
+								</section>
+							</div>
+							<article class="ml10 mr10 new-c-i-b-warp">
+								<div id="courseContext" class="c-i-content">
+									<h6 class="c-i-content c-infor-title">
+										<span>详情</span>
+									</h6>
+									<!-- /无数据提示 开始-->
+									<!-- /无数据提示 结束-->
+									<div class="course-txt-body-wrap">
+											<section class="course-txt-body">
+												<p><p>理科生都知道高考理综卷占的分数很大，一般失分也很严重。</p><p>有几个朋友就对小夜说“你看这些题好多都会的，这次又失误了。”那么我们应该怎么避免这样子的“失误”呢？</p><p>小夜也是一名高三学生，希望通过学习小夜的做题方式能给大家带来更好的考试成绩。</p><p><a class="exp-image-wraper" href="http://jingyan.baidu.com/album/aa6a2c14d848780d4c19c484.html?picindex=1" target="_self"><span class="exp-album-enter-mask"></span></a></p><h2 class="exp-content-head"><a></a>工具/原料<p><span class="audio-inner"><span class="audio-icon"></span><span class="audio-icon-2"></span><span class="audio-icon-3"></span></span><span class="desc"></span></p></h2><ul class="exp-content-unorderlist list-paddingleft-2"><li><p>一颗平静的心</p></li></ul><h2 class="exp-content-head"><a></a>考试过程<p><span class="audio-inner"><span class="audio-icon"></span><span class="audio-icon-2"></span><span class="audio-icon-3"></span></span><span class="desc"></span></p></h2><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>1</p><p>拿到试卷：在拿到试卷后有一段时间是给我们看题目的，这个时候不要急着做第</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 一题的题目。先把所有的题目看一遍，大致了解每个题目所考的内</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 容，让自己有一个心理准备。在做题时就不用因为纠结“下一题会不</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 会很难”而分心了。</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>2</p><p>开始做题：个人建议先做自己觉得简单的部分的题目，如果看完题目还不会做那</p><p>就果断放弃，把能拿到的分数先拿到。（遇到自己觉得会做但又力不从心的题目也最好先放着，做好标记，等到一遍做完后再细心的做那些题目。）</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>3</p><p>做完一遍之后：如果没有在不会做的题目上浪费时间我想这个时候至少还有40</p><p>到60分钟，这个时候我们可以大致估算一下能得几分，然后信心满满的对自己说只要再拿下几题就能得到一个更好的分数。然后利用剩余的时间通过种种方法尽可能的得取分数。</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>4</p><p>收卷前15分钟：到了这时我们应该放下手中的笔，认真得查看在之前做题时有</p><p>没有看错的题目或者有没有在答卷填错答案，15分钟时间不多，所以要加快速度。（之前做过的题目一般都有记忆，所以只要读题目就可以辨别是否看错题目了）</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>5</p><p>紧 急 补 救 ： &nbsp;如果真的有看错题目而时间来不及时（比如还有1分钟），可以</p><p>直接改掉答案，然后在原本过称里加一些解题过程，能加多少算多少，如果加过程的不多就不要把原本的过程划掉。</p><p><span class="last-item-end">END</span></p></li></ol><h2 class="exp-content-head"><a></a>物理技巧<p><span class="audio-inner"><span class="audio-icon"></span><span class="audio-icon-2"></span><span class="audio-icon-3"></span></span><span class="desc"></span></p></h2><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>1</p><p>选择题：</p><p>1.推导法：由于是不定项选择，我们可以通过判断出其中一个正确答案</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;引出其他正确答案。</p><p>比如：通过判断速度向右，物体做加速运动，我们可以确定加速度向右，同时引</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 出合力向右。（如果一个物体速度方向为右且在做加速运动下列说法正</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 确的是：A.加速度向右 &nbsp; &nbsp; &nbsp; &nbsp; B.加速度向左 &nbsp; &nbsp; &nbsp; &nbsp;C.合力向右 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;D合</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 力向左）</p><p>2.排除法：这个不用我多说，大家都会。在物理选择题中如果能排除2个，那么</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;剩下的2个很可能都是正确答案，至于要不要全选就要自己好好考虑</p><p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;了。</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>2</p><p>应用题：</p><p>1.解题时思路明确，数据不要太过复杂，最好是先用公式互相化简，最</p><p>&nbsp; &nbsp;后代入数据。</p><p>2.如果真的不会做那么就把所有能想起来的相关的公式整齐的写在答题区，一般</p><p>&nbsp; &nbsp;来说每个有用的公式都有一定的分值。</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p><span class="last-item-end">END</span></p></li></ol><h2 class="exp-content-head"><a></a>化学技巧<p><span class="audio-inner"><span class="audio-icon"></span><span class="audio-icon-2"></span><span class="audio-icon-3"></span></span><span class="desc"></span></p></h2><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>1</p><p>做化学时小夜建议以下几点：</p><p>1.做题时要考虑每一步推理的可行性，不要想当然。</p><p>2.在遇到难题时不要急，在草稿本上画出相应的图解，静下心通过推理方程式得</p><p>&nbsp; &nbsp;出答案。<strong>（做题目时千万别急，做化学一定要静心的做，不然很容易出错）</strong></p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p><span class="last-item-end">END</span></p></li></ol><h2 class="exp-content-head"><a></a>生物技巧<p><span class="audio-inner"><span class="audio-icon"></span><span class="audio-icon-2"></span><span class="audio-icon-3"></span></span><span class="desc"></span></p></h2><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>选择题：</p><p>1.看完每个选项后与自己的记住的知识进行对比，如果没问题就可以确定答案。</p><p>2.如果出现两个选项都是与知识相符合，就再看题目有没有条件限制及选项是否</p><p>&nbsp; 有表达性错误。（图片中为错误答案，脂质是储能物质而非能源物质。正确选项是C。）</p></li></ol><p><br/></p><ol class="exp-conent-orderlist list-paddingleft-2"><li><p>2</p><p>填空题：这里主要讲遗传方面的技巧。</p><p>1.判断显隐性可以大致通过患病与不患病的个数确定，患病多即为显性；少为隐</p><p>&nbsp; 性。（有特殊情况下会出错）</p><p>2.判断子代患病比例可以直接通过亲代患病比例推导。</p></li></ol><p><a class="exp-image-wraper" href="http://jingyan.baidu.com/album/aa6a2c14d848780d4c19c484.html?picindex=10" target="_self"><span class="exp-album-enter-mask"></span></a></p><p><br/></p></p>
+											</section>
+											</div>
+									</div>
+								<!-- 课程目录 -->
+								<div class="c-g-content" style="display: block;" id="courseList">
+
+									<div class="lh-menu-wrap" id="courseKpointMenu"><section class="">
+	</section>
+<section>
+
+	<h6 class="c-g-content c-infor-title">
+		<span>课程目录</span>
+	</h6>
+	<menu id="lh-menu" class="lh-menu">
+			<ul>
+				<!-- 文件目录 -->
+						<li class="lh-menu-stair">
+							<a href="javascript: void(0)" title="第一章" class="l-m-stitle current-1">
+								<span class="fr"><em class="icon16 m-tree-icon">&nbsp;</em></span>
+									第一章</a>
+							<ol class="lh-menu-ol" style="display: block;">
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第一节（视频）</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a id="playKpointId155" href="javascript:void(0)" onclick="toVideoPlayer('/uc/play/148/155')" class="cou-kscp" title="试听">
+															试听
+														</a>
+													<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-wd icon20">&nbsp;</em>
+												</span>
+										<a title="第二节（课后作业）" onclick="toVideoPlayer('/uc/play/148/155')" href="javascript:void (0)" class="cou-tit-txt">第二节（课后作业）</a>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-yp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第三节（音频）</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-wd icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第四章（文档）</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-wd icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第五节（文本）</span>
+												</div></li>
+								</ol>
+						</li>
+						<!-- 文件目录 -->
+						<li class="lh-menu-stair">
+							<a href="javascript: void(0)" title="第二章" class="l-m-stitle current-1">
+								<span class="fr"><em class="icon16 m-tree-icon">&nbsp;</em></span>
+									第二章</a>
+							<ol class="lh-menu-ol" style="display: block;">
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第一节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第二节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第三节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第四节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第五节</span>
+												</div></li>
+								</ol>
+						</li>
+						<!-- 文件目录 -->
+						<li class="lh-menu-stair">
+							<a href="javascript: void(0)" title="第三章" class="l-m-stitle current-1">
+								<span class="fr"><em class="icon16 m-tree-icon">&nbsp;</em></span>
+									第三章</a>
+							<ol class="lh-menu-ol" style="display: block;">
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第一节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第二节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第三节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第四节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第五节</span>
+												</div></li>
+								</ol>
+						</li>
+						<!-- 文件目录 -->
+						<li class="lh-menu-stair">
+							<a href="javascript: void(0)" title="第四章" class="l-m-stitle current-1">
+								<span class="fr"><em class="icon16 m-tree-icon">&nbsp;</em></span>
+									第四章</a>
+							<ol class="lh-menu-ol" style="display: block;">
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第一节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第二节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第三节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第四节</span>
+												</div></li>
+								<li class="lh-menu-second">
+										<div class="l-m-stitle clearfix">
+											<span class="fr">
+												<a style="display: none" class="cou-kscp ml20" href="" title="考试测评">考试测评</a>
+											</span>
+											<span class="vam">
+												<em class="lh-p-icon-sp icon20">&nbsp;</em>
+												</span>
+										<span class="cou-tit-txt">第五节</span>
+												</div></li>
+								</ol>
+						</li>
+					
+						</ul>
+		</menu>
+
+
+	</section>
+
+<!-- /无数据提示 开始-->
+<input type="hidden" id="playFromType" value="1">
+<input type="hidden" id="courseId" value="148">
+<!-- /无数据提示 结束-->
+<script type="text/javascript" src="/static/inxwebcourse-kpoint-list.js"></script></div>
+								</div>
+									<div class="lh-menu-wrap" id="courseKpointMenu"></div>
+								</div>
+				bvv				<!-- 课程评论 -->
+								<div id="courseComment" style="display: none" class="c-c-content">
+bbbbbbbb<div class="commentHtml" ></div>
+								</div>
+							</article>
+						</div>
+					</section>
+				</article>
+				<aside class="fl col-3">
+					<div class="i-box">
+						<div>
+							<section class="c-infor-tabTitle c-tab-title">
+								<span title="" href="javascript:void(0)">主讲讲师</span>
+							</section>
+							<section class="stud-act-list">
+								<ul style="height: auto;">
+										<li>
+											<div class="u-face">
+												<a href="teacher/86">
+													<img src="picture/1497839548297.jpg" width="50" height="50" alt="">
+														</a>
+											</div>
+											<section class="hLh30 txtOf">
+												<a class="c-333 fsize16 fl" href="teacher/86">李诚</a>
+											</section>
+											<section class="hLh20 txtOf">
+												<span class="c-999">毕业于师范大学数学系，热爱教育事业，执教数学思维6年有余</span>
+											</section>
+										</li>
+									</ul>
+									</section>
+						</div>
+					</div>
+					<div class="i-box mt25">
+						<div>
+							<section class="c-infor-tabTitle c-tab-title">
+								<span title="" href="javascript:void(0)">推荐课程</span>
+							</section>
+							<section class="comm-course-list of cou-in-r-list bg-fff">
+									<ol>
+										<li>
+												<div class="cc-l-wrap">
+													<section class="course-img">
+														<a href="couinfo/129" target="_blank">
+															<img class="img-responsive" xsrc="picture/1485228516578.jpg" src="/images/upload/course/20170124/1485228516578.jpg" alt="">
+														</a>
+													</section>
+													<div class="coure-bg-g">
+														<h3 class="hLh30 txtOf mt5">
+															<a target="_blank" class="course-title fsize16 c-333" href="couinfo/129" title="高中物理知识点总结">高中物理知识点总结</a>
+														</h3>
+														<section class="mt10 hLh20 of">
+															<span class="fr">
+															<tt class="c-master fsize14 f-fM">￥30.00</tt>
+															</span>
+															<span class="fl jgAttr c-ccc f-fA">
+															<tt class="c-999 f-fA mr10">0人购买</tt>
+															<tt class="c-999 f-fA span-2">51浏览</tt>
+															</span>
+														</section>
+													</div>
+												</div>
+											</li>
+										</ol>
+								</section>
+							</div>
+					</div>
+				</aside>
+				<div class="clear"></div>
+			</div>
+		</section>
+		<!-- /课程详情 结束 -->
+	</div>
+	<input type="hidden" id="isok" value="false"/>
+	<input type="hidden" id="invitationCode" value=""/>
+	<input type="hidden" id="currentprice" value="80.00"/>
+	<input type="hidden" id="otherId" value="135"/>
+	<input type="hidden" id="loseTimeTime" value=""/>
+	<input type="hidden" id="loseType" value="1"/>
+	<input type="hidden" id="type" value="2"/>
+	<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+	<script type="text/javascript" src="js/courseinfo.js"></script>
+	<script type="text/javascript" src="js/comment.js"></script>
+	<script type="text/javascript" src="js/parabola.js"></script>
+	<script>
+		$(function(){
+			slideScroll("#live-box-in", "#live-box-in .lv-prev", "#live-box-in .lv-next", "#i-live-cou-list", 5, true); //套餐推荐滚动
+			/*给导航加选中*/
+			$("a[href$='showcoulist']").parent().addClass("current");
+		})
+	</script>
+</div>
+		</div>
+	</div>
+	<footer id="footer">
+	<section class="container">
+		<div class="b-foot">
+			<section class="fl col-80">
+				<section class="mr20">
+					<div class="find-box">
+						<h4 class="hLh30 txtOf">
+							<span class="fsize18 f-fM c-fff">友情链接</span>
+						</h4>
+						<ul class="flink-list clearfix">
+							<li><a href="#" title="武汉澄汰科技" target="_blank">武汉澄汰科技</a></li>
+				
+							</ul>
+						<div class="clear"></div>
+					</div>
+					<section class="b-f-link mt20">
+						<a href="/front/helpCenter" title="帮助中心" target="_blank">帮助中心</a>|
+						<a href="/front/helpCenter?id=194" title="联系我们" target="_blank">联系我们</a>|
+						<a href="/front/helpCenter?id=193" title="关于我们" target="_blank">关于我们</a>|
+						<span>服务热线：400-900-8560</span>
+						<span>Email：serivce@inxedu.com</span>
+					
+					</section>
+					<section class="b-f-link mt10">
+						<span>Copyright ©2013-2017 版权所有武汉澄汰科技有限公司</span>
+						<span class="c-666">Powered by<a title="武汉澄汰科技" target="_blank" href="#" class="c-666">澄汰科技教育软件</a></span>
+						<!-- 统计代码 -->
+						</section>
+				</section>
+			</section>
+			<aside class="fl col-20 tar ewm-box">
+				<span class="disIb tac">
+					<img src="picture/1481617339900.jpg" alt="" class="dis" width="140" height="140">
+					<p class="hLh30 fsize14 c-999 f-fM mt10 tac">关注微信</p>
+				</span>
+				</aside>
+			<div class="clear"></div>
+
+		</div>
+	</section>
+</footer>
+
+<div class="r-fixed-wrap">
+	<div class="pr r-fix-box">
+		<ul class="r-fixed-ul">
+			<li id="goTopBtn" class="undis">
+				<a href="javascript: void(0)" title="返回顶部" class="bg-orange">
+					<em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
+				</a>
+			</li>
+			<li class="foot-zixun" id="shopCart">
+				<a href="javascript:shopCartHtml()" title="查看详情" class="bg-orange pr" id="v-nav-first">
+					<em class="r-f-icon-4">&nbsp;</em><!-- <span>查看详情</span> -->
+					<tt class="shop-car-num" id="shopCartNum">0</tt>
+				</a>
+			</li>
+			<li class="foot-zixun">
+				<a href="https://www.inxedu.com" target="_blank" title="在线咨询" class="bg-orange">
+					<em class="r-f-icon-1">&nbsp;</em><span>在线咨询</span>
+				</a>
+			</li>
+			<li class="foot-zixun">
+				<a href="JavaScript:void(0)" title="扫描关注" class="bg-orange">
+					<em class="r-f-icon-2">&nbsp;</em><span>扫描关注</span>
+					<div class="smgz-pic">
+						<img src="picture/1481617339900.jpg" width="150" height="150" class="dis"/>
+						<p class=" fsize14 f-fM c-666 tac">扫一扫，关注我们</p>
+					</div>
+				</a>
+			</li>
+		</ul>
+		<div class="shopcar-box fr" id="shopcarthtml">
+
+		</div>
+	</div>
+</div>
+<!--手机端回到顶部 开始-->
+<div class="m-go-top-box">
+	<ul class="r-fixed-ul">
+		<li id="goTopBtn2" class="">
+			<a href="javascript: void(0)" title="返回顶部" class="bg-orange">
+				<em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
+			</a>
+		</li>
+	</ul>
+</div>
+<!--手机端回到顶部 开始-->
+<section class="mo-foot">
+	<article class="mo-f-warp">
+		<ul class="clearfix mo-f-w-list" id="gn-ul">
+			<li style="width: 20.0%">
+					<a href="/">
+							<svg t="1486257228474" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="2464"  width="32" height="32">
+						<path d="M978.221 507.167l-469.737-439.203-469.737 437.913c-9.189 8.567-9.702 22.975-1.114 32.155 8.579 9.173 23.004 9.692 32.187 1.105l438.629-408.894 438.649 410.139c4.401 4.112 9.987 6.144 15.563 6.144 6.070 0 12.143-2.411 16.623-7.209 8.596-9.173 8.123-23.568-1.065-32.149v0zM978.221 507.167z" fill="#333333" p-id="2465"></path>
+						<path d="M834.88 516.187c-12.573 0-22.772 10.193-22.772 22.75v348.839h-182.185v-242.67h-242.91v242.67h-182.178v-348.839c0-12.557-10.189-22.75-22.771-22.75-12.59 0-22.777 10.193-22.777 22.75v394.338h273.275v-242.669h151.819v242.669h273.268v-394.338c0.001-12.557-10.201-22.75-22.768-22.75v0zM834.88 516.187z" fill="#333333" p-id="2466"></path>
+						<path d="M675.472 190.101h136.635v121.332c0 12.576 10.201 22.755 22.772 22.755 12.569 0 22.769-10.179 22.769-22.755v-166.831h-182.177c-12.576 0-22.777 10.174-22.777 22.75-0.001 12.572 10.201 22.75 22.777 22.75v0zM675.472 190.101z" fill="#333333" p-id="2467"></path>
+					</svg><p>首页</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="showcoulist">
+							<svg t="1486257362855" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="5482" width="30" height="30">
+						<path d="M229.499951 913.188218c-48.914036-7.229658-80.168878-68.500117-58.45432-114.993011 17.700127-37.899168 77.866439-44.274366 114.710578-43.379996 12.209066 0.296759 22.588461-10.589173 22.588461-22.588461 0-214.33967 0-428.679339 0-643.020032 0-12.211113-10.349719-22.588461-22.588461-22.588461-79.519078 0-156.825768 13.127995-188.981119 97.637738-14.056134 36.941354-9.794064 79.658248-9.794064 118.503974 0 140.217509 0 280.435017 0 420.652526 0 34.616402-1.300622 69.511143 0 104.108103 3.175319 84.488253 66.817802 147.707087 151.284565 150.829194 116.201535 1.707898 521.665127 0.956791 671.114904 0 21.049409 0 27.852348-24.02723 15.972786-38.561247-39.46278-48.27754-42.548048-113.524566 0-161.04793 19.342534-21.60404-12.502755-53.66013-31.94455-31.94455-60.080354 67.105351-56.141648 156.255787 0 224.937029 5.324262-12.853749 10.648524-25.707498 15.972786-38.561247-208.42496 0-416.84992 0-625.27488 0-45.63434 0-90.661859 2.997264-124.948757-35.18843-31.254841-34.808784-26.997887-78.81709-26.997887-121.741715 0-125.962853 0-251.925706 0-377.88856 0-50.012044-1.000793-100.139721 0-150.142555 0.601704-30.04427 6.29231-57.972343 26.997887-81.227999 34.031071-38.22151 80.371492-35.18843 126.600373-35.18843-7.529487-7.529487-15.058974-15.058974-22.588461-22.588461 0 214.33967 0 428.679339 0 643.020032 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-60.922535-1.479701-144.667867 18.272155-161.406087 86.262666-16.9613 68.895113 19.038612 149.897985 93.140307 160.850431C245.930155 960.955128 258.202667 917.430846 229.499951 913.188218L229.499951 913.188218z" p-id="5483" fill="#333333"></path>
+						<path d="M361.056196 111.795179c137.728828 0 277.028431-6.541997 414.573063 0 56.018851 8.659217 110.147656 42.715871 112.727411 105.47217 0.642636 15.646352 0 31.460526 0 47.115064 0 88.575338 0 177.150676 0 265.72499 0 68.37732 0 136.75464 0 205.130937 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-183.296653 0-366.592282 0-549.888935 0 7.529487 7.529487 15.058974 15.058974 22.588461 22.588461 0-215.344556 0-430.688089 0-646.032646 0-29.069059-45.176922-29.117155-45.176922 0 0 215.344556 0 430.688089 0 646.032646 0 12.211113 10.349719 22.588461 22.588461 22.588461 183.296653 0 366.592282 0 549.888935 0 12.211113 0 22.588461-10.349719 22.588461-22.588461 0-156.952658 0-313.904293 0-470.856951 0-82.908268-11.682064-153.384389-102.450347-182.328605-30.673603-9.781784-66.485227-13.762445-102.756315-15.243169-69.480444-0.192382-73.621764-0.192382-116.468618-0.192382-83.601046 0-167.202093 0-250.802116 0C331.987137 66.618257 331.939041 111.795179 361.056196 111.795179z" p-id="5484" fill="#333333"></path><path d="M510.185678 94.477768c0 113.695458 0 227.390917 0 341.086375 0 24.375154 29.352515 28.110221 42.092677 11.400654 29.27986-38.400588 58.559721-76.801177 87.840604-115.201765-11.825326 1.523703-23.651676 3.047406-35.477003 4.571109 29.826306 38.400588 59.652612 76.801177 89.479941 115.201765 12.533454 16.136515 38.561247 1.967818 38.561247-15.972786 0-113.695458 0-227.390917 0-341.086375 0-29.069059-45.176922-29.117155-45.176922 0 0 113.695458 0 227.390917 0 341.086375 12.853749-5.324262 25.707498-10.648524 38.561247-15.972786-29.826306-38.400588-59.652612-76.801177-89.479941-115.201765-9.933233-12.788258-27.79095-5.508457-35.477003 4.572132-29.27986 38.400588-58.559721 76.801177-87.839581 115.201765 14.030551 3.800559 28.062126 7.600095 42.092677 11.400654 0-113.695458 0-227.390917 0-341.086375C555.3626 65.408709 510.185678 65.360614 510.185678 94.477768L510.185678 94.477768z" p-id="5485" fill="#333333"></path><path d="M361.056196 879.8049c165.349909 0 330.700841 0 496.05075 0 29.069059 0 29.117155-45.176922 0-45.176922-165.349909 0-330.700841 0-496.05075 0C331.987137 834.627978 331.939041 879.8049 361.056196 879.8049L361.056196 879.8049z" p-id="5486" fill="#333333"></path>
+					</svg><p>课程</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="liveIndex">
+							<svg t="1486257689517" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="11329" width="32" height="32">
+						<path d="M438.615 605.87L629.76 438.615l-191.145-168.96V605.87z m240.635 332.8H344.745c-13.655 0-25.6-11.95-25.6-25.6 0-13.66 11.945-25.6 25.6-25.6H679.25c13.66 0 25.6 11.94 25.6 25.6 0 13.65-11.94 25.6-25.6 25.6z m179.538-453.14c-37.31 0.384-63.191 18.35-79.683 38.65-16.19-20.561-42.122-38.65-80.379-38.65-25.277 0-46.264 8.181-62.366 24.37-29.481 29.6-30.085 74.184-29.773 75.567-0.737 4.505-15.975 111.585 162.954 200.745a21.658 21.658 0 0 0 9.651 2.294 21.453 21.453 0 0 0 10.133-2.555C897.53 728.515 953.8 658.959 952.064 583.214c0.046-39.26-24.494-97.684-93.276-97.684z m-77.819 263.03c-144.297-75.736-136.213-154.287-135.542-160.953-0.046-8.356 3.226-35.63 18.335-50.785 8.161-8.213 19.01-12.206 33.213-12.206 48.057 0 60.396 43.878 61.573 48.737a22.62 22.62 0 0 0 21.602 17.423c9.933-1.09 19.553-6.625 22.369-16.558 0.594-2.002 14.474-49.1 63.483-49.602 50.642 0 51.185 54.722 51.236 59.714 1.275 56.5-47.007 114.54-136.269 164.23z" fill="#333333" p-id="11330"></path>
+						<path d="M177.495 738.99c-32.425 0-58.025-25.6-58.025-58.03v-486.4c0-32.425 25.6-58.025 58.025-58.025H846.51c32.42 0 58.02 25.6 58.02 58.025v228.623a319.078 319.078 0 0 1 49.5 7.133V194.56c1.7-59.735-47.79-109.225-107.52-109.225H177.495c-59.735 0-109.23 49.49-109.23 109.225v486.4c0 59.73 49.495 109.23 109.225 109.23h443.76a264.433 264.433 0 0 1-23.24-51.2H177.496z" fill="#333333" p-id="11331"></path>
+					</svg><p>直播</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="/group/index">
+							<svg t="1486258789373" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="23121" width="32" height="32">
+						<path d="M464.2 622c0.8 0 1.6 0 2.4-0.1 96.3-9 120.4-71.5 119.8-103.3-0.3-14.1-11.5-24.9-26-24.9-14 0.3-25.2 11.9-24.9 26 0 0.5 0.1 44.7-73.7 51.6-14 1.3-24.3 13.7-22.9 27.7 1.3 13.1 12.4 23 25.3 23z" p-id="23122"></path>
+						<path d="M910.3 414.9c55.7-99.1 64.3-180.3 24-228.6-39.7-47.6-119.6-54.3-225.1-19-0.6 0.2-1 0.7-1.6 0.9-65.5-43.5-143.9-68.9-228.3-68.9-228.3-0.1-414 185.7-414 414 0 67.7 16.7 131.5 45.6 188-34.8 89.8-16.1 140 5.8 166.3 23.4 28.1 60.4 41.6 106.9 41.6 28.2 0 60-5 94.3-14.7 46.4 19.7 97.2 30.9 150.4 32.3v0.6h425.2V502.2h-0.6c-0.5-17.3-2.1-34.3-4.6-51 7.9-12.2 15.3-24.4 22-36.3z m-15.1-196.1c23.9 28.7 14.6 88.7-24.2 161.3-23-67.5-63-127.1-114.9-173.9 67.5-17.8 117.4-13.5 139.1 12.6z m-415.9-68.7c174.9 0 321.2 124.2 355.6 289.1-49.5 72.4-119.4 147.6-202.1 216.6-113.6 94.7-224.4 155.6-311.9 183.9-121-59-204.8-182.9-204.8-326.3 0-200.4 163-363.3 363.2-363.3z m-323.6 685c-13.7-16.4-16.7-43-9.3-76.6 28.1 38.1 62.3 71.5 101.6 98.1-43.6 5-76-2.1-92.3-21.5z m323.6 41.4c-28.8 0-56.6-3.7-83.5-10.1 83.6-36.2 176.8-94.4 269.5-171.7 68.6-57.2 129-118.9 177.2-180.2v361.9H479.3z" p-id="23123"></path>
+					</svg><p>社区</p>
+					</a>
+				</li>
+			<li style="width: 20.0%">
+					<a href="javascript:h5FooterMyLogin();">
+							<svg t="1486257862430" class="icon" style="" viewBox="0 0 1024 1024" p-id="17785" width="32" height="32">
+						<path d="M511.674589 64.696488c-246.847038 0-446.956611 200.109574-446.956611 446.956611 0 94.231151 29.160133 181.651177 78.95012 253.727749 0 0 15.517415 21.547759 35.803437 9.270131 19.442818-11.768021 7.554046-34.44551 7.554046-34.44551-18.063401-24.635073-28.063149-46.14497-40.059368-74.507948-20.624736-48.762587-31.081902-100.589976-31.081902-154.044422 0-53.454446 10.457166-105.281835 31.081902-154.044422 19.931958-47.124274 48.477085-89.457428 84.842317-125.82266 36.365232-36.365232 78.698386-64.910359 125.82266-84.842317 48.762587-20.624736 100.589976-31.081902 154.044422-31.081902 53.454446 0 105.281835 10.457166 154.044422 31.081902 41.683355 17.630542 79.609129 42.012859 112.981191 72.572876l21.829168 21.586644c32.097022 34.219359 57.598836 73.345472 75.854619 116.506481 20.624736 48.762587 31.081902 100.589976 31.081902 154.044422 0 53.454446-10.457166 105.281835-31.081902 154.044422-19.931958 47.124274-48.477085 89.457428-84.842317 125.82266-5.247514 5.247514-10.634198 10.31288-16.127306 15.232936-7.247054-53.594639-33.886785-103.058191-76.816526-141.627624-24.589025-22.092158-53.120848-39.295981-84.133166-51.097772 46.131667-32.394804 76.2885-85.996606 76.2885-146.646941 0-98.902544-80.176041-179.078585-179.078585-179.078585s-179.078585 80.176041-179.078585 179.078585c0 60.651358 30.156834 114.252137 76.2885 146.646941-31.013341 11.80179-59.544141 29.005614-84.133166 51.097772-50.834782 45.671179-78.82937 106.616226-78.82937 171.609473 0 8.114818 0.179079 13.518898 1.193175 22.279423 0.470721 4.068665 1.876744 7.79964 3.970428 11.011798 4.293793 7.453762 10.69048 12.249999 10.69048 12.249999 71.334675 48.192605 157.330258 76.333526 249.897513 76.333526 246.848061 0 446.956611-200.109574 446.956611-446.956611S758.521626 64.696488 511.674589 64.696488zM383.761314 467.379757c0-34.167171 13.305027-66.288752 37.465287-90.447988 24.159236-24.159236 56.281841-37.465287 90.447988-37.465287s66.288752 13.305027 90.447988 37.465287c24.159236 24.159236 37.465287 56.281841 37.465287 90.447988s-13.305027 66.288752-37.465287 90.447988c-24.159236 24.159236-56.281841 37.465287-90.447988 37.465287s-66.288752-13.305027-90.447988-37.465287C397.066341 533.668509 383.761314 501.546927 383.761314 467.379757zM511.674589 907.444401c-53.454446 0-105.281835-10.457166-154.044422-31.081902-21.145599-8.943696-41.312918-19.643386-60.423161-31.984459-0.094144-2.240017-0.119727-4.589528-0.119727-7.643074 0-104.875582 96.263437-190.19783 214.58731-190.19783s214.58731 85.322248 214.58731 190.19783c0 2.555196-0.076748 5.127787-0.193405 7.701402-19.086707 12.319583-39.232536 22.99369-60.349483 31.92613C616.956424 896.987235 565.128011 907.444401 511.674589 907.444401z" p-id="17786"></path>
+					</svg><p>我的</p>
+					</a>
+				</li>
+			</ul>
+	</article>
+</section>
+<script>
+	setTimeout(function () {
+		try {
+			headerIndexSubject();//第二三版首页 专业 显示 处理
+		}catch (err){}
+
+	},100)
+</script>
+<!-- 公共底引入 -->
+	</div>
+	<div class="exam-foot-kst">
+		<div class="undis exam-f-kst-list clearfix h5ExamDatika">
+			<div class="dtk-box fl f-kst-fl-box fot-box-btn-js">
+				<div class="lin-right tac">
+					<svg t="1508738291238" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="2257" width="48" height="48"><defs><style type="text/css"></style></defs><path d="M816.655 962.058h-609.165c-56.524 0-102.506-46.111-102.506-102.806v-694.316c0-56.695 45.982-102.806 102.506-102.806h609.165c56.524 0 102.549 46.41 102.549 103.406v450.265c0 11.828-9.599 21.426-21.426 21.426s-21.426-9.599-21.426-21.426v-450.265c0-33.383-26.783-60.553-59.695-60.553h-609.165c-32.869 0-59.652 26.912-59.652 59.952v694.273c0 33.040 26.783 59.952 59.652 59.952h609.165c32.911 0 59.695-27.212 59.695-60.596v-81.25c0-11.828 9.599-21.426 21.426-21.426s21.426 9.599 21.426 21.426v81.25c0 57.082-45.982 103.491-102.549 103.491zM746.246 726.362h-182.171c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.171c11.828 0 21.426 9.599 21.426 21.426s-9.599 21.426-21.426 21.426zM446.27 726.362h-182.214c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.214c11.828 0 21.426 9.599 21.426 21.426s-9.556 21.426-21.426 21.426zM746.246 554.948h-182.171c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.171c11.828 0 21.426 9.599 21.426 21.426s-9.599 21.426-21.426 21.426zM446.27 554.948h-182.214c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.214c11.828 0 21.426 9.599 21.426 21.426s-9.556 21.426-21.426 21.426zM746.246 383.533h-182.171c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.171c11.828 0 21.426 9.599 21.426 21.426s-9.599 21.426-21.426 21.426zM446.27 383.533h-182.214c-11.828 0-21.426-9.599-21.426-21.426s9.599-21.426 21.426-21.426h182.214c11.828 0 21.426 9.599 21.426 21.426s-9.556 21.426-21.426 21.426z" p-id="2258" ></path></svg>
+					<span class="f-fM c-666 fsize16 vam">答题卡</span>
+				</div>
+				<div class="gscz-ej-li gscz-ej-li-big">
+					<div class="n-test-right-card bg-fff">
+						<div class="title f-fM c-333 fsize16 disFw">
+							答题卡
+						</div>
+						<div class="card-da">
+							<div>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tjsj-box fl f-kst-fl-box">
+				<div class="lin-right tac" onclick="formSubmit()">
+					<svg t="1508738342428" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="4141"  width="48" height="48"><defs><style type="text/css"></style></defs><path d="M872.30464 499.22048l0 417.18784L75.84768 916.40832 75.84768 157.89056l606.8224 0L682.67008 82.04288 37.92896 82.04288C16.95744 82.04288 0 99.0208 0 119.9616l0 834.36544C0 975.29856 16.95744 992.256 37.92896 992.256l872.2944 0c20.97152 0 37.92896-16.95744 37.92896-37.92896L948.15232 499.22048 872.30464 499.22048 872.30464 499.22048z" p-id="4142"></path><path d="M1024 69.00736c0-13.74208-11.15136-24.89344-24.89344-24.89344-6.52288 0-12.17536 2.82624-16.66048 6.94272L493.4144 600.17664 303.4112 411.41248 171.40736 540.70272l53.77024 0 267.48928 249.71264L1020.5184 81.07008C1022.58688 77.44512 1024 73.44128 1024 69.00736L1024 69.00736z" p-id="4143"></path></svg>
+					<span class="f-fM c-666 fsize16 vam">交卷</span>
+				</div>
+			</div>
+			<div class="gscz-box fl f-kst-fl-box fot-box-btn-js">
+				<div class="tac">
+					<svg t="1508738466385" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="10466"  width="48" height="48"><defs><style type="text/css"></style></defs><path d="M307.1 833.1c-14.1 0-26.4-19.3-26.4-41.3s12.3-41.3 26.4-41.3h627.8c14.1 0 26.4 19.3 26.4 41.3s-12.3 41.3-26.4 41.3H307.1z m0-282.7c-14.1 0-26.4-19.3-26.4-41.3 0-22 12.3-41.3 26.4-41.3h627.8c14.1 0 26.4 19.3 26.4 41.3 0 22-12.3 41.3-26.4 41.3H307.1z m0-282.6c-14.1 0-26.4-19.3-26.4-41.3s12.3-41.3 26.4-41.3h627.8c14.1 0 26.4 19.3 26.4 41.3s-12.3 41.3-26.4 41.3H307.1z" p-id="10467"></path><path d="M125.5 853.5c-10.8 0-21.4-2.9-30.8-8.3-19-11-30.9-31.5-30.8-53.4 0-22 11.8-42.5 30.8-53.4 9.4-5.4 20-8.3 30.8-8.3s21.5 2.9 30.8 8.3c19 11 30.8 31.5 30.8 53.4 0 10.8-2.9 21.5-8.3 30.9-10.8 19-31.3 30.8-53.3 30.8z m0.1-279.5c-10.8 0-21.5-2.9-30.8-8.3-19-11-30.9-31.5-30.8-53.4 0-22 11.8-42.4 30.8-53.4 9.4-5.4 20-8.3 30.8-8.3s21.5 2.9 30.8 8.3c19 11 30.8 31.5 30.8 53.4 0 22-11.8 42.5-30.8 53.4-9.3 5.4-20 8.3-30.8 8.3z m0-279.6c-10.8 0-21.5-2.9-30.8-8.3-19-11-30.9-31.5-30.9-53.4 0-22 11.8-42.5 30.8-53.4 9.4-5.4 20-8.3 30.8-8.3s21.5 2.9 30.8 8.3c19 11 30.8 31.5 30.8 53.4 0 22-11.8 42.4-30.8 53.4-9.2 5.5-19.9 8.3-30.7 8.3z" p-id="10468"></path></svg>
+					<span class="f-fM c-666 fsize16 vam">更多</span>
+				</div>
+				<div class="gscz-ej-li">
+					<ul class="gscz-ej-li-ul">
+						<li>
+								<a href="javascript:void(0)" onclick="dialog('温馨提示','练习题库',19);" title="" class="f-fM fsize16 c-666 current">下次再做</a>
+							</li>
+						<li>
+							<a href="javascript:void(0)" onclick="danti(this)" id="h5dantiATag" title="" class="f-fM fsize16 c-666">单题模式</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="exam-f-kst-tc-btn undis">
+			<a href="javascript:void(0)" onclick="dialog('提示','',20);" titile="退出">退出</a>
+		</div>
+	</div>
+	<section class="mo-all-seach-warp">
+		<div class="mo-all-seach-infor">
+			<header class="comm-title">
+				<span class="fr mt5 sech-qx-all"><a href="javascript:void(0)" title="清空"  class="c-master">取消</a></span>
+				<h2 class="fl tac tit-header">
+					<span class="c-333">近期搜索</span>
+				</h2>
+			</header>
+			<section class="no-data-wrap">
+				<section class="no-data-wrap">
+					<em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">没有相关数据，小编正在整理中...</span>
+				</section>
+			</section>
+			<section class="seach-group-all">
+				<ul>
+					</ul>
+			</section>
+		</div>
+	</section>
+	<input type="hidden" id="limitLogin" value="OFF"/>
+<script type="text/javascript">
+selectCourseInfo('courseContext')
+
+        var winW=$(window).width();
+        var boyH=$(window).height()-98;
+        $(".fot-box-btn-js").click(function () {
+            if($(this).hasClass("cur")){
+                $(".fot-box-btn-js").removeClass("cur");
+                $(this).children(".gscz-ej-li").hide();
+				//h5滚动时，右侧菜单定位有问题被隐藏，需要清除高度
+                $("body").css("height","");
+            }else {
+                $(".fot-box-btn-js").removeClass("cur");
+                $(this).addClass("cur");
+                $(".fot-box-btn-js").children(".gscz-ej-li").hide();
+                $(this).children(".gscz-ej-li").show();
+                $("body").css({"height":winW});
+            }
+        })
+        $(".gscz-ej-li-big").css({"width":winW,"height":boyH});
+
+	</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+
+<%
+:querystr = "select A.id,A.urlstr,A.title,A.id_index,B.filename from index_pic_info A,uploadedfiles B where A.id=B.filetuid order by A.id_index"
+changeRecordSet(:querystr)
+:totalNumber = recordCount()
+If :totalNumber>0
+	:i=1
+	Repeat
+		If :i==1
+%>
+<script  type="text/javascript">  
+	// style="background-image: url(./resouce/image/topbanner.jpg);background-size: cover;min-width:1180px;width:100%"
+	var main_header=document.getElementById("main-header");
+	main_header.style.backgroundSize="cover";
+	main_header.style.minWidth="1180px";
+	main_header.style.width="100%";
+	main_header.style.backgroundImage="url(/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>)";
+</script>
+ <a class="branding" href="<%=urlstr%>"><%=title%></a>
+
+<%If pic_id!=0%>
+	<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" alt="<%=urlstr%>" class="hide"> 
+<%Else%>
+	<img src="/pages/resouce/image/default.png" alt="<%=urlstr%>" class="hide">
+<%EndIf%>
+</a>
+$_@_$
+<%
+		Else
+		
+			If :i==4 || :i==8%>
+				 <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>">
+		      <%Else
+				If :i==5%>
+			<a href="<%=urlstr%>" target="_blank"><img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="860" height="90"></a>
+				<%Else%>
+				<a href="<%=urlstr%>" target="_blank"><img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>"></a>
+		      		<%EndIf
+			EndIf
+%>
+ 	
+$_@_$    
+
+<%	
+		EndIf
+		:i = :i+1
+	EndRepeat
+EndIf
+%>
+
+  
+

@@ -1,0 +1,8 @@
+<%
+	If :operation=="inserttest"
+	:insertStr = "insert into test values (?, ?)"
+	debugMsg(L(:tuid)#"------------")
+	:x = execSQL(:insertStr,S(:name), S(:sex))
+	Exit(:x)
+	EndIf
+%>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>文章内容</title>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/common.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/view.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/index.css">
+  <link rel="stylesheet" type="text/css" href="./resouce/css/viewimportant.css">
+  <script type="text/javascript" src="./resouce/jquery-1.8.3.min.js"></script>
+  <script src="./resouce/common.js" type="text/javascript"></script>
+  <script src="./resouce/portal.js" type="text/javascript"></script>
+  <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+  <script type="text/javascript" src="./js/main.js"></script>
+  
+
+  <script type="text/javascript">
+    var jq = jQuery.noConflict();
+  </script>
+  <script src="./resouce/deanactions.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="./resouce/css/animate.min.css">
+  <script>
+    var wow = new WOW({
+      boxClass: 'deanactions',
+    });
+    wow.init();
+
+    
+  </script>
+  <script src="./resouce/jquery.flexslider-min.js" type="text/javascript"></script>
+
+  <script src="./resouce/jquery.easing.1.3.js" type="text/javascript"></script>
+  <script src="./resouce/jquery.skitter.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    jQuery(document).ready(function() {
+
+      
+
+    var id = getUrlString("id");
+    var parasId = "operation=getArticleFromId";
+    parasId += "$^@^$id=" + id;
+    var content = new Array();
+    var contentResult = function(){
+      jQuery("#articleContentAndComment").html(content[0]);
+    }
+    getFromWS("home/getArticleContentAndComment.template",parasId,content,contentResult);
+
+   });
+
+    function doSubmit(){
+      var name = jQuery('#name').val();
+        var content = jQuery('#content').val();
+        var appealOpen = jQuery('input:radio[name="appealOpen"]:checked').val();
+        if(name == "" || content == "")
+        {
+          alert("请将内容填充完整");
+          return false;
+        }
+
+        var res = new Array();
+        var afterResult = function(){
+          if(res[0] == "ok")
+          {
+            alert("信件已经发出， 请等待审核!");
+            location.reload();
+            return;
+          }
+          else{
+            alert(res);
+            alert("提交失败");
+            return false;
+          }
+        }
+        var paras = "";
+        paras += "operation=insertGovEmail";
+        paras += "$^@^$name=" + name;
+        paras += "$^@^$content=" + content;
+        paras += "$^@^$appeal_open=" + appealOpen;
+        getFromWS("mianmooc/saveGovEmail.template", paras, res, afterResult);
+      
+    }
+  </script>
+  <script src="./resouce/jquery.pagnation.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./resouce/jquery.SuperSlide.2.1.1.js"></script>
+  <script language="javascript" type="text/javascript">
+    function killErrors() {
+      return true;
+    }
+    window.onerror = killErrors;
+
+  </script>
+</head>
+<body>
+<div id="header">
+</div>
+
+  <div id="wp" class="wp">
+    <script src="./resouce/viewthread.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      zoomstatus = parseInt(1), imagemaxwidth = '600', aimgcount = new Array();
+    </script>
+    <div id="ct" class="ct2 wp cl" style="width:1180px!important; margin:20px auto;">
+      <div class="mn">
+
+        <div class="deanxgydbox_pd" style="padding-bottom: 40px;margin:0 auto; width: 1100px">
+
+          <h3><span>市长信箱</span></h3>
+
+          <h4 style="margin-bottom: 10px;"><span>写信须知</span></h4>
+          
+          <div style="line-height: 28px">
+            <p>一、请您填写真实姓名、住址和联系方式，以便承办单位调查核实和反馈办理结果；</p>
+            <p>二、请您简明扼要填写信件内容，写清事情发生的时间、地点、简要经过、需要解决的问题和诉求；</p>
+            <p>三、请您客观真实反映情况和问题，对所反映内容的真实性负责，不得捏造歪曲事实，不得诬告、陷害他人。</p>
+          </div>
+  
+           
+          <h4 style="margin-bottom: 10px;">
+            <span style="display: inline-block;">我要写信</span>
+            <span style="float:right; font-size: 0.8em; border-left: 0px" >（注意：带<font color="red">*</font>的为必填项）</span>
+          </h4>
+
+          <table>
+            <tr>
+              <td>
+                <label><font color="red">*</font>姓名</label>
+              </td>
+              <td>
+                <input type="text" id="name" style="width: 1030px; height: 28px ;border: 1px  solid grey;border-radius: 3px;" required autofocus>
+              </td>
+            </tr>
+            
+            <tr>
+              <td style="padding-top: 12px;padding-right: 10px;vertical-align: top;"">
+                <label><font color="red">*</font>信件内容</label>
+              </td>
+              <td>
+                <textarea id="content" style="width: 1030px;min-height: 550px;margin-top: 10px;border-radius: 6px;    margin-bottom: 10px;"></textarea>
+              </td>
+            </tr>
+
+            <tr>
+              <td>
+                <label><font color="red">*</font>公开意愿</label>
+              </td>
+            
+              <td>
+                <input name="appealOpen" type="radio" value="1" checked="">
+            是 
+                <input name="appealOpen" type="radio" value="0" style="margin-left: 8px;">              
+            否  
+              </td>
+              
+            </tr>
+            <tr>
+              <td></td>
+              <td style="text-align: center;">
+                <input type="button" id="emailSubmit" onclick="doSubmit()" style="width: 100px" value="提交">
+                  
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+    <input type="hidden" id="portalview" value="1">
+    <script type="text/javascript">
+      jQuery(function() {
+        var elm = jQuery('.deanguanzhu');
+        var startPos = jQuery(elm).offset().top;
+        jQuery.event.add(window, "scroll", function() {
+          var p = jQuery(window).scrollTop();
+          jQuery(elm).css('position', ((p) > startPos) ? 'fixed' : 'relative');
+          jQuery(elm).css('top', ((p) > startPos) ? '75px' : '');
+          jQuery(elm).css('box-shadow', ((p) > startPos) ? '0px 2px 4px 2px #eaeaea' : '');
+          jQuery(elm).css('z-index', ((p) > startPos) ? '2' : '');
+        });
+      });
+    </script>
+  </div>
+<div id="footer">
+</div>
+  <div id="ft" style="margin:0;padding:0; height:0;"></div>
+  <div id="scrolltop" style="display:none;">
+    <span hidefocus="true"><a title="返回顶部" onclick="window.scrollTo('0','0')" id="scrolltopa"><b>返回顶部</b></a></span>
+  </div>
+  <script type="text/javascript">
+    _attachEvent(window, 'scroll', function() {
+      showTopLink();
+    });
+    checkBlind();
+
+  </script>
+</body>
+</html>
+

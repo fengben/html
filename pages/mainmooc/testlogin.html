@@ -1,0 +1,74 @@
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script>
+
+    function userlogin() {
+
+
+        function passResult(results) {
+            var fig = results[0].substring(0, 6);
+            if (fig == "failed") {
+                alert("登录失败：" + results[0].substring(7));
+            } else {
+                alert('success')
+                // location.href="articleManagement.html";
+            }
+        }
+
+        var loginName = "admi";//用户名
+        var password = "qwer1234";//密码
+
+        login(loginName, password, passResult);  //登录login
+    }
+
+        function checkLogin() {
+            alert('next');
+            var loginname = $.cookie('mooc_login_name');
+            alert(loginname);
+            if ($.cookie('mooc_login_name')) {
+
+            }
+
+        }
+
+        function userlogin() {
+
+            var loginName = $("#u-email").val();
+            var password = $("#u-password").val();
+
+            var autoThirty = $("#autoThirty").prop("checked");
+            $("#u-email").next().html('');
+            $("#u-password").next().html('');
+            $(".e-l-jy").html('');
+
+            function passResult(results) {
+                var fig = results[0].substring(0, 6);
+                if (fig == "failed") {
+                    alert("登录失败：" + results[0].substring(7));
+                } else {
+                    alert('success')
+                    if (jumpType == 'ucIndex') {
+                        window.location.href = "/uc/index";
+                    } else if (jumpType == 'reload') {
+                        window.location.reload();
+                    } else {
+                        $("#dClose").click();
+                        showUserInfo();//Í·²¿ÏÔÊ¾ÓÃ»§ÐÅÏ¢
+                        if ($("#limitLogin").val() == "ON") {
+                            //¼ÓÔØÏÞÖÆµÇÂ¼js
+                            limitLogin();
+                        }
+                    }
+                    // location.href="articleManagement.html";
+                }
+            }
+
+            login(loginName, password, passResult);  //登录login
+
+            $.cookie('mooc_login_name', loginName);
+            $.cookie('mooc_password', password);
+        }
+</script>
+<button onclick="checkLogin()">fassf</button>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+	<script>
+		//防止非超级管理员用户直接输入网址访问该网页
+		var loginName = localStorage.getItem('loginName');
+        var classification = localStorage.getItem('classification');
+		if (loginName != "admin"){
+			location.href="articleManagement.html";
+		}
+	</script>
+    <title>mooc后台管理</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/>
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-core.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-forms.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-components.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
+    <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css" />
+    <link rel="stylesheet" type="text/css" href="jquery-easyui/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="jquery-easyui/themes/icon.css">
+ 
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="/scripts/uploadfile.js"></script>
+    <script type="text/javascript" src="/scripts/htmleditor/kindeditor.js"></script>
+    <script type="text/javascript" src="/scripts/htmleditor/lang/zh_CN.js"></script>
+    <script type="text/javascript" src="jquery-easyui/jquery.easyui.min.js"></script>
+
+</head>
+
+<style type="text/css">
+    /*  显示问题 */
+    .page-container .main-content{
+        display: block;
+    }
+</style>
+<body class="page-body">
+<script>
+    var newRole = 1;
+
+    //保持(被选中的)侧边栏高亮
+    function keepActive(){
+        $("#personManagement").css("display", "block");
+        $("#roleManagement").css("display", "block");
+        $("#a_roleManagement").parent().addClass('active');
+    }
+
+    function init(){
+        $(".user-info-menu #loginName").html(localStorage.getItem("loginName"));
+        //加载侧边栏
+        var html = new Array();
+        var htmlResult = function(){
+            $("#main-menu").append(html[0]);
+            keepActive();
+        }
+        getFromWS("mainmooc/getNav.template","classification="+classification +"$^@^$loginName="+loginName, html, htmlResult);
+    }
+
+    function treeNode(id, text, children){
+        this.id = id;
+        this.text = text;
+        this.children = children;
+    }
+
+    function getTree(){
+        var paras = "";
+        paras += "operation=getTree";
+        var obj = new Array();
+        var afterTreeResult = function (){
+            //obj[0]为返回的字符串,由于拼接问题，删除最后一个空格
+            var arr = obj[0].substring(0, obj[0].length-1);
+            arr = arr.split("&");
+            var nodeArray = [];
+            var rootNode = {};
+            rootNode["id"] = 0;
+            rootNode["text"] = "root";
+            rootNode["children"] = [];
+            nodeArray.push(rootNode);
+            var result = BFSPraseTree(arr, nodeArray);
+            //alert(arr);
+        }
+        getFromWS("mainmooc/getColumns.template", paras, obj, afterTreeResult);
+
+    }
+
+    function BFSPraseTree(array, res){
+        for (var i = 0; i < array.length; i++) {
+            //获取栏目的id和其父id
+            var idx = array[i].indexOf(":");
+            var idx_name = array[i].indexOf(";");
+            var pid = array[i].substring(idx + 1, idx_name);
+            var id = array[i].substring(0, idx);
+            //获取栏目名称
+            var column_name = array[i].substring(idx_name + 1);
+            if( pid == 0){
+                var tmp = new treeNode(id, column_name, []);
+                var curr = {};
+                curr["id"] = tmp.id;
+                curr["text"] = tmp.text;
+                curr["children"] = tmp.children;
+                //找到父节点
+                for(var j = 0; j < res.length; j++){
+                    if(res[j]["id"] == pid){
+                        res[j]["children"].push(curr);
+                        break;
+                    			}
+                		}
+
+            }else{
+                insertNode(res, pid, id, column_name);
+            }
+        }   
+        //用json数据初始化树结构
+        $("#tree").tree({
+            data: res
+        });
+        
+        
+    }
+
+
+    function insertNode(array, pid, id, name){
+        for(var i = 0; i<array.length; i++){
+            if(array == undefined || array.length == 0){
+                return;
+            }else if(pid == array[i]["id"]){
+                var curr = {};
+                curr["id"] = id;
+                curr["text"] = name;
+                curr["children"] = [];
+                array[i]["children"].push(curr);
+            }else{
+                if(array[i]["children"] != undefined && array[i]["children"].length != 0)
+                {
+                    insertNode(array[i]["children"], pid, id, name);
+                }
+            }
+        }
+    }
+
+    function getAllCheckedTreeNode(){
+        var tree = $('#tree').tree('getChecked');
+        var res = "";
+        for(var i = 0; i < tree.length; i++){
+            if(res != "") res += ';';
+            res += tree[i].id;
+        }
+        return res;
+    }
+
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+
+    jQuery(document).ready(function ($) {
+    
+        init();
+        //加载现有角色
+    	loadFromWS("mainmooc/getRoleList.template", "operation=getRoleList", "rolePanel");
+        //加载栏目树
+        getTree();
+      
+    });
+    var editor;
+    function createEditor(){
+
+
+        editor = KindEditor.create('textarea[id="articleContent"]',{
+            allowFileManager : true,
+	    	uploadJson : kindeditUploadUrl(),
+            afterUpload: kindeditAfterUpload,
+            imageTabIndex:1,
+	    	pasteType : 1,  //无格式粘贴
+       		});
+    	}
+
+  function setRole(flag){
+
+    	//新建角色
+    	if(flag==0){
+            newRole = 1;
+            $('#h4-role-management').html("新增角色");
+            $('#modal-role-add #role_name').val('');
+            var tt = $('#tree').tree('getRoot');
+            $('#tree').tree('uncheck', tt.target);
+    	}else{  //编辑角色
+            newRole = 0;
+           $('#h4-role-management').html("编辑"); 
+           $("#modal-role-add #role_name").val($('#role_name' + flag).html());
+           var columns_ids = $("#column_ids" + flag).html();
+           var arr = columns_ids.split(";");
+           for(var i = 0; i < arr.length; i++){
+                var node = $('#tree').tree('find', arr[i]);
+                $('#tree').tree('check', node.target);
+           }
+            
+    	}
+		createEditor();
+		jQuery('#modal-role-add').modal('show', {backdrop: 'static'});
+
+    }
+
+    function doSave(){
+        var role_name = $('#modal-role-add #role_name').val();
+        //获取easyui-tree选中的id值
+        var column_ids = getAllCheckedTreeNode();
+        var paras = "";
+        if(newRole == 1){
+            paras += "operation=insertRole";
+            paras += "$^@^$role_name=" + role_name;
+            paras += "$^@^$column_ids=" + column_ids;
+        }else{
+            paras += "operation=updateRole";
+            paras += "$^@^$role_name=" + role_name;
+            paras += "$^@^$column_ids=" + column_ids;
+        }
+
+        var obj = new Array();
+        var afterSaveResult = function(){
+            if(obj[0] == "ok"){
+                $('#modal-role-add').modal('hide');
+                location.reload();
+            }else{
+                alert("存储失败");
+                $('#modal-role-add').modal('hide');
+                location.reload();
+            }
+        }
+        getFromWS("mainmooc/saveRole.template", paras, obj, afterSaveResult);
+    }
+
+
+    function doCancel(){
+        //关闭时复原
+        var tree = $('#tree').tree('getRoot');
+        $('#tree').tree('uncheck', tree.target);
+    }
+</script>
+<div class="page-container">
+    <div class="sidebar-menu toggle-others fixed">
+        <div class="sidebar-menu-inner">
+            <header class="logo-env">
+                <div class="logo">
+                    <a href="dashboard-1.html" class="logo-expanded">
+                        <img src="assets/images/logo@2x.png" width="80" alt=""/></a>
+                    <a href="dashboard-1.html" class="logo-collapsed">
+                        <img src="assets/images/logo-collapsed@2x.png" width="40" alt=""/></a>
+                </div>
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa-bell-o"></i>
+                        <span class="badge badge-success">7</span></a>
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+            <ul id="main-menu" class="main-menu">
+                
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <!-- User Info, Notifications and Menu Bar -->
+        <nav class="navbar user-info-navbar" role="navigation">
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <a href="#" data-toggle="sidebar" title="武汉大学出版社">
+                    <img src="images/logo.png" width="170" alt="武汉大学出版社" />
+                </a>
+            </ul>
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+                <li class="dropdown user-profile">
+                    <a href="#" data-toggle="dropdown">
+                        <img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32"
+                             width="28"/>
+                        <span id="loginName"></span></a>
+                </li>
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="fa-power-off" style="color:red;font-size:18px;"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="page-title">
+            <div class="title-env">
+                <h1 class="title">角色管理</h1>
+                <p class="description">management of role</p></div>
+            <div class="breadcrumb-env">
+                <ol class="breadcrumb bc-1">
+                    <li>
+                        <a href="articleManagement.html">
+                            <i class="fa-home"></i>Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>management of role</strong></li>
+                </ol>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"></h3>
+            </div>
+            <div class="panel-body">
+                <div class="panel-heading">
+                    <a href="javascript:;" class="btn btn-secondary btn-icon btn-icon-standalone"
+                       style="margin-left:0" onclick="setRole(0)">
+                        <i class="fa-plus" style="font-size:17px"></i>
+                        <span>新增角色</span>
+                    </a>
+
+                    <div class="panel-body" id="rolePanel">
+                        
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer sticky footer-type-1">
+                <div class="footer-inner">
+                    <div class="footer-text">&copy; 2017
+                        <strong>MOOC服务</strong>
+                        <a href="#" target="_blank">MOOC管理系统</a>- Collect from
+                        <a href="#" title="国家网络安全学院" target="_blank">国家网络安全学院</a></div>
+                    <div class="go-up">
+                        <a href="#" rel="go-top">
+                            <i class="fa-angle-up"></i>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-role-add">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="doCancel()">&times;</button>
+                    <h4 class="modal-title" id="h4-role-management">新增角色</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">角色名</label>
+                                <input type="text" class="form-control" id="role_name" placeholder="角色名">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="field-4" class="control-label">
+                                栏目选择
+                            </label>
+                            <ul id="tree" class="easyui-tree" checkbox="true">
+                                
+                            </ul>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal" onclick="doCancel()">关闭</button>
+                    <button type="button" class="btn btn-info" onclick="doSave()">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <div class="modal fade" id="deleteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header noborder">
+                    <h4 class="modal-title">确定删除该管理员？</h4></div>
+                <div class="modal-footer noborder">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" style="margin-left:40px" id="removeItem">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Imported styles on this page -->
+    <link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
+    <!-- Bottom Scripts -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/TweenMax.min.js"></script>
+    <script src="assets/js/resizeable.js"></script>
+    <script src="assets/js/joinable.js"></script>
+    <script src="assets/js/xenon-api.js"></script>
+    <script src="assets/js/xenon-toggles.js"></script>
+    <script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+    <!-- Imported scripts on this page -->
+    <script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+    <script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+    <script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+    <script src="assets/js/toastr/toastr.min.js"></script>
+    <!-- JavaScripts initializations and stuff -->
+    <script src="assets/js/xenon-custom.js"></script>
+</body>
+
+</html>

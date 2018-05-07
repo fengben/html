@@ -1,0 +1,158 @@
+
+<%
+///查询国务院要闻（columnid=2018024625660002204）的最新信息
+:sql = "select A.id, B.name, A.title, A.content_text from article as A, columns as B where A.article_type=B.id and B.id=2018024625660002204 order by A.on_top desc,A.id desc limit 1 offset 0 "
+changeRecordSet(:sql)
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+	<div id="deantopgrids" class="area">
+        <div class="deantopgt">
+            <a href="view.html?id=<%=id%>" target="_blank"><%=name%></a>
+            <div class="clear"></div>
+        </div>
+        <h3><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,50)%></a></h3>
+        <p>
+	    	<%:recContent=replace(content_text,"\r","")%>
+	    	<%:recContent=replace(:recContent,"\n","")%>
+			<%=shortTitle(:recContent,0,100)%>
+		</p>
+    </div>
+
+<%	EndRepeat
+EndIf
+%>
+$_@_$
+
+<%
+///查询湖北要闻（columnid=2018024625750002207）的最新信息
+:sql1 = "select A.id, B.name, A.title, A.content_text from article as A, columns as B where A.article_type=B.id and B.id=2018024625750002207 order by A.on_top desc,A.id desc limit 1 offset 0 "
+changeRecordSet(:sql1)
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+	<div class="deantopgt deantopgtxg">
+	<a href="view.html?id=<%=id%>" target="_blank"><%=name%></a>
+	<div class="clear"></div>
+	</div>
+	<h3><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,50)%></a></h3>
+	<p><%:recContent=replace(content_text,"\r","")%>
+	    	<%:recContent=replace(:recContent,"\n","")%>
+			<%=shortTitle(:recContent,0,100)%>
+	</p>
+
+<%	EndRepeat
+EndIf
+%>	
+    
+$_@_$    
+<%
+///查询天门要闻（columnid=123456785）的最新信息
+:sql = "select A.id, B.name, A.title, A.content_text from article as A, columns as B where A.article_type=B.id and B.id=123456785 order by A.on_top desc,A.id desc limit 1 offset 0 "
+changeRecordSet(:sql)
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+
+	<div class="deantopgt deantopgtx">
+	<a href="view.html?id=<%=id%>" target="_blank"><%=name%></a>
+	<div class="clear"></div>
+	</div>
+	<h3><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,50)%></a></h3>
+	<p><%:recContent=replace(content_text,"\r","")%>
+	    	<%:recContent=replace(:recContent,"\n","")%>
+			<%=shortTitle(:recContent,0,100)%>
+	</p>
+
+<%	EndRepeat
+EndIf
+%>
+
+$_@_$    
+<%
+///查询地名新闻（columnid=123456786）的最新信息
+:sql = "select A.id, B.name, A.title, A.content_text from article as A, columns as B where A.article_type=B.id and B.id=123456786 order by A.on_top desc,A.id desc limit 1 offset 0 "
+changeRecordSet(:sql)
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+
+	<div class="deantopgt deantopgtx">
+	<a href="view.html?id=<%=id%>" target="_blank"><%=name%></a>
+	<div class="clear"></div>
+	</div>
+	<h3><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,50)%></a></h3>
+	<p><%:recContent=replace(content_text,"\r","")%>
+	    	<%:recContent=replace(:recContent,"\n","")%>
+			<%=shortTitle(:recContent,0,100)%>
+	</p>
+
+<%	EndRepeat
+EndIf
+%>
+
+$_@_$  
+
+<%
+///查询基层动态（columnid=2018024583810002124）的最新信息
+:sql = "select A.id, B.name, A.title, A.content_text from article as A, columns as B where A.article_type=B.id and B.id=2018024583810002124 order by A.on_top desc,A.id desc limit 1 offset 0 "
+changeRecordSet(:sql)
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+
+	<div class="deantopgt deantopgtxt">
+	<a href="view.html?id=<%=id%>" target="_blank"><%=name%></a>
+	<div class="clear"></div>
+	</div>
+	<h3><a href="view.html?id=<%=id%>" target="_blank"><%=shortTitle(title,0,50)%></a></h3>
+	<p><%:recContent=replace(content_text,"\r","")%>
+	    	<%:recContent=replace(:recContent,"\n","")%>
+			<%=shortTitle(:recContent,0,100)%>
+	</p>
+
+
+
+<%	EndRepeat
+EndIf
+%>
+
+$_@_$  
+<%
+///首页轮播图
+:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from article as A, columns as B where A.article_type=B.id and B.id=2018056785780005378 order by A.on_top desc,A.id desc limit 6 offset 0 "
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+		
+%>
+    <li>
+        <a href="view.html?id=<%=id%>" target="_blank">
+<%If pic_id!=0%>
+			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  width="460" height="300">
+<%Else%>
+			<img src="/pages/resouce/image/default.png"  width="460" height="300">
+<%EndIf%>
+		</a>
+        <div class="label_text">
+            <h3><em>要闻</em><a href="view.html?id=<%=id%>" target="_blank"><%=title%></a>
+            </h3>
+            <span>
+				<%=shortTitle(content_text,0,100)%>
+			</span>
+        </div>
+    </li>
+<%
+
+	EndRepeat
+EndIf
+%>
+  
+
+

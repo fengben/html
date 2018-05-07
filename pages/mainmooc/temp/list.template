@@ -1,0 +1,11 @@
+<!--databaseName=single_database -->
+<!-- SQL={select type,departdetail,pid from sl_departTypeMap ;}-->
+
+<%Repeat%>
+ 
+<%="{ 'id':"#type#",'pId':"#pid#",'name':'"#departdetail#"'},"%>
+///<%debugMsg("{ \"id\":"#type#",\"pId\":"#pid#",\"name\": \""#departdetail#"\"},")%>
+<%EndRepeat%>
+
+
+a

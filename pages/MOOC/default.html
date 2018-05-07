@@ -92,16 +92,42 @@
 
             }
             getFromWS("frontmooc/getPictureList.template", recentHomeRotationMap, HomeRotationMapResult);
-            //首页全部分类展示
+
+//首页全部分类展示
             var allColumnsMap = new Array();
-            var allColumnsMapResult = function () {
+            var  allColumnsMapResult = function () {
 
                 jQuery("#allColumnsList").html(allColumnsMap[0]);
-
-
             }
             getFromWS("frontmooc/getAllColumnsResult.template", allColumnsMap, allColumnsMapResult);
 
+            var allSecondColumnsMap = new Array();
+            var  allSecondColumnsMapResult = function () {
+                jQuery("#allSecondColumnsList1").html(allSecondColumnsMap[0]);
+                jQuery("#allSecondColumnsList2").html(allSecondColumnsMap[1]);
+                jQuery("#allSecondColumnsList3").html(allSecondColumnsMap[2]);
+                jQuery("#allSecondColumnsList4").html(allSecondColumnsMap[3]);
+                jQuery("#allSecondColumnsList5").html(allSecondColumnsMap[4]);
+
+            }
+            $("#2018112858650021541").mouseover(function(){
+                //首页三级分类展示
+                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            });
+            $("#2018112859970021584").mouseover(function(){
+                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+
+            });
+
+            $("#2018112860600021632").mouseover(function(){
+                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            });
+            $("#2018112861090021663").mouseover(function(){
+                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            });
+            $("#2018112861680021689").mouseover(function(){
+                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            });
 
             //推荐194所高校
             var recentUniversity = new Array();
@@ -175,23 +201,47 @@
                 jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
             }
             getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
-
-
-        });
-        $(window).load(function(){
-            checkLogin()
         });
 
-        function checkLogin() {
-           // var loginname = $.cookie('mooc_login_name');
-           // var password = $.cookie('mooc_password');
-            if ($.cookie('mooc_login_name')) {
-                $("#loginForm_back").hide();
-                showUserInfo();//Í·²¿ÏÔÊ¾ÓÃ»§ÐÅÏ¢
+        function userlogin() {
+
+            var loginName = $("#u-email").val();
+            var password = $("#u-password").val();
+
+            var autoThirty = $("#autoThirty").prop("checked");
+            $("#u-email").next().html('');
+            $("#u-password").next().html('');
+            $(".e-l-jy").html('');
+
+            function passResult(results) {
+                var fig = results[0].substring(0, 6);
+                if (fig == "failed") {
+                    alert("登录失败：" + results[0].substring(7));
+                } else {
+                    alert('success');
+                    $.cookie('mooc_login_name', loginName);
+            $.cookie('mooc_password', password);
+            $("#loginfrom").hide();
+                    if (jumpType == 'ucIndex') {
+                        window.location.href = "/uc/index";
+                    } else if (jumpType == 'reload') {
+                        window.location.reload();
+                    } else {
+                        $("#dClose").click();
+                        showUserInfo();//Í·²¿ÏÔÊ¾ÓÃ»§ÐÅÏ¢
+                        if ($("#limitLogin").val() == "ON") {
+                            //¼ÓÔØÏÞÖÆµÇÂ¼js
+                            limitLogin();
+                        }
+                    }
+                    // location.href="articleManagement.html";
+                }
             }
+
+            login(loginName, password, passResult);  //登录login
+
+
         }
-
-
     </script>
 </head>
 <body class="W-body">
@@ -230,7 +280,7 @@
                                 <a class="vam ml10 c-blue fr" title="" href="/front/passwordRecovery">忘记密码?</a>
                             </section>
                             <section class="mt20 tac mb50">
-                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="dialogLogin()">登
+                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="userlogin()">登
                                     录</a>
                             </section>
                         </div>
@@ -317,15 +367,20 @@
                                         <a href="javascript:void(0)"> <em class="icon20 n-i-kcall">&nbsp;</em> <tt
                                                 class="vam f-fM">全部分类</tt> </a>
                                     </div>
-                                    <div class="n-i-m-bottom" 　 id="allColumnsList">
+                                    <div class="n-i-m-bottom"　 id="allColumnsList">
 
                                     </div>
                                 </section>
-                                <section class="n-item-right n-item-right-op" 　 id="allSecondColumnsList">
+                                <section class="n-item-right n-item-right-op">
+                                    <div class="j-cateright-wrap"  id="allSecondColumnsList1"></div>
+                                    <div class="j-cateright-wrap"  id="allSecondColumnsList2"></div>
+                                    <div class="j-cateright-wrap"  id="allSecondColumnsList3"></div>
+                                    <div class="j-cateright-wrap"  id="allSecondColumnsList4"></div>
+                                    <div class="j-cateright-wrap"  id="allSecondColumnsList5"></div>
 
                                 </section>
                             </div>
-                            <div id="loginForm_back" class="d3-ba-r-login undis" style="width:300px" >
+                            <div id="loginform" class="d3-ba-r-login undis" style="width:300px">
                                 <div class="d3-b-r-top">
                                     <div class="d3-b-r-t-in">
                                         <div>

@@ -1,5 +1,6 @@
 ///课程详情
 <%
+debugMsg("-------------------------0---"#:login_name)
 :selectSql = "select title, content, publish_date,appendix_id,article_type from moocarticle where id= ?"
 changeRecordSet(:selectSql,S(:id));
 If recordCount()>0
@@ -73,7 +74,34 @@ If recordCount()>0
                     </section>
                    </section>
                    <section class="c-attr-mt new-cours-btnbox mt30">
-                    <a href="shopcart.html" id="cou-shopcar" title="我要砍价" class="comm-btn c-btn-3 cou-buy-btn" onclick="#"> 立即参加</a>
+
+
+
+                            <form id="viewVideo" action="http://192.168.10.138/mylogin/" method="get">
+                             <a href="shopcart.html" id="cou-shopcar" title="我要砍价" class="comm-btn c-btn-3 cou-buy-btn" > 立即参加</a>
+
+                            <input type="hidden" id="mooc_login_name" name="email" value=""/>
+                            <script type="text/javascript">
+                                function writeUser() {
+                                    val = $.cookie('mooc_login_name');
+                                    document.getElementById('mooc_login_name').value = val;
+                                }
+
+                                writeUser();
+                            </script>
+                            <input type="hidden" id="mooc_passwd" name="password" value=""/>
+                            <script type="text/javascript">
+                                function writePasswd() {
+                                    val = $.cookie('mooc_password');
+                                    document.getElementById('mooc_passwd').value = val;
+                                }
+
+                                writePasswd();
+                            </script>
+                            <input type="hidden" name="redirect_url" value="course-v1:whu+cs002+2017_T1"/>
+                            <a  class="comm-btn c-btn-3 cou-buy-btn" onclick="viewVideo()"> 观看课程</a>
+                        </form>
+
                     <section class="ml15 c-shop-car-wrap disIb">
                     </section>
                    </section>

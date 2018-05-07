@@ -1,0 +1,117 @@
+
+<%
+:sql = "SELECT name,id FROM mooccolumns WHERE parent_id  = 2018112858650021541"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+   %>
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+              </dt>
+              <dd>
+              <%Repeat
+              %>
+               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+              <%EndRepeat%>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+<%
+EndIf
+%>
+$_@_$
+<%
+:sql = "SELECT name,id FROM mooccolumns WHERE parent_id  = 2018112859970021584"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+   %>
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+              </dt>
+              <dd>
+              <%Repeat
+              %>
+               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+              <%EndRepeat%>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+<%
+EndIf
+%>
+$_@_$
+<%
+:sql = "SELECT name,id FROM mooccolumns WHERE parent_id  = 2018112860600021632"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+   %>
+            <div class="v-i-tab-a clearfix">
+             <dl>
+              <dt class="fl">
+              </dt>
+              <dd>
+              <%Repeat
+              %>
+               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+              <%EndRepeat%>
+              </dd>
+             </dl>
+             <div class="clear"></div>
+            </div>
+<%
+EndIf
+%>
+$_@_$
+
+ <%
+  :sql = "SELECT name,id FROM mooccolumns WHERE parent_id  = 2018112861090021663"
+  changeRecordSet(:sql);
+  :totalNumber = recordCount()
+  If :totalNumber >0
+     %>
+              <div class="v-i-tab-a clearfix">
+               <dl>
+                <dt class="fl">
+                </dt>
+                <dd>
+                <%Repeat
+                %>
+                 <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+                <%EndRepeat%>
+                </dd>
+               </dl>
+               <div class="clear"></div>
+              </div>
+  <%
+  EndIf
+  %>
+  $_@_$
+    <%
+    :sql = "SELECT name,id FROM mooccolumns WHERE parent_id  = 2018112861680021689"
+    changeRecordSet(:sql);
+    :totalNumber = recordCount()
+    If :totalNumber >0
+       %>
+                <div class="v-i-tab-a clearfix">
+                 <dl>
+                  <dt class="fl">
+                  </dt>
+                  <dd>
+                  <%Repeat
+                  %>
+                   <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+                  <%EndRepeat%>
+                  </dd>
+                 </dl>
+                 <div class="clear"></div>
+                </div>
+    <%
+    EndIf
+    %>
+

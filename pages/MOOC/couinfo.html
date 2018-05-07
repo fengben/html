@@ -66,11 +66,10 @@
         }
 
         jQuery(document).ready(function () {
-            var login_user = $.cookie('mooc_login_name')
-            alert(login_user)
+            var login_name = $.cookie('mooc_login_name')
             var id = getUrlString("id");
             // var parasId = "operation=getArticleFromId";
-            var parasId = "id=" + id;
+            var paras = "id=" + id;
             // alert(parasId);
             var content = new Array();
             var contentResult = function () {
@@ -83,10 +82,22 @@
                 //课程发布者-老师
                 jQuery("#Publisher").html(content[3]);
             }
-            getFromWS("frontmooc/getCouinfoContent.template", parasId, content, contentResult);
 
+             paras += "$^@^$login_name=" + login_name;
+            getFromWS("frontmooc/getCouinfoContent.template", paras, content, contentResult);
 
         });
+
+        /*
+        * 已登录用户有权限跳转edx观看视频
+        * */
+        function viewVideo() {
+            if ($.cookie('mooc_login_name')){
+                 $("#viewVideo").submit();
+            }else {
+                alert('请先登录')
+            }
+        }
     </script>
     <style type="text/css">
         /*引用百家云点播，导致页面滚动条失效处理*/

@@ -8,7 +8,7 @@ Repeat
 %>
            <section class="i-j-item i-j-it-all" style="visibility: hidden">
                <div class="i-j-item-bx">
-                <div class="i-j-it-txt">
+                <div class="i-j-it-txt"  id="<%=id%>">
                  <a class="i-j-item-first-a fsize16 c-fff" href="showcoulist.html?id=<%=id%>"><%=name%></a>
                 </div>
                </div>

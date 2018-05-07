@@ -1,0 +1,39 @@
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script src="assets/js/jquery.cookie.js"></script>
+
+<script>
+    function f1() {
+        $.cookie('mooc_login_name', 'staff@example.com');
+        $.cookie('mooc_password', 'edx');
+    }
+    function fff() {
+        alert("in");
+        $("form").submit();
+    }
+</script>
+<button onclick="f1()">con</button>
+
+
+<form action="http://192.168.10.138/mylogin/" method="get">
+    <input type="hidden" id="mooc_login_name" name="email" value=""/>
+    <script type="text/javascript">
+        function writeUser() {
+            val = $.cookie('mooc_login_name');
+            document.getElementById('mooc_login_name').value = val;
+        }
+
+        writeUser();
+    </script>
+    <input type="hidden" id="mooc_passwd" name="password" value=""/>
+    <script type="text/javascript">
+        function writePasswd() {
+            val = $.cookie('mooc_password');
+            document.getElementById('mooc_passwd').value = val;
+        }
+
+        writePasswd();
+    </script>
+    <input type="hidden" name="redirect_url" value="course-v1:whu+cs002+2017_T1"/>
+    <a onclick="fff()" >观看课程</a>
+</form>

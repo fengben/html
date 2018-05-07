@@ -1,17 +1,19 @@
 
 <%
-:sql = "SELECT NAME,id  FROM mooccolumns WHERE parent_id = 0 AND id not IN (1,2018088680450003510,2018088683070003565,2018088683280003570,2018088683720003592,2018088683860003597,2018091140680011749)"
+:sql = "SELECT NAME,id  FROM mooccolumns WHERE parent_id = 2018112858180021535 "
         changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0
 %>
-<li id="allCategory"><a onclick="go(this);CourseCategory('2018088683410003579')" title="全部" href="javascript:void(0)">全部</a></li>
+<li id="allCategory"><a onclick="go(this);CourseCategory(2018112858180021535)" title="全部" href="javascript:void(0)">全部</a></li>
 <%Repeat%>
         	<li id="<%=id%>"><a onclick="go(this);CourseCategory('<%=id%>')" title="<%=name%>" href="javascript:void(0);"><%=name%></a></li>
         	<%EndRepeat%>
 <%
 EndIf
 %>
+
+
 
 
 

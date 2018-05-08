@@ -732,7 +732,7 @@ function sendEmailRegister() {
                     alert('success');
                     $.cookie('mooc_login_name', loginName);
                     $.cookie('mooc_password', password);
-                    $("#loginForm_back,#loginfrom").hide();
+                    //$("#loginForm_back,#loginfrom").hide();
                     if (jumpType == 'ucIndex') {
                         window.location.href = "/uc/index";
                     } else if (jumpType == 'reload') {

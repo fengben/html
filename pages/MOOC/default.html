@@ -203,45 +203,6 @@
             getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
         });
 
-        function userlogin() {
-
-            var loginName = $("#u-email").val();
-            var password = $("#u-password").val();
-
-            var autoThirty = $("#autoThirty").prop("checked");
-            $("#u-email").next().html('');
-            $("#u-password").next().html('');
-            $(".e-l-jy").html('');
-
-            function passResult(results) {
-                var fig = results[0].substring(0, 6);
-                if (fig == "failed") {
-                    alert("登录失败：" + results[0].substring(7));
-                } else {
-                    alert('success');
-                    $.cookie('mooc_login_name', loginName);
-            $.cookie('mooc_password', password);
-            $("#loginfrom").hide();
-                    if (jumpType == 'ucIndex') {
-                        window.location.href = "/uc/index";
-                    } else if (jumpType == 'reload') {
-                        window.location.reload();
-                    } else {
-                        $("#dClose").click();
-                        showUserInfo();//Í·²¿ÏÔÊ¾ÓÃ»§ÐÅÏ¢
-                        if ($("#limitLogin").val() == "ON") {
-                            //¼ÓÔØÏÞÖÆµÇÂ¼js
-                            limitLogin();
-                        }
-                    }
-                    // location.href="articleManagement.html";
-                }
-            }
-
-            login(loginName, password, passResult);  //登录login
-
-
-        }
     </script>
 </head>
 <body class="W-body">
@@ -280,7 +241,7 @@
                                 <a class="vam ml10 c-blue fr" title="" href="/front/passwordRecovery">忘记密码?</a>
                             </section>
                             <section class="mt20 tac mb50">
-                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="userlogin()">登
+                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="dialogLogin()">登
                                     录</a>
                             </section>
                         </div>

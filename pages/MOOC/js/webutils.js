@@ -36,9 +36,11 @@ function getLoginUser(){
             },
 		success:function(result){
 			user = result;
+			alert(user.displayName);
 		}
 	});
 	// user=$.cookie('mooc_login_name');
+
 	return user;
 }
 /*获取vip开通信息*/

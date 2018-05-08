@@ -65,74 +65,72 @@
 	}
 
 
-	function saveRecord(){
-	    var dirName;
-	    var fileName;
-	    var selected = $("#popup_message #modifyAttribute").val();
-	    var uploadfile = $("#popup_message #modifyUploadFile").val();
-	    var description = $("#popup_message #modifyDescription").val();
-	    var parentDirName = $("#parentDirName").text();
-	    var paras;
-	    if($("#bufferMark").val()=="new"){
+		function saveRecord(){
+    	    var dirName;
+    	    var fileName;
+    	    var selected = $("#popup_message #modifyAttribute").val();
+    	    var uploadfile = $("#popup_message #modifyUploadFile").val();
+    	    var description = $("#popup_message #modifyDescription").val();
+    	    var parentDirName = $("#parentDirName").text();
+    	    var paras;
+    	    if($("#bufferMark").val()=="new"){
 
-		if(selected == "文件"){
-			$("#bufferMark").val("newfile");
-			if(uploadfile==""){
-				alert("未选择任何文件");
-				return;
-			}
-		 var point = uploadfile.lastIndexOf("."); 
-	         var type = uploadfile.substr(point); 
-		 if(type==".mp4"||type==".avi"||type==".war"||type==".mov"||type==".flv"||type==".asf"||type==".rmvb"){
-			var additional_args="databaseType=PostgresXL&needThumbnail=true";
-		 }else{
-			var additional_args="databaseType=PostgresXL&needThumbnail=false";
-		 }
-			uploadToDatabase("popup_message #modifyUploadFile",doSaveFile,additional_args);
-		}else if(selected == "目录"){
-	        	$("#bufferMark").val("newdir");
-		}
+    		if(selected == "文件"){
+    			$("#bufferMark").val("newfile");
+    			if(uploadfile==""){
+    				alert("未选择任何文件");
+    				return;
+    			}
+    		 var point = uploadfile.lastIndexOf(".");
+    	         var type = uploadfile.substr(point);
+    		 if(type==".mp4"||type==".avi"||type==".war"||type==".mov"||type==".flv"||type==".asf"||type==".rmvb"){
+    			var additional_args="databaseType=PostgresXL&needThumbnail=true";
+    		 }else{
+    			var additional_args="databaseType=PostgresXL&needThumbnail=false";
+    		 }
+    			uploadToDatabase("popup_message #modifyUploadFile",doSaveFile,additional_args);
+    		}else if(selected == "目录"){
+    	        	$("#bufferMark").val("newdir");
+    		}
 
-	    }
-	    var obj = new Array();
-	    var processResult1 = function(){
-		if(obj[0]=="sameDir"){				
-			alert("文件夹名字重复");			    
-		}else{
-			alert('成功！');		
-			hiClose();		
-			refreshList();
-			refreshList1();
+    	    }
+    	    var obj = new Array();
+    	    var processResult1 = function(){
+    		if(obj[0]=="sameDir"){
+    			alert("文件夹名字重复");
+    		}else{
+    			alert('成功！');
+    			hiClose();
+    			refreshList();
 
-		}
-	    }; 
-	    paras = "parentDirName=" + parentDirName;
-	    paras += "$^@^$operation=" + $("#bufferMark").val();
-	    paras += "$^@^$description=" + description;
-	    paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+    		}
+    	    };
+    	    paras = "parentDirName=" + parentDirName;
+    	    paras += "$^@^$operation=" + $("#bufferMark").val();
+    	    paras += "$^@^$description=" + description;
+    	    paras += "$^@^$loginName=" + localStorage.getItem('loginName');
 
-	    if($("#bufferMark").val()=="modifydir"||$("#bufferMark").val()=="newdir"){
-	        dirName = $("#popup_message #modifyDirName").val();
-	    	paras += "$^@^$dirName=" + dirName;
-	    }else if($("#bufferMark").val()=="modifyfile"||$("#bufferMark").val()=="newfile"){
-	    	fileName = $("#popup_message #modifyFileName").val();
-	    	paras += "$^@^$fileName=" + fileName;
-	    }
-	    paras += "$^@^$id=" + $("#bufferId").val();
-	    paras += "$^@^$fileId=" + $("#bufferFileId").val();
-	    paras += "$^@^$oldFullPath=" + $("#bufferOldFullPath").val();
+    	    if($("#bufferMark").val()=="modifydir"||$("#bufferMark").val()=="newdir"){
+    	        dirName = $("#popup_message #modifyDirName").val();
+    	    	paras += "$^@^$dirName=" + dirName;
+    	    }else if($("#bufferMark").val()=="modifyfile"||$("#bufferMark").val()=="newfile"){
+    	    	fileName = $("#popup_message #modifyFileName").val();
+    	    	paras += "$^@^$fileName=" + fileName;
+    	    }
+    	    paras += "$^@^$id=" + $("#bufferId").val();
+    	    paras += "$^@^$fileId=" + $("#bufferFileId").val();
+    	    paras += "$^@^$oldFullPath=" + $("#bufferOldFullPath").val();
 
-	    if(dirName&&dirName.trim() == ""&&selected=="目录"){
-		alert("文件夹名称不能为空");
-		return;
-	    }else if(dirName&&dirName.indexOf("/")!=-1&&selected=="目录"){
-		alert("文件夹名称不能包含\"/\"");
-		return;
-	    }
-alert(paras);
-            getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult1);
-	
-	}
+    	    if(dirName&&dirName.trim() == ""&&selected=="目录"){
+    		alert("文件夹名称不能为空");
+    		return;
+    	    }else if(dirName&&dirName.indexOf("/")!=-1&&selected=="目录"){
+    		alert("文件夹名称不能包含\"/\"");
+    		return;
+    	    }
+                getFromWS("adminUsers/fileSpaceModify.template",paras,obj,processResult1);
+
+    	}
 	function doSaveFile(rstr){
 		if(rstr == ""){return;}
 	    var parentDirName = $("#parentDirName").text();

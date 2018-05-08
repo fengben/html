@@ -147,43 +147,43 @@
             getFromWS("frontmooc/getRecommendCourse.template", recentRecommendCourse, processRecommendCourseResult);
 
 
-            //	心理学"全部"部分图片展示
-            var recentPsychology = new Array();
-            var processPsyResult = function () {
+            //	现艺术设计课程展示
+            var recentArtDesign = new Array();
+            var processADResult = function () {
 
-                jQuery("#AllPsychology").html(recentPsychology[0]);
-                jQuery("#FirstPsychology").html(recentPsychology[1]);
-                jQuery("#SecondPsychology").html(recentPsychology[2]);
-                jQuery("#ThirdPsychology").html(recentPsychology[3]);
+                jQuery("#AllArtDesign").html(recentArtDesign[0]);
+                // jQuery("#FirstPsychology").html(recentPsychology[1]);
+                // jQuery("#SecondPsychology").html(recentPsychology[2]);
+                // jQuery("#ThirdPsychology").html(recentPsychology[3]);
             }
-            getFromWS("frontmooc/getRecentPsychology.template", recentPsychology, processPsyResult);
-            //建筑师“全部”部分图片展示
-            var recentArchitect = new Array();
-            var processArchitectResult = function () {
+            getFromWS("frontmooc/getRecentArtDesign.template", recentArtDesign, processADResult);
+            //计算机课程展示
+            var recentCS = new Array();
+            var processCSResult = function () {
 
-                jQuery("#AllArchitect").html(recentArchitect[0]);
+                jQuery("#AllCS").html(recentCS[0]);
 
             }
-            getFromWS("frontmooc/getRecentArchitect.template", recentArchitect, processArchitectResult);
+            getFromWS("frontmooc/getRecentCS.template", recentCS, processCSResult);
             //建筑师一级、二级图片展示
-            var recentFirstArchitect = new Array();
-            var processFirstArchitectResult = function () {
+            // var recentFirstArchitect = new Array();
+            // var processFirstArchitectResult = function () {
+            //
+            //     jQuery("#FirstArchitect").html(recentFirstArchitect[0]);
+            //     jQuery("#SecondArchitect").html(recentFirstArchitect[1]);
+            //
+            // }
+            // getFromWS("frontmooc/getRecentFirstArchitect.template", recentFirstArchitect, processFirstArchitectResult);
+            //文学历史
+            var recentLiteraryHistory = new Array();
+            var processLiteraryHistoryResult = function () {
 
-                jQuery("#FirstArchitect").html(recentFirstArchitect[0]);
-                jQuery("#SecondArchitect").html(recentFirstArchitect[1]);
+                jQuery("#AllLiteraryHistory").html(recentLiteraryHistory[0]);
+                // jQuery("#AccountingBasis").html(recentAccounting[1]);
+                // jQuery("#FinancialRegulations").html(recentAccounting[2]);
 
             }
-            getFromWS("frontmooc/getRecentFirstArchitect.template", recentFirstArchitect, processFirstArchitectResult);
-            //会计部分
-            var recentAccounting = new Array();
-            var processAccountingResult = function () {
-
-                jQuery("#AllAccounting").html(recentAccounting[0]);
-                jQuery("#AccountingBasis").html(recentAccounting[1]);
-                jQuery("#FinancialRegulations").html(recentAccounting[2]);
-
-            }
-            getFromWS("frontmooc/getRecentAccounting.template", recentAccounting, processAccountingResult);
+            getFromWS("frontmooc/getRecentLiteraryHistory.template", recentLiteraryHistory, processLiteraryHistoryResult);
 
             //名师讲坛
             var recentTeacher = new Array();
@@ -328,6 +328,50 @@
             <!-- 公共头引入 -->
             <!-- /global header begin-->
             <header id="header-3" class="all-header">
+                <section class="hear-3-top of">
+                    <div class="container">
+                        <div class="head-3-left">
+                            <tt class="f-fM fsize12 c-666 vam">欢迎来到</tt>
+                            <tt class="f-fM fsize12 c-master vam">武大传媒MOOC平台</tt>
+                        </div>
+                        <div class="head-3-right fr">
+                            <section class="h3-r-login">
+                                <ul class="clearfix h3-r-l-list">
+                                    <li class="undis" id="no-login" style="display: list-item;">
+                                        <a href="javascript:showlogin()" title="登录">
+                                            <em class="icon18 l2gio-icon mr5">&nbsp;</em>登录
+                                        </a>
+                                    </li>
+
+                                    <li class="undis loginedLiShow">
+                                        <a href="#" title="" class="h3-name">
+                                            <img src="" width="30" height="30" class="vam picImg" alt="">
+                                            <span class="vam disIb c-master" id="userName"></span>
+                                        </a>
+                                    </li>
+                                    <li class="pr undis loginedLiShow" id="is-login-one">
+                                        <a href="# title="消息" id="headerMsgCountId">
+                                        <em class="news-2-icon">&nbsp;</em>
+                                        </a>
+                                        <q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+                                    </li>
+                                    <li>
+                                        <a href="#" title="帮助" class="">
+                                            <em class="icon18 l2-help mr5">&nbsp;</em>帮助
+                                        </a>
+                                    </li>
+
+                                    <!--<li class="undis loginedLiShow">-->
+                                    <!--<a href="javascript:void(0)" title="退出" onclick="exit();" class="">-->
+                                    <!--退出-->
+                                    <!--</a>-->
+                                    <!--</li>-->
+                                </ul>
+                            </section>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </section>
                 <section class="hear-3-bottom">
                     <div class="container">
                         <h1 class="logo-3"><a class="headerlogo" style="display: none;" href="#" title="武汉大学出版社"> <img
@@ -380,44 +424,44 @@
 
                                 </section>
                             </div>
-                            <div id="loginform" class="d3-ba-r-login undis" style="width:300px">
-                                <div class="d3-b-r-top">
-                                    <div class="d3-b-r-t-in">
-                                        <div>
-                                            <ol class="e-login-options">
-                                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId"
-                                                                                               type="hidden"/> <input
-                                                        id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value=""
-                                                        onkeyup="$(this).next().html('');" type="text"/>
-                                                    <p class="lr-tip-wrap"></p></li>
-                                                <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password"
-                                                                                               placeholder="请输入密码"
-                                                                                               name="" value=""
-                                                                                               onkeyup="$(this).next().html('');"
-                                                                                               type="password"/>
-                                                    <p class="lr-tip-wrap"></p></li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d3-b-r-bottom">
-                                    <section class="d3-b-r-b-in">
-                                        <div class="undis loginedLiShow">
-                                            <img src="#" class="pic vam picImg"/>
-                                            <span class="name fszie14 f-fM c-666 vam"></span>
-                                        </div>
-                                        <div class="tac undis d3-b-r-btn mt20 no-login" style="display: block;">
-                                            <a href="javascript:showlogin()" class="bg mr30 fsize14 f-fM" title="登录"
-                                               style="margin-right:80px;padding:5px 30px">登录</a>
-                                            <a href="javascript:showlogin()" class="ku fszie14 f-fM" title="注册"
-                                               style="padding:5px 30px">注册</a>
-                                        </div>
-                                        <div class="tac undis d3-b-r-btn mt20 loginedLiShow">
-                                            <a href="javascript:exit()" class="ku fszie14 f-fM" title="退出">退出</a>
-                                        </div>
-                                    </section>
-                                </div>
-                            </div>
+                            <!--<div id="loginform" class="d3-ba-r-login undis" style="width:300px">-->
+                                <!--<div class="d3-b-r-top">-->
+                                    <!--<div class="d3-b-r-t-in">-->
+                                        <!--<div>-->
+                                            <!--<ol class="e-login-options">-->
+                                                <!--<li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId"-->
+                                                                                               <!--type="hidden"/> <input-->
+                                                        <!--id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value=""-->
+                                                        <!--onkeyup="$(this).next().html('');" type="text"/>-->
+                                                    <!--<p class="lr-tip-wrap"></p></li>-->
+                                                <!--<li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password"-->
+                                                                                               <!--placeholder="请输入密码"-->
+                                                                                               <!--name="" value=""-->
+                                                                                               <!--onkeyup="$(this).next().html('');"-->
+                                                                                               <!--type="password"/>-->
+                                                    <!--<p class="lr-tip-wrap"></p></li>-->
+                                            <!--</ol>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="d3-b-r-bottom">-->
+                                    <!--<section class="d3-b-r-b-in">-->
+                                        <!--<div class="undis loginedLiShow">-->
+                                            <!--<img src="#" class="pic vam picImg"/>-->
+                                            <!--<span class="name fszie14 f-fM c-666 vam"></span>-->
+                                        <!--</div>-->
+                                        <!--<div class="tac undis d3-b-r-btn mt20 no-login" style="display: block;">-->
+                                            <!--<a href="javascript:showlogin()" class="bg mr30 fsize14 f-fM" title="登录"-->
+                                               <!--style="margin-right:80px;padding:5px 30px">登录</a>-->
+                                            <!--<a href="javascript:showlogin()" class="ku fszie14 f-fM" title="注册"-->
+                                               <!--style="padding:5px 30px">注册</a>-->
+                                        <!--</div>-->
+                                        <!--<div class="tac undis d3-b-r-btn mt20 loginedLiShow">-->
+                                            <!--<a href="javascript:exit()" class="ku fszie14 f-fM" title="退出">退出</a>-->
+                                        <!--</div>-->
+                                    <!--</section>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <aside class="mw-nav-btn">
                                 <div class="mw-nav-icon"></div>
                             </aside>
@@ -676,7 +720,7 @@
                                         </ul>
                                     </div>
                                     <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject210" id="AllArchitect">
+                                        <ul class="clearfix subject210" id="AllCS">
                                         </ul>
                                         <ul style="display:none" class="clearfix subject211" id="FirstArchitect">
                                         </ul>
@@ -724,7 +768,7 @@
                                         </ul>
                                     </div>
                                     <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject221" id="AllPsychology"></ul>
+                                        <ul class="clearfix subject221" id="AllArtDesign"></ul>
                                         <ul style="display:none" class="clearfix subject648" id="FirstPsychology">
                                         </ul>
                                         <ul style="display:none" class="clearfix subject259" id="SecondPsychology"></ul>
@@ -770,7 +814,7 @@
                                         </ul>
                                     </div>
                                     <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject223" id="AllAccounting">
+                                        <ul class="clearfix subject223" id="AllLiteraryHistory">
                                         </ul>
                                         <ul style="display:none" class="clearfix subject251" id="AccountingBasis">
                                         </ul>

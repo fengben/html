@@ -1,6 +1,6 @@
 ///推荐课程
 <%
-:sql = "select A.id, A.title, A.content_text, A.publish_date,A.on_top, A.count, A.pic_id,A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id order by A.on_top desc,A.id desc limit 4 offset 0"
+:sql = "select A.id, A.title, A.content_text, A.publish_date,A.on_top,A.school, A.count, A.pic_id,A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id order by A.on_top desc,A.id desc limit 4 offset 0"
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0
@@ -11,8 +11,11 @@ Repeat
   		<div class="cc-l-wrap">
   			<section class="course-img">
   				<a href="couinfo.html?id=<%=id%>" target="_blank">
-  					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
- ///              <span><%=title%></span>
+    				 <%If pic_id!=0%>
+    					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
+    				 <%Else%>
+    				     <img src="/pages/MOOC/picture/default_course.png"  width="280" height="160">
+                   <%EndIf%>
   				</a>
   			</section>
   			<div class="bg-f8 coure-bg-g">
@@ -30,7 +33,7 @@ Repeat
   							<tt class="c-green fsize12 f-fA">免费</tt>
   						</span>
   						<span class="fl jgAttr c-ccc f-fA">
-  ///							<tt class="c-999 f-fA mr10">0人购买</tt>
+ 							<tt class="c-999 f-fA mr10"><%=school%></tt>
   ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
   						</span>
   					</section>

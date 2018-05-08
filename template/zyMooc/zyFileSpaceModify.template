@@ -20,7 +20,8 @@
  	<%EndIf%>
 <%EndIf%>   
 <%If :operation=="newfile"%>
-	<%:sqlStr = "insert into ry_filespace(file_id,publish_date,fullpath,publisher,description) values(?,now()::timestamp(0)without time zone,?,?,?) " %>
+<%debugMsg("++++++++++++++++++++++"#S(:description))%>
+<%:sqlStr = "insert into ry_filespace(file_id,publish_date,fullpath,publisher,description) values(?,now()::timestamp(0)without time zone,?,?,?) " %>
 	<%execSQL(:sqlStr,:fileId#"L",S(:parentDirName),S(:loginName),S(:description))%>
 
 	<%:sqlStr = "update uploadedfiles set relatedfile=-1 where filetuid=?" %>

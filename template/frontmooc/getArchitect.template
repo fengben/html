@@ -11,7 +11,11 @@ Repeat
    		<div class="cc-l-wrap">
    			<section class="course-img">
    				<a href="couinfo.html?id=<%=id%>" target="_blank">
+   				 <%If pic_id!=0%>
    					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
+   				 <%Else%>
+   				     <img src="/pages/resouce/image/default.png"  width="280" height="160">
+                  <%EndIf%>
   ///              <span><%=title%></span>
    				</a>
    			</section>

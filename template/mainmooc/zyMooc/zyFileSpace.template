@@ -71,6 +71,7 @@
 	    var selected = $("#popup_message #modifyAttribute").val();
 	    var uploadfile = $("#popup_message #modifyUploadFile").val();
 	    var description = $("#popup_message #modifyDescription").val();
+
 	    var parentDirName = $("#parentDirName").text();
 	    var paras;
 	    if($("#bufferMark").val()=="new"){
@@ -129,6 +130,7 @@
 		alert("文件夹名称不能包含\"/\"");
 		return;
 	    }
+	        alert("description");
 	        alert(paras);
             getFromWS("adminUsers/fileSpaceModify.template",paras,obj,processResult1);
 

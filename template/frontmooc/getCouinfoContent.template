@@ -3,6 +3,7 @@
 debugMsg("-------------------------0---"#:login_name)
 :selectSql = "select title, content, publish_date,appendix_id,article_type from moocarticle where id= ?"
 changeRecordSet(:selectSql,S(:id));
+debugMsg("-------------------------0---"#course_addr)
 If recordCount()>0
 	Repeat
 %>
@@ -17,7 +18,7 @@ If recordCount()>0
 $_@_$
 ///课程内容
 <%
-:selectSql = "select title, content,pic_id, publisher,appendix_id,article_type,course_start,course_end from moocarticle where id= ?"
+:selectSql = "select title, content,pic_id, publisher,appendix_id,article_type,course_start,course_end,course_addr from moocarticle where id= ?"
 changeRecordSet(:selectSql,S(:id));
 If recordCount()>0
 	Repeat
@@ -98,7 +99,8 @@ If recordCount()>0
 
                                 writePasswd();
                             </script>
-                            <input type="hidden" name="redirect_url" value="course-v1:whu+cs002+2017_T1"/>
+                            <input type="hidden" name="redirect_url" value='<%=course_addr%>'/>
+
                             <a  class="comm-btn c-btn-3 cou-buy-btn" onclick="viewVideo()"> 观看课程</a>
                         </form>
 

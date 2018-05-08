@@ -21,56 +21,28 @@
     <link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
     <title>课程列表-武汉大学出版社-中国在线教育平台第一品牌</title>
     <!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/webutils.js"></script>
-    <script type="text/javascript" src="js/headerh5searchcommon.js"></script>
-    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
 
-    <!--<script type="text/javascript">
+    <script type="text/javascript">
         function killErrors() {
             return true;
         }
         window.onerror = killErrors;
-        jQuery(document).ready(function() {
-            alert("hello");
+        //获取地址栏参数，name:参数名称
+        function getUrlParms(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)
+                return unescape(r[2]);
+            return null;
+        }
+        var urlid = getUrlParms("id");
 
-            /*//获取地址栏参数，name:参数名称
-            function getUrlParms(name){
-                var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-                var r = window.location.search.substr(1).match(reg);
-                if(r!=null)
-                    return unescape(r[2]);
-                return null;
-            }
-            var urlid = getUrlParms("id");
-
-
-            //分类课程展示
-            var CategoryCourseDetailMap = new Array();
-            var   CategoryCourseDetailMapResult = function () {
-
-                jQuery("#CategoryCourseDetail").html(CategoryCourseDetailMap[0]);
-                alert(CategoryCourseDetailMap[0]);
-
-            }
-            getFromWS("frontmooc/getCategoryCourseDetail.template", "urlid="+urlid,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
-
-
-            //课程全部分类展示
-            var CourseCategoryMap = new Array();
-            var  CourseCategoryMapResult = function () {
-                jQuery("#CourseCategoryResult").html(CourseCategoryMap[0]);
-            }
-            getFromWS("frontmooc/getCourseCategoryResult.template", CourseCategoryMap, CourseCategoryMapResult);
-
-            //点击展示分类列表详细课程*/
-
-
-        });
-
-       /* function CourseCategory(flag){
+        function CourseCategory(flag){
             var paras = "urlid=" + flag;
             var obj = new Array();
             var processResult = function(){
@@ -78,19 +50,53 @@
             }
             getFromWS("frontmooc/getCategoryCourseDetail.template",paras,obj,processResult);
 
-        }*/
-
-    </script>-->
-    <script type="text/javascript">
-        function killErrors() {
-            return true;
         }
 
-        window.onerror = killErrors;
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
 
-        jQuery(document).ready(function () {
-            alert("hello");
+            console.log(urlid);
+
         });
+    </script>
+    <script type="text/javascript">
+        window.onload = function () {
+            //课程全部分类展示
+            var CourseCategoryMap = new Array();
+            var  CourseCategoryMapResult = function () {
+                jQuery("#CourseCategoryResult").html(CourseCategoryMap[0]);
+
+                   if(urlid ==2018112858650021541){
+                       $("#2018112858650021541").addClass('current');
+                   }else if (urlid == 2018112859970021584 )
+                   {
+                       $("#2018112859970021584").addClass('current');
+                   }else if(urlid == 2018112860600021632)
+                   {
+                       $("#2018112860600021632").addClass('current');
+                   }else if(urlid == 2018112861090021663 )
+                   {
+                       $("#2018112861090021663").addClass('current');
+                   }else if (urlid == 2018112861680021689 )
+                   {
+                       $("#2018112861680021689").addClass('current');
+                   }else if(urlid == 2018112858180021535){
+                       $("#allCategory").addClass('current');
+                   }
+            }
+            getFromWS("frontmooc/getCourseCategoryResult.template", CourseCategoryMap, CourseCategoryMapResult);
+
+            //分类课程展示
+            var CategoryCourseDetailMap = new Array();
+            var   CategoryCourseDetailMapResult = function () {
+
+                jQuery("#CategoryCourseDetail").html(CategoryCourseDetailMap[0]);
+
+            }
+            getFromWS("frontmooc/getCategoryCourseDetail.template", "urlid="+urlid,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
+
+        };
     </script>
 
     <script type="text/javascript" src="js/course.js"></script>
@@ -172,9 +178,7 @@
                                 </dt>
                                 <dd class="c-s-dl-li">
                                     <ul class="clearfix" id="CourseCategoryResult">
-                                        <li ><a title="钻石会员" onclick="goa(this)" href="javascript:void(0)">钻石会员</a></li>
-                                        <li ><a title="黄钻会员" onclick="goa(this)" href="javascript:void(0)">黄钻会员</a></li>
-                                        <li ><a title="白银会员" onclick="goa(this)"href="javascript:void(0)">白银会员</a></li>
+
                                     </ul>
                                     <aside class="c-s-more">
                                         <a href="javascript: void(0)" title="" class="fsize14 c-master icon-gd">&nbsp;</a>
@@ -570,6 +574,7 @@
     function go2(obj)
 
     {
+
         //var tmp;
 
         $('#ol1').find('li').each(function() {
@@ -577,6 +582,7 @@
 
             $(this).attr("class","");
         });
+
 
         $(obj).parent().attr("class","current")
 //$(obj).parent.attr("class","current")

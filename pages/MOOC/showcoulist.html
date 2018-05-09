@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
@@ -51,14 +51,6 @@
             getFromWS("frontmooc/getCategoryCourseDetail.template",paras,obj,processResult);
 
         }
-
-    </script>
-    <script type="text/javascript">
-        jQuery(document).ready(function() {
-
-            console.log(urlid);
-
-        });
     </script>
     <script type="text/javascript">
         window.onload = function () {
@@ -95,7 +87,7 @@
 
             }
             getFromWS("frontmooc/getCategoryCourseDetail.template", "urlid="+urlid,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
-
+            
         };
     </script>
 

@@ -101,7 +101,8 @@ function logout(){
 			if(result[0]=="ok"){
 			    for(var i=1;i<result.length;i++)
 					localStorage.removeItem(result[i]);
-					location.href = "login.html";
+					// location.href = "login.html";
+                location.href ='/pages/MOOC/default.html'
 		       		}
 		    	};    
 		    getFromWS("/CoreService/logout","",result,processResult);

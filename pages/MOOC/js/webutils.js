@@ -60,16 +60,20 @@ function getVipInfo() {
 /**
  * 学员退出登录
  */
-function exit(){
-	$.ajax({
-		url:baselocation+'/uc/exit',
-		type:'post',
-		dataType:'json',
-		async:true,
-		success:function(result){
-            reload();
-		}
-	});
+function exit() {
+    // $.ajax({
+    // 	url:baselocation+'/uc/exit',
+    // 	type:'post',
+    // 	dataType:'json',
+    // 	async:true,
+    // 	success:function(result){
+    //        reload();
+    // 	}
+    // });
+    $.cookie('mooc_login_name', null);
+    $.cookie('mooc_password', null);
+    logout()
+    // reload();
 }
 function reload(){
     var url = window.location.href;

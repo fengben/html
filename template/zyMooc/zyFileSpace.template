@@ -70,6 +70,8 @@
     	    var fileName;
     	    var selected = $("#popup_message #modifyAttribute").val();
     	    var uploadfile = $("#popup_message #modifyUploadFile").val();
+    	     alert("56545646546");
+    	     alert($("#popup_message #modifyDescription").val());
     	    var description = $("#popup_message #modifyDescription").val();
     	    var parentDirName = $("#parentDirName").text();
     	    var paras;
@@ -89,6 +91,7 @@
     			var additional_args="databaseType=PostgresXL&needThumbnail=false";
     		 }
     			uploadToDatabase("popup_message #modifyUploadFile",doSaveFile,additional_args);
+    			return;
     		}else if(selected == "目录"){
     	        	$("#bufferMark").val("newdir");
     		}
@@ -129,27 +132,28 @@
     		return;
     	    }
                 getFromWS("adminUsers/fileSpaceModify.template",paras,obj,processResult1);
+}
+    	function doSaveFile(rstr){
+    		if(rstr == ""){return;}
+    	    var parentDirName = $("#parentDirName").text();
+    	    alert($("#popup_message #modifyDescription").val());
+    	    var descriptions = $("#popup_message #modifyDescription").val();
+    		paras = "fileId=" + rstr;
+    		paras += "$^@^$parentDirName=" + parentDirName;
+     		paras += "$^@^$operation=" + "newfile";
+    	    paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+    	    paras += "$^@^$description=" + descriptions;
+    		var obj = new Array();
+    	        var processResult = function(){
+
+    			refreshList();
+    			hiClose();
+    	    	};
+    	    	alert(paras);
+    		getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
 
     	}
-	function doSaveFile(rstr){
-		if(rstr == ""){return;}
-	    var parentDirName = $("#parentDirName").text();
-	    var description = $("#popup_message #modifyDescription").val();
-		paras = "fileId=" + rstr;      
-		paras += "$^@^$parentDirName=" + parentDirName;
- 		paras += "$^@^$operation=" + "newfile";
-	    paras += "$^@^$loginName=" + localStorage.getItem('loginName');
-	    paras += "$^@^$description=" + description;
-		var obj = new Array();
-	        var processResult = function(){
-		
-			refreshList();
-			refreshList1();
-			hiClose();
-	    	}; 
-		getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
-		
-	}
+
 
 	function modifyFileSpace(type,id,name,description){
 

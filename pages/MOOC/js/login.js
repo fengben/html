@@ -714,7 +714,7 @@ function sendEmailRegister() {
  * ִ�е�¼
  * jumpType ��ת���� ucIndex �������� reload ��ǰҳ������ˢ�� Ĭ��ֻ��̬����ͷ����Ϣ
  */
- function dialogLogin() {
+ function dialogLogin(jumpType) {
 
             var loginName = $("#u-email").val();
             var password = $("#u-password").val();
@@ -729,7 +729,6 @@ function sendEmailRegister() {
                 if (fig == "failed") {
                     alert("登录失败：" + results[0].substring(7));
                 } else {
-                    alert('success');
                     $.cookie('mooc_login_name', loginName);
                     $.cookie('mooc_password', password);
                     //$("#loginForm_back,#loginfrom").hide();

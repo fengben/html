@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 /*
 	power by http://www.inxedu.com/
 	v1.0 | 2015/06/06
@@ -1677,7 +1677,7 @@ a.current-1 .m-tree-icon {background-position: 0 -212px}
 .p-center-discuss {position: relative;height: 420px;padding-bottom: 110px;}
 .p-center-discuss .p-disc-box {position: absolute; bottom: 0; left: 0; right: 0;background-color: #fff;}
 .p-center-discuss .talkhtml {height: 420px; overflow: auto;}
-.i-slide, .swiper-container {  height: 460px;}
+.i-slide, .swiper-container { height: 460px;}
 .live-box-in-mobile,.index-teach-list{display: none;}
 .live-box-in,.in-teach-slider{display: block;}
 .u-fav-list li{margin-top: 10px;border-bottom: 1px dashed #ddd;padding-top: 5px;}

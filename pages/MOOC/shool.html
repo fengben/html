@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
@@ -28,12 +28,17 @@
 	<script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
 
+	<script type="text/javascript" src="js/swiper-2.1.0.js"></script>
+	<script type="text/javascript" src="js/live-index.js"></script>
+
+	<style type="text/css">
+		.n-i-m-bottom{display: block}
+	</style>
+
 	<script type="text/javascript">
         function killErrors() {
             return true;
         }
-        window.onerror = killErrors;
-        jQuery(document).ready(function() {
             //获取地址栏参数，name:参数名称
             function getUrlParms(name){
                 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -43,22 +48,19 @@
                 return null;
             }
             var id = getUrlParms("id");
+        window.onload = function () {
+            //学校课程全部分类展示
             var content = new Array();
-           var contentResult = function(){
-             jQuery("#SchoolCourse").html(content[0]);
+            var contentResult = function(){
+                jQuery("#SchoolCourse").html(content[0]);
+            }
+            getFromWS("homemooc/getCourseBySchool.template","id="+id,content,contentResult);
 
-         }
-         getFromWS("homemooc/getCourseBySchool.template","id="+id,content,contentResult);
+        };
 
-     });
-
+        window.onerror = killErrors;
 	</script>
 
-	<script type="text/javascript" src="js/swiper-2.1.0.js"></script>
-	<script type="text/javascript" src="js/live-index.js"></script>
-	<style type="text/css">
-		.n-i-m-bottom{display: block}
-	</style>
 </head>
 <body class="W-body line-mo-body">
 <div class="dialogWrap"  id="loginfrom" style="position: absolute; overflow-x: hidden; overflow-y: auto; top: 264.5px; margin-left: -193px; display:none"><div class="dialog-ele new-loigin"><h4 class="d-s-head pr new-header" style="width: 380px;"><a id="dClose" onclick="closewin()" href="javascript:void(0)" title="关闭" class="dClose icon16 pa new-close">&nbsp;</a><span id="d-s-head-tab" class="d-s-head-tab"><a href="javascript:void(0)" onclick="dialoglogin(this)" class="current">登录</a><a href="javascript:void(0)" onclick="dialogRegister(this)">注册</a></span></h4><div class="of"><div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
@@ -228,24 +230,32 @@
 		<!-- /global header end-->
 		<!-- 公共头引入 -->
 
-		<div class="i-slide banner-slide">
+		<div class="i-slide banner-slide" style="height: 248px;">
 			<section>
 				<!-- 如果需要导航按钮 -->
 				<a class="arrow-left s-arrow" href="javascript:void(0)"></a>
 				<a class="arrow-right s-arrow" href="javascript:void(0)"></a>
 				<!-- 图片位置 -->
 				<div class="swiper-container">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
+					<div class="swiper-wrapper" style="width: 4749px; height: 460px; transform: translate3d(-3166px, 0px, 0px); transition-duration: 0.3s;"><div class="swiper-slide" style="width: 1583px; height: 460px;">
+						<a target="_blank" href="/">
+							<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">
+						</a>
+					</div>
+						<div class="swiper-slide" style="width: 1583px; height: 460px;">
 							<a target="_blank" href="/">
 								<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">
 							</a>
 						</div>
 
-					</div>
+						<div class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 1583px; height: 460px;">
+							<a target="_blank" href="/">
+								<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">
+							</a>
+						</div></div>
 				</div>
 				<!-- 如果需要分页器 -->
-				<div class="pagination"></div>
+				<div class="pagination"><span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span></div>
 			</section>
 		</div>
 		<!-- /index slide -->

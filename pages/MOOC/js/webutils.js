@@ -25,6 +25,7 @@ function isLogin(){
 function getLoginUser(){
 	var user = null;
 	account=$.cookie('mooc_login_name');
+	//para = "account=" + account
 	$.ajax({
 		// url:baselocation+'/user/ajax/getloginUser',
 		url: homeAddress()+"one/mainmooc/getLoginUser.template",
@@ -32,11 +33,10 @@ function getLoginUser(){
 		async:false,
 		dataType:'json',
 		 data: {
-                "account": account,
+                "account": account,// staff@qq.com   template里面@被替换成了%40
             },
 		success:function(result){
 			user = result;
-			alert(user.displayName);
 		}
 	});
 	// user=$.cookie('mooc_login_name');

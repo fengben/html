@@ -34,6 +34,7 @@
     <script type="text/javascript">
 
     </script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <script src="js/bfcloud.js"></script>
     <script src="js/polyvplayer.min.js"></script>
@@ -45,10 +46,10 @@
     <script type="text/javascript" src="js/prism-flash-min.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor.config.js"></script>
     <script type="text/javascript" charset="utf-8" src="ueditor.all.min.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
 
     <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
-    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
-        <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
 
     <script type="text/javascript">
         function killErrors() {
@@ -83,7 +84,7 @@
                 jQuery("#Publisher").html(content[3]);
             }
 
-             paras += "$^@^$login_name=" + login_name;
+            paras += "$^@^$login_name=" + login_name;
             getFromWS("frontmooc/getCouinfoContent.template", paras, content, contentResult);
 
         });
@@ -92,9 +93,9 @@
         * 已登录用户有权限跳转edx观看视频
         * */
         function viewVideo() {
-            if ($.cookie('mooc_login_name')){
-                 $("#viewVideo").submit();
-            }else {
+            if ($.cookie('mooc_login_name')) {
+                $("#viewVideo").submit();
+            } else {
                 alert('请先登录')
             }
         }
@@ -196,7 +197,7 @@
                                 <a class="vam ml10 c-blue fr" title="" href="/front/passwordRecovery">忘记密码?</a>
                             </section>
                             <section class="mt20 tac mb50">
-                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="#">登 录</a>
+                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="dialogLogin()">登 录</a>
                             </section>
                         </div>
                     </section>
@@ -261,7 +262,7 @@
                     </ul>
                     <!-- / nav -->
                     <ul class="h-r-login clearfix">
-                        <li class="undis h-login-li" id="no-login"><a href="javascript:login()" title="登录"> <em
+                        <li class="undis h-login-li" id="no-login"><a href="javascript:showlogin()" title="登录"> <em
                                 class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span> </a></li>
                         <li class="tit-new-list undis h-login-li" id="is-login-one"><a href="/uc/letter" title="消息"
                                                                                        id="headerMsgCountId"> <em
@@ -1305,7 +1306,7 @@
     $(".gscz-ej-li-big").css({"width": winW, "height": boyH});
 
 
-    function login() {
+    function showlogin() {
         $("#loginfrom").show();
         $("#dl").show()
         $("#zc").hide()
@@ -1327,16 +1328,16 @@
         $("#zc").show()
     }
 
-    function dialoglogin(obj) {
-        $('#d-s-head-tab').find('a').each(function () {
-            //tmp = $(this).text();
-
-            $(this).attr("class", "");
-        });
-        $(obj).attr("class", "current")
-        $("#dl").show()
-        $("#zc").hide()
-    }
+    // function dialoglogin(obj) {
+    //     $('#d-s-head-tab').find('a').each(function () {
+    //         //tmp = $(this).text();
+    //
+    //         $(this).attr("class", "");
+    //     });
+    //     $(obj).attr("class", "current")
+    //     $("#dl").show()
+    //     $("#zc").hide()
+    // }
 </script>
 </body>
 </html>

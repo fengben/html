@@ -232,7 +232,7 @@
 
     // 翻页
     function jumpPage1(){
-        var idx = document.getElementById("mySelect").selectedIndex+1;
+        var idx = document.getElementById("mySelect1").selectedIndex+1;
 	var parentDirName1 = $("#parentDirName1").text();
 	initPage1($("#fileType").val(),$("#downloadSearchName").val(),parentDirName1,idx,<%=:pageSize%>,"fileList",376);
     }
@@ -351,7 +351,7 @@
             <%If :pageNumber!=:totalPage%></a> <%EndIf%> &nbsp;&nbsp;&nbsp;///:pageNumber等于totalPage，就会放弃这一行
 
 
-           <select id="mySelect" width="50" STYLE="width: 40px" onchange="jumpPage1();">
+           <select id="mySelect1" width="50" STYLE="width: 40px" onchange="jumpPage1();">
            <%:tmp=1%>
            <%:endPage=:totalPage+1%>
            <%While :tmp!=:endPage%>

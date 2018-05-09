@@ -84,11 +84,17 @@
         window.onerror = killErrors;
 
         jQuery(document).ready(function () {
-            //首页轮播图展示
+            //首页轮播图、栏目图展示
             var recentHomeRotationMap = new Array();
             var HomeRotationMapResult = function () {
-
+                //首页轮播图
                 jQuery("#HomeRotationMap").html(recentHomeRotationMap[0]);
+                //栏目一图
+                jQuery("#Columns_pic1").html(recentHomeRotationMap[1]);
+                //栏目二图
+                jQuery("#Columns_pic2").html(recentHomeRotationMap[2]);
+                //栏目三图
+                jQuery("#Columns_pic3").html(recentHomeRotationMap[3]);
 
             }
             getFromWS("frontmooc/getPictureList.template", recentHomeRotationMap, HomeRotationMapResult);
@@ -194,13 +200,22 @@
             getFromWS("frontmooc/getTeacher01.template", recentTeacher, processTeResult);
 
             //新闻资讯
-            var recentNewsConsulting = new Array();
-            var NewsConsultingResult = function () {
+            // var recentNewsConsulting = new Array();
+            // var NewsConsultingResult = function () {
+            //
+            //     jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
+            //     jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
+            // }
+            // getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
 
-                jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
-                jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
+            //首页栏目信息读取
+            var recentColumns = new Array();
+            var processCoResult = function () {
+                jQuery("#FirstColumns").html(recentColumns[0]);
+                jQuery("#SecondColumns").html(recentColumns[1]);
+                jQuery("#ThirdColumns").html(recentColumns[2]);
             }
-            getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
+            getFromWS("frontmooc/getColumns.template", recentColumns, processCoResult);
         });
 
     </script>
@@ -651,31 +666,30 @@
                 <div class="of bg-fff  ">
                     <section class="container">
                         <header class="comm-title">
-                            <div class="live-small-tit">
+                            <div class="live-small-tit" >
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
                                                                    href="showcoulist.html?queryCourse.subjectId=210"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
-                                <h2 class="fl tac tit-header"><span class="c-master">建筑师</span></h2>
+                                <h2 class="fl tac tit-header " id="FirstColumns"></h2>
                                 <ul class="clearfix">
                                     <li class="current"><a href="javascript:void(0)" onclick="selectSubject(210,this)">全部</a>
                                     </li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(211,this)">一级建造师</a></li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(213,this)">二级建造师</a></li>
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(211,this)">一级建造师</a></li>-->
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(213,this)">二级建造师</a></li>-->
                                 </ul>
                             </div>
                         </header>
-                        <section class="live-moblie-fl">
-                            <a onclick="selectSubject(211,this)" href="javascript:void(0)">一级建造师</a>
-                            <a onclick="selectSubject(213,this)" href="javascript:void(0)">二级建造师</a>
-                        </section>
+                        <!--<section class="live-moblie-fl">-->
+                            <!--<a onclick="selectSubject(211,this)" href="javascript:void(0)">一级建造师</a>-->
+                            <!--<a onclick="selectSubject(213,this)" href="javascript:void(0)">二级建造师</a>-->
+                        <!--</section>-->
                         <article class="live-no-title">
                             <div class="comm-course-list of">
                                 <div class="com-live-no-box">
                                     <div class="c-l-n-left">
                                         <ul>
                                             <li class="liv-fist-box">
-                                                <div class="d3-left-pic">
-                                                    <img src="picture/1484291737351.jpg"/>
+                                                <div class="d3-left-pic" id="Columns_pic1">
                                                 </div>
                                             </li>
                                         </ul>
@@ -701,29 +715,28 @@
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
                                                                    href="showcoulist.html?queryCourse.subjectId=221"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
-                                <h2 class="fl tac tit-header"><span class="c-master">心理学</span></h2>
+                                <h2 class="fl tac tit-header" id="SecondColumns"></h2>
                                 <ul class="clearfix">
                                     <li class="current"><a href="javascript:void(0)" onclick="selectSubject(221,this)">全部</a>
                                     </li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(648,this)">心理咨询一级</a></li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(259,this)">心理咨询二级</a></li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(260,this)">心理咨询三级</a></li>
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(648,this)">心理咨询一级</a></li>-->
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(259,this)">心理咨询二级</a></li>-->
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(260,this)">心理咨询三级</a></li>-->
                                 </ul>
                             </div>
                         </header>
-                        <section class="live-moblie-fl">
-                            <a onclick="selectSubject(648,this)" href="javascript:void(0)">心理咨询一级</a>
-                            <a onclick="selectSubject(259,this)" href="javascript:void(0)">心理咨询二级</a>
-                            <a onclick="selectSubject(260,this)" href="javascript:void(0)">心理咨询三级</a>
-                        </section>
+                        <!--<section class="live-moblie-fl">-->
+                            <!--<a onclick="selectSubject(648,this)" href="javascript:void(0)">心理咨询一级</a>-->
+                            <!--<a onclick="selectSubject(259,this)" href="javascript:void(0)">心理咨询二级</a>-->
+                            <!--<a onclick="selectSubject(260,this)" href="javascript:void(0)">心理咨询三级</a>-->
+                        <!--</section>-->
                         <article class="live-no-title">
                             <div class="comm-course-list of">
                                 <div class="com-live-no-box">
                                     <div class="c-l-n-left">
                                         <ul>
                                             <li class="liv-fist-box">
-                                                <div class="d3-left-pic">
-                                                    <img src="picture/1484291811920.jpg"/>
+                                                <div class="d3-left-pic" id="Columns_pic2">
                                                 </div>
                                             </li>
                                         </ul>
@@ -740,6 +753,7 @@
                                 <div class="clearfix"></div>
                             </div>
                         </article>
+
                     </section>
                 </div>
                 <div class="of bg-fff  ">
@@ -749,27 +763,26 @@
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
                                                                    href="showcoulist.html?queryCourse.subjectId=223"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
-                                <h2 class="fl tac tit-header"><span class="c-master">会计</span></h2>
+                                <h2 class="fl tac tit-header" id="ThirdColumns"></h2>
                                 <ul class="clearfix">
                                     <li class="current"><a href="javascript:void(0)" onclick="selectSubject(223,this)">全部</a>
                                     </li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(251,this)">会计基础</a></li>
-                                    <li><a href="javascript:void(0)" onclick="selectSubject(256,this)">财经法规</a></li>
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(251,this)">会计基础</a></li>-->
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(256,this)">财经法规</a></li>-->
                                 </ul>
                             </div>
                         </header>
-                        <section class="live-moblie-fl">
-                            <a onclick="selectSubject(251,this)" href="javascript:void(0)">会计基础</a>
-                            <a onclick="selectSubject(256,this)" href="javascript:void(0)">财经法规</a>
-                        </section>
+                        <!--<section class="live-moblie-fl">-->
+                            <!--<a onclick="selectSubject(251,this)" href="javascript:void(0)">会计基础</a>-->
+                            <!--<a onclick="selectSubject(256,this)" href="javascript:void(0)">财经法规</a>-->
+                        <!--</section>-->
                         <article class="live-no-title">
                             <div class="comm-course-list of">
                                 <div class="com-live-no-box">
                                     <div class="c-l-n-left">
                                         <ul>
                                             <li class="liv-fist-box">
-                                                <div class="d3-left-pic">
-                                                    <img src="picture/1484291821155.jpg"/>
+                                                <div class="d3-left-pic" id="Columns_pic3">
                                                 </div>
                                             </li>
                                         </ul>

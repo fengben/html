@@ -1,6 +1,6 @@
- 
+ ///首页轮播图
 <%
-	:sql = "select A.id,A.urlstr,A.title,B.filename from mooc_index_pic_info A,uploadedfiles B where A.id=B.filetuid order by A.id_index"
+	:sql = "select id,urlstr from mooc_index_pic_info where title ='首页轮播图'; "
 	changeRecordSet(:sql)
     :totalNumber = recordCount()
     If :totalNumber >0
@@ -19,7 +19,64 @@
 </div>
 
 	<%EndRepeat
-	EndIf
-
 EndIf%>
+$_@_$
+///栏目一展示图
+<%
+	:sql = "select id,urlstr from mooc_index_pic_info where title ='栏目一'; "
+	changeRecordSet(:sql)
+    :totalNumber = recordCount()
+    If :totalNumber >0
+     Repeat
+	%>
 
+ <a href="<%=urlstr%>" target="_blank">
+<%If pic_id!=0%>
+			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
+<%Else%>
+			<img src="/pages/MOOC/picture/Columns_default.jpg" >
+<%EndIf%>
+</a>
+
+	<%EndRepeat
+EndIf%>
+$_@_$
+///栏目二展示图
+<%
+	:sql = "select id,urlstr from mooc_index_pic_info where title ='栏目二'; "
+	changeRecordSet(:sql)
+    :totalNumber = recordCount()
+    If :totalNumber >0
+     Repeat
+	%>
+
+ <a href="<%=urlstr%>" target="_blank">
+<%If pic_id!=0%>
+			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
+<%Else%>
+			<img src="/pages/MOOC/picture/Columns_default.jpg" >
+<%EndIf%>
+</a>
+
+	<%EndRepeat
+EndIf%>
+$_@_$
+///栏目三展示图
+<%
+	:sql = "select id,urlstr from mooc_index_pic_info where title ='栏目三'; "
+	changeRecordSet(:sql)
+    :totalNumber = recordCount()
+    If :totalNumber >0
+     Repeat
+	%>
+
+ <a href="<%=urlstr%>" target="_blank">
+<%If pic_id!=0%>
+			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
+<%Else%>
+			<img src="/pages/MOOC/picture/Columns_default.jpg" >
+<%EndIf%>
+</a>
+
+	<%EndRepeat
+EndIf%>

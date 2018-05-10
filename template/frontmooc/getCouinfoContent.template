@@ -26,7 +26,11 @@ If recordCount()>0
            <div class="cours-big-box">
                  <article class="c-v-pic-wrap">
                   <section class="p-h-video-box" id="videoPlay">
-                   <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" alt="理综卷做题技巧" class="dis c-v-pic"/ >
+                  <%If pic_id!=0%>
+                   <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" alt="" class="dis c-v-pic"/ >
+                   <%Else%>
+                    <img src="/pages/MOOC/picture/default_course.png" alt="" class="dis c-v-pic">
+                    <%EndIf%>
                    <section class="zhz-bg"></section>
                   </section>
                   <section class="p-h-video-tip">

@@ -1,15 +1,9 @@
 <%If :id == ""
 	Exit ""
   Else
-      :id == 2018100820720025503
-      :sql = "select id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = '中国人民大学' limit 8 "
+      :sql = "select id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = ? limit 6 "
       changeRecordSet(:sql, :id);
 EndIf
-  Else
-       :id == 2018100820450025498
-       :sql = "select id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = '武汉大学' limit 8 "
-       changeRecordSet(:sql, :id);
-
 If recordCount()>0
 	Repeat
 %>
@@ -18,9 +12,9 @@ If recordCount()>0
      			<section class="course-img">
      				<a href="couinfo.html?id=<%=id%>" target="_blank">
        				 <%If pic_id!=0%>
-       					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive"  >
+       					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
        				 <%Else%>
-       				     <img src="/pages/MOOC/picture/default_course.png"  >
+       				     <img src="/pages/MOOC/picture/default_course.png"  width="280" height="160">
                       <%EndIf%>
      				</a>
      			</section>

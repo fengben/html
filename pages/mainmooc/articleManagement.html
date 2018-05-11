@@ -383,7 +383,7 @@
             $("#modal-article #articleId").val(flag);
             $("#modal-article #title").val("");
             $("#modal-article #topArticle").val("0");
-            $("#modal-article #school").val("武汉大学");
+            $("#modal-article #school").val();
             $("#modal-article #bufferPicIds").val("");
             $("#modal-article #articleContent").val("");
             $("#modal-article #picInput").val("");
@@ -439,7 +439,7 @@
 				}
 			}
            alert(flag);
-            $("#modal-article #topArticle").val($("#top" + flag).val());alert($("#school" + flag).val());
+            $("#modal-article #topArticle").val($("#top" + flag).val());
             $("#modal-article #school").val($("#school" + flag).val());
             $("#modal-article #articleContent").val($("#content" + flag).val());
             //副文本中的图片
@@ -590,6 +590,25 @@ function uploadAppendix(){
 
     function doSave() {
         var title = $("#modal-article #title").val();
+        var school = $("#modal-article #school").val();
+        alert(school);
+        if(school!= ""){
+            //查询数据库是否有相应学校
+            var schoolcontent = new Array();
+            var contentResult = function(){
+                /* jQuery("#SchoolCourse").html(content[0]);*/
+
+                if(schoolcontent[0] !="no"){
+                    var schoollist = schoolcontent[0].split(";");
+                    $("#modal-article #school").val(schoollist[2]);
+                    alert(schoollist[2]);
+                }esle
+                {
+                    $("#modal-article #school").val();
+                }
+            }
+            getFromWS("homemooc/getSchoolName.template","school="+school,schoolcontent,contentResult);
+        }
         var type = $("#modal-article #type").val();
         var content = editor.html();
         var picId = $("#modal-article #picId").val();
@@ -600,8 +619,8 @@ function uploadAppendix(){
 		var money = $("#travelInfo #money").val();
 		var address = $("#travelInfo #address").val();
 
-        if (!title || !type || !publisher || !content || (!$("#picInput").val()&&!picId)) {
-            alert("请把标题，类型，文章内容，文章图片补充完整");
+        if (!title ||!school || !type || !publisher || !content || (!$("#picInput").val()&&!picId)) {
+            alert("请把标题，学校，类型，文章内容，文章图片补充完整");
             return;
         	}
 
@@ -997,12 +1016,14 @@ function ifTrabelInfoByColumnId(id){
                             <label for="field-4" class="control-label">类型: </label>
                             <select class="form-control" id="type" style="display:inline-block;width:20%" onchange="ifTravelInfo()">
 -->                          <label for="field-4" class="control-label">学校: </label>
-                            <select class="form-control" id="school" style="display:inline-block;width:20%">
+                            <input type="text" class="form-control" id="school" placeholder="学校"
+                                   style="display:inline-block;width:20%">
+                          <!--  <select class="form-control" id="school" style="display:inline-block;width:20%">
                                 <option value="武汉大学">武汉大学</option>
                                 <option value="中原大学">中原大学</option>
                                 <option value="长安大学">长安大学</option>
                                 <option value="中国人民大学">中国人民大学</option>
-                            </select>
+                            </select>-->
                             <br/>
                             <br/>
                             <label for="field-4" class="control-label">发布者: </label>

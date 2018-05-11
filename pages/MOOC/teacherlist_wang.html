@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="css/web.css">
     <link rel="stylesheet" type="text/css" href="css/theme.css">
     <link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
-    <title>课程列表-武汉大学出版社-中国在线教育平台第一品牌</title>
+    <title>讲师列表-武汉大学出版社-中国在线教育平台第一品牌</title>
     <!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/webutils.js"></script>
@@ -33,23 +33,18 @@
         }
         window.onerror = killErrors;
         //获取地址栏参数，name:参数名称
-        function getUrlParms(name){
-            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if(r!=null)
-                return unescape(r[2]);
-            return null;
-        }
-        var urlid = getUrlParms("id");
 
+        var major_id ;
 
         function CourseCategory(flag){
-            var paras = "urlid=" + flag;
+            var paras = "major_id=" + flag;
+             // alert(flag);
             var obj = new Array();
             var processResult = function(){
                 jQuery("#CategoryCourseDetail").html(obj[0]);
             }
-            getFromWS("frontmooc/getCategoryCourseDetail.template",paras,obj,processResult);
+            // alert(paras);
+            getFromWS("frontmooc/getTeacherDetail.template",paras,obj,processResult);
 
         }
     </script>
@@ -60,34 +55,26 @@
             var  CourseCategoryMapResult = function () {
                 jQuery("#CourseCategoryResult").html(CourseCategoryMap[0]);
 
-                   if(urlid ==2018112858650021541){
+                   if(major_id ==2018112858650021541){
                        $("#2018112858650021541").addClass('current');
-                   }else if (urlid == 2018112859970021584 )
+                   }else if (major_id == 2018112859970021584 )
                    {
                        $("#2018112859970021584").addClass('current');
-                   }else if(urlid == 2018112860600021632)
+                   }else if(major_id == 2018112860600021632)
                    {
                        $("#2018112860600021632").addClass('current');
-                   }else if(urlid == 2018112861090021663 )
+                   }else if(major_id == 2018112861090021663 )
                    {
                        $("#2018112861090021663").addClass('current');
-                   }else if (urlid == 2018112861680021689 )
+                   }else if (major_id == 2018112861680021689 )
                    {
                        $("#2018112861680021689").addClass('current');
-                   }else if(urlid == 2018112858180021535){
+                   }else if(major_id == 2018112858180021535){
                        $("#allCategory").addClass('current');
                    }
             }
-            getFromWS("frontmooc/getCourseCategoryResult.template", CourseCategoryMap, CourseCategoryMapResult);
+            getFromWS("frontmooc/getTeacherResult.template", CourseCategoryMap, CourseCategoryMapResult);
 
-            //分类课程展示
-            var CategoryCourseDetailMap = new Array();
-            var   CategoryCourseDetailMapResult = function () {
-
-                jQuery("#CategoryCourseDetail").html(CategoryCourseDetailMap[0]);
-
-            }
-            getFromWS("frontmooc/getCategoryCourseDetail.template", "urlid="+urlid,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
 
         };
     </script>
@@ -162,99 +149,20 @@
                         <section class="path-wrap txtOf hLh30">
                             <a class="c-999 fsize14" href="#" title="">首页</a>
                             \
-                            <span class="c-333 fsize14">课程列表</span>
+                            <span class="c-333 fsize14">讲师列表</span>
                         </section>
-                        <section class="c-s-dl coures-option">
-                            <dl>
-                                <dt>
-                                    <span class="c-333 fsize16">按专业</span>
-                                </dt>
-                                <dd class="c-s-dl-li">
-                                    <ul class="clearfix" id="CourseCategoryResult">
+                        <section class="new-all-cou-list">
+                            <ul class="clearfix" id="CourseCategoryResult">
 
-                                    </ul>
-                                    <aside class="c-s-more">
-                                        <a href="javascript: void(0)" title="" class="fsize14 c-master icon-gd">&nbsp;</a>
-                                        <div class="m-a-box">
-                                            <section class="m-a-b-inf">
-                                                <div class="DT-arrow">
-                                                    <em>◆</em>
-                                                    <span>◆</span>
-                                                </div>
-                                                <div class="m-a-b-more">
-
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </aside>
-                                </dd>
-                            </dl>
-                            <dl class="teach-yjdl">
-                                <dt> <span class="c-333 fsize16">按会员</span> </dt>
-                                <dd class="c-s-dl-li">
-                                    <ul class="clearfixa">
-                                        <li class="current"><a title="全部" onclick="goa(this)" href="javascript:void(0)">全部</a></li>
-                                        <li id="123"><a title="黄金会员" onclick="goa(this)" href="javascript:void(0)">黄金会员</a></li>
-                                        <li ><a title="钻石会员" onclick="goa(this)" href="javascript:void(0)">钻石会员</a></li>
-                                        <li ><a title="黄钻会员" onclick="goa(this)" href="javascript:void(0)">黄钻会员</a></li>
-                                        <li ><a title="白银会员" onclick="goa(this)"href="javascript:void(0)">白银会员</a></li>
-                                    </ul>
-                                </dd>
-                            </dl>
-                            <div class="clear"></div>
+                            </ul>
                         </section>
+                        <!--<section class="c-s-dl coures-option">-->
+
                     </div>
                 </div>
                 <!-- /课程列表 开始 -->
                 <section class="container">
                     <section class="c-sort-box bg-fff c-sort-box-new">
-                        <div class="js-wrap ">
-                            <section class="clearfix">
-                                <ol class="js-tap clearfix fl" id="ol1">
-                                    <li class="current bg-orange"><a title="默认排序" onclick="go2(this)" href="javascript:void(0)">默认排序</a></li>
-                                    <li class="pr ">
-                                        <a title="时间" onclick="go2(this)" href="#">时间
-                                            <span class="c-master fsize14 f-fM">
-										</span>
-                                        </a>
-                                    </li>
-                                    <li class=""  >
-                                        <a  class="current" title="热度" onclick="go2(this)" href="#">热度
-                                            <span class="c-master fsize14 f-fM">
-										</span>
-                                        </a>
-                                    </li>
-                                    <li class="
-
-								">
-                                        <a title="价格" onclick="go2(this)" href="#">价格
-                                            <span class="c-master fsize14 f-fM">
-										</span>
-                                        </a>
-                                    </li>
-                                </ol>
-                                <article class="fr">
-                                    <label onclick="#" class="c-kcfl  ml20">
-                                        <em class="icon14 c-chb-ico">
-                                            <input type="checkbox" class="chen-c-fl">
-                                        </em>
-                                        <tt class="vam fsize14 c-666 f-fM">套 餐</tt>
-                                    </label>
-                                    <label onclick="#" class="c-kcfl   ml20">
-                                        <em class="icon14 c-chb-ico">
-                                            <input value="true" type="checkbox" class="chen-c-fl">
-                                        </em>
-                                        <tt class="vam fsize14 c-666 f-fM">免 费</tt>
-                                    </label>
-                                    <label onclick="#" class="c-kcfl   ml20">
-                                        <em class="icon14 c-chb-ico">
-                                            <input value="true" type="checkbox" class="chen-c-fl">
-                                        </em>
-                                        <tt class="vam fsize14 c-666 f-fM">可砍价</tt>
-                                    </label>
-                                </article>
-                            </section>
-                        </div>
 
                         <div class="couresnew-big">
                             <article class="comm-course-list">

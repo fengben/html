@@ -1,6 +1,6 @@
 <%
-:sql = "select id,head_portrait, name, school, major,nickname, birthday, age, sex, introduction  from mooc_userprofile limit 4 offset 0"
-changeRecordSet(:sql);
+:sql = "select id,head_portrait, name, school, major,nickname, birthday, age, sex, introduction  from mooc_userprofile where major = ? limit 8 offset 0"
+changeRecordSet(:sql,:major);
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat
@@ -20,7 +20,7 @@ Repeat
 		<a class="name fsize18 c-333 f-fM" href="teacher/80"><%=name%></a>
 	</h4>
 	<input value="1" type="hidden">
-	<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;首席讲师</h5>
+	<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;<%=school%></h5>
 	<div class="mt15 i-q-txt">
 		<input value="2" type="hidden">
 		<p class="c-999 f-fA"><%=introduction%></p>

@@ -1,0 +1,20 @@
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+
+<script>
+    function getUrlString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return "";
+    }
+    function f(){
+        alert(getUrlString('queryCourse.courseName'));
+    }
+</script>
+<form id="headerformSearch" action="testform.html" method="get">
+    <input name="queryCourse.courseName">
+    <a href="javascript:$('#headerformSearch').submit()" type="submit"
+       title="搜索"/>s
+    </a>
+</form>
+<button onclick="f()">aas</button>

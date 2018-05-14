@@ -1,7 +1,12 @@
 
 <%
-:selectSql = "select id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile where major_id = ? limit 8 offset 0"
+If :major_id == 2018112858180021535
+	:querystr="select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile  limit 8 offset 0"
+	changeRecordSet(:querystr ,(:pageNumber-1)*10);
+	Else
+:selectSql = "select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile where major_id = ? limit 8 offset 0"
 changeRecordSet(:selectSql,S(:major_id));
+EndIf
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat
@@ -33,5 +38,21 @@ EndRepeat
 EndIf
 %>
 
+$_@_$
+<%:i=1%>
+<%:totalPage = 0%>
+<%debugMsg("--------------=----"#:FOUND_ROWS)%>
+<%:totalPage=ceil(:FOUND_ROWS,8)%>
 
+             		<a href="#" title="">首</a>
+             		<a id="backpage" class="undisable" href="#" title="">&lt;</a>
+             			<a id="nextpage" href="#" title="">&gt;</a>
+             			<a href="#" title="">末</a>
+             		<div class="clear"></div>
+
+            ///<%If :pageNumber-1!=0%> <a href="javascript:goToPage(1);" title="">首</a><%EndIf%>
+            ///<%If :pageNumber-1!=0%> <a  id="backpage" class="undisable" href="javascript:goToPage(<%=:pageNumber-1%>)"> &lt;</a><%EndIf%>  /// sub的结果为0，就会放弃这一行
+           /// <%If :pageNumber!=:totalPage && :totalPage != 0%> <aid="nextpage" href="javascript:goToPage(<%=:pageNumber+1%>)">下一页</a> <%EndIf%> ///:pageNumber等于totalPage，就会放弃这一行
+            ///<%If :pageNumber!=:totalPage && :totalPage != 0%> <a href="javascript:goToPage(<%=:totalPage%>)" title="">尾页</a> <%EndIf%> ///:pageNumber等于totalPage，就会放弃这一行
+           /// <div class="clear"></div>
 

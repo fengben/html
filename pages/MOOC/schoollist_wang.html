@@ -92,24 +92,16 @@
             var   CategoryTeacherDetailMapResult = function () {
 
                 jQuery("#CategoryTeacherDetail").html(CategoryTeacherDetailMap[0]);
-                jQuery("#deanpage").html(CategoryTeacherDetailMap[1]);
 
             }
-            var paras = "major_id=" + id;
-            paras += "$^@^$pageNumber=1";
-            getFromWS("frontmooc/getTeacherDetail.template", paras, CategoryTeacherDetailMap, CategoryTeacherDetailMapResult);
+            getFromWS("frontmooc/getTeacherDetail.template", "major_id="+major_id,CategoryTeacherDetailMap, CategoryTeacherDetailMapResult);
 
+            var recentUniversity = new Array();
+            var processUnResult = function () {
 
-
-//             var articleList = new Array();
-//             var articleListResult = function(){
-//
-//                 jQuery("#deanpage").html(articleList[0]);
-//
-//             }
-// ;
-//             getFromWS("frontmooc/getDeanpage.template",articleList,articleListResult);
-
+                jQuery("#AllUniversity").html(recentUniversity[0]);
+            }
+            getFromWS("frontmooc/getAllUniversity.template", recentUniversity, processUnResult);
 
 
         };
@@ -126,6 +118,7 @@
         <div class="main-infor" >
             <!-- 公共头引入 -->
             <!-- /global header begin-->
+
             <header id="header" class="all-header">
                 <section class="container">
                     <h1 id="logo" class="logo">
@@ -178,71 +171,26 @@
             </header>
             <!-- /global header end-->
             <!-- 公共头引入 -->
+            <div id="aCoursesList" class="of index-bg">
+                <!-- /直播课程 开始 -->
+                <div class="of bg-f8">
+                    <section class="container">
+                        <header class="comm-title">
+                            <!--<span class="fr mt20 mr10 hyh">-->
+                                <!--<a href="javascript:void(0)" title="查看更多"-->
+                                                              <!--class="c-master fsize14"-->
+                                                              <!--onclick="window.location.href='shoollist.html'">更多&gt;&gt;</a></span>-->
+                            <h2 class="fl tac tit-header"><span class="c-333">全部高校 </span></h2>
+                        </header>
+                        <div>
+                            <article class="comm-course-list of demo2-i-live-list demo3-i-live-list">
+                                <ul class="of" id="AllUniversity">
 
-            <div id="aCoursesList" class="bg-f8 of">
-                <div class="">
-                    <div class="container">
-                        <section class="path-wrap txtOf hLh30">
-                            <a class="c-999 fsize14" href="#" title="">首页</a>
-                            \
-                            <span class="c-333 fsize14">讲师列表</span>
-                        </section>
-                        <section class="new-all-cou-list">
-                            <ul class="clearfix" id="TeacherCategoryResult">
-
-                            </ul>
-                        </section>
-                        <!--<section class="c-s-dl coures-option">-->
-
-                    </div>
-                </div>
-                <!-- /课程列表 开始 -->
-                <section class="container">
-                    <section class="c-sort-box bg-fff c-sort-box-new">
-
-                        <div class="couresnew-big">
-                            <article class="comm-course-list">
-                                <ul class="of" id="CategoryTeacherDetail">
                                 </ul>
-                                <div class="clear"></div>
                             </article>
                         </div>
-
-                        <!-- 公共分页 开始 -->
-                        <script type="text/javascript" src="js/page.js"></script>
-                        <div class="paging" id="deanpage">
-                        </div>
-
-
-                        <script type="text/javascript">
-                            var totalPageSize =5;
-                            var currentPage =0<1 ? 1 :1;
-                            var totalPage = 5;
-                            showPageNumber();
-                        </script><!-- 公共分页 结束 -->
-                        <form action="/showcoulist" id="searchForm" method="post">
-                            <input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1" />
-                            <input type="hidden" name="queryCourse.teacherId" value="0" />
-                            <input type="hidden" name="queryCourse.subjectId" value="0" />
-                            <input type="hidden" name="queryCourse.order" value="DESCsequence" />
-                            <input type="hidden" name="queryCourse.memberTypeId" value="" />
-                            <input type="hidden"id="package" name="queryCourse.sellType" value="" />
-                            <input type="hidden" name="queryCourse.courseName" id="hiddenCourseName" value="" />
-                            <input type="hidden" id="isFree" name="queryCourse.isFree" value="" />
-                            <input type="hidden" id="isBargainIng" name="queryCourse.isBargainIng" value="" />
-                            <input id="noPackage" type="hidden" name="queryCourse.sellType_cou_pag" value="true" />
-                        </form>
                     </section>
-                </section>
-                <!-- /课程列表 结束 -->
-            </div>
-            <script>
-                /* 专业父级id 用于判断专业筛选条件是否为2级 用于移动端*/
-                var parentSubjectId = +"";
-            </script>
-        </div>
-    </div>
-</div>
+                </div>
 <div class="mo-footer">
     <!-- 公共底引入 -->
     <script type="text/javascript" src="js/footer.js"></script>
@@ -450,7 +398,6 @@
 </section>
 <input type="hidden" id="limitLogin" value="OFF"/>
 <script type="text/javascript">
-
     var winW=$(window).width();
     var boyH=$(window).height()-98;
     $(".fot-box-btn-js").click(function () {

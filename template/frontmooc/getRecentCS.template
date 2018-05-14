@@ -33,7 +33,7 @@ Repeat
    							<tt class="c-green fsize12 f-fA">免费</tt>
    						</span>
    						<span class="fl jgAttr c-ccc f-fA">
- 							<tt class="c-999 f-fA mr10"><%=school%></tt>
+ 	///						<tt class="c-999 f-fA mr10"><%=school%></tt>
    ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
    						</span>
    					</section>

@@ -126,17 +126,16 @@ function getUrlString(name) {
    if (r!=null) return unescape(r[2]); return "";
 }
 function goToPage(value){
-	var articleList = new Array();
-	var articleListResult = function(){
-		jQuery("#articleList").html(articleList[0]);
-		jQuery("#deanpage").html(articleList[1]);
+    var CategoryTeacherDetailMap = new Array();
+    var  CategoryTeacherDetailMapResult = function () {
 
-	}
-	var type = getUrlString("id");
-	var paras = "operation=getArticleList";
-	paras += "$^@^$type=" + type;
-	paras += "$^@^$pageNumber=" + value;
-	getFromWS("home/getNews.template",paras,articleList,articleListResult);
+        jQuery("#CategoryTeacherDetail").html(CategoryTeacherDetailMap[0]);
+        jQuery("#deanpage").html(CategoryTeacherDetailMap[1]);
+
+    }
+    var paras = "major_id=" + id;
+    paras += "$^@^$pageNumber=1";
+    getFromWS("frontmooc/getTeacherDetail.template", paras, CategoryTeacherDetailMap, CategoryTeacherDetailMapResult);
 }
 function goToPage_culture(value){
 

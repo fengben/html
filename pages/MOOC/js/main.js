@@ -2240,3 +2240,23 @@ window.onresize=function(){
 BCMain.show();
 BCMain.third_req();
 setTimeout("mim_auto_close()",8000);
+
+
+function getUrlString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r!=null) return unescape(r[2]); return "";
+}
+function goToPage(value){
+    var articleList = new Array();
+    var articleListResult = function(){
+        jQuery("#articleList").html(articleList[0]);
+        jQuery("#deanpage").html(articleList[1]);
+
+    }
+    var type = getUrlString("id");
+    var paras = "operation=getArticleList";
+    paras += "$^@^$type=" + type;
+    paras += "$^@^$pageNumber=" + value;
+    getFromWS("home/getNews.template",paras,articleList,articleListResult);
+}

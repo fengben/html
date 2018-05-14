@@ -229,7 +229,7 @@
                                                                     class="dClose icon16 pa new-close">&nbsp;</a><span
                 id="d-s-head-tab" class="d-s-head-tab">
       <a href="javascript:void(0)" onclick="dialoglogin(this)" class="current">登录</a>
-      <a href="javascript:void(0)" onclick="dialogRegister(this)">注册</a></span></h4>
+      <a href="javascript:void(0)" onclick="showdialogRegister(this)">注册</a></span></h4>
         <div class="of">
             <div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
                 <div id="d-s-head-cont" class="lrWrap">
@@ -240,7 +240,7 @@
                         <div>
                             <ol class="e-login-options">
                                 <li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden"/> <input
-                                        id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value=""
+                                        id="u-email" placeholder="请输入账户" name="" value=""
                                         onkeyup="$(this).next().html('');" type="text"/>
                                     <p class="lr-tip-wrap"></p></li>
                                 <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password" placeholder="请输入密码"
@@ -267,13 +267,18 @@
                         </div>
                         <div>
                             <ol class="e-login-options">
-                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-name-reg" placeholder="请输入账号"
+                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-email-reg" placeholder="请输入邮箱"
                                                                                name="registerName" maxlength="50"
                                                                                value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="text"/>
                                     <p class="lr-tip-wrap"></p></li>
                                 <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-reg" placeholder="请输入密码"
+                                                                               name="" value=""
+                                                                               onkeyup="$(this).next().html('');"
+                                                                               type="password"/>
+                                    <p class="lr-tip-wrap"></p></li>
+                                 <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-rep" placeholder="请确认密码"
                                                                                name="" value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="password"/>
@@ -290,7 +295,7 @@
                         <h6 class="hLh20 mb15"><span class="c-666 fsize14">第三方快捷登录</span></h6>
                         <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
                         <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
-                        <a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>
+                        <!--<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>-->
                     </div>
                 </div>
             </div>
@@ -362,7 +367,7 @@
                                 <aside class="fr">
                                     <section class="search-3">
                                         <div class="s-3-infor">
-                                            <form action="showcoulist.html" method="post" id="headerformSearch">
+                                            <form action="search.html" method="get" id="headerformSearch">
                                                 <input type="text" value="" id="headerSearchName"
                                                        name="queryCourse.courseName" placeholder="请输入要查找的内容"/>
                                                 <a href="javascript:$('#headerformSearch').submit()" type="submit"
@@ -376,7 +381,7 @@
                                     <li><a href="default.html" title="首页">首页</a></li>
                                     <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
                                     <li><a href="shoollist.html" title="直播">名校</a></li>
-                                    <li><a href="teacherlist.html" title="班级">名师</a></li>
+                                    <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
                                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                                     <li><a href="article.html" title="资讯">资讯</a></li>
                                 </ul>
@@ -924,7 +929,7 @@
                 $("#loginfrom").hide();
             }
 
-            function dialogRegister(obj) {
+            function showdialogRegister(obj) {
                 $('#d-s-head-tab').find('a').each(function () {
                     //tmp = $(this).text();
 

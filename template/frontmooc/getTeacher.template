@@ -1,5 +1,5 @@
 <%
-:sql = "select id,head_portrait, name, school, major,nickname, birthday, age, sex, introduction  from mooc_userprofile limit 4 offset 0"
+:sql = "select id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile limit 4 offset 0"
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0

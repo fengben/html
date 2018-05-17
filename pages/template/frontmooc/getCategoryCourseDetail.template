@@ -1,0 +1,89 @@
+<%debugMsg("--------------=-----------------"#:urlid)%>
+<%
+If :  urlid == 2018112858180021535
+		:querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.on_top desc,A.id desc limit ?,8"
+		changeRecordSet(:querystr,(:pageNumber-1)*8)
+Else
+        :sql = "select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id = ? ) order by A.on_top desc,A.id desc limit ?,8"
+        changeRecordSet(:sql,:urlid,(:pageNumber-1)*8)
+EndIf
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+<li>
+  										<div class="cc-l-wrap">
+
+  											<section class="course-img">
+  												<a href="couinfo.html?id=<%=id%>" target="_blank">
+                                                  <%If pic_id!=0%>
+                                                  					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
+                                                  <%Else%>
+                                                                      <img src="/pages/MOOC/picture/default_course.png"  width="280" height="160">
+                                                  <%EndIf%>
+  												</section>
+  											<div class="coure-bg-g">
+  												<h3 class="hLh30 txtOf mt10">
+  													<a href="couinfo.html" target="_blank" title="<%=title%>）" class="course-title fsize18 c-333"><%=title%></a>
+  												</h3>
+  												<section class="mt10 hLh20 of">
+  													<span class="fr"><tt class="c-green fsize12 f-fA">免费</tt></span>
+  													<span class="fl jgAttr c-ccc f-fA">
+  														<tt class="c-999 f-fA mr10">1234人购买</tt>
+  														<tt class="c-999 f-fA span-2"><%=count%></tt>
+  													</span>
+  												</section>
+  											</div>
+  											<div class="coures-jbicon">
+  													<img src="picture/c-vip-jb.png">
+  												</div>
+  											</div>
+  									</li>
+<%
+EndRepeat
+EndIf
+%>
+
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 8%>
+<%:totalPage=ceil(:FOUND_ROWS,8)%>
+
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToPage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToPage(1)">首页</a>
+             <%EndIf%>
+
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToPage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="nextpage" href="javascript:goToPage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="nextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =8;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = <%=:totalPage%>;
+   showPageNumber() ;
+</script>
+

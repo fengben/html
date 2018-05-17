@@ -46,7 +46,7 @@
 
         function TeacherCategory(flag){
             var paras = "major_id=" + flag;
-             // alert(flag);
+            // alert(flag);
             var obj = new Array();
             var processResult = function(){
                 jQuery("#CategoryTeacherDetail").html(obj[0]);
@@ -63,24 +63,24 @@
             var  TeacherCategoryMapResult = function () {
                 jQuery("#TeacherCategoryResult").html(TeacherCategoryMap[0]);
 
-                   if(major_id ==2018112858650021541){
-                       $("#2018112858650021541").addClass('current');
-                   }else if (major_id == 2018112859970021584 )
-                   {
-                       $("#2018112859970021584").addClass('current');
-                   }else if(major_id == 2018112860600021632)
-                   {
-                       $("#2018112860600021632").addClass('current');
-                   }else if(major_id == 2018112861090021663 )
-                   {
-                       $("#2018112861090021663").addClass('current');
-                   }else if (major_id == 2018112861680021689 )
-                   {
-                       $("#2018112861680021689").addClass('current');
-                   }
-                   else if(major_id == 2018112858180021535){
-                       $("#allTeacher").addClass('current');
-                   }
+                if(major_id ==2018112858650021541){
+                    $("#2018112858650021541").addClass('current');
+                }else if (major_id == 2018112859970021584 )
+                {
+                    $("#2018112859970021584").addClass('current');
+                }else if(major_id == 2018112860600021632)
+                {
+                    $("#2018112860600021632").addClass('current');
+                }else if(major_id == 2018112861090021663 )
+                {
+                    $("#2018112861090021663").addClass('current');
+                }else if (major_id == 2018112861680021689 )
+                {
+                    $("#2018112861680021689").addClass('current');
+                }
+                else if(major_id == 2018112858180021535){
+                    $("#allTeacher").addClass('current');
+                }
             }
 
 
@@ -92,23 +92,10 @@
             var   CategoryTeacherDetailMapResult = function () {
 
                 jQuery("#CategoryTeacherDetail").html(CategoryTeacherDetailMap[0]);
-                jQuery("#deanpage").html(CategoryTeacherDetailMap[1]);
 
             }
-            var paras = "major_id=" + id;
-            paras += "$^@^$pageNumber=1";
-            getFromWS("frontmooc/getTeacherDetail.template", paras, CategoryTeacherDetailMap, CategoryTeacherDetailMapResult);
+            getFromWS("frontmooc/getTeacherDetail.template", "major_id="+major_id,CategoryTeacherDetailMap, CategoryTeacherDetailMapResult);
 
-
-
-//             var articleList = new Array();
-//             var articleListResult = function(){
-//
-//                 jQuery("#deanpage").html(articleList[0]);
-//
-//             }
-// ;
-//             getFromWS("frontmooc/getDeanpage.template",articleList,articleListResult);
 
 
 

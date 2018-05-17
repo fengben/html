@@ -1,0 +1,12 @@
+<%debugMsg("-----++++++++++"#:school)%>
+<%
+:sql = "select id,schoolname, articleid from moocschool where schoolname = ? "
+changeRecordSet(:sql,S(:school));
+                If recordCount()>0
+                    Repeat
+                    	Exit(id#";"#schoolname#";"#articleid);
+                    EndRepeat
+        		Else
+        			Exit("no");
+        		EndIf
+%>

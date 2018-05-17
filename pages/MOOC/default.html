@@ -200,13 +200,13 @@
             getFromWS("frontmooc/getTeacher.template", recentTeacher, processTeResult);
 
             //新闻资讯
-            // var recentNewsConsulting = new Array();
-            // var NewsConsultingResult = function () {
-            //
-            //     jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
-            //     jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
-            // }
-            // getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
+            var recentNewsConsulting = new Array();
+            var NewsConsultingResult = function () {
+
+                jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
+                jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
+            }
+            getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
 
             //首页栏目信息读取
             var recentColumns = new Array();
@@ -228,7 +228,7 @@
                                                                     href="javascript:void(0)" title="关闭"
                                                                     class="dClose icon16 pa new-close">&nbsp;</a><span
                 id="d-s-head-tab" class="d-s-head-tab">
-      <a href="javascript:void(0)" onclick="dialoglogin(this)" class="current">登录</a>
+      <a href="javascript:void(0)" onclick="showdialoglogin(this)" class="current">登录</a>
       <a href="javascript:void(0)" onclick="showdialogRegister(this)">注册</a></span></h4>
         <div class="of">
             <div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
@@ -381,7 +381,7 @@
                                     <li><a href="default.html" title="首页">首页</a></li>
                                     <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
                                     <li><a href="shoollist.html" title="直播">名校</a></li>
-                                    <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
+                                    <li><a href="teacherlist.html?id=2018112858180021535 " title="名师">名师</a></li>
                                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                                     <li><a href="article.html" title="资讯">资讯</a></li>
                                 </ul>
@@ -653,7 +653,7 @@
                 <div class="of bg-f8">
                     <section class="container">
                         <header class="comm-title">
-                            <span class="fr mt15 mr10 hyh"><a href="classlist" title="更多" class="c-master fsize14">更多 &gt;</a></span>
+                            <span class="fr mt15 mr10 hyh"><a href="showcoulist.html?id=2018112858180021535" title="更多" class="c-master fsize14">更多 &gt;</a></span>
                             <h2 class="fl tac tit-header"><span class="c-333">推荐课程</span></h2>
                         </header>
                         <div>
@@ -673,7 +673,7 @@
                         <header class="comm-title">
                             <div class="live-small-tit" >
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?queryCourse.subjectId=210"
+                                                                   href="showcoulist.html?id=2018112858650021541"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
                                 <h2 class="fl tac tit-header " id="FirstColumns"></h2>
                                 <ul class="clearfix">
@@ -718,7 +718,7 @@
                         <header class="comm-title">
                             <div class="live-small-tit">
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?queryCourse.subjectId=221"
+                                                                   href="showcoulist.html?id=2018112861090021663"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
                                 <h2 class="fl tac tit-header" id="SecondColumns"></h2>
                                 <ul class="clearfix">
@@ -766,7 +766,7 @@
                         <header class="comm-title">
                             <div class="live-small-tit">
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?queryCourse.subjectId=223"
+                                                                   href="showcoulist.html?id=2018112860600021632"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
                                 <h2 class="fl tac tit-header" id="ThirdColumns"></h2>
                                 <ul class="clearfix">
@@ -811,7 +811,7 @@
                 <div class="of bg-f8">
                     <section class="container">
                         <header class="comm-title">
-                            <span class="fr mt15 mr10 hyh"><a href="teacherlist.html" title="更多"
+                            <span class="fr mt15 mr10 hyh"><a href="teacherlist.html?id=2018112858180021535" title="更多"
                                                               class="c-master fsize14">更多 &gt;</a></span>
                             <h2 class="fl tac tit-header"><span class="c-333">名家讲师</span></h2>
                         </header>
@@ -824,6 +824,34 @@
                     </section>
                 </div>
                 <!-- /网校名师 结束 -->
+                <div class="bg-fff of">
+                    <section class="container">
+                        <header class="comm-title">
+                            <span class="fr mt15 mr10 hyh"><a href="article.html" title="更多" class="c-master fsize14" >更多 &gt;</a></span>
+                            <h2 class="fl tac tit-header">
+                                <span class="c-333">新闻资讯</span>
+                            </h2>
+                        </header>
+                        <section class="in-new-box clerfix">
+                            <div class="clearfix d2-in-news-warp mt30">
+                                <article class="d2-i-ns-left">
+                                    <div class="d2-i-n-l-box of d3-i-n-l-box">
+                                        <ul class="clearfix" id="NewsConsultingImages">
+                                        </ul>
+                                    </div>
+                                </article>
+                                <article class="d2-i-ns-right">
+                                    <div class="d2-i-n-r-box">
+                                        <section class="d2-i-nr-body">
+                                            <ul class="d2-i-nr-b-list d3-i-nr-b-list" id="NewsTitleList">
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+                    </section>
+                </div>
                 <input type="hidden" id="theme_color" value=""/>
                 <script type="text/javascript" src="js/swiper-2.1.0.js"></script>
                 <script type="text/javascript" src="js/index.js"></script>
@@ -941,7 +969,7 @@
                 $("#zc").show()
             }
 
-            function dialoglogin(obj) {
+            function showdialoglogin(obj) {
                 $('#d-s-head-tab').find('a').each(function () {
                     //tmp = $(this).text();
 

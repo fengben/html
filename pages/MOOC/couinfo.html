@@ -82,10 +82,21 @@
                 jQuery("#CouinfoId01").html(content[2]);
                 //课程发布者-老师
                 jQuery("#Publisher").html(content[3]);
+                //推荐课程
+                jQuery("#Recourse").html(content[4]);
             }
 
             paras += "$^@^$login_name=" + login_name;
             getFromWS("frontmooc/getCouinfoContent.template", paras, content, contentResult);
+             //推荐课程
+            var Recourse = new Array();
+            var RecourseResult = function () {
+
+                //推荐课程
+                jQuery("#Recourse").html(Recourse[0]);
+
+            }
+            getFromWS("frontmooc/getCouinfoRecourse.template", "id=" + id, Recourse, RecourseResult);
 
         });
 
@@ -337,23 +348,15 @@
                         <div class="i-box cou-in-boc ">
                             <div class="clearfix c-infor-tabTitle c-tab-title">
                                 <section id="c-i-tabTitle" class=" fl">
-                                    <a name="c-i" class="current" onclick="selectCourseInfo('courseContext',this)"
-                                       title="课程详情" href="javascript: void(0)">课程详情</a>
-                                    <a name="c-g" title="课程目录" onclick="selectCourseInfo('courseList',this)" "
-                                    href="javascript: void(0)">课程目录</a>
-                                    <a name="c-c" title="课程评论" onclick="selectCourseInfo('courseComment',this)"
-                                       href="javascript: void(0)">课程评论</a>
-                                    <a name="c-z" title="课程作业" onclick="selectCourseInfo('courseContext1',this)"
-                                       href="javascript: void(0)">课程作业</a>
-                                </section>
-                                <section class="fr m-check-box">
-                                    <a href="javascript:;"><span class="fsize16 vam"
-                                                                 style="font-size: 14px;">手机查看</span><img width="18"
-                                                                                                          height="18"
-                                                                                                          class="vam ml5"
-                                                                                                          src="picture/wxewm.png"/><em
-                                            class="icon14 ml5 phone-check"> </em></a>
-                                    <div id="output" class="m-ewm"></div>
+                                    <span href="javascript:void(0)">课程介绍</span>
+                                    <!--<a name="c-i" class="current" onclick="selectCourseInfo('courseContext',this)"-->
+                                       <!--title="课程详情" href="javascript: void(0)">课程详情</a>-->
+                                    <!--<a name="c-g" title="课程目录" onclick="selectCourseInfo('courseList',this)" "-->
+                                    <!--href="javascript: void(0)">课程目录</a>-->
+                                    <!--<a name="c-c" title="课程评论" onclick="selectCourseInfo('courseComment',this)"-->
+                                       <!--href="javascript: void(0)">课程评论</a>-->
+                                    <!--<a name="c-z" title="课程作业" onclick="selectCourseInfo('courseContext1',this)"-->
+                                       <!--href="javascript: void(0)">课程作业</a>-->
                                 </section>
                             </div>
                             <article class="ml10 mr10 new-c-i-b-warp">
@@ -1007,39 +1010,8 @@
                     <div id="Publisher">
 
                     </div>
-                    <div class="i-box mt25">
-                        <div>
-                            <section class="c-infor-tabTitle c-tab-title">
-                                <span title="" href="javascript:void(0)">推荐课程</span>
-                            </section>
-                            <section class="comm-course-list of cou-in-r-list bg-fff">
-                                <ol>
-                                    <li>
-                                        <div class="cc-l-wrap">
-                                            <section class="course-img">
-                                                <a href="couinfo.html" target="_blank"> <img class="img-responsive"
-                                                                                             xsrc="picture/1485228516578.jpg"
-                                                                                             src="picture/1521729615694.jpg"
-                                                                                             alt=""/> </a>
-                                            </section>
-                                            <div class="coure-bg-g">
-                                                <h3 class="hLh30 txtOf mt5"><a target="_blank"
-                                                                               class="course-title fsize16 c-333"
-                                                                               href="couinfo/129" title="高中物理知识点总结">高中物理知识点总结</a>
-                                                </h3>
-                                                <section class="mt10 hLh20 of">
-                                                    <span class="fr"> <tt
-                                                            class="c-master fsize14 f-fM">￥30.00</tt> </span>
-                                                    <span class="fl jgAttr c-ccc f-fA"> <tt
-                                                            class="c-999 f-fA mr10">0人购买</tt> <tt
-                                                            class="c-999 f-fA span-2">51浏览</tt> </span>
-                                                </section>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </section>
-                        </div>
+                    <div class="i-box mt25" id="Recourse">
+
                     </div>
             </aside>
             <div class="clear"></div>

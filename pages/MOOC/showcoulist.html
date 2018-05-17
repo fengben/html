@@ -26,6 +26,7 @@
     <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="js/page.js"></script>
 
     <script type="text/javascript">
         function killErrors() {
@@ -41,20 +42,9 @@
             return null;
         }
         var urlid = getUrlParms("id");
-
-
-        function CourseCategory(flag){
-            var paras = "urlid=" + flag;
-            var obj = new Array();
-            var processResult = function(){
-                jQuery("#CategoryCourseDetail").html(obj[0]);
-            }
-            getFromWS("frontmooc/getCategoryCourseDetail.template",paras,obj,processResult);
-
-        }
-    </script>
-    <script type="text/javascript">
+        var currentid=urlid;
         window.onload = function () {
+
             //课程全部分类展示
             var CourseCategoryMap = new Array();
             var  CourseCategoryMapResult = function () {
@@ -82,14 +72,41 @@
 
             //分类课程展示
             var CategoryCourseDetailMap = new Array();
+            var paras = "urlid=" + urlid;
+            paras += "$^@^$pageNumber=1";
             var   CategoryCourseDetailMapResult = function () {
 
                 jQuery("#CategoryCourseDetail").html(CategoryCourseDetailMap[0]);
-
+                jQuery("#deanpage").html(CategoryCourseDetailMap[1]);
             }
-            getFromWS("frontmooc/getCategoryCourseDetail.template", "urlid="+urlid,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
+            getFromWS("frontmooc/getCategoryCourseDetail.template", paras,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
 
         };
+        //按专业分类时的点击展示每个栏目
+        function CourseCategory(flag){
+            currentid=flag
+            var paras = "urlid=" + flag;
+            //alert(flag);
+            paras += "$^@^$pageNumber=1";
+            var obj = new Array();
+            var processResult = function(){
+                jQuery("#CategoryCourseDetail").html(obj[0]);
+                jQuery("#deanpage").html(obj[1]);
+            }
+            getFromWS("frontmooc/getCategoryCourseDetail.template",paras,obj,processResult);
+
+        }
+
+        function goToPage(value){
+                var paras = "pageNumber=" + value;
+                paras += "$^@^$urlid=" + currentid;
+                var articleList = new Array();
+                var articleListResult = function(){
+                    jQuery("#CategoryCourseDetail").html(articleList[0]);
+                    jQuery("#deanpage").html(articleList[1]);
+                }
+            getFromWS("frontmooc/getCategoryCourseDetail.template",paras,articleList,articleListResult);
+        }
     </script>
 
     <script type="text/javascript" src="js/course.js"></script>
@@ -263,22 +280,11 @@
                         </div>
 
                         <!-- 公共分页 开始 -->
-                        <script type="text/javascript" src="js/page.js"></script>
-                        <div class="paging">
-                            <a href="javascript:goPage(1);" title="">首</a>
-                            <a id="backpage" class="undisable" href="javascript:void(0)" title="">&lt;</a>
-                            <a id="nextpage" href="javascript:goPage(2);" title="">&gt;</a>
-                            <a href="javascript:goPage(5);" title="">末</a>
-                            <div class="clear"></div>
+                        <div class="pgs cl" id="deanpage">
+
+
                         </div>
-
-
-                        <script type="text/javascript">
-                            var totalPageSize =5;
-                            var currentPage =0<1 ? 1 :1;
-                            var totalPage = 5;
-                            showPageNumber();
-                        </script><!-- 公共分页 结束 -->
+                        <!-- 公共分页 结束 -->
                         <form action="/showcoulist" id="searchForm" method="post">
                             <input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1" />
                             <input type="hidden" name="queryCourse.teacherId" value="0" />

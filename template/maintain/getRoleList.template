@@ -1,0 +1,55 @@
+<table class="table table-bordered table-striped" id="example-2">
+	<thead>
+		<tr>
+			<th>角色名</th>
+			<th>所管栏目</th>
+			<th style="display:none;">栏目id</th>
+			<th>操作</th>
+		</tr>
+	</thead>
+
+	<tbody class="middle-align">
+<%
+	If :operation=="getRoleList"
+	:queryStr="select id, name, column_ids from role where id!=1"
+	changeRecordSet(:queryStr)
+		If recordCount() > 0
+			Repeat
+%>
+	<tr>
+		<td><span id="role_name<%=id%>"><%=name%></span></td>
+<%
+		:column_names=""
+				split(column_ids,";", &columnIdsArray)
+				:i=0
+				While :i < arrayLength(&columnIdsArray)
+					:columnStr = "select name from columns where id = ?"
+					:res=execSQL(:columnStr, :columnIdsArray[:i])
+					:index = indexOf(:res, "=")
+					:column_name = mid(:res, :index+1)
+					:column_names = :column_names#:column_name#" "
+					:i = :i + 1
+				EndWhile
+%>
+		<td><span id="column_names<%=id%>"><%=:column_names%></span></td>
+		<td style="display:none;"><span id="column_ids<%=id%>" ><%=column_ids%></span></td>
+		<td>
+		<a href="javascript:void(0);" class="btn btn-secondary btn-sm btn-icon icon-left" data-id="<%=id%>" onclick="setRole('<%=id%>')">编辑</a>
+		</td>
+	</tr>
+<%
+			EndRepeat
+		EndIf
+	EndIf
+%>
+
+	</tbody>
+
+</table>
+
+<script type="text/javascript">
+jQuery(document).ready(function ($) {	
+    $('#example-2').dataTable({});
+});
+</script>
+

@@ -1,0 +1,8 @@
+<!-- databaseName=placenamedb -->
+<%
+
+	:sql = "select FOUND_ROWS from article ";
+	changeRecordSet(:sql)
+debugMsg("=============="#:FOUND_ROWS)
+%>
+

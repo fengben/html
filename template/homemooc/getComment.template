@@ -1,0 +1,39 @@
+<!-- databaseName=placenamedb -->
+///获取文章的评论
+<%
+If :operation=="getComment"
+:commentSql = "select comment, ipaddress, to_char(comment_time,'yyyy-MM-dd HH24-MI-SS') as comment_time from onlinesurvey where article_id = ? order by comment_time desc"
+
+changeRecordSet(:commentSql, :id)
+
+    :num = recordCount()
+%>
+    <script type="text/javascript">
+      jQuery("#comment_list h4").css('display', 'block');
+    </script>
+    <dl>
+    <%Repeat%>
+      <dt>
+        <div class="ipaddr">用户@<%=ipaddress%></div>
+        <div class="time"><%=comment_time%></div>
+        <div class="floor_num"><%=:num%>楼</div>   
+      </dt>
+      <dd>
+        <ul class="top">
+          <li>
+            <div class="comment_p">
+              <%=comment%>
+            </div>
+          </li>
+        </ul>
+      </dd>
+      
+    <%
+    :num = :num-1
+    EndRepeat
+    %>
+    </dl>
+<%
+
+EndIf
+%>

@@ -1,0 +1,144 @@
+<%
+If :operation=="getSomeArticle"
+	If :classification == 1
+		:querystr= "select  A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A,mooccolumns as B where A.article_type=B.id and (B.id=? or B.parent_id=? or B.parent_id in (select id from mooccolumns where parent_id=?))  order by A.on_top desc,A.id desc"
+		changeRecordSet(:querystr,:typeId,:typeId,:typeId)
+		debugMsg("-----++++++++++"#:typeId)
+	Else
+		:selectStr="select column_ids from role where id=? "
+		:column_ids=execSQL(:selectStr,:classification)
+		:idx = indexOf(:column_ids,"=");
+		:column_ids = mid(:column_ids,:idx+1);
+		split(:column_ids,";",&columnIdsArray);
+		:columnIdsStr = :columnIdsArray[0];
+		:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id and (B.id=?  or B.parent_id=? or B.parent_id in (select id from mooccolumns where parent_id=?)) and  "
+		:i=0;
+
+		While :i<arrayLength(&columnIdsArray)
+			If :i == 0
+				:querystr = :querystr # "(B.id = "#:columnIdsArray[:i];
+			Else
+				:querystr = :querystr # " or B.id = "#:columnIdsArray[:i];
+			EndIf
+			If :i == arrayLength(&columnIdsArray)-1
+				:querystr = :querystr # ") order by A.on_top desc,A.id desc";
+			EndIf
+
+			:i = :i+1;
+		EndWhile
+		changeRecordSet(:querystr,:typeId,:typeId,:typeId)
+	EndIf
+EndIf
+If :operation=="getAllArticle"
+	If :classification == 1
+		:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id  order by A.on_top desc,A.id desc"
+		changeRecordSet(:querystr)
+	Else
+		:selectStr="select column_ids from role where id=? "
+		:column_ids=execSQL(:selectStr,:classification)
+		:idx = indexOf(:column_ids,"=");
+		:column_ids = mid(:column_ids,:idx+1);
+		split(:column_ids,";",&columnIdsArray);
+		:columnIdsStr = :columnIdsArray[0];
+		:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id and  "
+		:i=0;
+
+		While :i<arrayLength(&columnIdsArray)
+			If :i == 0
+				:querystr = :querystr # "(B.id = "#:columnIdsArray[:i];
+			Else
+				:querystr = :querystr # " or B.id = "#:columnIdsArray[:i];
+			EndIf
+			If :i == arrayLength(&columnIdsArray)-1
+				:querystr = :querystr # ") order by A.on_top desc,A.id desc";
+			EndIf
+
+			:i = :i+1;
+		EndWhile
+
+		changeRecordSet(:querystr)
+	EndIf
+EndIf
+
+If recordCount()>0
+
+  :i=1
+     Repeat
+        If :loginName =="admin"
+%>
+        		<tr>
+        			<td>
+        				<input type="checkbox" name="articleCheckBox" class="cbr" value="<%=id%>">
+        			</td>
+        			<td>
+        		      <%:recContent=replace(content,"'","\'")%>
+        		      <%:recContent=replace(:recContent,"\r"," ")%>
+        		      <%:recContent=replace(:recContent,"\n"," ")%>
+
+        				<span  id="title<%=id%>" title="<%=title%>" style="display:none"> <%=title%></span>
+        <%If on_top==1%>
+        				<a href="../view.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:red;"> <%=shortTitle(title,0,6)%></a>
+        <%Else%>
+        				<a href="../view.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:#979898;"> <%=shortTitle(title,0,6)%></a>
+        <%EndIf%>
+                        <input style="display:none" id="school<%=id%>"  value='<%=school%>'>
+        				<input style="display:none" id="content<%=id%>" value='<%=:recContent%>'>
+        				<input style="display:none" id="picIds<%=id%>"  value='<%=pics%>'>
+        				<input style="display:none" id="picId<%=id%>"  value='<%=pic_id%>'>
+        				<input style="display:none" id="top<%=id%>"  value='<%=on_top%>'>
+        				<input style="display:none" id="appendixId<%=id%>"  value='<%=appendix_id%>'>
+        			</td>
+        			<td><span  id="publisher<%=id%>" title="<%=publisher%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(publisher,0,5)%></span></td>
+        			<td><span  id="publishDate<%=id%>" title="<%=modify_date%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=modify_date%></span></td>
+        			<td><span  id="name<%=id%>" title="<%=name%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(name,0,5)%></span>
+        				<input id="type<%=id%>" value="<%=article_type%>" style="display:none">
+        			</td>
+        			<td style="white-space: nowrap;">
+
+        			<a href="javascript:void(0);" class="btn btn-secondary btn-sm btn-icon icon-left" data-id="<%=id%>" onclick="setArticle('<%=id%>')">编辑</a>
+        			<a class="btn btn-danger btn-sm btn-icon icon-left" data-toggle="modal" data-target="#deleteModal" data-id="<%=id%>">删除</a>
+
+        			</td>
+        		</tr>
+        		<%EndIf%>
+        		 <%If publisher == :loginName  && publisher != "admin"%>
+                         		<tr>
+                         			<td>
+                         				<input type="checkbox" name="articleCheckBox" class="cbr" value="<%=id%>">
+                         			</td>
+                         			<td>
+                         		      <%:recContent=replace(content,"'","\'")%>
+                         		      <%:recContent=replace(:recContent,"\r"," ")%>
+                         		      <%:recContent=replace(:recContent,"\n"," ")%>
+
+                         				<span  id="title<%=id%>" title="<%=title%>" style="display:none"> <%=title%></span>
+                         <%If on_top==1%>
+                         				<a href="../view.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:red;"> <%=shortTitle(title,0,6)%></a>
+                         <%Else%>
+                         				<a href="../view.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:#979898;"> <%=shortTitle(title,0,6)%></a>
+                         <%EndIf%>
+
+                         				<input style="display:none" id="content<%=id%>" value='<%=:recContent%>'>
+                         				<input style="display:none" id="picIds<%=id%>"  value='<%=pics%>'>
+                         				<input style="display:none" id="picId<%=id%>"  value='<%=pic_id%>'>
+
+                         				<input style="display:none" id="top<%=id%>"  value='<%=on_top%>'>
+                         				<input style="display:none" id="appendixId<%=id%>"  value='<%=appendix_id%>'>
+                         			</td>
+                         			<td><span  id="publisher<%=id%>" title="<%=publisher%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(publisher,0,5)%></span></td>
+                         			<td><span  id="publishDate<%=id%>" title="<%=modify_date%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=modify_date%></span></td>
+                         			<td><span  id="name<%=id%>" title="<%=name%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(name,0,5)%></span>
+                         				<input id="type<%=id%>" value="<%=article_type%>" style="display:none">
+                         			</td>
+                         			<td style="white-space: nowrap;">
+
+                         			<a href="javascript:void(0);" class="btn btn-secondary btn-sm btn-icon icon-left" data-id="<%=id%>" onclick="setArticle('<%=id%>')">编辑</a>
+                         			<a class="btn btn-danger btn-sm btn-icon icon-left" data-toggle="modal" data-target="#deleteModal" data-id="<%=id%>">删除</a>
+
+                         			</td>
+                         		</tr>
+                 <%EndIf%>
+	<%EndRepeat%>
+<%EndIf%>
+
+

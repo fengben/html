@@ -1,0 +1,58 @@
+<table class="table table-bordered table-striped" id="example-2">
+	<thead>
+		<tr>
+			<th>姓名</th>
+			<th>发布时间</th>
+			<th>信件内容</th>
+			<th>公开意愿</th>
+			<th>操作</th>
+
+		</tr>
+	</thead>
+
+	<tbody class="middle-align">
+<%
+	If :operation=="getGovEmailList"
+	:queryStr="select id, name, publish_date, content, appeal_open from govemail where id!=0"
+	changeRecordSet(:queryStr)
+		If recordCount() > 0
+			Repeat
+%>
+	<tr>
+	<td><span id="email_name<%=id%>"><%=name%></span></td>
+	<td><span id="email_publish_date<%=id%>"><%=publish_date%></span></td>
+	<td><span id="email_content<%=id%>"><%=content%></span></td>
+
+<%
+		:appeal="否"
+		If appeal_open != 0
+			:appeal="是"
+		EndIf
+%>
+	<td><span id="email_appeal_open<%=id%>"> <%=:appeal%>
+	</span> </td>
+	<td>
+		<a href="javascript:void(0);" class="btn btn-secondary btn-sm btn-icon icon-left" data-id="<%=id%>" onclick="viewEmail('<%=id%>')">查看</a>
+
+		<a class="btn btn-danger btn-sm btn-icon icon-left" data-toggle="modal" data-target="#deleteModal" data-id="<%=id%>">删除
+		</a>
+	</td>
+	</tr>
+
+<%
+			EndRepeat
+		EndIf
+	EndIf
+%>
+
+
+
+</table>
+
+
+
+<script type="text/javascript">
+jQuery(document).ready(function ($){
+	$('#example-2').dataTable({});
+});
+</script>

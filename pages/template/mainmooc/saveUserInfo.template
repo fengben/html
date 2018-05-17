@@ -1,0 +1,33 @@
+
+
+<%If  :operation=="editPhone" 
+	:updateSql = "update user_passports set phone_number=? where id= ?"
+	debugMsg(:id#","#"修改电话=================")
+	:x=execSQL(:updateSql,S(:phone),:id)
+	Exit(:x)
+EndIf%>
+<%If  :operation=="editAddr" 
+	:updateSql = "update user_passports set email=? where id= ?"
+	:x=execSQL(:updateSql,S(:email),:id)
+	Exit(:x)
+EndIf%>
+
+<%If  :operation=="editPwd" 
+	debugMsg(:old#","#:login#"================="#:new)
+	:selectSql = "select *from user_passports where login_name= ? and passwd=md5(?) "
+	changeRecordSet(:selectSql,S(:login),S(:old))
+	If recordCount()>0
+		debugMsg("密码输入正确=================")
+		:updateSql = "update user_passports set passwd=md5(?) where id= ?"
+		:x=execSQL(:updateSql,S(:new),:id)
+		Exit(:x)
+	Else
+		debugMsg("原始密码输入错误=================")
+		Exit("原始密码输入错误，无法修改密码")
+		///alert输出结果异常
+	EndIf
+	
+EndIf%>
+
+
+

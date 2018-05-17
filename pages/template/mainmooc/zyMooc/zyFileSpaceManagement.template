@@ -1,0 +1,169 @@
+<script type="text/javascript">
+	    $(function(){
+		initPage1("","","/",1, 8, "fileList",376);
+		initPageShowDownloadFile("/",1,10,"fileSpace",376);
+	      }
+	    );
+            function initPage1(fileType,infoType,parentDirName, pageNumber, pageSize, contentDiv, tableWidth) {
+                var url = "zyMooc/zyFileList.template";
+                var para = "pageNumber=" + pageNumber + "$^@^$pageSize=" + pageSize + "$^@^$fileType=" + fileType
+                + "$^@^$infoType=" + infoType + "$^@^$contentDiv=" + contentDiv + "$^@^$tableWidth=" + tableWidth
+                +"$^@^$parentDirName="+parentDirName+ "$^@^$publisher=" + localStorage.getItem('loginName')
+                + "$^@^$classification=" + localStorage.getItem('classification');
+                loadFromWS(url, para, contentDiv);
+            }
+	        function initPageShowDownloadFile(parentDirName, pageNumber, pageSize,contentDiv, tableWidth) {
+		        var url = "zyMooc/zyFileSpace.template";
+                var para = "parentDirName=" + parentDirName + "$^@^$contentDiv=" + contentDiv + "$^@^$tableWidth=" + tableWidth
+                + "$^@^$pageSize=" + pageSize + "$^@^$pageNumber=" + pageNumber + "$^@^$publisher=" + localStorage.getItem('loginName')
+                + "$^@^$classification=" + localStorage.getItem('classification');
+                loadFromWS(url, para, contentDiv);
+	        }
+	function selectChange(){
+		var selected = $("#popup_message #modifyAttribute").val();
+		if(selected == "文件"){
+			$("#popup_message #selectFileTr").css("display","table-row");
+			$("#popup_message #dirNameTr").css("display","none");
+
+		}else{
+			$("#popup_message #selectFileTr").css("display","none");
+			$("#popup_message #dirNameTr").css("display","table-row");
+		}
+	}
+
+	</script>
+
+<div id="databuffer" style="display:none">
+    <input id="bufferMark" type=hidden>
+    <input id="bufferId" type=hidden>
+    <input id="bufferFileId" type=hidden>
+    <input id="bufferOldFullPath" type=hidden>
+
+</div>
+<form action="http://192.168.10.108/mylogin">
+        <input type="text" name="email"> </input>
+        <input type="password" name="password"></input>
+        <input type="text" name="redirect_url"></input>
+        <button type="submit"></button>
+   </form>
+ <TABLE style="BORDER-COLLAPSE: collapse;" borderColor=#ddd cellSpacing=0 cellPadding=3 width="100%" border=1>
+    <TBODY>
+        <TR>
+            <TD align=left width="100%"  height=25 width=50 >
+                <div  style="display:inline;clear:both">
+			        <i class="lnr lnr-file-empty"/>  文件列表
+		        </div>
+		        <div style="display:inline;height:30px;margin-left:20px">
+				    <span>类型: </span>
+				    <select id="fileType">
+					    <option value="">全部</option>
+					    <option value="text/html">文章</option>
+					    <option value="image">图片</option>
+					    <option value="video">视频</option>
+				    </select>
+			        <input type="text" class="form-control1 input-sm" id="downloadSearchName" style="height:25px;width:200px;"/>
+                    <button onclick="downloadSearch()"  style="height:30px;width:50px" class="btn btn-sm btn-default">搜索</button>
+		        </div>
+
+		        <div align=center style="display:inline;height:30px;margin-left:80px">
+                    <span>当前目录: </span>
+			        <span id="parentDirName1" style="margin-left:5px">/</span>
+		        </div>
+
+		        <div style="display:inline;height:30px;margin-left:100px">
+		            <button onclick="deleSeltedRecords()" style="height:30px"  class="btn btn-sm btn-default" >批量删除文件</button>
+                </div>
+            </TD>
+        </TR>
+        <!--文件列表-->
+	    <tr>
+             <TD align="center">
+                 <div id="fileList" style=" margin-top:15px; height:400px;color:#fa8510;">
+                 </div>
+             </TD>
+	    </tr>
+
+        <TR>
+            <TD align=left width="100%" height=25 >
+		        <div  style="display:inline;clear:both">
+		            <i class="lnr lnr-file-empty"/> 文件浏览
+		        </div>
+		        <div align=center style="display:inline;height:30px;margin-left:300px">
+			        <span>当前目录: </span>
+			        <span id="parentDirName" style="margin-left:5px">/</span>
+		        </div>
+		        <div align=right style="display:inline;height:30px;margin-left:250px">
+		            <button  style="height:30px" class="btn btn-sm btn-default" onclick="javascript:newFileOrDir();" >新建文件</button>
+		            <!--button  style="height:30px" class="btn btn-sm btn-default" onclick="javascript:newArticle();" >新建文章</button-->
+		        </div>
+		    </TD>
+        </TR>
+        <!--文件空间-->
+        <TR>
+		    <td>
+                <div id="fileSpace" style=" margin-top:15px; height:450px; "> </div>
+		    </td>
+        </TR>
+    </TBODY>
+ </TABLE>
+
+ <div id = "viewbox" style="display:none; align:center">
+
+ </div>
+ <!--新建文件的框-->
+ <div id="modifybox" style="display:none; align:center">
+
+     <table cellspacing="0" cellpadding="0" border="0" >
+
+     <tr height=5></tr>
+     <tr id="dirNameTr" style="display:none">
+         <td width=100> 目录名：  </td>
+         <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyDirName" type="text"> </td>
+         <td></td>
+     </tr>
+     <tr id="fileNameTr" style="display:none">
+         <td width=100> 文件名：  </td>
+         <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyFileName" type="text"> </td>
+         <td></td>
+     </tr>
+     <tr height=5></tr>
+     <tr id="fullpathTr">
+         <td width=100>当前目录： </td>
+         <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyFullpath" type="text" readonly ></td> <td></td>
+     </tr>
+     <tr height=5></tr>
+     <tr id="selectAttributeTr">
+	  <td>
+            <label>文件属性：</label>
+	  </td>
+          <td>
+		<select id="modifyAttribute" type="text" style="width:200px;height:30px" class="form-control1" onchange="selectChange()">
+		  <option value="文件">文件</option>
+		  <option value="目录">目录</option>
+		</select>
+          </td>
+     </tr>
+     <tr height=5></tr>
+     <tr id="selectFileTr">
+         <td width=100>上传文件： </td>
+         <td>  <input id="modifyUploadFile" type="file" style="width:450px" ></td> <td></td>
+     </tr>
+     <tr height=5></tr>
+     <tr>
+         <td width=100>描述： </td>
+         <td>
+	     <textarea id="modifyDescription" class="form-control1" style="width:500px;height:100px;resize: none;" ></textarea>
+	 </td> <td></td>
+     </tr>
+     <tr height=15></tr>
+
+     <tr>
+       <td></td>
+       <td>
+	    <button style="width:50p;height:30px" class="btn btn-sm btn-default" onclick="javascript:saveRecord();">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	    <button  style="width:50px;height:30px" class="a_close btn btn-sm btn-default">取消</button>
+	</td>
+       <td></td><td></td>
+     </tr>
+   </table>
+ </div>

@@ -74,6 +74,15 @@
              }
 			 getFromWS("frontmooc/getCouinfoContent.template",parasId,content,contentResult);
 
+             var Recourse = new Array();
+             var RecourseResult = function () {
+
+                 //推荐课程
+                 jQuery("#Recourse").html(Recourse[0]);
+                 jQuery("#Recourse1").html(Recourse[1]);
+             }
+             getFromWS("frontmooc/getCouinfoRecourse.template", "id=" + id, Recourse, RecourseResult);
+
 
          });
 	 </script>
@@ -775,19 +784,19 @@ margin-right: 0}
        <div id="Publisher">
 
       </div>
-      <div class="i-box mt25">
+      <div class="i-box mt25"   >
        <div>
         <section class="c-infor-tabTitle c-tab-title">
          <span title="" href="javascript:void(0)">推荐课程</span>
         </section>
-        <section class="comm-course-list of cou-in-r-list bg-fff">
-         <ol>
+        <section class="comm-course-list of cou-in-r-list bg-fff"  >
+         <ol >
           <li>
-           <div class="cc-l-wrap">
+           <div class="cc-l-wrap" >
             <section class="course-img">
              <a href="couinfo.html" target="_blank"> <img class="img-responsive" xsrc="picture/1485228516578.jpg" src="picture/1521729615694.jpg" alt="" /> </a>
             </section>
-            <div class="coure-bg-g">
+            <div class="coure-bg-g" >
              <h3 class="hLh30 txtOf mt5"> <a target="_blank" class="course-title fsize16 c-333" href="couinfo/129" title="高中物理知识点总结">高中物理知识点总结</a> </h3>
              <section class="mt10 hLh20 of">
               <span class="fr"> <tt class="c-master fsize14 f-fM">￥30.00</tt> </span>
@@ -795,7 +804,7 @@ margin-right: 0}
              </section>
             </div>
            </div> </li>
-         </ol>
+			 </ol>
         </section>
        </div>
       </div>

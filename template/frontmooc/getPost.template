@@ -1,0 +1,32 @@
+<div id="indexTopicAll">
+</div>
+<section class="isAct-list" id="aCoursesList">
+    <div id="indexTopicAll">
+        <ul class="img-page-1 otShow">
+            <li><a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)"
+                   onclick="toBrowseUserCenter(7)" userinfoid="7" title=""> <img class="isAct-img"
+                                                                                 src="http://wx.inxedu.com/images/upload/userAppImage/20180328/1522224555888.jpg"
+                                                                                 alt=""/> </a>
+                <div class="isAct-title">
+                    <a href="groupInfo.html" title="进入查看" target="_blank" class="isAct-title-name" style="
+
+									">cdsc</a>
+                    <!-- 火热-->
+                    <!-- 置顶 -->
+                    <!-- 精华 -->
+                </div>
+                <p class="isAct-desc-wrap"><a href="groupInfo.html" title="进入查看" target="_blank">sdaddd </a>
+                <div class="clear"></div>
+                <div class="isAct-attr">
+                    <span class="numb view" title="浏览 2"><em class="icon14">&nbsp;</em>2</span>
+                    <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span>
+                    <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span>
+                    <a href="javascript:void(0)" onclick="#" title="" name="u-002" userinfoid="7">inxedu！</a>
+                    <font class="view">来自于</font>
+                    <a class="vam belong-group" href="#">[习惯一个人的音乐]</a>
+                    <span>9分钟前</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

@@ -19,7 +19,7 @@
     <link rel="stylesheet" type="text/css" href="css/web.css">
     <link rel="stylesheet" type="text/css" href="css/theme.css">
     <link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
-    <title>讲师列表-武汉大学出版社-中国在线教育平台第一品牌</title>
+    <title>高校列表-武汉大学出版社-中国在线教育平台第一品牌</title>
     <!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="js/webutils.js"></script>
@@ -32,69 +32,12 @@
             return true;
         }
         window.onerror = killErrors;
-        //获取地址栏参数，name:参数名称
-        function getUrlParms(name){
-            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-            var r = window.location.search.substr(1).match(reg);
-            if(r!=null)
-                return unescape(r[2]);
-            return null;
-        }
-        var major_id = getUrlParms("id");
 
 
-
-        function TeacherCategory(flag){
-            var paras = "major_id=" + flag;
-             // alert(flag);
-            var obj = new Array();
-            var processResult = function(){
-                jQuery("#CategoryTeacherDetail").html(obj[0]);
-            }
-
-            getFromWS("frontmooc/getTeacherDetail.template",paras,obj,processResult);
-
-        }
     </script>
     <script type="text/javascript">
         window.onload = function () {
             //课程全部分类展示
-            var TeacherCategoryMap = new Array();
-            var  TeacherCategoryMapResult = function () {
-                jQuery("#TeacherCategoryResult").html(TeacherCategoryMap[0]);
-
-                   if(major_id ==2018112858650021541){
-                       $("#2018112858650021541").addClass('current');
-                   }else if (major_id == 2018112859970021584 )
-                   {
-                       $("#2018112859970021584").addClass('current');
-                   }else if(major_id == 2018112860600021632)
-                   {
-                       $("#2018112860600021632").addClass('current');
-                   }else if(major_id == 2018112861090021663 )
-                   {
-                       $("#2018112861090021663").addClass('current');
-                   }else if (major_id == 2018112861680021689 )
-                   {
-                       $("#2018112861680021689").addClass('current');
-                   }
-                   else if(major_id == 2018112858180021535){
-                       $("#allTeacher").addClass('current');
-                   }
-            }
-
-
-            getFromWS("frontmooc/getTeacherResult.template", TeacherCategoryMap, TeacherCategoryMapResult);
-
-
-            //老师分科目展示
-            var CategoryTeacherDetailMap = new Array();
-            var   CategoryTeacherDetailMapResult = function () {
-
-                jQuery("#CategoryTeacherDetail").html(CategoryTeacherDetailMap[0]);
-
-            }
-            getFromWS("frontmooc/getTeacherDetail.template", "major_id="+major_id,CategoryTeacherDetailMap, CategoryTeacherDetailMapResult);
 
             var recentUniversity = new Array();
             var processUnResult = function () {
@@ -203,7 +146,7 @@
                                 <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学出版社</a></li>
                                 <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学国家网络安全学院</a></li>
                                 <li><a href="#" title="武汉大学出版社" target="_blank">武汉樱顶网络安全技术中心</a></li>
-                                <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学</a></li>
+                                <li><a href="../mainmooc/login.html" title="武汉大学出版社" target="_blank">后台管理</a></li>
                             </ul>
                             <div class="clear"></div>
                         </div>

@@ -1,0 +1,24 @@
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script>
+    function f() {
+
+        $.ajax({
+            // url: baselocation + "/user/ajax/createuser",
+            url: '//192.168.10.108/moocregister/',
+            data: {
+                "name":"afsafsab@qq.com",
+                "passwd":"123456",
+            },
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                alert(result.issuccess)
+                alert(typeof (result.issuccess))
+            },
+            error:function (error) {
+                alert('error')
+            }
+        })
+    }
+</script>
+<button onclick="f()">AAA</button>

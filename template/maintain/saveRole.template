@@ -1,0 +1,16 @@
+<%
+	If :operation=="insertRole"
+	:insertStr = "insert into role values (?, ? , ?)"
+	debugMsg(L(:tuid)#"------------")
+	:x = execSQL(:insertStr, tuid(), S(:role_name), S(:column_ids))
+	Exit(:x)
+	EndIf
+%>
+
+<%
+	If :operation=="updateRole"
+	:updateStr = "update role set column_ids = ? where name = ?"
+	:x = execSQL(:updateStr, S(:column_ids), S(:role_name))
+	Exit(:x)
+	EndIf
+%>

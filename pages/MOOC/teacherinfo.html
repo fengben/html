@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
@@ -25,10 +25,41 @@
 <script type="text/javascript" src="js/webutils.js"></script>
 <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+   <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript">
+        function killErrors() {
+            return true;
+        }
+        window.onerror = killErrors;
+        //获取地址栏参数，name:参数名称
+        function getUrlParms(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)
+                return unescape(r[2]);
+            return null;
+        }
+        var id = getUrlParms("id");
 
-<script type="text/javascript">
-   
-</script>
+
+	</script>
+	<script type="text/javascript">
+        window.onload = function () {
+
+            var paras = "id=" + id;
+
+            var Teacontent = new Array();
+            var TeacontentResult = function () {
+                //	老师介绍
+                jQuery("#Teacontent").html(Teacontent[0]);
+
+            }
+            // alert(paras);
+            getFromWS("frontmooc/getTeacherContent.template", paras, Teacontent, TeacontentResult);
+
+        };
+	</script>
 
 </head>
 <body class="W-body line-mo-body">
@@ -146,19 +177,17 @@
 <header id="header" class="all-header">
 	<section class="container">
 		<h1 id="logo" class="logo">
-			<a class="headerlogo" style="display: none;"  href="#" title="澄汰科技">
-				<img src="picture/logo.png" width="100%" alt="澄汰科技">
-			</a>
-			<a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="澄汰科技">
+			<a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
+			<a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="武汉大学出版社">
 				<img src="picture/mo-back.png">
 			</a>
 		</h1>
 		<div class="h-r-nsl">
 			<ul class="nav">
 			<li><a href="default.html" title="首页" >首页</a></li>
-						<li><a href="showcoulist.html" title="录播" >课程</a></li>
+						<li><a href="showcoulist.html?id=2018112858180021535" title="录播" >课程</a></li>
 						<li><a href="shoollist.html" title="直播" >名校</a></li>
-						<li><a href="teacherlist.html" title="班级" >名师</a></li>
+						<li><a href="teacherlist.html?id=2018112858180021535" title="班级" >名师</a></li>
 						<li><a href="group.html" title="社区" target="_blank">学问</a></li>
 						<li><a href="article.html" title="资讯" >资讯</a></li>
 
@@ -206,21 +235,9 @@
 				</h2>
 			</header>
 			<div class="t-infor-wrap bg-fff">
-				<section class="t-infor-box c-desc-content">
-					<div class="">
-						<section class="t-infor-pic">
-							<img src="picture/1442297935589.jpg"" xsrc="http://wx.inxedu.com/images/upload/teacher/20150915/1442297935589.jpg" alt="">
-								</section>
-						<h3 class="hLh30">
-							<span class="fsize24 c-333">潘新强&nbsp;首席讲师</span>
-						</h3>
-						<section class="mt10">
-							<span class="t-tag-bg">考研政治辅导实战派专家，全国考研政治命题研究组核心成员。</span>
-						</section>
-						<section class="t-infor-txt">
-							<p class="mt20">法学博士，北京师范大学马克思主义学院副教授，专攻毛泽东思想概论、邓小平理论，长期从事考研辅导。出版著作两部，发表学术论文30余篇，主持国家社会科学基金项目和教育部重大课题子课题各一项，参与中央实施马克思主义理论研究和建设工程项目。</p>
-						</section>
-						<div class="clear"></div>
+				<section class="t-infor-box c-desc-content" >
+					<div class="" id="Teacontent">
+
 					</div>
 				</section>
 				<div class="clear"></div>

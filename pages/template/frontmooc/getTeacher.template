@@ -1,0 +1,33 @@
+<%
+:sql = "select id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile limit 4 offset 0"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+<li>
+<div class="demo-t-l-warp d3-t-l-warp">
+	<a class="pic" href="teacherinfo.html?id=<%=id%>" target="_self">
+		  <%If head_portrait!=0%>
+///         	<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" class="img-responsive" width="110" height="110" >
+ ///暂时展示固定图片
+                 <img src="/pages/resouce/image/default.png"  width="110" height="110">
+          <%Else%>
+             <img src="/pages/resouce/image/default.png"  width="110" height="110">
+          <%EndIf%>
+	</a>
+	<h4 class="hLh30 tac txtOf unFw">
+		<a class="name fsize18 c-333 f-fM" href="teacher/80"><%=name%></a>
+	</h4>
+	<input value="1" type="hidden">
+	<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;首席讲师</h5>
+	<div class="mt15 i-q-txt">
+		<input value="2" type="hidden">
+		<p class="c-999 f-fA"><%=introduction%></p>
+	</div>
+</div>
+</li>
+<%
+EndRepeat
+EndIf
+%>

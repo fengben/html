@@ -1,0 +1,49 @@
+
+  <div class="deanfooter">
+        <div class="deanfttop">
+            <div class="w1180">
+                <div class="deanfttl">
+                    <div class="deanftlogo" style="width:150px">
+                        <img src="./resouce/image/ftlogo.png" style="width:100%">
+                    </div>
+                    <div class="deanftkouhao">
+                        信用湖北
+                    </div>
+                    <div class="deantels">400-456-7895</div>
+                    <div class="deanservicetime">周一至周五 9:00-18:00</div>
+                    <div class="deanservicetime">意见反馈：green@Kgh_tyr.com</div>
+                    <div class="deanservicetime">武汉大学技术开发</div>
+                    <div class="deanservicetime">技术问题反馈：027-68778007</div>
+
+                </div>
+                <div class="deanfttm">
+                    <ul>
+                        <li id="newsBottom">                           
+                        </li>
+                        <li id="publicInteractionBottom">
+                        </li>
+                        <li id="cultureBottom">
+                        </li>
+                        <li id="travelInfoBottom">
+                        </li>
+						<li>
+							<a href="http://sdev.whu.edu.cn/pn/pages/maintain/login.html" target="_blank">后台登录</a>
+						</li>
+                        <div class="clear"></div>
+                    </ul>
+                </div>
+                <div class="deanfttr">
+                    <div class="deanerweimaft" id="indexPic8">
+                       
+                    </div>
+                    <p>扫一扫关注我们</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="deanftbottom">
+            <p>Powered by <a href="#">天门市民政局</a> <em>0.1</em>&#169; 2017-2018 <a
+                    href="#">天门市民政局.</a>&nbsp;&nbsp;
+                <script type="text/javascript" src="./resouce/ping.js" charset="utf-8"></script>
+            </p>
+        </div>

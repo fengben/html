@@ -1,0 +1,138 @@
+<!-- databaseName=placenamedb -->
+<%If :operation == "getArticleFromId"
+If :id == ""
+	Exit ""
+EndIf
+:sql = "select title, content, publish_date,appendix_id,article_type from article where id=? "
+changeRecordSet(:sql, :id);
+If recordCount()>0
+	Repeat
+%>
+          <div class="deanacticletop">
+            <h4><%=title%></h4>
+          </div>
+          <div class="deanmanagerart">
+
+            <span class="deanfenxianga">日期： <%=publish_date%> </span>
+		<!--新增 调整字体大小的span （ 陈 ）-->
+		    <span style="color: #333;font-size: 14px;" id="fontstyle_change">【字体：
+			<a href="javascript:void(0);"><i class="fontstyle" onclick="fontZoomC();">大</i></a>
+			<a href="javascript:void(0);"><i class="fontstyle" onclick="fontZoom();">中</i> </a>
+			<a href="javascript:void(0);"><i class="fontstyle" onclick="fontZoomA();">小</i></a>】
+		    </span>
+          </div>
+          <div class="bm vw">
+            <div class="d">
+              <table cellpadding="0" cellspacing="0" class="vwtb">
+                <tbody>
+                  <tr>
+                    <td id="article_content">
+						<%=content%> 
+                    </td>
+                  </tr>
+
+				  <%
+				///通过id获取article_type,再获取栏目name
+				:getNameSql = "select name from columns where id = "#article_type
+				:res = execSQL(:getNameSql)
+				:idx = lastIndexOf(:res, "=")
+				:column_name = mid(:res, :idx+1)
+				If :column_name == "在线调查"
+				%>
+
+				    <tr>
+				      <td>
+					<label style="font-size: 18px; color: #333;font-weight: normal;padding-left: 15px;border-left: 4px solid #1396FF;">我的看法:</label>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td>
+					<textarea id="comment" style="width: 1150px;min-height: 100px;margin-top: 10px;border-radius: 6px; margin-bottom: 10px;"></textarea>
+				      </td>
+				    </tr>
+				    <tr>
+				      <td style="text-align: center;">
+					<input type="button" id="commentSubmit" onclick="doSubmit()" style="width: 100px" value="提交">
+				      </td>
+				    </tr>
+				<%EndIf%>
+
+				  <tr>
+					<td>
+
+<%
+If appendix_id !=""
+split(appendix_id,";",&appendixIdsArray)%>
+<%:i=0%>
+附件: 
+<%While :i<arrayLength(&appendixIdsArray)%>
+<%
+:selectSql = "select filename from uploadedfiles where filetuid=? "
+:result = execSQL(:selectSql, :appendixIdsArray[:i]);
+:idx = lastIndexOf(:result,"=");
+:appendixName = mid(:result,:idx+1);
+
+%>
+
+	<a style="display:block;margin-left:30px;color:#1386FF" title="点击下载" href="/one/downloadFile.spe?dtype=PostgresXL&mode=attachment&fileid=<%=:appendixIdsArray[:i]%>"> <%=:appendixName%></a>
+						
+<%
+:i = :i+1;
+EndWhile
+EndIf
+%>
+
+					</td>
+				  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+<%
+	EndRepeat
+Else
+	该文章已被删除
+EndIf
+EndIf
+%>
+
+<% 
+If :operation == "getArticleFromAdministration"
+///:sql = "select title, content, publish_date from article as A,columns as B where A.article_type=B.id and B.name = '行政区划' and A.on_top = 1"
+:sql = "select title, content from article where article_type=2018056670270004675 and on_top = 1"
+	changeRecordSet(:sql);
+	If recordCount()>0
+		Repeat
+%>
+   <div class="deanacticletop">
+            <h4><%=title%></h4>
+          </div>
+          <div class="deanmanagerart">
+            <span class="deanedit">                                                                                                             </span>
+            <!--<span class="deanfenxianga"><%=publish_date%> </span>-->
+          </div>
+          <div class="bm vw">
+            <div class="d">
+              <table cellpadding="0" cellspacing="0" class="vwtb">
+                <tbody>
+                  <tr>
+                    <td id="article_content" style="text-indent:2em;">
+			<%=content%> 
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+           
+          </div>
+
+
+<% 
+		EndRepeat
+	Else
+		该文章已被删除
+	EndIf
+EndIf
+%>
+

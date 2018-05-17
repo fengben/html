@@ -1,0 +1,59 @@
+<table class="table table-bordered table-striped" id="example-2">
+	<thead>
+		<tr>
+			<th>在线调查名称</th>
+			<th>客户回复内容</th>
+			<th>IP地址</th>
+			<th>时间</th>
+			<th>操作</th>
+
+		</tr>
+	</thead>
+
+	<tbody class="middle-align">
+<%
+	If :operation=="getOnlineSurveyList"
+	:sql = "select id, article_id, comment , ipaddress, to_char(comment_time, 'yyyy-MM-dd HH24-MI-SS') as comment_time from onlinesurvey"
+	changeRecordSet(:sql)
+		If recordCount() > 0
+			Repeat
+				:getNameSql = "select title from article where id = ?"
+				:res = execSQL(:getNameSql, article_id)
+				:idx = lastIndexOf(:res, "=")
+				:surveyName = mid(:res, :idx+1)
+
+%>
+	<tr>
+	<td><span id="name<%=id%>"><%=:surveyName%></span></td>
+	<td><span id="comment<%=id%>"><%=comment%></span></td>
+	<td><span id="ipaddress<%=id%>"><%=ipaddress%></span></td>
+	<td><span id="time<%=id%>"><%=comment_time%></span></td>
+
+<%
+
+%>
+	<td>
+		<a href="javascript:void(0);" class="btn btn-secondary btn-sm btn-icon icon-left" data-id="<%=id%>" onclick="viewOnlineSurvey('<%=id%>')">查看</a>
+
+		<a class="btn btn-danger btn-sm btn-icon icon-left" data-toggle="modal" data-target="#deleteModal" data-id="<%=id%>">删除
+		</a>
+	</td>
+	</tr>
+
+<%
+			EndRepeat
+		EndIf
+	EndIf
+%>
+
+
+
+</table>
+
+
+
+<script type="text/javascript">
+jQuery(document).ready(function ($){
+	$('#example-2').dataTable({});
+});
+</script>

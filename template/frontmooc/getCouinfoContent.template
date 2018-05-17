@@ -156,8 +156,9 @@ If recordCount()>0
                        <a class="c-333 fsize16 fl" href="teacherinfo.html"><%=publisher%></a>
                       </section>
                       <section class="hLh20 txtOf">
-                       <span class="c-999">毕业于师范大学数学系，热爱教育事业，执教数学思维6年有余</span>
-                      </section> </li>
+                       <span class="c-999">主讲讲师</span>
+                      </section>
+                       </li>
                     </ul>
                    </section>
                   </div>

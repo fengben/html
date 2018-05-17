@@ -1,0 +1,85 @@
+<!-- databaseName=placenamedb -->
+<%
+debugMsg("=============="#:type)
+If :operation == "getArticleList"
+
+	If :type == ""
+		:sql = "select FOUND_ROWS, A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from article as A, columns as B  where A.article_type = B.id and (B.id=2018062105410002453 or B.parent_id = 2018062105410002453 or B.parent_id in(select id  from columns  where parent_id=2018062105410002453)) order by A.on_top desc,A.id desc limit ?, 10 ";
+		changeRecordSet(:sql, (:pageNumber-1)*10)
+	Else
+		:sql = "select FOUND_ROWS, A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from article as A, columns as B  where A.article_type = B.id and (B.id=? or B.parent_id=?) order by A.on_top desc,A.id desc limit ?, 10 ";
+		changeRecordSet(:sql,L(:type),L(:type), (:pageNumber-1)*10 )
+	EndIf
+
+	Repeat
+%>
+      <li>
+        <div class="deanarticel">
+          <a href="view.html?id=<%=id%>" target="_blank">
+<%If pic_id!=0%>
+			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  width="250" height="150">
+<%Else%>
+			<img src="/pages/resouce/image/default.png"  width="250" height="150">
+<%EndIf%>
+		</a><em></em>
+        </div>
+        <div class="deanarticer">
+          <div class="deanarticername">
+            <a href="view.html?id=<%=id%>" class="deantaglebs" target="_blank"><%=name%></a>
+          </div>
+          <h5> 
+			<a href="view.html?id=<%=id%>" target="_blank" class="deanarttitles xi2" title="<%=title%>"><%=shortTitle(title,0,50)%></a> 
+		  </h5>
+
+	      <%:recContent=replace(content_text,"\r"," ")%>
+	      <%:recContent=replace(:recContent,"\n"," ")%>
+	      <%:recContent=replace(:recContent,"img","span")%>
+	      <%:recContent=replace(:recContent,"video","span")%>
+	      <%:recContent=replace(:recContent,"embed","span")%>
+	      <%:recContent=replace(:recContent,"object","span")%>
+          <div class="deanarticersummary"><%=:recContent%></div>
+          <div class="deanatcertop">
+            <div class="deanarticerinfo">
+              <span class="deanfabushijian">时间：<%=publish_date%></span>
+              <em>|</em>
+              <span class="deanyuedushu">阅读：<%=count%></span>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+<%EndRepeat%>
+$_@_$
+<div class="pg">
+<%:i=1%>
+<%:totalPage = 0%>
+<%debugMsg("--------------=----"#:FOUND_ROWS)%>
+<%:totalPage=ceil(:FOUND_ROWS,10)%>
+
+<div>
+            <%If :pageNumber-1!=0%> <a href="javascript:goToPage(1)">首页</a><%EndIf%> &nbsp;&nbsp;&nbsp;
+        
+            <%If :pageNumber-1!=0%> <a href="javascript:goToPage(<%=:pageNumber-1%>)"> 上一页</a><%EndIf%> &nbsp;&nbsp;&nbsp;  /// sub的结果为0，就会放弃这一行
+        
+         第<%=:pageNumber%>页/共<%=:totalPage%>页&nbsp;&nbsp;&nbsp;
+        
+            <%If :pageNumber!=:totalPage && :totalPage != 0%> <a href="javascript:goToPage(<%=:pageNumber+1%>)">下一页</a> <%EndIf%> &nbsp;&nbsp;&nbsp;///:pageNumber等于totalPage，就会放弃这一行
+                 
+        
+            <%If :pageNumber!=:totalPage && :totalPage != 0%> <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a> <%EndIf%> &nbsp;&nbsp;&nbsp;///:pageNumber等于totalPage，就会放弃这一行
+
+           <select id="mySelect" width="50" STYLE="width: 40px" onchange="goToPage(this.value)">
+           <%:tmp=1%>
+           <%:endPage=:totalPage+1%>
+           <%While :tmp!=:endPage%>
+               <option  <%If :tmp==:pageNumber%>selected<%EndIf%> ><%=:tmp%></option>
+               <%:tmp=:tmp+1%>
+           <%EndWhile%>
+           </select>
+</div>
+<%EndIf%>
+
+

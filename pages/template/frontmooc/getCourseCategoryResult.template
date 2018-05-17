@@ -1,0 +1,19 @@
+
+<%
+:sql = "SELECT NAME,id  FROM mooccolumns WHERE parent_id = 2018112858180021535 "
+        changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+%>
+<li id="allCategory"><a onclick="go(this);CourseCategory('2018112858180021535')" title="全部" href="javascript:void(0)">全部</a></li>
+<%Repeat%>
+        	<li id="<%=id%>"><a onclick="go(this);CourseCategory('<%=id%>');changeURLPar(http://192.168.10.199/pages/MOOC/showcoulist.html?id=2018112858180021535,'id','<%=id%>')" title="<%=name%>" href="javascript:void(0);"><%=name%></a></li>
+        	<%EndRepeat%>
+<%
+EndIf
+%>
+
+
+
+
+

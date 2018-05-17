@@ -1,0 +1,610 @@
+<!-- databaseName=moocdb -->
+<%:tmp=:pageNumber-1%>
+
+<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description,FOUND_ROWS from ry_filespace as A, uploadedfiles as B where A.file_id=B.filetuid" %>
+<%:sql=:sql#" and A.fullpath = '"#:parentDirName#"'" %>
+<%:sql=:sql#" order by A.file_id asc,dir_name asc limit "#:tmp*:pageSize#","#:pageSize%>
+<%:x=changeRecordSet(:sql)%>
+<%:remaind=:FOUND_ROWS%:pageSize%>
+<%:totalPage=ceil(:FOUND_ROWS,:pageSize)%>
+<%If :totalPage==0%>
+    <%:totalPage=1%>
+<%EndIf%>
+<script>
+    var editor;
+    function createEditor(){
+        editor = KindEditor.create('textarea[id="content"]',{
+        allowFileManager : true,
+        uploadJson : kindeditUploadUrl(),
+        afterUpload: kindeditAfterUpload,
+        imageTabIndex:1,
+        pasteType : 1,  //无格式粘贴
+	    fileManagerJson : kindeditorFileManagerUrl(),
+        items:[
+			'source', '|', 'undo', 'redo', '|', 'view', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image',
+			'media', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '|', 'about'
+		  ]
+        });
+    }
+    function kindeditorFileManagerUrl(){
+
+	return '/Home/remoteFile.template';
+    }
+	function enterDir(fullpath,dir_name){
+		initPageShowDownloadFile(fullpath+dir_name+"/",1,9,"fileSpace",376);
+		$("#parentDirName").text(fullpath+dir_name+"/");
+	}
+	function backDir(){
+		var parentDirName = $("#parentDirName").text();
+		if(parentDirName == "/"){
+			return;
+		}
+		var grandParentDirNameTemp = parentDirName.substring(0,parentDirName.length-1);
+		var grandParentDirName = parentDirName.substring(0,grandParentDirNameTemp.lastIndexOf('/')+1);
+		if(grandParentDirName == "/"){
+			initPageShowDownloadFile(grandParentDirName ,1,10,"fileSpace",376);
+		}else{
+			initPageShowDownloadFile(grandParentDirName ,1,9,"fileSpace",376);
+		}
+
+		$("#parentDirName").text(grandParentDirName);
+	}
+	function newFileOrDir(){
+	    var prmpt = "新建文件";
+	    $("#bufferMark").val("new");
+	    hiBox('#modifybox',prmpt,750,350,'','.a_close');
+	    var parentDirName = $("#parentDirName").text();
+	    $("#popup_message #modifyFullpath").val(parentDirName);
+
+	}
+
+
+	function saveRecord(){
+	    var dirName;
+	    var fileName;
+	    var selected = $("#popup_message #modifyAttribute").val();
+	    var uploadfile = $("#popup_message #modifyUploadFile").val();
+	    var description = $("#popup_message #modifyDescription").val();
+
+	    var parentDirName = $("#parentDirName").text();
+	    var paras;
+	    if($("#bufferMark").val()=="new"){
+
+		if(selected == "文件"){
+			$("#bufferMark").val("newfile");
+			if(uploadfile==""){
+				alert("未选择任何文件");
+				return;
+			}
+		 var point = uploadfile.lastIndexOf(".");
+	         var type = uploadfile.substr(point);
+		 if(type==".mp4"||type==".avi"||type==".war"||type==".mov"||type==".flv"||type==".asf"||type==".rmvb"){
+			var additional_args="databaseType=PostgresXL&needThumbnail=true";
+		 }else{
+			var additional_args="databaseType=PostgresXL&needThumbnail=false";
+		 }
+			uploadToDatabase("popup_message #modifyUploadFile",doSaveFile,additional_args);
+			return;
+		}else if(selected == "目录"){
+	        	$("#bufferMark").val("newdir");
+		}
+
+	    }
+	    var obj = new Array();
+	    var processResult1 = function(){
+		if(obj[0]=="sameDir"){
+			alert("文件夹名字重复");
+		}else{
+			alert('成功！');
+			hiClose();
+			refreshList();
+
+		}
+	    };
+	    paras = "parentDirName=" + parentDirName;
+	    paras += "$^@^$operation=" + $("#bufferMark").val();
+	    paras += "$^@^$description=" + description;
+	    paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+
+	    if($("#bufferMark").val()=="modifydir"||$("#bufferMark").val()=="newdir"){
+	        dirName = $("#popup_message #modifyDirName").val();
+	    	paras += "$^@^$dirName=" + dirName;
+	    }else if($("#bufferMark").val()=="modifyfile"||$("#bufferMark").val()=="newfile"){
+	    	fileName = $("#popup_message #modifyFileName").val();
+	    	paras += "$^@^$fileName=" + fileName;
+	    }
+	    paras += "$^@^$id=" + $("#bufferId").val();
+	    paras += "$^@^$fileId=" + $("#bufferFileId").val();
+	    paras += "$^@^$oldFullPath=" + $("#bufferOldFullPath").val();
+
+	    if(dirName&&dirName.trim() == ""&&selected=="目录"){
+		alert("文件夹名称不能为空");
+		return;
+	    }else if(dirName&&dirName.indexOf("/")!=-1&&selected=="目录"){
+		alert("文件夹名称不能包含\"/\"");
+		return;
+	    }
+	        alert("description");
+	        alert(paras);
+            getFromWS("adminUsers/fileSpaceModify.template",paras,obj,processResult1);
+
+	}
+	function doSaveFile(rstr){
+		if(rstr == ""){return;}
+	    var parentDirName = $("#parentDirName").text();
+	    var description = $("#popup_message #modifyDescription").val();
+		paras = "fileId=" + rstr;
+		paras += "$^@^$parentDirName=" + parentDirName;
+ 		paras += "$^@^$operation=" + "newfile";
+	    paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+	    paras += "$^@^$description=" + description;
+		var obj = new Array();
+	        var processResult = function(){
+
+			refreshList();
+			hiClose();
+	    	};
+		getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
+
+	}
+
+	function modifyFileSpace(type,id,name,description){
+
+	    var prmpt = "修改文件";
+	    hiBox('#modifybox',prmpt,750,350,'','.a_close');
+	    var parentDirName = $("#parentDirName").text();
+	    $("#popup_message #selectFileTr").css("display","none");
+	    $("#popup_message #selectAttributeTr").css("display","none");
+	    $("#popup_message #modifyFullpath").val(parentDirName);
+	    $("#popup_message #modifyDescription").val(description);
+	    if(type == "dir"){
+	    	$("#bufferId").val(id);
+	    	$("#bufferOldFullPath").val(parentDirName+name+"/"); //用来存储修改目录的子目录的fullpath,（其对应的子目录fullpath都要改)
+	    }else if(type == "file"){
+	    	$("#bufferFileId").val(id);
+	    }
+
+	    if(type=="dir"){
+		$("#bufferMark").val("modifydir");
+		$("#popup_message #dirNameTr").css("display","table-row");
+		$("#popup_message #fileNameTr").css("display","none");
+	        $("#popup_message #modifyDirName").val(name);
+	    }else if(type=="file"){
+		$("#bufferMark").val("modifyfile");
+		$("#popup_message #dirNameTr").css("display","none");
+		$("#popup_message #fileNameTr").css("display","table-row");
+	        $("#popup_message #modifyFileName").val(name);
+	    }
+
+	}
+	function deleteFile(type,id,name){
+	    var fullpath = $("#parentDirName").text();
+	    var dealResult = function(r){
+	        if(r){
+			var paras;
+			if(type == "dir"){
+		    	paras="operation=deletedir";
+				paras += "$^@^$fullpath=" + fullpath;
+				paras += "$^@^$id=" + id;
+				paras += "$^@^$dir_name=" + name;
+			}else if(type == "file"){
+		    	paras="operation=deletefile";
+				paras += "$^@^$file_id=" + id;
+			}
+		    var obj = new Array();
+		    var processResult=function(){
+				if(obj[0]=="isNotNullDir"){
+					alert("请先删除子文件");
+				}else{
+					alert('成功！');
+					hiClose();
+					alert("删除。。。。");
+					refreshList();
+
+				}
+		        };
+			getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
+		}
+	    };
+		hiConfirm('真的要删除此项吗?', '确认框', dealResult);
+	}
+	function viewFile(fileId,fileName){
+	    if(checkImg(fileName)){
+		    var html = '<center><img width="550" height="400" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'"></center>';
+		    hiBox('#viewbox',fileName,650,500,'');
+            $("#popup_message").html(html);
+	    }else if(checkTv(fileName)){
+		var html = '<center><video src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" controls="true" width="550" height="400" autoplay="autoplay"/></center>';
+		$("#viewbox").html(html);
+	        hiBox('#viewbox',fileName,650,500,'');
+	    }else if(checkWord(fileName)){
+            var html = '<center><object data="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" width="550" height="400"/></center>';
+            		$("#viewbox").html(html);
+            	        hiBox('#viewbox',fileName,650,500,'');
+	    }else if(checkPdf(fileName)){
+	    var html = '<center><object data="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" width="550" height="400"/></center>';
+                    		$("#viewbox").html(html);
+                    	        hiBox('#viewbox',fileName,650,500,'');
+
+	    }else if(checkPpt(fileName)){
+	    var html = '<center><object data="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" width="550" height="400"/></center>';
+                            		$("#viewbox").html(html);
+                            	        hiBox('#viewbox',fileName,650,500,'');
+	    }
+	    else{
+		alert("格式不支持预览");
+
+	    }
+
+	}
+    //下面是关于文章的新建，修改和保存
+	function newArticle(){
+	    var prmpt = "新建文章";
+        showHiBox('modifyArticlebox',prmpt,'modifyContent');
+		$("#popup_message #modifyFullpath").val($("#parentDirName").text());
+		$("#popup_message #mark").val("新建文章");
+        $("#popup_message #modifyContent")[0].id = "content"; //为createEditor();做准备
+        createEditor();
+	}
+    function saveArticle(){
+		var title = $("#popup_message #modifyTitle").val();
+	    var fullpath = $("#parentDirName").text();
+	    var content = editor.html();
+		var mark = $("#popup_message #mark").val();
+		if(title==""||content==""){
+			alert("请填写标题和内容");
+			return;
+		}
+		if(mark=="新建文章"){
+			var arr = new Array();
+			var myCallback = function(){
+			    var paras = "title=" + title;
+			    paras += "$^@^$fullpath=" + fullpath;
+				paras += "$^@^$loginName=" + localStorage.getItem('loginName');
+			    paras += "$^@^$content=" + content;
+			    paras += "$^@^$operation=saveArticle";
+			    paras += "$^@^$file_id=" + arr[0];
+				var obj = new Array();
+				var processResult = function(){
+					alert(obj[0]);
+					var fileList = $("#bufferPicIds")[0].value;
+					var pics = new Array();
+					pics = fileList.split(";");
+					for(var i=0;i<pics.length;i++){
+						var paras = "file_id=" + arr[0];
+			    		paras += "$^@^$fileId=" + pics[0];  //文章中上传的图片或者视频的id
+			    		paras += "$^@^$operation=setRelatedFile";
+						getFromWS("zyMooc/zyFileSpaceModify.template",paras,null);
+					}
+					hiClose();
+					refreshList();
+				}
+				//alert(paras);
+		       getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
+			};
+			getFromWS("Home/generateTuid.template","",arr,myCallback);
+		}else if(mark=="修改文章"){
+			    var paras = "title=" + title;
+			    paras += "$^@^$content=" + content;
+			    paras += "$^@^$operation=modifyArticle";
+			    paras += "$^@^$file_id=" + $("#popup_message #fileId").val();;
+				var obj = new Array();
+				var processResult = function(){
+					alert(obj[0]);
+					var fileList = $("#bufferPicIds")[0].value;
+					var pics = new Array();
+					pics = fileList.split(";");
+					for(var j=0;j<pics.length;j++){
+						var paras = "file_id=" + $("#popup_message #fileId").val();
+			    		paras += "$^@^$fileId=" + pics[0];  //文章中上传的图片或者视频的id
+			    		paras += "$^@^$operation=setRelatedFile";
+						getFromWS("zyMooc/zyFileSpaceModify.template",paras,null);
+					}
+					hiClose();
+					refreshList();
+
+				}
+		       getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
+		}
+
+	}
+	function modifyArticle(file_id,filename,date){
+		paras = "file_id=" + file_id;
+		paras += "$^@^$operation=queryContent";
+		var obj = new Array();
+       var processResult = function(){
+		    var prmpt = "修改文章";
+			showHiBox('modifyArticlebox',prmpt,'modifyContent');
+			$("#popup_message #modifyFullpath").val($("#parentDirName").text());
+			$("#popup_message #modifyTitle").val(filename);
+			$("#popup_message #mark").val("修改文章");
+			$("#popup_message #fileId").val(file_id);
+			$("#popup_message #modifyDate").val(date);
+			$("#popup_message #modifyContent").val(obj[0]);
+			$("#popup_message #modifyContent")[0].id = "content"; //为createEditor();做准备
+			createEditor();
+	    	};
+		getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
+	}
+	function viewArticle(file_id,filename,date){
+	    modifyArticle(file_id,filename,date);
+     	}
+	function deleteArticle(file_id){
+	    var dealResult = function(r){
+	        if(r){
+				var paras;
+			    paras="operation=deleteArticle";
+				paras += "$^@^$file_id=" + file_id;
+
+			    var obj = new Array();
+			    var processResult=function(){
+					refreshList();
+				};
+				getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
+			}
+	        };
+		hiConfirm('真的要删除此项吗?', '确认框', dealResult);
+	}
+
+
+	function checkImg(filename){
+
+	    var index = filename.lastIndexOf("."); //得到"."在第几位
+	    var fileType = filename.substring(index); //截断"."之前的，得到后缀
+	    if(fileType==".bmp"||fileType==".png"||fileType==".gif"||fileType==".jpg"||fileType==".jpeg"){  //根据后缀，判断是否符合图片格式
+		  return true;
+	    }
+	    return false;
+	 }
+	function checkPdf(filename){
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".pdf"){  //根据后缀，判断是否符合图片格式
+          return true;
+        }
+        return false;
+    }
+    function checkPpt(filename){
+            var index = filename.lastIndexOf("."); //得到"."在第几位
+            var fileType = filename.substring(index); //截断"."之前的，得到后缀
+            if(fileType==".pptx"||fileType==".ppt"){  //根据后缀，判断是否符合图片格式
+              return true;
+            }
+            return false;
+        }
+    function checkWord(filename){
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".txt"||fileType==".doc"||fileType==".docx"||fileType==".rtf"||fileType=="wps"){  //根据后缀，判断是否符合图片格式
+          return true;
+        }
+        return false;
+    }
+	function checkTv(filename){
+	    var index = filename.lastIndexOf("."); //得到"."在第几位
+	    var fileType = filename.substring(index); //截断"."之前的，得到后缀
+	    if(fileType==".mp4"||fileType==".avi"||fileType==".war"||fileType==".mov"||fileType==".flv"||fileType==".asf"||fileType==".rmvb"){ //根据后缀，判断是否符合视频格式
+	        return true;
+	    }
+	    return false;
+	}
+    // 翻页
+    function refreshList(){
+	var parentDirName = $("#parentDirName").text();
+	initPageShowDownloadFile(parentDirName,<%=:pageNumber%>,<%=:pageSize%>,"fileSpace",376);
+	alert();
+	initPage1($("#fileType").val(),$("#downloadSearchName").val(),parentDirName1,1,8,"fileList",376);
+    }
+
+    // 翻页
+    function gotoPage(pn,ps){
+	var parentDirName = $("#parentDirName").text();
+	initPageShowDownloadFile(parentDirName,pn,ps,"fileSpace",376);
+    }
+
+    // 翻页
+    function jumpPage(){
+        var idx = document.getElementById("mySelect").selectedIndex+1;
+	var parentDirName = $("#parentDirName").text();
+	initPageShowDownloadFile(parentDirName,idx,<%=:pageSize%>,"fileSpace",376);
+    }
+
+</script>
+ <div id="databuffer" style="display:none">
+     <input id="bufferPicIds" type= hidden>
+ </div>
+<table align='center' style="width:900px;color:#000;margin:auto;font-size:12px">
+  <% :i=0%>
+  <% :k=1%>
+  <tr>
+
+<%If recordCount()>0%>
+    <%Repeat%>
+        <%If :i==0&&:k==0%></tr><tr> <%EndIf%>
+        <%If contenttype=="text/html"%>
+        	<%:thumbnail_id = 0%>
+	    <%Else%>
+		    <%:sql="select filetuid as thumbnail_id from uploadedfiles where relatedfile = ? " %>
+		    <%:x=execSQL(:sql,file_id#"L")%>
+		    <%If mid(:x,0,2)=="ok"&&:x!="ok"%>
+			    <%:idx2 = indexOf(:x,"=")%>
+			    <%:thumbnail_id = mid(:x,:idx2+1)%>
+		    <%Else%>
+			    <%:thumbnail_id = 0%>
+		    <%EndIf%>
+	    <%EndIf%>
+        <%If :parentDirName!="/"&& :k==1%>
+            <td align="center" >
+	            <div title="返回上一级" style="width:125px;height:150px">
+   		            <img align=left  src="" style="cursor:pointer;width:15px;height:15px;float:left;visibility:hidden" />
+   		            <img align=right  src="" style="cursor:pointer;width:15px;height:15px;float:right;visibility:hidden" />
+		            <img src="/images/home/dir.png" style="cursor:pointer;width:125px;height:130px"  onclick="backDir()"/>
+	            </div>../
+            </td>
+	        <% :i=:i+1%>
+        <%EndIf%>
+        <%If file_id==1%>
+            <td align="center" >
+	            <div title="<%=description%>" style="width:125px;height:150px">
+	            <% If :classification=="超级管理员"||(:classification=="老师"&&publisher==:publisher)%>
+	                <img id="icon" align=left title="修改" src="/images/home/edit.png" style="cursor:pointer;width:15px;height:15px;float:left" onclick="modifyFileSpace('dir','<%=id%>','<%=dir_name%>','<%=description%>')"/>
+	                <img id="icon" align=right title="删除" src="/images/home/delete.png" style="cursor:pointer;width:15px;height:15px;float:right" onclick="deleteFile('dir','<%=id%>','<%=dir_name%>')"/>
+                <% EndIf%>
+	                <img src="/images/home/dir.png" style="cursor:pointer;width:125px;height:130px;margin-top:0px" onclick="enterDir('<%=fullpath%>','<%=dir_name%>')"/>
+	            </div>
+	        <span tilte="<%=dir_name%>"><%=shortTitle(dir_name,0,10)%></span>
+            </td>
+    	<%Else%>
+		    <%If contenttype=="text/html"%>
+                <td align="center" >
+		            <div title="<%=filename%>" style="width:125px;height:150px">
+		            <% If :classification=="超级管理员"||(:classification=="老师"&&publisher==:publisher)%>
+		                <img id="icon" align=left title="修改" src="/images/home/edit.png" style="cursor:pointer;width:15px;height:15px;float:left" onclick="modifyArticle('<%=file_id%>','<%=filename%>','<%=publish_date%>')"/>
+		                <img id="icon" align=right title="删除" src="/images/home/delete.png" style="cursor:pointer;width:15px;height:15px;float:right" onclick="deleteArticle('<%=file_id%>')"/>
+		            <% EndIf%>
+		                <img src="/images/home/article.png" style="cursor:pointer;width:125px;height:130px;margin-top:0px" onclick="viewArticle('<%=file_id%>','<%=filename%>','<%=publish_date%>')"/>
+		            </div>
+		            <span tilte="<%=filename%>"><%=shortTitle(filename,0,10)%></span>
+                </td>
+	        <%Else%>
+                <td align="center">
+                    <div style="width:125px;height:150px">
+                        <%If :classification=="超级管理员"||(:classification=="老师"&&publisher==:publisher)%>
+                            <img id="icon" align=left title="修改" src="/images/home/edit.png" style="cursor:pointer;width:15px;height:15px;float:left" onclick="modifyFileSpace('file','<%=file_id%>','<%=filename%>','<%=description%>')"/>
+                            <img id="icon" align=right title="删除" src="/images/home/delete.png" style="cursor:pointer;width:15px;height:15px;float:right" onclick="deleteFile('file','<%=file_id%>','<%=filename%>')"/>
+                        <%EndIf%>
+                        <%If indexOf(contenttype,"image")!=-1%>
+                            <img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=file_id%>" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                        <%Else%>
+	                        <%If indexOf(contenttype,"video")!=-1%>
+	                        	<img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=:thumbnail_id%>" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+	                        <%Else%>
+	                        	<%If indexOf(contenttype,"plain")!=-1%>
+                            		<img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/images/WLImages/txt.jpg" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                            	<%Else%>
+                            			<%If indexOf(contenttype,"word")!=-1%>
+                            				<img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/images/WLImages/word.jpg" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                            			<%Else%>
+                            				<%If indexOf(contenttype,"pdf")!=-1%>
+                            					<img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/images/WLImages/pdf.jpg" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                            				<%Else%>
+                            					 <%If indexOf(contenttype,"presentation")!=-1%>
+                            						<img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/images/WLImages/ppt.jpg" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                       							<%Else%>
+                            						<img title="<%=description%>" style="cursor:pointer;width:125px;height:130px;" src="/images/WLImages/unKnown.jpg" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                        						<%EndIf%>
+                        					<%EndIf%>
+                        				<%EndIf%>
+                        		<%EndIf%>
+	                        <%EndIf%>
+                        <%EndIf%>
+                    </div>
+                    <span title="<%=filename%>"><%=shortTitle(filename,0,10)%> </span>
+                </td>
+            <%EndIf%>
+        <%EndIf%>
+        <% :i=:i+1%> <%:k=0%> <%If :i==5%><%:i=0%> <%EndIf%>
+    <%EndRepeat%>
+<%Else%>
+	<%If :parentDirName!="/"%>
+	    <td align="center" >
+		<div title="返回上一级" style="width:125px;height:150px">
+			<img align=left  src="" style="cursor:pointer;width:15px;height:15px;float:left;visibility:hidden" />
+			<img align=right  src="" style="cursor:pointer;width:15px;height:15px;float:right;visibility:hidden" />
+			<img src="/images/home/dir.png" style="cursor:pointer;width:125px;height:130px"  onclick="backDir()"/>
+		</div>../
+        </td>
+	<%EndIf%>
+<%EndIf%>
+</tr>
+    <tr>
+        <td colspan=5 align=center style="font-size:12px;padding-top:20px">
+            <%If :pageNumber-1!=0%> <a href='javascript:gotoPage(1,<%=:pageSize%>)'> <%EndIf%>
+                首页
+            <%If :pageNumber-1!=0%></a><%EndIf%> &nbsp;&nbsp;&nbsp;
+
+            <%If :pageNumber-1!=0%> <a href='javascript:gotoPage(<%=:pageNumber-1%>,<%=:pageSize%>)'> <%EndIf%>/// sub结果为0，就会放弃这一行
+            上一页
+            <%If :pageNumber-1!=0%></a><%EndIf%> &nbsp;&nbsp;&nbsp;  /// sub的结果为0，就会放弃这一行
+
+         第<%=:pageNumber%>页/共<%=:totalPage%>页&nbsp;&nbsp;&nbsp;
+
+            <%If :pageNumber!=:totalPage%> <a href='javascript:gotoPage(<%=:pageNumber+1%>,<%=:pageSize%>)'> <%EndIf%>  /// :pageNumber等于totalPage，就会放弃这一行
+            下一页
+            <%If :pageNumber!=:totalPage%></a> <%EndIf%> &nbsp;&nbsp;&nbsp;///:pageNumber等于totalPage，就会放弃这一行
+
+
+            <%If :pageNumber!=:totalPage%> <a href='javascript:gotoPage(<%=:totalPage%>,<%=:pageSize%>)'> <%EndIf%>  /// :pageNumber等于totalPage，就会放弃这一行
+            尾页
+            <%If :pageNumber!=:totalPage%></a> <%EndIf%> &nbsp;&nbsp;&nbsp;///:pageNumber等于totalPage，就会放弃这一行
+
+
+           <select id="mySelect" width="50" STYLE="width: 40px" onchange="jumpPage();">
+           <%:tmp=1%>
+           <%:endPage=:totalPage+1%>
+           <%While :tmp!=:endPage%>
+               <option  <%If :tmp==:pageNumber%>selected<%EndIf%> ><%=:tmp%></option>
+               <%:tmp=:tmp+1%>
+           <%EndWhile%>
+           </select>
+        </td>
+
+    </tr>
+</table>
+ <div id="modifyArticlebox" style="display:none; align:center">
+
+     <table cellspacing="0" cellpadding="0" border="0" >
+
+     <tr>
+		  <td></td>
+         <td width=80 align="right"> 标题：  </td>
+         <td>  <input class="form-control1 input-sm" style="width:200px;height:30px" id="modifyTitle" style="width:450px" type="text"> </td>
+         <td width=80  align="right"> 操作： </td>
+	 	 <td>
+			<input class="form-control1 input-sm" style="width:200px;height:30px" id="mark" type="text" style="width:450px" readonly>
+			<input id="fileId" type="text" style="display:none">
+		</td>
+     </tr>
+     <tr height=5></tr>
+     <tr>
+		<td></td>
+         <td width=80  align="right">  发布日期： </td>
+         <td> <input class="form-control1 input-sm" style="width:200px;height:30px" id="modifyDate" type="text" style="width:450px" readonly></td>
+         <td width=100 align="right">当前目录： </td>
+         <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyFullpath" type="text" readonly ></td>
+     </tr>
+     <tr height=5></tr>
+     <tr>
+		<td></td>
+       <td width=100>  内容： </td>
+     </tr>
+     <tr>
+		<td></td>
+       <td colspan="4">  <textarea id="modifyContent" style="width:700px;height:600px !important;visibility:hidden;resize: none;" ></textarea>  </td>
+     </tr>
+
+     <tr style="margin-top:10px">
+       <td></td>
+       <td></td>
+       <td>
+	    <button style="width:50p;height:30px" class="btn btn-sm btn-default" onclick="saveArticle();">保存</button>
+	    <button  style="width:50px;height:30px;margin-left:20px" class="a_close btn btn-sm btn-default">取消</button>
+	    </td>
+       <td></td>
+       <td></td>
+
+     </tr>
+   </table>
+
+ </div>
+
+
+
+
+

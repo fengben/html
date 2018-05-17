@@ -19,7 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/web.css">
 	<link rel="stylesheet" type="text/css" href="css/theme.css">
 	<link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
-	<title>直播首页-武汉武汉大学出版社-中国在线教育平台第一品牌</title>
+	<title>高校首页-武汉武汉大学出版社-中国在线教育平台第一品牌</title>
 	<!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
 	<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 
@@ -55,6 +55,13 @@
                 jQuery("#SchoolCourse").html(content[0]);
             }
             getFromWS("homemooc/getCourseBySchool.template","id="+id,content,contentResult);
+          //学校下的老师数据读取
+			var paras= "school_id=" +id;
+            var Teacontent = new Array();
+            var TeacontentResult = function(){
+                jQuery("#Teacontent").html(Teacontent[0]);
+            }
+            getFromWS("frontmooc/getSchoolTeacher.template",paras,Teacontent,TeacontentResult);
 
         };
 
@@ -228,32 +235,32 @@
 		<!-- /global header end-->
 		<!-- 公共头引入 -->
 
-		<div class="i-slide banner-slide" style="height: 248px;">
+		<div class="i-slide banner-slide" style="height: 200px;">
 			<section>
 				<!-- 如果需要导航按钮 -->
-				<a class="arrow-left s-arrow" href="javascript:void(0)"></a>
-				<a class="arrow-right s-arrow" href="javascript:void(0)"></a>
+				<!--<a class="arrow-left s-arrow" href="javascript:void(0)"></a>-->
+				<!--<a class="arrow-right s-arrow" href="javascript:void(0)"></a>-->
 				<!-- 图片位置 -->
 				<div class="swiper-container">
-					<div class="swiper-wrapper" style="width: 4749px; height: 460px; transform: translate3d(-3166px, 0px, 0px); transition-duration: 0.3s;">
-						<div class="swiper-slide" style="width: 1583px; height: 460px;">
-						<a target="_blank" href="/">
-							<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">
-						</a>
-					</div>
-						<div class="swiper-slide" style="width: 1583px; height: 460px;">
+					<!--<div class="swiper-wrapper" style="width: 4749px; height: 460px; transform: translate3d(-3166px, 0px, 0px); transition-duration: 0.3s;">-->
+						<!--<div class="swiper-slide" style="width: 1583px; height: 460px;">-->
+						<!--<a target="_blank" href="/">-->
+							<!--<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">-->
+						<!--</a>-->
+					<!--</div>-->
+						<!--<div class="swiper-slide" style="width: 1583px; height: 460px;">-->
+							<!--<a target="_blank" href="/">-->
+								<!--<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">-->
+							<!--</a>-->
+						<!--</div>-->
+						<div class="swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-active" style="width: 1280px; height: 200px;">
 							<a target="_blank" href="/">
-								<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">
+								<img class="imgload" src="https://edu-image.nosdn.127.net/D69FB207F80249BC94E62324731EAC32.jpg?imageView&thumbnail=1280y200&quality=100" alt="直播首页banner 1" >
 							</a>
-						</div>
-						<div class="swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-active" style="width: 1583px; height: 460px;">
-							<a target="_blank" href="/">
-								<img class="imgload" src="https://img2.ph.126.net/SkD-CO-sd86gJDlfsRix0A==/6608230909190265551.jpg" alt="直播首页banner 1">
-							</a>
-						</div>
+						<!--</div>-->
 					</div></div>
 				<!-- 如果需要分页器 -->
-				<div class="pagination"><span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span></div>
+				<!--<div class="pagination"><span class="swiper-pagination-switch swiper-visible-switch swiper-active-switch"></span></div>-->
 			</section>
 		</div>
 		<!-- /index slide -->
@@ -308,71 +315,8 @@
 					</header>
 					<article class="live-no-title">
 						<div class="demo-teach-warp">
-							<ul class="clearfix demo-teach-list">
-								<li>
-									<div class="demo-t-l-warp">
-										<a class="pic" href="teacherinfo.html?id=86" target="_blank" title="李诚" target="_self">
-											<img alt="李诚" src="picture/avatar-boy.gif" xsrc="picture/1442297957332.jpg">
-										</a>
-										<h4 class="hLh30 tac txtOf unFw">
-											<a class="name fsize18 c-333 f-fM" href="teacherinfo.html?id=86" target="_blank" >李诚</a>
-										</h4>
-										<input value="1" type="hidden">
-										<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;高级讲师</h5>
-										<div class="mt15 i-q-txt">
-											<input value="2" type="hidden">
-											<p class="c-999 f-fA">毕业于师范大学数学系，热爱教育事业，执教数学思维6年有余</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="demo-t-l-warp">
-										<a class="pic" href="teacherinfo.html?id=74" target="_blank" title="马妮妮" target="_self">
-											<img alt="马妮妮" src="picture/avatar-boy.gif" xsrc="picture/1442297935589.jpg">
-										</a>
-										<h4 class="hLh30 tac txtOf unFw">
-											<a class="name fsize18 c-333 f-fM" href="teacherinfo.html?id=74" target="_blank" >马妮妮</a>
-										</h4>
-										<input value="1" type="hidden">
-										<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;首席讲师</h5>
-										<div class="mt15 i-q-txt">
-											<input value="2" type="hidden">
-											<p class="c-999 f-fA">中国人民大学附属中学数学一级教师</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="demo-t-l-warp">
-										<a class="pic" href="teacherinfo.html?id=82" target="_blank" title="李小梅" target="_self">
-											<img alt="李小梅" src="picture/avatar-boy.gif" xsrc="picture/1441853318496.jpg">
-										</a>
-										<h4 class="hLh30 tac txtOf unFw">
-											<a class="name fsize18 c-333 f-fM" href="teacherinfo.html?id=82" target="_blank" >李小梅</a>
-										</h4>
-										<input value="1" type="hidden">
-										<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;首席讲师</h5>
-										<div class="mt15 i-q-txt">
-											<input value="2" type="hidden">
-											<p class="c-999 f-fA">资深课程设计专家，专注10年AACTP美国培训协会认证导师</p>
-										</div>
-									</div>
-								</li>
-								<li>
-									<div class="demo-t-l-warp">
-										<a class="pic" href="teacherinfo.html?id=81" target="_blank" title="李立" target="_self">
-											<img alt="李立" src="picture/avatar-boy.gif" xsrc="picture/1442297927029.jpg">
-										</a>
-										<h4 class="hLh30 tac txtOf unFw">
-											<a class="name fsize18 c-333 f-fM" href="teacherinfo.html?id=81" target="_blank" >李立</a>
-										</h4>
-										<input value="1" type="hidden">
-										<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;高级讲师</h5>
-										<div class="mt15 i-q-txt">
-											<input value="2" type="hidden">
-											<p class="c-999 f-fA">上海师范大学法学院副教授</p>
-										</div>
-									</div>
-								</li>
+							<ul class="clearfix demo-teach-list" id="Teacontent">
+
 							</ul>
 						</div>
 					</article>

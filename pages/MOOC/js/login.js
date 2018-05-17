@@ -894,6 +894,32 @@ function dialogRegister(jumpType) {
             return;
         }
     }*/
+    //创建edx账户
+    $.ajax({
+        // url: baselocation + "/user/ajax/createuser",
+        url: '//192.168.10.138/moocregister/',
+        data: {
+            "name": emailVal,
+            "passwd": passwdVal,
+        },
+        type: "get",
+        dataType: "json",
+        success: function (result) {
+            alert('ye');
+            if (result.issuccess == 1) {
+                alert('yes');
+
+            } else {
+                 alert('no');
+                $(".e-l-jy").html('<font class="fsize12 c-orange"> 服务器繁忙,请稍后再试</font>');
+                return;
+            }
+        },
+        error: function (error) {
+            $(".e-l-jy").html('<font class="fsize12 c-orange"> 服务器繁忙,请稍后再试</font>');
+            return;
+        }
+    })
 
     $.ajax({
         // url: baselocation + "/user/ajax/createuser",
@@ -921,7 +947,6 @@ function dialogRegister(jumpType) {
                         if (fig == "failed") {
                             alert("登录失败：" + results[0].substring(7));
                         } else {
-                            alert(emailVal)
                             $.cookie('mooc_login_name', emailVal);
                             $.cookie('mooc_password', passwdVal);
 

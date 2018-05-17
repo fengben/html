@@ -1,11 +1,13 @@
-
+<%debugMsg("--------------=pn-----------------"#:pageNumber)%>
+<%debugMsg("--------------=urlid-----------------"#:urlid)%>
 <%
-If :urlid == 2018112858180021535
-		:querystr="select A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.on_top desc,A.id desc limit 8 offset 0"
-		changeRecordSet(:querystr);
-	Else
-:sql = "select A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id = ? ) order by A.on_top desc,A.id desc limit 8 offset 0"
-changeRecordSet(:sql,:urlid);
+If      :urlid != 2018112858180021535
+       debugMsg("--------------=-----------------"#:pageNumber)
+        :sql = "select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id = ? ) order by A.on_top desc,A.id desc limit ?,8"
+        changeRecordSet(:sql,:urlid,(:pageNumber-1)*8)
+Else
+        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.on_top desc,A.id desc limit ?,8"
+        changeRecordSet(:querystr,(:pageNumber-1)*8)
 EndIf
 :totalNumber = recordCount()
 If :totalNumber >0
@@ -44,6 +46,46 @@ EndRepeat
 EndIf
 %>
 
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 8%>
+<%:totalPage=ceil(:FOUND_ROWS,8)%>
 
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToPage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToPage(1)">首页</a>
+             <%EndIf%>
 
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToPage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="nextpage" href="javascript:goToPage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="nextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =8;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = <%=:totalPage%>;
+    showPageNumber() ;
+</script>
 

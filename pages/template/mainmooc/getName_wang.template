@@ -1,0 +1,5 @@
+
+<%:selectSql = "select A.id, A.login_name, A.classification, A.name as real_name, A.phone_number, A.email, B.name as b_name, B.column_ids from user_passports_mooc as A, role as B where A.classification = B.id"%>
+<%:i=changeRecordSet(:selectSql,S(:login_name))%>
+<%	:count = recordCount()%>
+<%=:count%>

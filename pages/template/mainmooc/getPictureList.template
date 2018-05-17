@@ -1,0 +1,32 @@
+
+<%If :operation=="getAllPicture"
+	:querystr = "select A.id,A.urlstr,A.title,B.filename from mooc_index_pic_info A,uploadedfiles B where A.id=B.filetuid order by A.id_index"
+	changeRecordSet(:querystr)
+	If recordCount()>0
+	///debugMsg(":queryPIC=========="#recordCount());select filetuid,filename from uploadedfiles;
+     		Repeat
+	%> 
+		
+                    <tr>
+                        <td width=190>
+                            <input id="title<%=id%>" value="<%=title%>" type="text" style="width:180px" />
+                        </td>
+                        <td width=190>
+                            <input id="urlstr<%=id%>" value="<%=urlstr%>" type="text" style="width:180px" />
+                        </td>
+                        <td colspan=2 width=420>
+                            <FORM METHOD="POST" id="form1" name="form1" ENCTYPE="multipart/form-data">
+                                <INPUT TYPE="FILE" NAME="file1" id="file1<%=id%>"  class="btn" style="width:210px;display:inline-block">
+                     		<input type="button" value="更改图片" style="width:68px;" onclick="javascript:update_file('<%=id%>');" />
+                            </FORM>
+                        </td>
+                    </tr>
+		<tr>
+		  <td colspan="4"> 
+		<a href="<%=urlstr%>"> <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" height="80" width="700" alt="<%=title%>"> </a></td>
+		</tr>
+	<%EndRepeat
+	EndIf
+
+EndIf%>
+

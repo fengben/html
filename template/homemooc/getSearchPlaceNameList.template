@@ -1,0 +1,329 @@
+<!-- databaseName=placenamedb -->
+<%
+debugMsg("=========operation"#:operation)////地名查询 or 标志查询 or 界桩查询 or 界线查询 
+
+If :operation == "地名查询" 		      ///从place_info表中查询地名
+
+	
+		:sql = "select FOUND_ROWS,place_id,standard_place_name,another_name, short_name, used_name, chinese_writing, minority_writing, original_pronunciation, mandarin_pronunciation, rome_spelling, language_classification, category, east_longitude, to_east_longitude, north_latitude, to_north_latitude, state, map_name, drawing_number, scale, using_time, origin, meaning, history, security, coordinate_system, measuring_method, geography_general_situation, multimedia_information, source_of_information, remarks, register_time, register_person, register_unit, general_rome_spelling, establish_year, abolish_year, relevant_region, other_information, place_type from place_info  where standard_place_name like ? order by place_id desc limit ?, 1 ";	
+		changeRecordSet(:sql,S("%"#:search_placeName#"%"),(:pageNumber-1)*1)	
+	
+	Repeat
+%>
+      <li >
+        <div class="deanarticer" style="width: 100%;">
+          <div class="deanarticername">   
+           <%=standard_place_name%>
+          </div>
+		<%:recContent=""
+		///:recContent += "地名代码:" + place_id + "," + "别名:" + another_name + "," +"简称:" + short_name + "," +"汉字书写:" + chinese_writing + "," +"少数民族语书写:" + minority_writing + "," +"地名原读音:" + original_pronunciation + "," +"汉语普通话读音:" + mandarin_pronunciation + "," +"罗马字母拼写:" + rome_spelling + "," +"地名语种:" + language_classification + "," +"地名类别:" + category + "," +"东经:" + east_longitude + "," +"至东经:" + to_east_longitude + "," +"北纬:" + north_latitude + "," +"至北纬:" + to_north_latitude + "," +"地名普查状态:" + state + "," +"原图名称:" + map_name + "," +"图号（年版）:" + drawing_number + "," +"比例尺:" + scale + "," +"使用时间:" + using_time + "," +"地名的来历:" + origin + "," +"地名的含义:" + meaning + "," +"地名的历史沿革:" + history + "," +"密级:" + security + "," +"坐标系:" + coordinate_system + "," +"测量方法:" + measuring_method + "," +"地理实体概况:" + geography_general_situation + "," +"多媒体信息:" + multimedia_information + "," +"资料来源:" + source_of_information + "," +"备注:" + remarks + "," +"登记时间:" + register_time + "," +"登记人:" + register_person + "," +"登记单位:" + register_unit + "," +"通名罗马字母拼写:" + general_rome_spelling + "," +"设立年份:" + establish_year + "," +"废止年份:" + abolish_year + "," +"所在（跨）行政区:" + relevant_region + "," +"其他信息:" + other_information 
+%>
+
+          <div class="deanarticersummary" style="height:800px;" ><!--style="text-indent:2em;"-->
+		<%="地名代码:" + place_id %><br/>
+		<%If another_name!= "" %><%="别名:" + another_name %><br/><%EndIf%>
+		<%If short_name!= "" %><%="简称:" + short_name %><br/><%EndIf%>
+		<%If chinese_writing!= "" %><%="汉字书写:" + chinese_writing %><br/><%EndIf%>
+		<%If minority_writing!= "" %><%="少数民族语书写:" + minority_writing %><br/><%EndIf%>
+		<%If original_pronunciation!= "" %><%="地名原读音:" + original_pronunciation %><br/><%EndIf%>
+		<%If mandarin_pronunciation!= "" %><%="汉语普通话读音:" + mandarin_pronunciation %><br/><%EndIf%>
+		<%If rome_spelling!= "" %><%="罗马字母拼写:" + rome_spelling %><br/><%EndIf%>
+		<%If language_classification!= "" %><%="地名语种:" + language_classification %><br/><%EndIf%>
+		<%If category != "" %><%="地名类别:" + category %><br/><%EndIf%>
+		<%If  east_longitude!= "" %><%="东经:" + east_longitude %>&nbsp;&nbsp;<%EndIf%>
+		<%If to_east_longitude!= "" %><%="至东经:" + to_east_longitude %>&nbsp;&nbsp;<%EndIf%>
+		<%If north_latitude!= "" %><%="北纬:" + north_latitude %>&nbsp;&nbsp;<%EndIf%>
+		<%If to_north_latitude!= "" %><%="至北纬:" + to_north_latitude %><br/><%Else%><br/><%EndIf%>
+		<%If state!= "" %><%="地名普查状态:" + state %><br/><%EndIf%>
+		<%If map_name!= "" %><%="原图名称:" + map_name %><br/><%EndIf%>
+		<%If drawing_number!= "" %><%="图号（年版）:" + drawing_number  %><br/><%EndIf%>
+		<%If scale!= "" %><%="比例尺:" + scale %><br/><%EndIf%>
+		<%If using_time!= "" %><%="使用时间:" + using_time %><br/><%EndIf%>
+		<%If origin!= "" %><%="地名的来历:" + origin %><br/><%EndIf%>
+		<%If meaning!= "" %><%="地名的含义:" + meaning %><br/><%EndIf%>
+		<%If history!= "" %><%="地名的历史沿革:" + history %><br/><%EndIf%>
+		<%If security!= "" %><%="密级:" + security  %><br/><%EndIf%>
+		<%If coordinate_system!= "" %><%="坐标系:" + coordinate_system  %><br/><%EndIf%>
+		<%If  measuring_method!= "" %><%="测量方法:" + measuring_method %><br/><%EndIf%>
+		<%If geography_general_situation!= "" %><%="地理实体概况:" + geography_general_situation %><br/><%EndIf%>
+		<%If multimedia_information!= "" %><%="多媒体信息:" + multimedia_information  %><br/><%EndIf%>
+		<%If source_of_information!= "" %><%="资料来源:" + source_of_information %><br/><%EndIf%>
+		<%If remarks!= "" %><%="备注:" + remarks %><br/><%EndIf%>
+		<%If register_time!= "" %><%="登记时间:" + register_time %><br/><%EndIf%>
+		<%If register_person!= "" %><%="登记人:" + register_person %><br/><%EndIf%>
+		<%If  register_unit!= "" %><%="登记单位:" + register_unit %><br/><%EndIf%>
+		<%If general_rome_spelling!= "" %><%="通名罗马字母拼写:" + general_rome_spelling %><br/><%EndIf%>
+		<%If establish_year!= "" %><%="设立年份:" + establish_year %><br/><%EndIf%>
+		<%If abolish_year!= "" %><%="废止年份:" + abolish_year %><br/><%EndIf%>
+		<%If relevant_region!= "" %><%="所在（跨）行政区:" + relevant_region %><br/><%EndIf%>
+		<%If other_information!= "" %><%="其他信息:" + other_information  %><br/><%EndIf%>
+	  </div>
+	    
+          <div class="deanatcertop">
+            <div class="deanarticerinfo"> <span class="deanyuedushu">地名类别：<%=place_type%></span>
+              
+              <em>|</em>
+             <span class="deanfabushijian">
+			<input type="button" class="showInMap" value="在地图中查看"  onclick="searchInMap('<%=standard_place_name%>')" />
+			</span>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+
+<%	EndRepeat
+EndIf%>
+
+
+<%If :operation == "标志查询" 		      ///从place_sign表中查询标志地名
+
+	:sql = "select FOUND_ROWS,signal_code,space_data_signal_code,normal_place_name,rome_spelling,national_characters,relevant_region,east_longitude,north_latitude,set_commpany_name,set_time,manufacturer,material_quality,spec,signal_picture_filename,register_time, register_person,register_unit,auditor from place_sign  where normal_place_name like ? order by signal_code desc limit ?, 1 ";
+	changeRecordSet(:sql,S("%"#:search_placeName#"%"),(:pageNumber-1)*1)	
+	Repeat
+%>
+      <li >
+        <div class="deanarticer" style="width: 100%;">
+          <div class="deanarticername">
+           <%=normal_place_name%>
+          </div>
+
+		<%:recContent=""
+		///:recContent += "标志代码:" + signal_code + "," + "空间数据标识码:" + space_data_signal_code + "," +"罗马字母拼写:" + rome_spelling + "," +"民族文字:" + national_characters + "," +"所在（跨）行政区:" + relevant_region + "," +"东经:" + east_longitude + "," +"北纬:" + north_latitude + "," +"设置单位:" + set_commpany_name + "," +"设置时间:" + set_time + "," +"生产厂家:" + manufacturer + "," +"材质:" + material_quality + "," +"规格:" + spec + "," +"标志照片文件名:" + signal_picture_filename + "," +"登记时间:" + register_time + "," +"登记人:" + register_person + "," +"登记单位:" + register_unit + "," +"审核人:" + auditor <%If != "" %><%= %><br/><%EndIf%>
+%>
+		
+          <div class="deanarticersummary"  style="height:400px;">
+		<%="标志代码:" + signal_code	%><br/>
+		<%="空间数据标识码:" + space_data_signal_code	%><br/>
+		<%If rome_spelling!= "" %><%="罗马字母拼写:" + rome_spelling %><br/><%EndIf%>
+		<%If national_characters!= "" %><%="民族文字:" + national_characters %><br/><%EndIf%>
+		<%If relevant_region!= "" %><%="所在（跨）行政区:" + relevant_region %><br/><%EndIf%>
+		<%If east_longitude!= "" %><%="东经:" + east_longitude %>&nbsp;&nbsp;<%EndIf%>
+		<%If north_latitude!= "" %><%="北纬:" + north_latitude %><br/><%Else%><br/><%EndIf%>
+		<%If set_commpany_name!= "" %><%="设置单位:" + set_commpany_name %><br/><%EndIf%>
+		<%If set_time!= "" %><%="设置时间:" + set_time %><br/><%EndIf%>
+		<%If manufacturer!= "" %><%="生产厂家:" + manufacturer %><br/><%EndIf%>
+		<%If material_quality!= "" %><%="材质:" + material_quality %><br/><%EndIf%>
+		<%If spec!= "" %><%="规格:" + spec %><br/><%EndIf%>
+		<%If signal_picture_filename!= "" %><%="标志照片文件名:" + signal_picture_filename %><br/><%EndIf%>
+		<%If  register_time!= "" %><%="登记时间:" + register_time %><br/><%EndIf%>
+		<%If register_person!= "" %><%="登记人:" + register_person %><br/><%EndIf%>
+		<%If register_unit!= "" %><%="登记单位:" + register_unit %><br/><%EndIf%>
+		<%If auditor!= "" %><%="审核人:" + auditor %><br/><%EndIf%>
+	  </div>
+          <div class="deanatcertop">
+            <div class="deanarticerinfo"> <span class="deanyuedushu">所在（跨）行政区：<%=relevant_region%></span>
+              
+              <em>|</em>   
+             <span class="deanfabushijian">
+
+			<input type="button" class="showInMap" value="在地图中查看"  onclick="searchInMap('<%=normal_place_name%>')" />
+			</span>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+
+<%EndRepeat
+EndIf%>
+
+
+<%If :operation == "界桩查询" 	 ///从place_boundary表中查询界桩
+
+	:sql = "select FOUND_ROWS,boundary_code,space_code,borderline_code, boundary_name, longitudes, latitude,y_axes, x_axes, boundary_rank, boundary_type, boundary_material, boundary_position, 1st_marker_name, 1st_marker_angle, 1st_marker_distance, 2nd_marker_name, 2nd_marker_angle, 2nd_marker_distance, 3rd_marker_name, 3rd_marker_angle, 3rd_marker_distance, boundary_sketch_map, boundary_history, boundary_result, boundary_list, boundary_photo, boundary_voice, 3point_protocol, 3point_att, 3point_summary,a_technology_sign, a_boundary_sign, a_time,b_technology_sign,b_boundary_sign,b_time,c_technology_sign,c_boundary_sign,c_time from place_boundary where boundary_name like ? order by boundary_code desc limit ?, 1 ";
+	changeRecordSet(:sql,S("%"#:search_placeName#"%"),(:pageNumber-1)*1)	
+	///debugMsg("==============界桩查询"#:FOUND_ROWS)
+
+	Repeat
+%>
+      <li >
+        <div class="deanarticer" style="width: 100%;">
+          <div class="deanarticername">
+           <%=boundary_name%>
+          </div>
+
+		<%:recContent=""
+///:recContent += "界桩编号:" + boundary_code + "," + "空间数据标识码:" + space_code + "," +"界线代码:" + borderline_code + ","  +"经度:" + longitudes + "," +"纬度:" + latitude + "," +"界桩等级:" + boundary_rank + "," +"界桩类型:" + boundary_type + "," +"界桩材质:" + boundary_material + "," +"界桩位置:" + boundary_position + "," +"一号方位物名称:" + 1st_marker_name + "," +"一号方位物磁方位角:" + 1st_marker_angle + "," +"一号方位物距离:" + 1st_marker_distance + "," + "二号方位物名称:" + 2nd_marker_name + "," +"二号方位物磁方位角:" + 2nd_marker_angle + "," +"二号方位物距离:" + 2nd_marker_distance + "," + "三号方位物名称:" + 3rd_marker_name + "," +"三号方位物磁方位角:" + 3rd_marker_angle + "," +"三号方位物距离:" + 3rd_marker_distance + "," +"界桩位置略图:" + boundary_sketch_map + "," +"界桩变更历史纪录:" + boundary_history + "," +"界桩成果表:" + boundary_result + "," +"界桩登记表:" + boundary_list + "," +"界桩照片:" + boundary_photo + "," +"界桩音像:" + boundary_voice + "," +"三交点协议:" + 3point_protocol + "," +"三交点附图:" +3point_att + "," +"三交点纪要:" +3point_summary + ","  +"其他信息:"  
+%>
+	  
+          <div class="deanarticersummary"  style="height:700px;">
+		<%="界桩编号:" + boundary_code %><br/>
+		<%If space_code!= "" %><%="空间数据标识码:" + space_code %><br/><%EndIf%>
+		<%If  borderline_code!= "" %><%="界线代码:" + borderline_code %><br/><%EndIf%>
+		<%If longitudes!= "" %><%="经度:" + longitudes %>&nbsp;&nbsp;<%EndIf%>
+		<%If latitude!= "" %><%="纬度:" + latitude %><br/><%Else%><br/><%EndIf%>
+		<%If y_axes!= "" %><%="纵坐标:" + y_axes %>&nbsp;&nbsp;<%EndIf%>
+		<%If x_axes!= "" %><%="横坐标:" + x_axes %><br/><%Else%><br/><%EndIf%>
+		<%If boundary_rank!= "" %><%="界桩等级:" + boundary_rank %><br/><%EndIf%>
+		<%If boundary_type!= "" %><%="界桩类型:" + boundary_type %><br/><%EndIf%>
+		<%If boundary_material!= "" %><%="界桩材质:" + boundary_material %><br/><%EndIf%>
+		<%If boundary_position!= "" %><%="界桩位置:" + boundary_position  %><br/><%EndIf%>
+		<%If 1st_marker_name!= "" 
+			debugMsg(1st_marker_name)	///为什么将当作字符串输出，而不是取变量的值
+		%>
+		<%="一号方位物名称:" + 1st_marker_name %><br/><%EndIf%>
+		<%If 1st_marker_angle!= "" %><%="一号方位物磁方位角:" + 1st_marker_angle  %><br/><%EndIf%>
+		<%If  1st_marker_distance != "" %><%="一号方位物距离:" + 1st_marker_distance  %><br/><%EndIf%>
+		<%If 2nd_marker_name!= "" %><%="二号方位物名称:" + 2nd_marker_name %><br/><%EndIf%>
+		<%If 2nd_marker_angle!= "" %><%="二号方位物磁方位角:" + 2nd_marker_angle %><br/><%EndIf%>
+		<%If 2nd_marker_distance!= "" %><%="二号方位物距离:" + 2nd_marker_distance %><br/><%EndIf%>
+		<%If 3rd_marker_name!= "" %><%="三号方位物名称:" + 3rd_marker_name %><br/><%EndIf%>
+		<%If 3rd_marker_angle!= "" %><%="三号方位物磁方位角:" + 3rd_marker_angle  %><br/><%EndIf%>
+		<%If 3rd_marker_distance!= "" %><%="三号方位物距离:" + 3rd_marker_distance %><br/><%EndIf%>
+		<%If boundary_sketch_map!= "" %><%="界桩位置略图:" + boundary_sketch_map %><br/><%EndIf%>
+		<%If boundary_history!= "" %><%="界桩变更历史纪录:" + boundary_history %><br/><%EndIf%>
+		<%If boundary_result != "" %><%="界桩成果表:" + boundary_result %><br/><%EndIf%>
+		<%If boundary_list!= "" %><%="界桩登记表:" + boundary_list  %><br/><%EndIf%>
+		<%If boundary_photo!= "" %><%="界桩照片:" + boundary_photo %><br/><%EndIf%>
+		<%If boundary_voice != "" %><%="界桩音像:" + boundary_voice  %><br/><%EndIf%>
+		<%If 3point_protocol != "" %><%="三交点协议:" + 3point_protocol %><br/><%EndIf%>
+		<%If 3point_att!= "" %><%="三交点附图:" +3point_att  %><br/><%EndIf%>
+		<%If 3point_summary != "" %><%="三交点纪要:" +3point_summary %><br/><%EndIf%>
+		<%If a_technology_sign!= "" %><%="a方技术人员签字:" + a_technology_sign %><br/><%EndIf%>
+		<%If a_boundary_sign!= "" %><%="a方勘界办人员签字:" + a_boundary_sign %><br/><%EndIf%>
+		<%If a_time != "" %><%="a方签字时间:" + a_time %><br/><%EndIf%>
+		<%If b_technology_sign!= "" %><%="b方技术人员签字:" + b_technology_sign %><br/><%EndIf%>
+		<%If b_boundary_sign!= "" %><%="b方勘界办人员签字:" + b_boundary_sign %><br/><%EndIf%>
+		<%If b_time!= "" %><%="b方签字时间:" + b_time %><br/><%EndIf%>
+		<%If c_technology_sign!= "" %><%="c方技术人员签字:" + c_technology_sign %><br/><%EndIf%>
+		<%If c_boundary_sign!= "" %><%="c方勘界办人员签字:" + c_boundary_sign %><br/><%EndIf%>
+		<%If c_time != "" %><%="c方签字时间:" + c_time %><br/><%EndIf%>
+	  </div>
+          <div class="deanatcertop">
+            <div class="deanarticerinfo"> <span class="deanyuedushu">界桩类型：<%=boundary_type%></span>
+              
+              <em>|</em>   
+             <span class="deanfabushijian">
+
+			<input type="button" class="showInMap" value="在地图中查看"  onclick="searchInMap('<%=boundary_name%>')" />
+			</span>
+
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+
+<%EndRepeat
+EndIf%>
+
+
+<%If :operation == "界线查询" 	///从place_borderline表中查询界线
+
+	:sql = "select FOUND_ROWS,borderline_code,space_code,borderline_rank,borderline_name,borderline_length,borderline_start_point,borderline_end_point,higher_comment,higher_ask,union_plan,history_summary,history_protocol, history_protocol_att,history_media,sum,higher_protocol_comment,tow_protocol_ask_for,borderline_protocol,protocol_ask_for,protocol_explain, borderline_protocol_att,pile_num,one_pile_num,two_pile_num,three_pile_num,borderline_history,borderline_media,year_plan,year_report,year_deal_with,year_result,other,dispute  from place_borderline where borderline_name like ? limit ?, 1 ";
+	changeRecordSet(:sql,S("%"#:search_placeName#"%"),(:pageNumber-1)*1)	
+	///debugMsg("==============界线查询"#:FOUND_ROWS)
+	Repeat
+%>
+      <li >
+        <div class="deanarticer" style="width: 100%;">
+          <div class="deanarticername">
+           <%=borderline_name%>
+          </div>
+
+		<%:recContent=""
+		///:recContent += "界线代码:" + borderline_code + "," + "空间数据标识码:" + space_code + "," +"界线等级:" + borderline_rank + ","  +"界线长度:" + borderline_length + "," +"界线起点:" + borderline_start_point + "," +"界线止点:" + borderline_end_point + "," +"上级对勘界方案批复:" + higher_comment + "," +"上报联合勘界方案请示:" + higher_ask + "," +"联合勘界方案:" + union_plan + "," +"历次协商会议纪要:" + history_summary + "," +"历次协商会议协议:" + history_protocol + "," +"历次协商会议附图:" + history_protocol_att + "," + "历次会议多媒体:" + history_media + "," +"勘界工作总结:" + sum + "," +"上级对协议书批复:" + higher_protocol_comment + "," + "双方报批协议书请示:" + tow_protocol_ask_for + "," +"边界线协议书:" + borderline_protocol + "," +"报送协议书请示:" + protocol_ask_for + "," +"起草协议书说明:" + protocol_explain + "," +"边界协议书附图:" + borderline_protocol_att + "," +"界桩颗数:" + pile_num + "," +"单立桩颗数:" + one_pile_num + "," +"双立桩颗数:" + two_pile_num + "," +"三立桩颗数:" + three_pile_num + "," +"界线变更历史记录:" + borderline_history + "," +"界线多媒体:" +borderline_media + "," +"年度联检方案:" +year_plan + ","  +"年度联检报告:"+ year_report + "," +"年度联检问题处理结果:"+ year_deal_with + "," +"年度联检成果:"+ year_result + "," +"其他信息:"+ other + "," +"是否争议:"+ dispute
+
+%>
+          <div class="deanarticersummary"  style="height:800px;">
+		  <%="界线代码:" + borderline_code %><br/>
+		<%If space_code!= "" %><%="空间数据标识码:" + space_code %><br/><%EndIf%> 
+		<%If  borderline_rank!= "" %><%="界线等级:" + borderline_rank %><br/><%EndIf%>
+		<%If borderline_length!= "" %><%="界线长度:" + borderline_length %><br/><%EndIf%> 
+		<%If  borderline_start_point!= "" %><%="界线起点:" + borderline_start_point %><br/><%EndIf%>
+		<%If borderline_end_point != "" %><%="界线止点:" + borderline_end_point %><br/><%EndIf%> 
+		<%If  higher_comment!= "" %><%="上级对勘界方案批复:" + higher_comment %><br/><%EndIf%>
+		<%If higher_ask!= "" %><%="上报联合勘界方案请示:" + higher_ask  %><br/><%EndIf%> 
+		<%If  union_plan!= "" %><%="联合勘界方案:" + union_plan %><br/><%EndIf%>
+		<%If history_summary!= "" %><%="历次协商会议纪要:" + history_summary  %><br/><%EndIf%> 
+		<%If  history_protocol != "" %><%="历次协商会议协议:" + history_protocol %><br/><%EndIf%>
+		<%If  history_protocol_att!= "" %><%="历次协商会议附图:" + history_protocol_att %><br/><%EndIf%> 
+		<%If  history_media!= "" %><%="历次会议多媒体:" + history_media %><br/><%EndIf%>
+		<%If  sum!= "" %><%="勘界工作总结:" + sum %><br/><%EndIf%> 
+		<%If  higher_protocol_comment != "" %><%="上级对协议书批复:" + higher_protocol_comment %><br/><%EndIf%>
+		<%If  tow_protocol_ask_for!= "" %><%="双方报批协议书请示:" + tow_protocol_ask_for %><br/><%EndIf%> 
+		<%If  borderline_protocol!= "" %><%="边界线协议书:" + borderline_protocol  %><br/><%EndIf%>
+		<%If  protocol_ask_for!= "" %><%="报送协议书请示:" + protocol_ask_for %><br/><%EndIf%> 
+		<%If  protocol_explain != "" %><%="起草协议书说明:" + protocol_explain %><br/><%EndIf%>
+		<%If  borderline_protocol_att!= "" %><%="边界协议书附图:" + borderline_protocol_att %><br/><%EndIf%> 
+		<%If  pile_num!= "" %><%="界桩颗数:" + pile_num %><br/><%EndIf%>
+		<%If  one_pile_num!= "" %><%="单立桩颗数:" + one_pile_num %><br/><%EndIf%> 
+		<%If  two_pile_num!= "" %><%="双立桩颗数:" + two_pile_num %><br/><%EndIf%>
+		<%If  three_pile_num!= "" %><%="三立桩颗数:" + three_pile_num %><br/><%EndIf%> 
+		<%If  borderline_history!= "" %><%="界线变更历史记录:" + borderline_history %><br/><%EndIf%>
+		<%If  borderline_media!= "" %><%="界线多媒体:" +borderline_media %><br/><%EndIf%> 
+		<%If  year_plan!= "" %><%="年度联检方案:" +year_plan %><br/><%EndIf%>
+		<%If  year_report!= "" %><%="年度联检报告:"+ year_report %><br/><%EndIf%>
+		<%If  year_deal_with!= "" %><%="年度联检问题处理结果:"+ year_deal_with %><br/><%EndIf%>
+		<%If  year_result!= "" %><%="年度联检成果:"+ year_result %><br/><%EndIf%> 
+		<%If  other!= "" %><%="其他信息:"+ other %><br/><%EndIf%>
+		<%If  dispute!= "" %><%="是否争议:"+ dispute %><br/><%EndIf%>
+
+	  </div>
+          <div class="deanatcertop">
+            <div class="deanarticerinfo"> <span class="deanyuedushu">界线等级：<%=borderline_rank%></span>
+             
+              <em>|</em>   
+             <span class="deanfabushijian">
+	
+			<input type="button" class="showInMap" value="在地图中查看"  onclick="searchInMap('<%=borderline_name%>')" />
+			</span>
+
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+      </li>
+
+<%EndRepeat
+EndIf%>
+
+	<input type="hidden" id="searchCountHidden" value="<%=:FOUND_ROWS%>" />
+$_@_$
+<div class="pg">
+<%:i=1%>
+<%:totalPage = 0%>
+<%debugMsg("-------------FOUND_ROWS"#:FOUND_ROWS)%>
+
+<%:totalPage=ceil(:FOUND_ROWS,1)%>
+
+<div>
+            <%If :pageNumber-1!=0%> <a href="javascript:goToPage_searchPlaceInfo(1)">首页</a><%EndIf%> &nbsp;&nbsp;&nbsp;
+        
+            <%If :pageNumber-1!=0%> <a href="javascript:goToPage_searchPlaceInfo(<%=:pageNumber-1%>)"> 上一页</a><%EndIf%> &nbsp;&nbsp;&nbsp;  /// sub的结果为0，就会放弃这一行
+        
+         第<%=:pageNumber%>页/共<%=:totalPage%>页&nbsp;&nbsp;&nbsp;
+        
+            <%If :pageNumber!=:totalPage && :totalPage != 0%> <a href="javascript:goToPage_searchPlaceInfo(<%=:pageNumber+1%>)">下一页</a> <%EndIf%> &nbsp;&nbsp;&nbsp;
+	///:pageNumber等于totalPage，就会放弃这一行
+                 
+        
+            <%If :pageNumber!=:totalPage && :totalPage != 0%> <a href="javascript:goToPage_searchPlaceInfo(<%=:totalPage%>)">尾页</a> <%EndIf%> &nbsp;&nbsp;&nbsp;
+	///:pageNumber等于totalPage，就会放弃这一行
+
+           <select id="mySelect" width="50" STYLE="width: 40px" onchange="goToPage_searchPlaceInfo(this.value)">
+           <%:tmp=1%>
+           <%:endPage=:totalPage+1%>
+           <%While :tmp!=:endPage%>
+               <option  <%If :tmp==:pageNumber%>selected<%EndIf%> ><%=:tmp%></option>
+               <%:tmp=:tmp+1%>
+           <%EndWhile%>
+           </select>
+</div>
+
+
+
+

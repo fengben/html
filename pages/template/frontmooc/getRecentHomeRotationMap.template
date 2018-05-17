@@ -1,0 +1,23 @@
+<%
+///首页轮播图
+:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018091140680011749 order by A.on_top desc,A.id desc limit 3 offset 0"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+<div class="swiper-slide"　>
+
+        <a href="#" target="_blank">
+<%If pic_id!=0%>
+			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" width="1583" height="460" >
+<%Else%>
+			<img src="/pages/resouce/image/default.png" >
+<%EndIf%>
+		</a>
+
+</div>
+<%
+EndRepeat
+EndIf
+%>

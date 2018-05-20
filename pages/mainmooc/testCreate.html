@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+</head>
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="/scripts/uploadfile.js"></script>
+<script src="/scripts/StationJSLib.js"></script>
+<script src="/scripts/htmleditor/kindeditor.js"></script>
+
+
+<script src="/scripts/htmleditor/lang/zh_CN.js"></script>
+<script src="jquery/jquery.ztree.core.js"></script>
+
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+<link rel="stylesheet" href="assets/css/bootstrap.css"/>
+<link rel="stylesheet" href="assets/css/xenon-core.css"/>
+<link rel="stylesheet" href="assets/css/xenon-forms.css"/>
+<link rel="stylesheet" href="assets/css/xenon-components.css"/>
+<link rel="stylesheet" href="assets/css/xenon-skins.css"/>
+<link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
+<link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css"/>
+<link rel="stylesheet" href="assets/css/zTreeStyle.css"/>
+<script>
+
+    function setArticle(flag) {
+        $("#bufferArticleId").val(flag);
+        if (editor) {
+            editor.remove("#articleContent");
+        }
+        $("#modal-article #appendix-group").html("");
+        //新建文章
+        if (flag == 0) {
+            $("#modal-article #publisher").val(localStorage.getItem("loginName"));
+            $("#modal-article #articleId").val(flag);
+            $("#modal-article #title").val("");
+            $("#modal-article #topArticle").val("0");
+            $("#modal-article #school").val();
+            $("#modal-article #bufferPicIds").val("");
+            $("#modal-article #articleContent").val("");
+            $("#modal-article #picInput").val("");
+            $("#modal-article #appendixInput").val("");
+            $("#modal-article #picId").val("0");
+            $("#modal-article #picImg").attr("src", "");
+            $("#modal-article #picImg").css("display", "none");
+            $("#modal-article #appendixId").val("");
+            $("#modal-article #picName").val("");
+            $("#modal-article #appendixName").val("");
+
+            $("#modal-article #picInput").removeAttr("disabled");
+            $("#travelInfo #theme").val("");
+            $("#travelInfo #district").val("");
+            $("#travelInfo #money").val("");
+            $("#travelInfo #address").val("");
+
+            createEditor();
+            jQuery('#modal-article').modal('show', {backdrop: 'static'});
+
+        } else {  //编辑文章
+
+            //如果是旅游推荐模块则查询旅游推荐相关信息
+            var paras = "id=" + flag;
+            paras += "$^@^$columnId=" + $("#type" + flag).val();
+            paras += "$^@^$operation=queryTravelInfo";
+            var obj = new Array();
+            var processResult = function () {
+                if (obj[0] != "no") {
+                    var travelArray = obj[0].split(";");
+                    $("#travelInfo #theme").val(travelArray[0]);
+                    $("#travelInfo #district").val(travelArray[1]);
+                    $("#travelInfo #money").val(travelArray[2]);
+                    $("#travelInfo #address").val(travelArray[3]);
+                    $("#travelInfo").css("display", "block");
+                    $("#bufferIfTravelInfo").val("yes");
+                } else {
+                    $("#travelInfo").css("display", "none");
+                    $("#bufferIfTravelInfo").val("no");
+                }
+            }
+            getFromWS("mainmooc/travelInfo.template", paras, obj, processResult);
+
+
+            $("#modal-article #articleId").val(flag);
+            $("#modal-article #title").val($("#title" + flag).html());
+            $("#modal-article #publisher").val($("#publisher" + flag).html());
+            $("#modal-article #type").val($("#type" + flag).val());
+            for (var i = 0; i < type_zNodes.length; i++) {
+                if (type_zNodes[i].id == $("#type" + flag).val()) {
+                    $("#modal-article #typeSel").val(type_zNodes[i].name);
+
+                }
+            }
+            alert(flag);
+            $("#modal-article #topArticle").val($("#top" + flag).val());
+            $("#modal-article #school").val($("#school" + flag).val());
+            $("#modal-article #articleContent").val($("#content" + flag).val());
+            //副文本中的图片
+            $("#modal-article #bufferPicIds").val("");
+            $("#modal-article #picName").val("");
+            $("#modal-article #appendixName").val("");
+            var picId = $("#picId" + flag).val();
+            var appendixId = $("#appendixId" + flag).val();
+
+            //该文章对应的图片
+            $("#modal-article #picId").val(picId);
+
+            $("#modal-article #appendixId").val(appendixId);
+
+            if (picId != 0) {
+                $("#modal-article #picInput").attr("disabled", "disabled");
+                $("#modal-article #picImg").css("display", "inline-block");
+                $("#modal-article #picImg").attr("src", "/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=" + picId);
+            } else {
+                $("#modal-article #picInput").removeAttr("disabled");
+                $("#modal-article #picImg").css("display", "none");
+                $("#modal-article #picImg").attr("src", "");
+            }
+            ///如果有图片或者附件，则从数据库中查出相关文件的name
+            if (picId != 0 || appendixId != "") {
+                var result = new Array();
+                var queryResult = function () {
+                    if (result[0]) {
+
+                        var names = result[0].split("|");
+                        var picName = names[0];
+                        $("#modal-article #picName").val(picName);
+
+
+                        var parentDiv = document.getElementById("appendix-group");
+                        var articleId = $("#modal-article #articleId").val();
+                        if (appendixId != "") {
+                            var appendixIds = appendixId.split(";");
+                            var appendixNames = names[1].split(";");
+                            for (var i = 0; i < appendixNames.length; i++) {
+                                //动态创建div用来显示上传的附件名，以及删除和下载的标签
+
+                                var insertDiv = '<div id="appendixId' + appendixIds[i] + '"><span style="display:inline-block;width:200px;overflow: hidden;text-overflow: ellipsis;" id="appendixName' + appendixIds[i] + '">' + appendixNames[i] + '</span><a style="margin-left:30px;color:blue" href="javaScript:deleteAppendix(\'' + appendixIds[i] + '\',\'' + articleId + '\')">删除</a><a style="margin-left:50px;color:blue" href="/one/downloadFile.spe?dtype=PostgresXL&mode=attachment&fileid=' + appendixIds[i] + '">下载</a></div>';
+                                parentDiv.innerHTML = parentDiv.innerHTML + insertDiv;
+                            }
+                        }
+                        createEditor();
+                        jQuery('#modal-article').modal('show', {backdrop: 'static'});
+                    }
+                }
+                var paras = "picId=" + picId;
+                paras += "$^@^$appendixId=" + appendixId;
+                paras += "$^@^$operation=getPicAndAppendixName";
+
+                getFromWS("mainmooc/saveArticle.template", paras, result, queryResult);
+            } else {
+                createEditor();
+                jQuery('#modal-article').modal('show', {backdrop: 'static'});
+            }
+        }
+    }
+
+    var editor;
+
+    function createEditor() {
+
+
+        editor = KindEditor.create('textarea[id="articleContent"]', {
+            allowFileManager: true,
+            uploadJson: kindeditUploadUrl(),
+            afterUpload: kindeditAfterUpload,
+            imageTabIndex: 1,
+            pasteType: 1,  //无格式粘贴
+        });
+    }
+
+    function closeDia() {
+        var picIds = $("#modal-article #bufferPicIds").val();
+        if (picIds != "") {
+            var paras = "$^@^$picIds=" + picIds;
+            paras += "$^@^$operation=deleteFiles";
+            var objs = new Array();
+            var afterDelete = function () {
+                $("#modal-article").modal('hide');
+                var type = $("#modal-article #type").val();
+                reloadArticle(type);
+
+            };
+            getFromWS("mainmooc/saveArticle.template", paras, objs, afterDelete);
+        } else {
+            $("#modal-article").modal('hide');
+            var type = $("#modal-article #type").val();
+            reloadArticle(type);
+        }
+
+    }
+
+    function doSave() {
+        var title = $("#modal-article #title").val();
+        // var type = $("#modal-article #type").val();
+        var content = editor.html();
+        var picId = $("#modal-article #picId").val();
+        var appendixId = $("#modal-article #appendixId").val();
+
+
+        if (!title || !content) {
+            alert("文章和标题是必须的");
+            return;
+        }
+
+        //TODO 这是干嘛的?
+        if ($("#picInput").val()) {
+            //上传图片
+            var setPicId = function (fileId_pic) {
+                if (fileId_pic) {
+                    picId = fileId_pic;
+                    doSaveArticle(picId);
+
+                }
+            }
+            uploadToDatabase("picInput", setPicId, "databaseType=PostgresXL");
+        } else {
+
+        }
+        doSaveArticle(picId);
+    }
+
+    function doSaveArticle(picId) {
+
+        var id = $("#modal-article #articleId").val();
+        var title = $("#modal-article #title").val();
+        // var type = $("#modal-article #type").val();
+        // var top = $("#modal-article #topArticle").val();
+        var publisher = localStorage.getItem("loginName");
+        // var picIds = $("#bufferPicIds").val();
+        // var content = editor.html();
+        var content_text = editor.text();
+
+        //kindeditor中嵌入文章中的图片,音频,视频等保存的是路径
+        // e.g <img src="/one/downloadFile.spe?dtype=Sqldb&mode=html&fileid=2018123270230001002" alt="" />
+        //提前保存的图片正则为 pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";
+        // alert(content_text)
+        // alert(content)
+        var operation;
+        if (id == 0) {
+            operation = "newArticle";
+        } else {
+            operation = "editArticle";
+        }
+        var paras = "id=" + id;
+        paras += "$^@^$title=" + title;
+        // paras += "$^@^$type=" + type;
+        // paras += "$^@^$top=" + top;
+        paras += "$^@^$publisher=" + publisher;
+        // paras += "$^@^$content=" + content;
+        paras += "$^@^$content_text=" + content_text;
+        // paras += "$^@^$picIds=" + picIds;
+        // paras += "$^@^$picId=" + picId;
+        // paras += "$^@^$appendixId=" + appendixId;
+
+        paras += "$^@^$operation=" + operation;
+        var objs = new Array();
+        var afterSavePost = function () {
+            if (objs[0] == "ok") {
+                $("#modal-article #bufferPicIds").val("");
+                $("#modal-article").modal('hide');
+                reloadArticle(type);
+            } else {
+                alert("存储失败");
+            }
+        };
+        getFromWS("mainmooc/savePost.template", paras, objs, afterSavePost);
+    }
+
+
+</script>
+<button class="btn btn-secondary btn-icon btn-icon-standalone"
+        style="margin-left:5px;" onclick="setArticle(0)">新的话题
+</button>
+
+
+<div class="modal fade" id="modal-article">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" onclick="closeDia()">&times;</button>
+                <h4 class="modal-title">编辑课程</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">标题: </label>
+                            <input type="text" class="form-control" id="title" placeholder="标题"
+                                   style="display:inline-block;width:30%">
+                            <input type="text" id="articleId" style="display:none">
+                            <input type="text" id="bufferPicIds" value="" style="display:none">
+                            <!--<li class="title" style="display:inline-block">&nbsp;&nbsp;类型：<input id="typeSel"-->
+                            <!--type="text" readonly-->
+                            <!--value=""-->
+                            <!--style="width:120px;"/>-->
+                            <!--<a id="menuBtn" style="color:blue" href="#" onclick="showMenu('文章编辑'); return false;">选择类型</a>-->
+                            <!--</li>-->
+                            <!--<input type="text" id="type" value="" style="display:none">-->
+
+
+                            <br/>
+                            <br/>
+                            <label for="field-4" class="control-label">发布者: </label>
+
+                            <input class="form-control" id="publisher" readonly="readonly"
+                                   style="display:inline-block;width:15%"><br/>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">图片: </label>
+                            <input type="text" value="0" id="picId" style="display:none">
+                            <input type="text" id="picName" class="form-control" style="display:none;width:30%"
+                                   readonly>
+                            <img id="picImg" src="" style="width:150px;height:60px">
+                            <input type="file" id="picInput" value="上传图片"
+                                   style="display:inline-block;width:70px;color: transparent;"
+                                   onchange="updatePicName()">
+                            <input type="button" value="删除图片" onclick="deletePic()">
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">附件: </label>
+                            <input type="text" value="" id="appendixId" style="display:none">
+                            <input type="text" id="appendixName" class="form-control"
+                                   style="display:inline-block;width:30%" readonly>
+                            <input type="file" id="appendixInput" value="选择附件"
+                                   style="display:inline-block;width:70px;color: transparent;"
+                                   onchange="updateAppendixName()">
+                            <input type="button" value="上传文件" onclick="uploadAppendix()">
+                            <!--
+                                                        <input type="button" value="删除文件" onclick="deleteAppendix()">
+                            -->
+                        </div>
+                        <!--此div用来先显示已经上传的附件，可以删除和下载-->
+                        <div class="form-group" id="appendix-group">
+
+                        </div>
+                    </div>
+                    <div class="col-md-12" id="travelInfo" style="display:none">
+
+                        <div class="form-group">
+                            <label class="control-label">特点: </label>
+                            <input type="text" placeholder="主题/口味等" id="theme" style="width:100px">
+                            <label class="control-label">所在地区: </label>
+                            <select id="district" style="width:80px">
+                                <option value="多宝镇">多宝镇</option>
+                                <option value="拖市镇">拖市镇</option>
+                                <option value="蒋湖">蒋湖</option>
+                                <option value="渔薪镇">渔薪镇</option>
+                                <option value="蒋场镇">蒋场镇</option>
+                                <option value="佛子山镇">佛子山镇</option>
+                                <option value="黄潭镇">黄潭镇</option>
+                                <option value="汪场镇">汪场镇</option>
+                                <option value="岳口镇">岳口镇</option>
+                                <option value="横林镇">横林镇</option>
+                                <option value="彭市镇">彭市镇</option>
+                                <option value="麻洋镇">麻洋镇</option>
+                                <option value="多祥镇">多祥镇</option>
+                                <option value="干驿镇">干驿镇</option>
+                                <option value="马湾镇">马湾镇</option>
+                                <option value="卢市镇">卢市镇</option>
+                                <option value="小板镇">小板镇</option>
+                                <option value="皂市镇">皂市镇</option>
+                                <option value="胡市镇">胡市镇</option>
+                                <option value="石河镇">石河镇</option>
+                                <option value="张港镇">张港镇</option>
+                                <option value="九真镇">九真镇</option>
+                                <option value="石家河镇">石家河镇</option>
+                                <option value="天门工业园">天门工业园</option>
+                                <option value="净潭乡">净潭乡</option>
+                            </select>
+                            <label class="control-label">费用: </label>
+                            <input type="text" placeholder="元(整数)" id="money" style="width:60px">
+                            <label class="control-label">详细地址: </label>
+                            <input type="text" placeholder="地址" id="address" style="width:150px">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="form-group">
+                            <label for="field-4" class="control-label">文章内容: </label>
+                            <textarea class="form-control" id="articleContent" style="height:300px">
+
+					            </textarea>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-white" onclick="closeDia()">关闭</button>
+                <button type="button" class="btn btn-info" onclick="doSave()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
+<link rel="stylesheet" href="assets/css/bootstrap-treeview.css">
+<script src="assets/js/bootstrap-treeview.min.js"></script>
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+<!-- Imported scripts on this page -->
+<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>

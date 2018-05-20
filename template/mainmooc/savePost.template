@@ -1,0 +1,171 @@
+///新建一个话题
+<%If :operation=="newArticle" %>
+	<%:insertSql = "insert into moocpost(id,title,author,body) values(?,?,?,?)"%>
+	<%
+	:aid = tuid();
+	:x = execSQL(:insertSql,:aid,S(:title),S(:publisher),S(:content_text))
+	 %>
+	<%Exit(:x)%>
+<%EndIf%>
+
+
+///编辑一个话题
+<%If :operation=="editArticle" %>
+	<%:selectSql = "select pics from moocarticle where id=?"%>
+	<%:result=execSQL(:selectSql,:id)%>
+	<%:index = indexOf(:result,"=")%>
+	<%:picIds_old = mid(:result,:index+1)%>
+	<%:updateSql = "update moocarticle set title=?,article_type=?, modify_date=now(),pics=?,content=?, content_text=?, pic_id=?, on_top=? where id= ?"%>
+	<%:x=execSQL(:updateSql,S(:title),:type,S(:picIds_old#";"#:picIds),S(:content),S(:content_text),:picId#"L",:top,:id)%>
+
+	<%
+	:sql = "update travel_info set theme=?,district=?,money=?,address=? where article_id=?"
+	execSQL(:sql,S(:theme),S(:district),:money,S(:address),:id)
+	%>
+	<%Exit(:x)%>
+<%EndIf%>
+
+<%If :operation=="updateAppendixId"
+	:updateSql = "update moocarticle set appendix_id=? where id= ?"
+	:x=execSQL(:updateSql,S(:appendixId),:articleId)
+	Exit(:x)
+EndIf
+%>
+
+
+///单个删除
+<%If :operation=="deleteArticle" %>
+///	<%:selectSql = "select pics from moocarticle where id=?"%>
+///	<%:result=execSQL(:selectSql,:id)%>
+///	<%:index = indexOf(:result,"=")%>
+///	<%:picIds = mid(:result,:index+1)%>
+///	<%split(:picIds,";",&picIdsArray)%>
+///	<%:i=0%>
+///	<%While :i<arrayLength(&picIdsArray)%>
+///		<%:deletePicSql = "delete from uploadedfiles  where filetuid= ?"%>
+///		<%:x=execSQL(:deletePicSql,:picIdsArray[:i])%>
+///		<%:i = :i+1%>
+///	<%EndWhile%>
+
+	<%:selectSql = "select appendix_id from moocarticle where id=?"%>
+	<%:result=execSQL(:selectSql,:id)%>
+	<%:index = indexOf(:result,"=")%>
+	<%:appendixIds = mid(:result,:index+1)%>
+	<%split(:appendixIds,";",&appendixIdsArray)%>
+	<%:i=0%>
+	<%While :i<arrayLength(&appendixIdsArray)%>
+		<%:deleteAppendixSql = "delete from uploadedfiles  where filetuid= ?"%>
+		<%:x=execSQL(:deleteAppendixSql,:appendixIdsArray[:i])%>
+		<%:i = :i+1%>
+	<%EndWhile%>
+	<%debugMsg("========id===="#:id)%>
+	<%:deleteSql = "delete from travel_info  where article_id= ?"%>
+	<%execSQL(:deleteSql,:id)%>
+	<%:deleteSql = "delete from moocarticle  where id= ?"%>
+	<%:x=execSQL(:deleteSql,:id)%>
+	<%Exit(:x)%>
+<%EndIf%>
+
+
+///批量删除
+<%If :operation=="batchDelete" %>
+
+	<%debugMsg("========ids===="#:ids)%>
+
+	<%split(:ids,";",&idsArray)%>
+	<%:i=0%>
+	<%While :i<arrayLength(&idsArray)-1%>
+		<%:deleteSql = "delete from travel_info  where article_id= ?"%>
+		<%execSQL(:deleteSql,:idsArray[:i])%>
+		<%:deleteSql = "delete from moocarticle  where id= ?"%>
+		<%:x=execSQL(:deleteSql,:idsArray[:i])%>
+		<%:i = :i+1%>
+	<%EndWhile%>
+
+	<%Exit(:x)%>
+<%EndIf%>
+
+<% If :operation=="getPicAndAppendixName"
+	If :picId !=0
+		:selectSql = "select filename from uploadedfiles where filetuid=?"
+		:result=execSQL(:selectSql,:picId)
+		:index = indexOf(:result,"=")
+		:picName = mid(:result,:index+1)
+	Else
+		:picName = "";
+	EndIf
+
+	If :appendixId !=""
+		:appendixName="";
+		split(:appendixId,";",&appendixIdArray)
+		:i=0;
+%>
+		<%While :i<arrayLength(&appendixIdArray)%>
+<%
+			:selectSql = "select filename from uploadedfiles where filetuid=?"
+			:result=execSQL(:selectSql,:appendixIdArray[:i])
+			:index = indexOf(:result,"=")
+			:name = mid(:result,:index+1)
+			If :appendixName == ""
+				:appendixName = :name
+			Else
+				:appendixName = :appendixName#";"#:name
+			EndIf
+
+			:i = :i+1
+		EndWhile
+	Else
+		:appendixName = "";
+	EndIf
+	Exit :picName#"|"#:appendixName
+EndIf%>
+<%If :operation=="deletePic"
+	:deleteSql = "delete from uploadedfiles  where filetuid= ?"
+	execSQL(:deleteSql,:id)
+
+	:updateSql = "update moocarticle set pic_id=0  where pic_id = ?"
+	:x=execSQL(:deleteSql,:id)
+	Exit :x
+EndIf%>
+<%If :operation=="deleteAppendix"
+	:deleteSql = "delete from uploadedfiles  where filetuid= ?"
+	execSQL(:deleteSql,:id)
+
+	///更新moocarticle表的appendix_id 字段
+	:selectSql = "select appendix_id from article where id=? "
+	:result = execSQL(:selectSql,:articleId)
+	:idx = lastIndexOf(:result,"=");
+	:appendixIds = mid(:result,:idx+1);
+
+	split(:appendixIds,";",&appendixIdsArray)
+	:i=0
+	:newAppendixIds = "";
+	While :i<arrayLength(&appendixIdsArray)
+		If :newAppendixIds == ""
+			If :id != :appendixIdsArray[:i]
+				:newAppendixIds = :appendixIdsArray[:i];
+			EndIf
+		Else
+			If :id != :appendixIdsArray[:i]
+				:newAppendixIds = :newAppendixIds #";"# :appendixIdsArray[:i];
+			EndIf
+
+		EndIf
+		:i = :i+1
+	EndWhile
+
+	:updateSql = "update moocarticle set appendix_id=?  where id = ?"
+	:x=execSQL(:updateSql,S(:newAppendixIds),:articleId)
+
+	Exit :newAppendixIds
+EndIf%>
+<%If :operation=="deleteFiles"
+	split(:picIds,";",&picIdsArray)
+	:i=0
+	While :i<arrayLength(&picIdsArray)
+		:deletePicSql = "delete from uploadedfiles  where filetuid= ?"
+		:x=execSQL(:deletePicSql,:picIdsArray[:i])
+		:i = :i+1
+	EndWhile
+
+EndIf%>

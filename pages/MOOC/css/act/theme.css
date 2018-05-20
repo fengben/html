@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 .c-master,
 .live-cou-box ul li.current .live-three-angle .yk-DT-arrow *, .live-cou-box ul li.current .live-cb-wrap .live-cou-time .fr a, .live-cou-box ul li .live-cb-wrap .live-course-title:hover, .i-n-l-mane a:hover, .in-new-box-list ul li:hover a, .in-new-box-list ul li:hover h3, .in-n-r-l-ul li a:hover, .js-tap li .c-l-jgpx a:hover, .js-tap li .c-l-jgpx a.current,
 .c-s-dl .ejdl-box ul li a:hover, .c-s-dl .ejdl-box .c-s-dl-li ul li.current a, .c-s-dl .ejdl-box dt span, .sc-end a, .sc-end a:hover, .all-teacher-title .js-list-tit a:hover, .all-teacher-title .js-list-tit a.current, .q-r-r-num .r-b-num, .kj-link li a, .ei-i-close,
@@ -88,7 +88,7 @@
 }
 
 .r-art-wrap li.lt2 .orderNum span {
-    background: #CA9191;
+    background: ##9E9E9E;
 }
 
 .u-account-li li.errorts input, .i-r-kc-btn:hover, .u-index .lh-menu-stair .lh-menu-ol li.lh-menu-second .l-m-stitle .cou-kscp:hover, .u-index .lh-menu ul ul.no-parent-node li.lh-menu-second .cou-kscp:hover,

@@ -1,0 +1,98 @@
+<%
+///新闻页面大图片展示
+:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 and A.pic_id !=0 order by A.on_top desc,A.id desc limit 1 offset 0"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+<div class="mr5">
+							<div class="big-pic pic-box-zx">
+								<div class="nr-infor">
+									<a href="articleinfo.html?id=<%=id%>" target="_blank">
+										<section class="n-i-sebox">
+											<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+											<div class="nr-i-zy">
+												<p class="c-fff fsize14"><%=content_text%>
+												</p>
+											</div>
+											<p class="nr-i-zy-btn tac">
+												查看详情
+											</p>
+										</section>
+									</a>
+								</div>
+								<a href="articleinfo.html?id=<%=id%>" target="_blank" class="pic-a-n">
+<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  >								</a>
+								<a href="articleinfo.html?id=<%=id%>" target="_blank" class="name-a-n">
+									<span class="txtOf"><%=title%></span>
+								</a>
+							</div>
+						</div>
+<%
+EndRepeat
+EndIf
+%>
+$_@_$
+<%
+///新闻页面小图片展示
+:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 and A.pic_id !=0 order by A.on_top desc,A.id desc limit 4 offset 1"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber>0
+	Repeat
+%>
+<div class="small-pic clearfix　mb10" >
+								<div class="w50pre fl">
+											<div class="mr5 pic-box-zx">
+												<div class="nr-infor">
+													<a href="articleinfo.html?id=<%=id%>" target="_blank">
+														<section class="n-i-sebox">
+															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
+															<div class="nr-i-zy">
+																<p class="c-fff fsize14">
+																		<%=content_text%>
+																</p>
+															</div>
+															<p class="nr-i-zy-btn tac">
+																查看详情
+															</p>
+														</section>
+													</a>
+												</div>
+												<a href="articleinfo.html?id=<%=id%>" target="_blank" class="pic-a-n">
+<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" width="280px" height="185.91px" >													</a>
+												<a href="articleinfo.html?id=<%=id%>" class="name-a-n">
+													<span class="txtOf"><%=title%></span>
+												</a>
+											</div>
+
+							</div>
+<%
+EndRepeat
+EndIf
+%>
+$_@_$
+<%
+///新闻页面资讯排行标题展示
+:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id ,A.count from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 order by A.count desc,A.id desc limit 10 offset 0"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+debugMsg("--------------=urlid-----------------"#:totalNumber
+
+If :totalNumber>0
+  Repeat
+%>
+<li class="lt2">
+<aside class="orderNum"><span></span></aside>
+						<h3 class="hLh30 txtOf">
+							<a href="articleinfo.html?id=<%=id%>" target="_blank" title="<%=title%>" class="i-art-title"><%=title%></a>
+						</h3>
+						</li>
+
+<%
+EndRepeat
+EndIf
+%>
+
+

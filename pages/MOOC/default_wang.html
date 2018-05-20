@@ -87,7 +87,7 @@
             //首页轮播图、栏目图展示
             var recentHomeRotationMap = new Array();
             var HomeRotationMapResult = function () {
-              //首页轮播图
+                //首页轮播图
                 jQuery("#HomeRotationMap").html(recentHomeRotationMap[0]);
                 //栏目一图
                 jQuery("#Columns_pic1").html(recentHomeRotationMap[1]);
@@ -164,13 +164,13 @@
             }
             getFromWS("frontmooc/getRecentArtDesign.template", recentArtDesign, processADResult);
             //计算机课程展示
-            var recentCS = new Array();
-            var processCSResult = function () {
-
-                jQuery("#AllCS").html(recentCS[0]);
-
-            }
-            getFromWS("frontmooc/getRecentCS.template", recentCS, processCSResult);
+            // var recentCS = new Array();
+            // var processCSResult = function () {
+            //
+            //     jQuery("#AllCS").html(recentCS[0]);
+            //
+            // }
+            // getFromWS("frontmooc/getRecentCS.template", recentCS, processCSResult);
             //建筑师一级、二级图片展示
             // var recentFirstArchitect = new Array();
             // var processFirstArchitectResult = function () {
@@ -197,25 +197,57 @@
                 jQuery("#AllTeacher").html(recentTeacher[0]);
             }
             // alert(recentTeacher);
-            getFromWS("frontmooc/getTeacher01.template", recentTeacher, processTeResult);
+            getFromWS("frontmooc/getTeacher.template", recentTeacher, processTeResult);
 
             //新闻资讯
-            // var recentNewsConsulting = new Array();
-            // var NewsConsultingResult = function () {
-            //
-            //     jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
-            //     jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
-            // }
-            // getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
+            var recentNewsConsulting = new Array();
+            var NewsConsultingResult = function () {
 
-            //首页栏目信息读取
-            var recentColumns = new Array();
-            var processCoResult = function () {
-                jQuery("#FirstColumns").html(recentColumns[0]);
-                jQuery("#SecondColumns").html(recentColumns[1]);
-                jQuery("#ThirdColumns").html(recentColumns[2]);
+                jQuery("#NewsConsultingImages").html(recentNewsConsulting[0]);
+                jQuery("#NewsTitleList").html(recentNewsConsulting[1]);
             }
-            getFromWS("frontmooc/getColumns.template", recentColumns, processCoResult);
+            getFromWS("frontmooc/getRecentNewsConsulting.template", recentNewsConsulting, NewsConsultingResult);
+
+            //首页栏目一信息读取
+            var recentColumns01 = new Array();
+            var processCoResult01 = function () {
+                jQuery("#ColumnsResult01").html(recentColumns01[0]);
+                jQuery("#AllCourse01").html(recentColumns01[1]);
+
+
+            }
+            getFromWS("frontmooc/getColumns01.template", recentColumns01, processCoResult01);
+
+            //首页栏目二信息读取
+            var recentColumns02 = new Array();
+            var processCoResult02 = function () {
+                jQuery("#ColumnsResult02").html(recentColumns02[0]);
+                jQuery("#AllCourse02").html(recentColumns02[1]);
+
+
+            }
+            getFromWS("frontmooc/getColumns02.template", recentColumns02, processCoResult02);
+
+           //首页栏目三信息读取
+            var recentColumns03 = new Array();
+            var processCoResult03 = function () {
+                jQuery("#ColumnsResult03").html(recentColumns03[0]);
+                jQuery("#AllCourse03").html(recentColumns03[1]);
+
+
+            }
+            getFromWS("frontmooc/getColumns03.template", recentColumns03, processCoResult03);
+
+            //首页栏目四信息读取
+            var recentColumns04 = new Array();
+            var processCoResult04 = function () {
+                jQuery("#ColumnsResult04").html(recentColumns04[0]);
+                jQuery("#AllCourse04").html(recentColumns04[1]);
+
+
+            }
+            getFromWS("frontmooc/getColumns04.template", recentColumns04, processCoResult04);
+
         });
 
     </script>
@@ -228,8 +260,8 @@
                                                                     href="javascript:void(0)" title="关闭"
                                                                     class="dClose icon16 pa new-close">&nbsp;</a><span
                 id="d-s-head-tab" class="d-s-head-tab">
-      <a href="javascript:void(0)" onclick="dialoglogin(this)" class="current">登录</a>
-      <a href="javascript:void(0)" onclick="dialogRegister(this)">注册</a></span></h4>
+      <a href="javascript:void(0)" onclick="showdialoglogin(this)" class="current">登录</a>
+      <a href="javascript:void(0)" onclick="showdialogRegister(this)">注册</a></span></h4>
         <div class="of">
             <div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
                 <div id="d-s-head-cont" class="lrWrap">
@@ -240,7 +272,7 @@
                         <div>
                             <ol class="e-login-options">
                                 <li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden"/> <input
-                                        id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value=""
+                                        id="u-email" placeholder="请输入账户" name="" value=""
                                         onkeyup="$(this).next().html('');" type="text"/>
                                     <p class="lr-tip-wrap"></p></li>
                                 <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password" placeholder="请输入密码"
@@ -267,13 +299,18 @@
                         </div>
                         <div>
                             <ol class="e-login-options">
-                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-name-reg" placeholder="请输入账号"
+                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-email-reg" placeholder="请输入邮箱"
                                                                                name="registerName" maxlength="50"
                                                                                value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="text"/>
                                     <p class="lr-tip-wrap"></p></li>
                                 <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-reg" placeholder="请输入密码"
+                                                                               name="" value=""
+                                                                               onkeyup="$(this).next().html('');"
+                                                                               type="password"/>
+                                    <p class="lr-tip-wrap"></p></li>
+                                 <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-rep" placeholder="请确认密码"
                                                                                name="" value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="password"/>
@@ -290,7 +327,7 @@
                         <h6 class="hLh20 mb15"><span class="c-666 fsize14">第三方快捷登录</span></h6>
                         <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
                         <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
-                        <a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>
+                        <!--<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>-->
                     </div>
                 </div>
             </div>
@@ -337,11 +374,11 @@
                                         </a>
                                     </li>
 
-                                    <!--<li class="undis loginedLiShow">-->
-                                    <!--<a href="javascript:void(0)" title="退出" onclick="exit();" class="">-->
-                                    <!--退出-->
-                                    <!--</a>-->
-                                    <!--</li>-->
+                                    <li class="undis loginedLiShow">
+                                    <a href="javascript:void(0)" title="退出" onclick="exit();" class="">
+                                    退出
+                                    </a>
+                                    </li>
                                 </ul>
                             </section>
                         </div>
@@ -362,7 +399,7 @@
                                 <aside class="fr">
                                     <section class="search-3">
                                         <div class="s-3-infor">
-                                            <form action="showcoulist.html" method="post" id="headerformSearch">
+                                            <form action="search.html" method="get" id="headerformSearch">
                                                 <input type="text" value="" id="headerSearchName"
                                                        name="queryCourse.courseName" placeholder="请输入要查找的内容"/>
                                                 <a href="javascript:$('#headerformSearch').submit()" type="submit"
@@ -376,7 +413,7 @@
                                     <li><a href="default.html" title="首页">首页</a></li>
                                     <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
                                     <li><a href="shoollist.html" title="直播">名校</a></li>
-                                    <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
+                                    <li><a href="teacherlist.html?id=2018112858180021535 " title="名师">名师</a></li>
                                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                                     <li><a href="article.html" title="资讯">资讯</a></li>
                                 </ul>
@@ -554,90 +591,7 @@
                         <div>
                             <article class="comm-course-list of demo2-i-live-list demo3-i-live-list">
                                 <ul class="of" id="AllUniversity">
-                                    <li>
-                                        <div class="cc-l-wrap in-live-ing">
-                                            <div class="d3-liv-in-zt">
-                                            </div>
-                                            <div class="cc-l-wrap-top">
-                                                <section class="course-img">
-                                                    <a href="shool.html"> <img xsrc="picture/bj.png"
-                                                                               src="http://wx..com/static/inxweb/img/coures.gif"
-                                                                               class="img-responsive" alt=" "/> </a>
-                                                </section>
-                                                <section class="d3-lv-in-b">
-                                                    <h3 class="hLh30 txtOf mt5"><a class="course-title fsize16 c-333"
-                                                                                   title=" " href="shool.html">北京大学</a>
-                                                    </h3>
-                                                    <section class="mt10 hLh20 of">
-                                                        <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
-                                                    </section>
-                                                </section>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cc-l-wrap in-live-ing">
-                                            <div class="d3-liv-in-zt">
-                                            </div>
-                                            <div class="cc-l-wrap-top">
-                                                <section class="course-img">
-                                                    <a href="shool.html"> <img xsrc="picture/mz.png"
-                                                                               src="http://wx..com/static/inxweb/img/coures.gif"
-                                                                               class="img-responsive" alt=" "/> </a>
-                                                </section>
-                                                <section class="d3-lv-in-b">
-                                                    <h3 class="hLh30 txtOf mt5"><a class="course-title fsize16 c-333"
-                                                                                   title=" " href="shool.html">浙江大学</a>
-                                                    </h3>
-                                                    <section class="mt10 hLh20 of">
-                                                        <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
-                                                    </section>
-                                                </section>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cc-l-wrap in-live-ing">
-                                            <div class="d3-liv-in-zt">
-                                            </div>
-                                            <div class="cc-l-wrap-top">
-                                                <section class="course-img">
-                                                    <a href="shool.html"> <img xsrc="picture/wh.png"
-                                                                               src="http://wx..com/static/inxweb/img/coures.gif"
-                                                                               class="img-responsive" alt=" "/> </a>
-                                                </section>
-                                                <section class="d3-lv-in-b">
-                                                    <h3 class="hLh30 txtOf mt5"><a class="course-title fsize16 c-333"
-                                                                                   title=" " href="shool.html">武汉大学</a>
-                                                    </h3>
-                                                    <section class="mt10 hLh20 of">
-                                                        <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
-                                                    </section>
-                                                </section>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="cc-l-wrap in-live-ing">
-                                            <div class="d3-liv-in-zt">
-                                            </div>
-                                            <div class="cc-l-wrap-top">
-                                                <section class="course-img">
-                                                    <a href="shool.html"> <img xsrc="picture/hgd.png"
-                                                                               src="http://wx..com/static/inxweb/img/coures.gif"
-                                                                               class="img-responsive" alt=" "/> </a>
-                                                </section>
-                                                <section class="d3-lv-in-b">
-                                                    <h3 class="hLh30 txtOf mt5"><a class="course-title fsize16 c-333"
-                                                                                   title=" " href="shool.html">哈尔滨大学</a>
-                                                    </h3>
-                                                    <section class="mt10 hLh20 of">
-                                                        <span class="fl jgAttr c-ccc f-fA"> 大学简介 </span>
-                                                    </section>
-                                                </section>
-                                            </div>
-                                        </div>
-                                    </li>
+
                                 </ul>
                             </article>
                         </div>
@@ -648,7 +602,7 @@
                 <div class="of bg-f8">
                     <section class="container">
                         <header class="comm-title">
-                            <span class="fr mt15 mr10 hyh"><a href="classlist" title="更多" class="c-master fsize14">更多 &gt;</a></span>
+                            <span class="fr mt15 mr10 hyh"><a href="showcoulist.html?id=2018112858180021535" title="更多" class="c-master fsize14">更多 &gt;</a></span>
                             <h2 class="fl tac tit-header"><span class="c-333">推荐课程</span></h2>
                         </header>
                         <div>
@@ -663,150 +617,24 @@
                 </div>
                 <!-- /班级 结束 -->
                 <!--/分类课程开始  -->
-                <div class="of bg-fff  ">
-                    <section class="container">
-                        <header class="comm-title">
-                            <div class="live-small-tit" >
-                                <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?queryCourse.subjectId=210"
-                                                                   title="更多" onclick="">更多&gt;&gt;</a> </span>
-                                <h2 class="fl tac tit-header " id="FirstColumns"></h2>
-                                <ul class="clearfix">
-                                    <li class="current"><a href="javascript:void(0)" onclick="selectSubject(210,this)">全部</a>
-                                    </li>
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(211,this)">一级建造师</a></li>-->
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(213,this)">二级建造师</a></li>-->
-                                </ul>
-                            </div>
-                        </header>
-                        <!--<section class="live-moblie-fl">-->
-                            <!--<a onclick="selectSubject(211,this)" href="javascript:void(0)">一级建造师</a>-->
-                            <!--<a onclick="selectSubject(213,this)" href="javascript:void(0)">二级建造师</a>-->
-                        <!--</section>-->
-                        <article class="live-no-title">
-                            <div class="comm-course-list of">
-                                <div class="com-live-no-box">
-                                    <div class="c-l-n-left">
-                                        <ul>
-                                            <li class="liv-fist-box">
-                                                <div class="d3-left-pic" id="Columns_pic1">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject210" id="AllCS">
-                                        </ul>
-                                        <ul style="display:none" class="clearfix subject211" id="FirstArchitect">
-                                        </ul>
-                                        <ul style="display:none" class="clearfix subject213" id="SecondArchitect">
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </article>
-                    </section>
-                </div>
-                <div class="of bg-f8  ">
-                    <section class="container">
-                        <header class="comm-title">
-                            <div class="live-small-tit">
-                                <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?queryCourse.subjectId=221"
-                                                                   title="更多" onclick="">更多&gt;&gt;</a> </span>
-                                <h2 class="fl tac tit-header" id="SecondColumns"></h2>
-                                <ul class="clearfix">
-                                    <li class="current"><a href="javascript:void(0)" onclick="selectSubject(221,this)">全部</a>
-                                    </li>
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(648,this)">心理咨询一级</a></li>-->
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(259,this)">心理咨询二级</a></li>-->
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(260,this)">心理咨询三级</a></li>-->
-                                </ul>
-                            </div>
-                        </header>
-                        <!--<section class="live-moblie-fl">-->
-                            <!--<a onclick="selectSubject(648,this)" href="javascript:void(0)">心理咨询一级</a>-->
-                            <!--<a onclick="selectSubject(259,this)" href="javascript:void(0)">心理咨询二级</a>-->
-                            <!--<a onclick="selectSubject(260,this)" href="javascript:void(0)">心理咨询三级</a>-->
-                        <!--</section>-->
-                        <article class="live-no-title">
-                            <div class="comm-course-list of">
-                                <div class="com-live-no-box">
-                                    <div class="c-l-n-left">
-                                        <ul>
-                                            <li class="liv-fist-box">
-                                                <div class="d3-left-pic" id="Columns_pic2">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject221" id="AllArtDesign"></ul>
-                                        <ul style="display:none" class="clearfix subject648" id="FirstPsychology">
-                                        </ul>
-                                        <ul style="display:none" class="clearfix subject259" id="SecondPsychology"></ul>
-                                        <ul style="display:none" class="clearfix subject260" id="ThirdPsychology">
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </article>
+                <div class="of bg-fff  " id="ColumnsResult01">
 
-                    </section>
                 </div>
-                <div class="of bg-fff  ">
-                    <section class="container">
-                        <header class="comm-title">
-                            <div class="live-small-tit">
-                                <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?queryCourse.subjectId=223"
-                                                                   title="更多" onclick="">更多&gt;&gt;</a> </span>
-                                <h2 class="fl tac tit-header" id="ThirdColumns"></h2>
-                                <ul class="clearfix">
-                                    <li class="current"><a href="javascript:void(0)" onclick="selectSubject(223,this)">全部</a>
-                                    </li>
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(251,this)">会计基础</a></li>-->
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(256,this)">财经法规</a></li>-->
-                                </ul>
-                            </div>
-                        </header>
-                        <!--<section class="live-moblie-fl">-->
-                            <!--<a onclick="selectSubject(251,this)" href="javascript:void(0)">会计基础</a>-->
-                            <!--<a onclick="selectSubject(256,this)" href="javascript:void(0)">财经法规</a>-->
-                        <!--</section>-->
-                        <article class="live-no-title">
-                            <div class="comm-course-list of">
-                                <div class="com-live-no-box">
-                                    <div class="c-l-n-left" >
-                                        <ul>
-                                            <li class="liv-fist-box">
-                                                <div class="d3-left-pic" id="Columns_pic3">
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject223" id="AllLiteraryHistory">
-                                        </ul>
-                                        <ul style="display:none" class="clearfix subject251" id="AccountingBasis">
-                                        </ul>
-                                        <ul style="display:none" class="clearfix subject256" id="FinancialRegulations">
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </article>
-                    </section>
+                <div class="of bg-f8  " id="ColumnsResult02" >
+
                 </div>
+                <div class="of bg-fff  " id="ColumnsResult03" >
+
+                </div>
+                <div class="of bg-f8  " id="ColumnsResult04" >
+
+               </div>
                 <!--分类课程结束  -->
                 <!-- /网校名师 开始 -->
                 <div class="of bg-f8">
                     <section class="container">
                         <header class="comm-title">
-                            <span class="fr mt15 mr10 hyh"><a href="teacherlist.html" title="更多"
+                            <span class="fr mt15 mr10 hyh"><a href="teacherlist.html?id=2018112858180021535" title="更多"
                                                               class="c-master fsize14">更多 &gt;</a></span>
                             <h2 class="fl tac tit-header"><span class="c-333">名家讲师</span></h2>
                         </header>
@@ -819,6 +647,34 @@
                     </section>
                 </div>
                 <!-- /网校名师 结束 -->
+                <div class="bg-fff of">
+                    <section class="container">
+                        <header class="comm-title">
+                            <span class="fr mt15 mr10 hyh"><a href="article.html" title="更多" class="c-master fsize14" >更多 &gt;</a></span>
+                            <h2 class="fl tac tit-header">
+                                <span class="c-333">新闻资讯</span>
+                            </h2>
+                        </header>
+                        <section class="in-new-box clerfix">
+                            <div class="clearfix d2-in-news-warp mt30">
+                                <article class="d2-i-ns-left">
+                                    <div class="d2-i-n-l-box of d3-i-n-l-box">
+                                        <ul class="clearfix" id="NewsConsultingImages">
+                                        </ul>
+                                    </div>
+                                </article>
+                                <article class="d2-i-ns-right">
+                                    <div class="d2-i-n-r-box">
+                                        <section class="d2-i-nr-body">
+                                            <ul class="d2-i-nr-b-list d3-i-nr-b-list" id="NewsTitleList">
+                                            </ul>
+                                        </section>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+                    </section>
+                </div>
                 <input type="hidden" id="theme_color" value=""/>
                 <script type="text/javascript" src="js/swiper-2.1.0.js"></script>
                 <script type="text/javascript" src="js/index.js"></script>
@@ -924,7 +780,7 @@
                 $("#loginfrom").hide();
             }
 
-            function dialogRegister(obj) {
+            function showdialogRegister(obj) {
                 $('#d-s-head-tab').find('a').each(function () {
                     //tmp = $(this).text();
 
@@ -936,7 +792,7 @@
                 $("#zc").show()
             }
 
-            function dialoglogin(obj) {
+            function showdialoglogin(obj) {
                 $('#d-s-head-tab').find('a').each(function () {
                     //tmp = $(this).text();
 

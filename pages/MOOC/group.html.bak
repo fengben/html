@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"><![endif]-->
+<!--[if IE 9]><html class="lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+ <!--<![endif]-->
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui" /> 
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
+  <meta content="telephone=no" name="format-detection" /> 
+  <title>首页-MOOC平台</title>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> 
+  <link rel="stylesheet" type="text/css" href="css/reset_3.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/global_3.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/webstyle.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/mw_300_768.css" media="screen and (min-width: 300px) and (max-width: 768px)" /> 
+  <!--[if lt IE 9]><script src="js/html5_3.js"></script><![endif]--> 
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
+  <script>
+        var mobileRegex=/^1[0-9]{10}$/; //验证手机正则
+        var emailRegex=/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //验证邮箱正则
+	</script> 
+ </head> 
+ <body> 
+
+  <div id="in-wrap"> 
+   <div class="h-mobile-mask"></div> 
+   <div class="leftMenu-mobile"> 
+    <section class="leftMenu-box"> 
+     <section> 
+      <div class="u-face-pic"> 
+       <img src="picture/avatar-boy_3.gif" alt="" class="userImgPhoto cusImgClass" /> 
+      </div> 
+    
+      <div class="hLh30"> 
+       <a href="javascript:togouc('/groupuc/uinfo')" title="个人资料设置" class="c-999">个人资料设置</a> 
+      </div> 
+     </section> 
+     <nav class="nav-mobile-ul"> 
+      <ul class="clearfix"> 
+       <li> <a href="/" title="首页">首页</a> </li> 
+       <li> <a href="/front/showcoulist" title="录播">录播</a> </li> 
+       <li> <a href="/front/liveIndex" title="直播">直播</a> </li> 
+       <li> <a href="/front/classlist" title="班级">班级</a> </li> 
+       <li> <a href="/lineclass/index" title="面授">面授</a> </li> 
+       <li> <a href="/front/teacherlist" title="名师">名师</a> </li> 
+       <li> <a href="/exam/index" title="考试">考试</a> </li> 
+       <li> <a href="/group/index" title="社区" target="_blank">社区</a> </li> 
+       <li> <a href="/front/articlelist/article" title="资讯">资讯</a> </li> 
+      </ul> 
+     </nav> 
+    
+    </section> 
+   </div> 
+   <div class="main-warp"> 
+    <div class="main-infor"> 
+    
+    
+    
+    
+    
+   
+
+<header id="header"> 
+      <section class="header-wrap"> 
+       <div class="header-pc"> 
+        <section class="fr h-r"> 
+         <aside class="h-r-user-box fr"> 
+       
+          <ul id="notLogin" class="undis" style="display: block;"> 
+          
+          </ul> 
+          <div class="clear"></div> 
+         </aside> 
+         <aside class="h-r-search"> 
+          
+         </aside> 
+        </section> 
+        <section class="fl h-l"> 
+         <h1 class="logo"> <a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="auto"></a> </h1>
+         <nav class="nav-pc"> 
+          <ul> 
+           <li><a href="default.html" title="网校首页" target="_blank">网校首页</a></li> 
+             <div class="DT-arrow">
+             
+             </div>  
+            <section class="fn-sub-box"> 
+             <div class="fn-sub-wrap fn-sub"> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">职业资格·考证：</b>
+               </dt> 
+               <dd> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">IT·互联网技术：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/10">互联网中国科技</a> 
+                <a title="" href="groupinfo.html?id=/20">互联网的圆桌会议室</a> 
+                <a title="" href="groupinfo.html?id=/15">程序员书屋</a> 
+                <a title="" href="groupinfo.html?id=/9">爱科技,爱创意,我们是技术控</a> 
+                <a title="" href="groupinfo.html?id=/13">科技创意</a> 
+                <a title="" href="groupinfo.html?id=/32">奔跑吧！指尖上的愤青们儿</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">艺术设计·创作：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/30">习惯一个人的音乐</a> 
+                <a title="" href="groupinfo.html?id=/29">音乐，人类的灵魂</a> 
+                <a title="" href="groupinfo.html?id=/12">一个背包一台单反一个爱拍照的人</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">兴趣·生活·理财：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/24">生活需要游戏，但人生不能游戏</a> 
+                <a title="" href="groupinfo.html?id=/14">享受生活，enjoy yourself</a> 
+                <a title="" href="groupinfo.html?id=/19">金融交流</a> 
+                <a title="" href="groupinfo.html?id=/31">金融众筹，让筹者不再发愁</a> 
+                <a title="" href="groupinfo.html?id=/11">吃货的世界</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">语言学习·留学：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/28">愿得一学霸，白首不分离</a> 
+                <a title="" href="groupinfo.html?id=/27">我爱法语</a> 
+                <a title="" href="groupinfo.html?id=/18">英语口语交流组</a> 
+                <a title="" href="groupinfo.html?id=/25">板绘学习指南小组</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">学历升学·考研：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/17">用车轮丈量生命</a> 
+                <a title="" href="groupinfo.html?id=/26">汗水、是脂肪在哭泣！</a> 
+                <a title="" href="groupinfo.html?id=/16">爱体育,爱运动</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">会计：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/34">会计超值特惠班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">心理学：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/40">心理学培训班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">高中：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/35">高中教师资格证全程保过班</a> 
+                <a title="" href="groupinfo.html?id=/42">高中零基小提琴班</a> 
+                <a title="" href="groupinfo.html?id=/43">高中化学学习班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">建筑师：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/37">二级建造师精品教学班</a> 
+                <a title="" href="groupinfo.html?id=/38">水利水电工程管理与实务</a> 
+                <a title="" href="groupinfo.html?id=/44">建设工程法规学习班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">IT互联网：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/33">java精品就业班</a> 
+                <a title="" href="groupinfo.html?id=/39">企业人力资源管理师一级视频教程全集</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">初中：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/36">初中国家教师资格考试专用班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">小学：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/45">写作基础培训班</a> 
+                <a title="" href="groupinfo.html?id=/41">幼儿资格证—综合素质学习</a> 
+               </dd> 
+              </dl> 
+             </div> 
+            </section>  
+          </ul> 
+          <div class="clear"></div> 
+         </nav> 
+        </section> 
+        <div class="clear"></div> 
+       </div> 
+       <div class="header-mobile"> 
+        <h1 class="logo"> <a href="#" title="因酷在线教育软件"><img src="picture/logo.png" height="36" width="auto"></a> </h1> 
+        <section> 
+         <aside class="h-r-user-box fr"> 
+          <ul> 
+           <li class="mw-nav-tap"> 
+            <div class="mw-nav-icon"></div> </li> 
+          </ul> 
+          <div class="clear"></div> 
+         </aside> 
+         <aside class="h-r-search"> 
+         
+         </aside> 
+         <div class="clear"></div> 
+        </section> 
+        <div class="clear"></div> 
+       </div> 
+      </section> 
+     </header>
+
+
+
+
+
+
+
+
+
+
+
+     <section class="s-main"> 
+      <div class="viewport"> 
+       <div class="mt20 mo-mt20"> 
+        <article class="fl col-7"> 
+         <div class="mo-sr-btn-box">
+         
+         </div> 
+         <section> 
+          <div class="is-box"> 
+           <header class="is-title"> 
+            <ol class="is-title-ol"> 
+             <li class="current"><a href="" title="热门小组">热门论题</a></li> 
+            </ol> 
+            <div class="clear"></div> 
+           </header> 
+           <section> 
+            <div class="t-slide"> 
+             <a class="arrow-left s-arrow" href="#"></a> 
+             <a class="arrow-right s-arrow" href="#"></a> 
+             <section class="t-slide-wrap"> 
+              <div class="swiper-container"> 
+               <div class="swiper-wrapper"> 
+                <div class="swiper-slide"> 
+                 <section class="hot-team-wrap"> 
+                  <ol class="team-ol clearfix"> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="#" title="" class="team-pic"> <img src="picture/1459160169083233084.jpg" width="80" height="80" alt="习惯一个人的音乐" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="#" title="习惯一个人的音乐" class="team-name">习惯一个人的音乐</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">张三</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+                   
+                     </section> 
+                    </div> </li> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="#" title="" class="team-pic"> <img src="picture/1448531721513138044.jpg" width="80" height="80" alt="互联网的圆桌会议室" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="#" title="互联网的圆桌会议室" class="team-name">互联网的圆桌会议室</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">张三</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+
+                     </section> 
+                    </div> </li> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="#" title="" class="team-pic"> <img src="picture/1448529928595019911.jpg" width="80" height="80" alt="互联网中国科技" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="#" title="互联网中国科技" class="team-name">互联网中国科技</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">李四</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+ 
+                     </section> 
+                    </div> </li> 
+                  </ol> 
+                  <div class="clear"></div> 
+                 </section> 
+                </div> 
+                <div class="swiper-slide"> 
+                 <section class="hot-team-wrap"> 
+                  <ol class="team-ol clearfix"> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="groupinfo.html?id=/17" title="" class="team-pic"> <img src="picture/1448531844991402040.jpg" width="80" height="80" alt="用车轮丈量生命" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="groupinfo.html?id=/17" title="用车轮丈量生命" class="team-name">用车轮丈量生命</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">李四</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+                     
+                     </section> 
+                    </div> </li> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="groupinfo.html?id=/15" title="" class="team-pic"> <img src="picture/1448529891494225219.jpg" width="80" height="80" alt="程序员书屋" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="groupinfo.html?id=/15" title="程序员书屋" class="team-name">程序员书屋</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">王五</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+                
+                     </section> 
+                    </div> </li> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="groupinfo.html?id=/28" title="" class="team-pic"> <img src="picture/1459160397472434203.jpg" width="80" height="80" alt="愿得一学霸，白首不分离" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="groupinfo.html?id=/28" title="愿得一学霸，白首不分离" class="team-name">愿得一学霸，白首不分离</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">赵六</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+                    
+                     </section> 
+                    </div> </li> 
+                  </ol> 
+                  <div class="clear"></div> 
+                 </section> 
+                </div> 
+                <div class="swiper-slide"> 
+                 <section class="hot-team-wrap"> 
+                  <ol class="team-ol clearfix"> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="groupinfo.html?id=/27" title="" class="team-pic"> <img src="picture/1459160229100083181.jpg" width="80" height="80" alt="我爱法语" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="groupinfo.html?id=/27" title="我爱法语" class="team-name">我爱法语</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">六七</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+                   
+                     </section> 
+                    </div> </li> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="groupinfo.html?id=/9" title="" class="team-pic"> <img src="picture/1448529764557725730.jpg" width="80" height="80" alt="爱科技,爱创意,我们是技术控" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="groupinfo.html?id=/9" title="爱科技,爱创意,我们是技术控" class="team-name">爱科技,爱创意,我们是技术控</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">张三成</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+                    
+                     </section> 
+                    </div> </li> 
+                   <li> 
+                    <div class="team-ele-box"> 
+                     <a href="groupinfo.html?id=/24" title="" class="team-pic"> <img src="picture/1459160305175105688.jpg" width="80" height="80" alt="生活需要游戏，但人生不能游戏" /> </a> 
+                     <h6 class="hLh20 txtOf"><a href="groupinfo.html?id=/24" title="生活需要游戏，但人生不能游戏" class="team-name">生活需要游戏，但人生不能游戏</a></h6> 
+                     <section class="mt10 hLh20 team-number">
+                      <span class="c-999">楼主</span>
+                     </section> 
+                     <section class="mt10 hLh20 team-jr-btn"> 
+              
+                     </section> 
+                    </div> </li> 
+                  </ol> 
+                  <div class="clear"></div> 
+                 </section> 
+                </div> 
+               </div> 
+              </div> 
+             </section> 
+             <div class="pagination"></div> 
+            </div> 
+           </section> 
+          </div> 
+         </section> 
+         <section class="mt20"> 
+          <div class="is-box"> 
+           <header class="is-title"> 
+            <aside class="fr"> 
+             <div class="t-s-select"> 
+              <span class="s-vv-txt"><q class="vam fsize12 c-666">全部</q>&nbsp;
+               <s class="sm-sj"></s></span> 
+              <ol class="s-vv-ol" style="display: none;"> 
+               <li class="current"><a href="javascript: void(0)" name="all">全部</a></li> 
+               <li class=""><a href="javascript: void(0)" name="top">置顶</a></li> 
+               <li class=""><a href="javascript: void(0)" name="essence">精华</a></li> 
+               <li class=""><a href="javascript: void(0)" name="fiery">火热</a></li> 
+              </ol> 
+             </div> 
+            </aside> 
+            <ol class="is-title-ol is-t-tab-ol"> 
+             <li class="current"><a href="javascript:void(0)" onclick="changeSelectTopic(this,0)" title="推荐">推荐</a></li> 
+             <li><a href="javascript:void(0)" onclick="changeSelectTopic(this,1)" title="最热小组">最新话题</a></li> 
+            </ol> 
+            <div class="clear"></div> 
+           </header> 
+           <div> 
+            <section class="isAct-list" id="aCoursesList">
+             <div id="indexTopicAll">
+             </div>
+             <section class="isAct-list" id="aCoursesList"> 
+              <div id="indexTopicAll">
+               <ul class="img-page-1 otShow"> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(7)" userinfoid="7" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/userAppImage/20180328/1522224555888.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupInfo.html" title="进入查看" target="_blank" class="isAct-title-name" style="
+										
+									">cdsc</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupInfo.html" title="进入查看" target="_blank">sdaddd </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 2"><em class="icon14">&nbsp;</em>2</span> 
+                  <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <a href="javascript:void(0)" onclick="#" title="" name="u-002" userinfoid="7">inxedu！</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="#">[习惯一个人的音乐]</a> 
+                  <span>9分钟前</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="" userinfoid="3" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/3.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=67" title="进入查看" target="_blank" class="isAct-title-name" style="
+										color:#FFA105
+									">中国十大难懂的方言你的家乡排第几？</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <i class="icon-jh" title="精华">精华</i> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=76" title="进入查看" target="_blank"> &nbsp; 中国地大物博，语言也成为一个地域的文化特色，一方面文化差异，方言难懂难交流，另一方面随着普通话越来越普及，越来越多的方言被忘记，小伙伴们现在还会说家乡话吗？ &nbsp;&nbsp; &nbsp; 网上也是评选出中国十大难懂的方言，...</a> </p> <a href="groupinfo.html?id=76" title="进入查看" target="_blank" class="topic_imgs"> <span class="topic_img_box"><img src="http://static5.gewara.com/images/micro/201511/s1745b4_1511dfbef5a__7fd4.jpg" xsrc="http://static5.gewara.com/images/micro/201511/s1745b4_1511dfbef5a__7fd4.jpg" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://static5.gewara.com/images/micro/201511/s_76406f29_1511dfee291__7fd7.png" xsrc="http://static5.gewara.com/images/micro/201511/s_76406f29_1511dfee291__7fd7.png" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://static5.gewara.com/images/micro/201511/s3814f58e_1511dfbf087__7fe2.png" xsrc="http://static5.gewara.com/images/micro/201511/s3814f58e_1511dfbf087__7fe2.png" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://static5.gewara.com/images/micro/201511/s_58e560f2_1511dfc80fd__7fd3.gif" xsrc="http://static5.gewara.com/images/micro/201511/s_58e560f2_1511dfc80fd__7fd3.gif" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://static5.gewara.com/images/micro/201511/s3814f58e_1511dfbf087__7fe0.gif" xsrc="http://static5.gewara.com/images/micro/201511/s3814f58e_1511dfbf087__7fe0.gif" class="topic_content_img" alt="" /></span> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 31"><em class="icon14">&nbsp;</em>31</span> 
+                  <span class="numb msg" title="评论 6"><em class="icon14">&nbsp;</em>6</span> 
+                  <span class="numb zan" title="点赞 4"><em class="icon14">&nbsp;</em>4</span> 
+                  <a href="javascript:void(0)" onclick="" title="" name="u-002" userinfoid="3">雷欧斯</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="#">[互联网中国科技]</a> 
+                  <span>2016-01-19 10:36:17</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(2)" userinfoid="2" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/2.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=67" title="进入查看" target="_blank" class="isAct-title-name" style="
+										
+									">[转帖]北京为何斜街多？</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=67" title="进入查看" target="_blank"> 来源：北京范儿 &nbsp;&nbsp;&nbsp;&nbsp;北京城最大的特点和辉煌之处，在于它是事先设计好再施工的，不像世界及全国其他城市，逐渐形成规模。 &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;明清...</a> </p> <a href="groupinfo.html?id=67" title="进入查看" target="_blank" class="topic_imgs"> <span class="topic_img_box"><img src="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg" xsrc="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg" xsrc="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg" xsrc="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg" xsrc="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg" class="topic_content_img" alt="" /></span> <span class="topic_img_box"><img src="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg" xsrc="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg" class="topic_content_img" alt="" /></span> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 20"><em class="icon14">&nbsp;</em>20</span> 
+                  <span class="numb msg" title="评论 1"><em class="icon14">&nbsp;</em>1</span> 
+                  <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)" title="" name="u-002" userinfoid="2">吃货</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=14">[享受生活，enjoy yourself]</a> 
+                  <span>2016-01-19 10:02:00</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(2)" userinfoid="2" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/2.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=68" title="进入查看" target="_blank" class="isAct-title-name" style="
+										
+									">[转载]山林初秋</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=68" title="进入查看" target="_blank"> 转自：http://club.kdnet.net/dispbbs.asp?boardid=86&amp;id=11288491 </a> </p> <a href="groupinfo.html?id=68" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 2"><em class="icon14">&nbsp;</em>2</span> 
+                  <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <span class="numb zan" title="点赞 1"><em class="icon14">&nbsp;</em>1</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)" title="" name="u-002" userinfoid="2">吃货</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=14">[享受生活，enjoy yourself]</a> 
+                  <span>2016-01-18 10:03:24</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/3.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=45" title="进入查看" target="_blank" class="isAct-title-name" style="
+										
+									">南海有变：中国这一举动令美军是火冒三丈</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=45" title="进入查看" target="_blank"> 距美国导弹驱逐舰进入中国南海岛礁附近水域之后不到10天，美国太平洋司令部司令哈里斯就表示，尽管中国认为这片水域属于自己，但美国将继续巡航。为什么美国决意采取这种挑衅行为? 不论是承诺给出蜜糖饼干还是用大棒来威胁，美国试图让中国变得更顺从一些的努...</a> </p> <a href="groupinfo.html?id=45" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 25"><em class="icon14">&nbsp;</em>25</span> 
+                  <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)" title="" name="u-002" userinfoid="3">雷欧斯</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=18">[英语口语交流组]</a> 
+                  <span>2016-01-18 09:44:43</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/3.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=95" title="进入查看" target="_blank" class="isAct-title-name" style="
+										color:#0000ff
+									">骑车穿越北京中轴线，感受帝都的独特魅力</a> 
+                  <!-- 火热--> 
+                  <i class="icon-zd" title="置顶">置顶</i> 
+                  <!-- 置顶 --> 
+                  <i class="icon-jh" title="精华">精华</i> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=95" title="进入查看" target="_blank"> &nbsp;&nbsp; 偶尔会有来京的朋友会问我，来北京应该怎样游览？吃些什么？住哪里？的问题，随着到北京出差或旅游的朋友越来越多，我开始认真思考这些问题。虽然我是土生土长的北京人，但好多景点儿，我的好多美好回忆都停留在了童年，也许是因为人越来越多，门票越来越贵，所以随着日渐长...</a> </p> <a href="groupinfo.html?id=95" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 147"><em class="icon14">&nbsp;</em>147</span> 
+                  <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <span class="numb zan" title="点赞 3"><em class="icon14">&nbsp;</em>3</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)" title="" name="u-002" userinfoid="3">雷欧斯</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=17">[用车轮丈量生命]</a> 
+                  <span>2015-10-31 11:11:22</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(7)" userinfoid="7" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/userAppImage/20180328/1522224555888.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=101" title="进入查看" target="_blank" class="isAct-title-name" style="
+										color:#EF1A2E
+									">听歌学法语--《No&ecirc;ldesenfantsdumonde》</a> 
+                  <!-- 火热--> 
+                  <i class="icon-zd" title="置顶">置顶</i> 
+                  <!-- 置顶 --> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=101" title="进入查看" target="_blank"> No&ecirc;l des enfants du monde Enfants de palestine ou enfants d'israel D'am&eacute;rique ou de chine en ce jour de no&ecirc;l Que ton regard se pose ...</a> </p> <a href="groupinfo.html?id=101" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 53"><em class="icon14">&nbsp;</em>53</span> 
+                  <span class="numb msg" title="评论 6"><em class="icon14">&nbsp;</em>6</span> 
+                  <span class="numb zan" title="点赞 3"><em class="icon14">&nbsp;</em>3</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(7)" title="" name="u-002" userinfoid="7">inxedu！</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=27">[我爱法语]</a> 
+                  <span>2015-10-24 11:32:08</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(1)" userinfoid="1" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/1.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupInfo.html" title="进入查看" target="_blank" class="isAct-title-name" style="
+										color:#FFA105
+									">学音乐最怕走弯路</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <i class="icon-jh" title="精华">精华</i> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupInfo.html" title="进入查看" target="_blank"> 我，从对音乐的渴求四处求学的学生，到如今的高校音乐学院的教师。回想起求学之路的一路颠簸，打心里我就暗暗下决心：一定不要让我的学生在音乐的求学道路上走弯路。于是，我便想用自己的亲身经历和四处求经得来的经验，给那些还在为孩子学习音乐而困惑的家长，或自己在学习音乐路上苦苦挣扎的学子们一...</a> </p> <a href="groupInfo.html" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 8"><em class="icon14">&nbsp;</em>8</span> 
+                  <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(1)" title="" name="u-002" userinfoid="1">琳达</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=30">[习惯一个人的音乐]</a> 
+                  <span>2015-10-23 11:36:35</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/3.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupInfo.html" title="进入查看" target="_blank" class="isAct-title-name" style="
+										
+									">如何掌握地道式口语</a> 
+                  <!-- 火热--> 
+                  <!-- 置顶 --> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupInfo.html" title="进入查看" target="_blank"> 【适合水平】 1 英语爱好者 2 初级或者中级英语水平的朋友 【地址】北京市朝阳区双井广渠路36号首城国际C座6层638 【交通】驾车，双井桥东500米左右即到 地铁，10号线双井站B口出往东走5分钟左右即到 ，7号线九龙山站G出口往北走10分钟，公交双井...</a> </p> <a href="groupInfo.html" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 3"><em class="icon14">&nbsp;</em>3</span> 
+                  <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)" title="" name="u-002" userinfoid="3">雷欧斯</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=18">[英语口语交流组]</a> 
+                  <span>2015-10-15 11:44:22</span> 
+                 </div> </li> 
+                <li> <a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title=""> <img class="isAct-img" src="http://wx.inxedu.com/images/upload/group/customer/20170329/3.jpg" alt="" /> </a> 
+                 <div class="isAct-title"> 
+                  <a href="groupinfo.html?id=85" title="进入查看" target="_blank" class="isAct-title-name" style="
+										color:#0000ff
+									">写出你最爱的一句歌词</a> 
+                  <!-- 火热--> 
+                  <i class="icon-zd" title="置顶">置顶</i> 
+                  <!-- 置顶 --> 
+                  <i class="icon-jh" title="精华">精华</i> 
+                  <!-- 精华 --> 
+                 </div> <p class="isAct-desc-wrap"> <a href="groupinfo.html?id=85" title="进入查看" target="_blank"> 我先来，快乐是选择。孙燕姿，&lt;开始懂了&gt;</a> </p> <a href="groupinfo.html?id=85" title="进入查看" target="_blank" class="topic_imgs"> </a> 
+                 <div class="clear"></div> 
+                 <div class="isAct-attr"> 
+                  <span class="numb view" title="浏览 10"><em class="icon14">&nbsp;</em>10</span> 
+                  <span class="numb msg" title="评论 1"><em class="icon14">&nbsp;</em>1</span> 
+                  <span class="numb zan" title="点赞 2"><em class="icon14">&nbsp;</em>2</span> 
+                  <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)" title="" name="u-002" userinfoid="3">雷欧斯</a> 
+                  <font class="view">来自于</font> 
+                  <a class="vam belong-group" href="groupinfo.html?id=29">[音乐，人类的灵魂]</a> 
+                  <span>2015-10-10 10:52:42</span> 
+                 </div> </li> 
+               </ul> 
+              </div> 
+             </section>
+            </section>
+            <section class="paginationWrap"> 
+             <div class="pagination pagination-large"> 
+              <ul id="pageFlag"> 
+              </ul> 
+             </div> 
+            </section> 
+           </div> 
+          </div> 
+         </section> 
+        </article> 
+        <aside class="fl col-3"> 
+         
+        </aside> 
+        <div class="clear"></div> 
+       </div> 
+      </div> 
+     </section> 
+     <script src="js/swiper-2.1.0.js" type="text/javascript"></script> 
+     <script type="text/javascript" src="js/ajax-topic-list.js"></script> 
+     <script type="text/javascript" src="js/guidejs.js"></script> 
+     <script>
+		var currentGroupId=0;//小组id
+		var filterParam="";//z置顶、精华、火热  筛选条件
+        var relationIds="";//关联内容
+        var kpointId="";//关联课时Id
+		$(function() {
+			tSwiperFun();//热门小组滚动方法
+			groupHotTopic("0");//热门话题
+			getAllTopic(0,1);//推荐/话题/活动  list
+			ssFun();//展开推荐/话题/活动
+			
+		});
+		//热门小组滚动方法
+		function tSwiperFun() {
+		    var _sWrap = $('.swiper-container'),
+		        _sLi = _sWrap.find(".swiper-slide>.hot-team-wrap").eq(0);
+		    $(".t-slide-wrap").css("height",_sLi.height());
+		    var mySwiper = _sWrap.swiper({
+		        loop: true, //无缝连接滚动
+		        autoplay : 5000, //自动滚动
+		        autoplayDisableOnInteraction : false, //设置点击后是否继续滚动
+		        speed:300, //滚动速度
+		        pagination : '.pagination', //设置分页
+		        paginationClickable : true //设置true分页点击执行swiper
+		    });
+		    $(".t-slide").hover(function() {$('.s-arrow').show();}, function() {$('.s-arrow').hide();})
+		    $('.arrow-left').on('click', function(e){e.preventDefault();mySwiper.swipePrev();});
+		    $('.arrow-right').on('click', function(e){e.preventDefault();mySwiper.swipeNext();})
+		};
+		//首页加载欢迎引导
+		function drcFun() {
+			if (document.readyState == "complete") {
+				if(isLogin()==false){
+					var cookie=getCookieFromServer("indexGuide");
+					if(cookie==null){
+						browserRedirectOne();
+					}
+				}
+			}
+		};
+		//document.onreadystatechange = drcFun;
+	</script> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="mo-footer"> 
+   <footer id="footer"> 
+    <section class="viewport"> 
+     <dl class="footer-elem"> 
+      <dt> 
+       <a href="http://wx.inxedu.com" title="武汉大学出版社"><img src="picture/logo.png" /></a> 
+      </dt> 
+      <dd> 
+       <ol class="footer-ol">
+         <li><span>24小时服务热线：027-87215590 &nbsp;Email：cbs22@whu.edu.cn &nbsp;工作时间：9:00-18:00</span></li>
+         <li><span>Copyright &copy;2013-2017 版权所有武大出版传媒股份公司  鄂ICP备15053495号 京公网安备11010802018055</span></li> 
+        <li><span>Powered By <a target="_blank" href="#" title="网站开发技术支持(武汉大学出版社)" class="c-666">武汉大学国家网络安全学院</a></span> </li> 
+       </ol> 
+      </dd> 
+     </dl> 
+     <div class="clear"></div> 
+    </section> 
+   </footer> 
+   <section class="mo-foot"> 
+    <article class="mo-f-warp"> 
+     <ul class="clearfix mo-f-w-list" id="gn-ul"> 
+      <li style="width: Infinity%"> <a href="/group/index"> 
+        <svg t="1486257228474" class="icon" style="" viewbox="0 0 1024 1024" version="1.1" p-id="2464" width="32" height="32"> 
+         <path d="M978.221 507.167l-469.737-439.203-469.737 437.913c-9.189 8.567-9.702 22.975-1.114 32.155 8.579 9.173 23.004 9.692 32.187 1.105l438.629-408.894 438.649 410.139c4.401 4.112 9.987 6.144 15.563 6.144 6.070 0 12.143-2.411 16.623-7.209 8.596-9.173 8.123-23.568-1.065-32.149v0zM978.221 507.167z" fill="#333333" p-id="2465"></path> 
+         <path d="M834.88 516.187c-12.573 0-22.772 10.193-22.772 22.75v348.839h-182.185v-242.67h-242.91v242.67h-182.178v-348.839c0-12.557-10.189-22.75-22.771-22.75-12.59 0-22.777 10.193-22.777 22.75v394.338h273.275v-242.669h151.819v242.669h273.268v-394.338c0.001-12.557-10.201-22.75-22.768-22.75v0zM834.88 516.187z" fill="#333333" p-id="2466"></path> 
+         <path d="M675.472 190.101h136.635v121.332c0 12.576 10.201 22.755 22.772 22.755 12.569 0 22.769-10.179 22.769-22.755v-166.831h-182.177c-12.576 0-22.777 10.174-22.777 22.75-0.001 12.572 10.201 22.75 22.777 22.75v0zM675.472 190.101z" fill="#333333" p-id="2467"></path> 
+        </svg><p>首页</p> </a> </li> 
+      <li style="width: Infinity%"> <a href="/group/groupList"> 
+        <svg t="1497232070500" class="icon" style="" viewbox="0 0 1024 1024" version="1.1" p-id="12451" width="64" height="64">
+         <path d="M107.498 251.878l222.891 0c6.628-15.148 14.496-29.622 23.275-43.466L107.498 208.412c-11.997 0-21.733 9.737-21.733 21.733S95.502 251.877 107.498 251.878L107.498 251.878zM107.498 577.867l261.249 0c-10.344-13.734-19.777-28.166-27.861-43.465L107.498 534.402c-11.997 0-21.733 9.715-21.733 21.732C85.765 568.154 95.502 577.867 107.498 577.867zM802.946 860.395 107.498 860.395c-11.997 0-21.733 9.715-21.733 21.732s9.736 21.732 21.733 21.732l695.447 0c12.019 0 21.732-9.715 21.732-21.732S814.964 860.395 802.946 860.395zM930.931 707.723l-129.81-129.809c54.311-47.793 88.757-117.619 88.757-195.64 0-144.023-116.771-260.793-260.792-260.793-144.023 0-260.794 116.771-260.794 260.793s116.771 260.794 260.794 260.794c50.223 0 96.928-14.432 136.721-39.012l134.395 134.396c8.52 8.518 22.256 8.518 30.731 0 8.477-8.477 8.477-22.256 0-30.73L930.931 707.722zM629.085 599.604c-120.031 0-217.329-97.322-217.329-217.33 0-120.03 97.298-217.328 217.329-217.328 119.984 0 217.328 97.298 217.328 217.328C846.413 502.282 749.071 599.604 629.085 599.604L629.085 599.604z" p-id="12452"></path>
+        </svg> <p>小组列表</p> </a> </li> 
+      <li style="width: Infinity%"> <a href="javascript:toAddGroup()"> 
+        <svg t="1497232036288" class="icon" style="" viewbox="0 0 1024 1024" version="1.1" p-id="11777" width="64" height="64">
+         <path d="M741.2 731.2c-4.4 4.4-8.4 9.6-8.4 18 0 12.8 12.8 26.8 25.2 26.8h94v93.2c0 16.8 7.2 25.2 20 25.2 16.8 0 24-8.4 24-25.2V776h102.8c12.8 0 25.2-15.2 25.2-28s-12.8-28-25.2-28H896v-91.6c0-12.8-5.6-27.2-22.4-27.2-4.4 0-10.4 6.8-14.8 6.8h-0.8c-4.4 4-6 16.4-6 20.4V720h-94c-8.4 0-12.8 7.2-16.8 11.2z" p-id="11778"></path>
+         <path d="M439.6 546.8c-0.4 0-0.4 0 0 0-0.4 0 0 0 0 0zM507.2 565.2c-26.8-12-47.2-16.8-67.2-18v1.2h-2.4c0.4 0 1.2-0.8 1.6-0.8h-0.8 0.8c75.6-31.2 128.4-110.8 128.4-199.2 0-120-98-218-218-218s-218 97.6-218 218c0 83.2 46.8 155.6 115.2 192-142.8 44-246.8 177.2-246.8 334 0 11.6 9.2 20.8 20.8 20.8 11.6 0 20.8-9.2 20.8-20.8 0-169.6 138-308 306.4-308 2 0.4 4.4 0 6.4-0.4 3.6 0 7.2-0.4 10.4-0.4h-0.8 2.4-1.6 0.4c30.8 0.8 89.2 19.2 124 35.2 53.6 24.4 89.6 68.8 91.6 71.2 49.2 56 76 127.2 76 202.8 0 11.6 9.2 20.8 20.8 20.8s20.8-9.2 20.8-20.8c0-87.6-32-170.4-90.4-234.8-1.2-3.2-46.4-50.4-100.8-74.8z m-157.6-41.6c-97.2 0-176.4-79.2-176.4-176.4s79.2-176.4 176.4-176.4 176.4 79.2 176.4 176.4c0 97.6-79.2 176.4-176.4 176.4z" p-id="11779"></path>
+         <path d="M800.4 598.4c0-5.6-2.4-10.8-6.4-14.4-15.6-13.6-38.4-28.4-61.6-38.8-25.2-11.2-44.8-16-63.6-17.6 71.6-29.6 121.6-104 121.6-188 0-114-92.8-206-207.2-206h-2.4c-11.2 0.4-19.2 8.4-19.2 18.8s8.8 18 18.8 18c2.4 0 4.4 0.4 7.2 0.4 89.2 3.2 162.4 75.2 163.6 164.8 1.2 93.6-74.4 169.6-167.6 169.6h-2c-11.2 0-20.8 9.2-20.4 20.4 0.4 10.4 8.8 18 20 18.4h18c29.2 0.8 84 19.2 117.2 34.4 20.8 9.6 39.2 22.4 53.2 34.4 12 10 30.8 1.6 30.8-14.4z m-132-68.4h-1.2c0.4 0 0.8-0.8 1.2-1.2v1.2z m0-2.4c-0.4 0-0.4 0 0 0-0.4 0-0.4 0 0 0z" p-id="11780"></path>
+        </svg> <p>创建小组</p> </a> </li> 
+      <li style="width: Infinity%"> <a href="/"> 
+        <svg t="1497232510947" class="icon" style="" viewbox="0 0 1024 1024" version="1.1" p-id="16585" width="64" height="64">
+         <path d="M511.943116 398.165117C446.41305 398.165117 392.999221 450.953226 392.999221 516.028222 392.999221 581.103218 446.299283 633.891327 511.943116 633.891327 577.473182 633.891327 630.887012 581.103218 630.887012 516.028222 630.887012 450.953226 577.473182 398.165117 511.943116 398.165117L511.943116 398.165117ZM511.943116 588.327453C471.783197 588.327453 438.961281 555.846838 438.961281 516.028222 438.961281 476.038954 471.612546 443.672107 511.943116 443.672107 552.273686 443.672107 584.981836 476.038954 584.981836 516.028222 584.981836 555.960606 552.159919 588.327453 511.943116 588.327453L511.943116 588.327453ZM171.949016 752.607687 225.533497 752.607687 225.533497 830.936594 171.949016 830.936594 171.949016 752.607687 171.949016 752.607687ZM171.949016 873.997584 225.533497 873.997584 225.533497 952.32649 171.949016 952.32649 171.949016 873.997584 171.949016 873.997584ZM583.67351 794.815421 439.245699 794.815421C424.399044 794.815421 412.453459 806.647238 412.453459 821.380126 412.453459 821.664545 412.567226 821.948964 412.567226 822.062731 412.567226 822.34715 412.453459 822.631568 412.453459 822.80222L412.453459 996.013201C412.453459 1010.746089 424.399044 1022.577907 439.245699 1022.577907 454.035471 1022.577907 466.03794 1010.746089 466.03794 996.013201L466.03794 847.944832 557.905176 847.944832 557.905176 996.013201C557.905176 1010.746089 569.850761 1022.577907 584.697417 1022.577907 599.487189 1022.577907 611.432774 1010.746089 611.432774 996.013201L611.432774 822.915987C611.432774 817.341381 609.726261 812.221844 606.711423 807.955564 601.990073 800.105608 593.457512 794.815421 583.67351 794.815421L583.67351 794.815421ZM798.238968 752.607687 851.823449 752.607687 851.823449 830.936594 798.238968 830.936594 798.238968 752.607687 798.238968 752.607687ZM798.238968 873.997584 851.823449 873.997584 851.823449 952.32649 798.238968 952.32649 798.238968 873.997584 798.238968 873.997584ZM996.990748 514.719896 739.022997 514.719896 739.022997 390.713348 685.4954 363.181619 685.4954 997.037108C685.4954 1011.713113 697.440985 1023.54493 712.287641 1023.54493 727.077412 1023.54493 739.022997 1011.713113 739.022997 997.037108L739.022997 674.27878 997.104516 674.27878C1011.951171 674.27878 1023.896756 662.446963 1023.896756 647.714075L1023.896756 541.11395C1023.782989 526.551713 1011.837404 514.719896 996.990748 514.719896L996.990748 514.719896ZM970.198508 621.32002 739.762486 621.32002 739.762486 567.792423 970.198508 567.792423 970.198508 621.32002 970.198508 621.32002ZM57.328284 996.013201C57.328284 1010.746089 69.273869 1022.577907 84.120525 1022.577907 98.910296 1022.577907 110.912765 1010.746089 110.912765 996.013201L110.912765 671.946547 57.328284 671.946547 57.328284 996.013201 57.328284 996.013201ZM912.8597 996.013201C912.8597 1010.746089 924.805285 1022.577907 939.65194 1022.577907 954.498596 1022.577907 966.444181 1010.746089 966.444181 996.013201L966.444181 671.946547 912.8597 671.946547 912.8597 996.013201 912.8597 996.013201ZM284.863235 514.719896 26.781717 514.719896C11.935061 514.719896-0.010523 526.551713-0.010523 541.284601L-0.010523 647.884726C-0.010523 662.56073 11.935061 674.392548 26.781717 674.392548L284.863235 674.392548 284.863235 997.037108C284.863235 1011.713113 296.80882 1023.54493 311.655476 1023.54493 326.502131 1023.54493 338.447716 1013.135206 338.447716 998.459202L338.447716 362.043944 284.863235 389.632557 284.863235 514.719896 284.863235 514.719896ZM284.009979 621.32002 53.573957 621.32002 53.573957 567.792423 284.009979 567.792423 284.009979 621.32002 284.009979 621.32002ZM224.794008 419.724054C228.946521 419.724054 233.155918 418.700147 237.024012 416.709216L511.829349 275.865081 786.748453 416.709216C790.616548 418.700147 794.76906 419.724054 798.978457 419.724054 808.591809 419.724054 817.977625 414.433866 822.698976 405.446236 829.46814 392.476743 824.462371 376.492413 811.208461 369.609481L540.15745 230.64251C539.474845 229.391067 538.621589 228.082741 537.768333 226.945067 537.995868 225.238555 538.337171 223.532042 538.337171 221.654879L538.337171 180.12975 691.12689 118.922849C692.833402 118.240244 694.255496 117.500755 695.734473 116.533732 695.734473 116.533732 695.734473 116.533732 695.84824 116.533732 697.896055 115.225406 699.602567 113.632661 701.024661 111.926149 701.47973 111.527963 701.764149 111.072893 702.048568 110.617823 703.527545 108.797543 704.778987 106.806613 705.802895 104.531263 705.802895 104.531263 705.802895 104.531263 705.802895 104.360612 705.916662 103.791774 706.087313 103.393588 706.201081 102.824751 706.542383 101.687076 706.940569 100.663169 707.224988 99.525494 707.395639 98.672238 707.395639 97.932749 707.509407 97.250145 707.680058 96.226237 707.793825 95.372981 707.793825 94.405958 707.793825 93.495818 707.680058 92.642562 707.509407 91.846189 707.395639 90.93605 707.395639 90.082794 707.224988 89.229538 707.11122 88.262514 706.656151 87.124839 706.371732 86.100932 706.201081 85.532095 706.087313 84.963257 705.802895 84.39442 705.802895 84.39442 705.802895 84.280652 705.632243 84.280652 705.063406 82.972326 704.494569 81.834652 703.75508 80.696977 703.641312 80.412558 703.527545 79.957488 703.186243 79.67307 701.47973 77.283953 699.318148 75.122371 696.872148 73.245207 696.417078 72.960789 696.132659 72.67637 695.84824 72.391951 695.450054 72.107532 694.881217 71.823114 694.255496 71.538695 693.288472 70.969858 692.264565 70.40102 691.12689 69.832183 690.956239 69.832183 690.956239 69.832183 690.956239 69.718415L523.319864 1.913C512.682605-2.35328 501.021439 0.661558 493.683436 8.511514 488.336365 13.346631 484.866457 20.17268 484.866457 28.022636L484.866457 221.82553C484.866457 223.816461 485.150876 225.807392 485.605946 227.627671 484.866457 228.651579 484.183852 229.675486 483.615015 230.813161L212.564004 369.609481C199.480745 376.321762 194.247441 392.306092 201.016606 405.446236 205.79484 414.433866 215.180656 419.724054 224.794008 419.724054L224.794008 419.724054ZM538.450938 65.281484 610.01068 94.121539 538.450938 122.790943 538.450938 65.281484 538.450938 65.281484ZM939.65194 1024 85.713269 1024C76.156801 1024 68.420613 1016.263812 68.420613 1006.877995L68.420613 1005.171483C68.420613 995.728782 76.156801 987.992594 85.713269 987.992594L939.65194 987.992594C949.151525 987.992594 956.944597 995.728782 956.944597 1005.171483L956.944597 1006.877995C956.944597 1016.263812 949.151525 1024 939.65194 1024Z" p-id="16586"></path>
+        </svg><p>网校</p> </a> </li> 
+      <li style="width: Infinity%"> <a href="javascript:togouc('/groupuc/index')"> 
+        <svg t="1486257862430" class="icon" style="" viewbox="0 0 1024 1024" p-id="17785" width="32" height="32"> 
+         <path d="M511.674589 64.696488c-246.847038 0-446.956611 200.109574-446.956611 446.956611 0 94.231151 29.160133 181.651177 78.95012 253.727749 0 0 15.517415 21.547759 35.803437 9.270131 19.442818-11.768021 7.554046-34.44551 7.554046-34.44551-18.063401-24.635073-28.063149-46.14497-40.059368-74.507948-20.624736-48.762587-31.081902-100.589976-31.081902-154.044422 0-53.454446 10.457166-105.281835 31.081902-154.044422 19.931958-47.124274 48.477085-89.457428 84.842317-125.82266 36.365232-36.365232 78.698386-64.910359 125.82266-84.842317 48.762587-20.624736 100.589976-31.081902 154.044422-31.081902 53.454446 0 105.281835 10.457166 154.044422 31.081902 41.683355 17.630542 79.609129 42.012859 112.981191 72.572876l21.829168 21.586644c32.097022 34.219359 57.598836 73.345472 75.854619 116.506481 20.624736 48.762587 31.081902 100.589976 31.081902 154.044422 0 53.454446-10.457166 105.281835-31.081902 154.044422-19.931958 47.124274-48.477085 89.457428-84.842317 125.82266-5.247514 5.247514-10.634198 10.31288-16.127306 15.232936-7.247054-53.594639-33.886785-103.058191-76.816526-141.627624-24.589025-22.092158-53.120848-39.295981-84.133166-51.097772 46.131667-32.394804 76.2885-85.996606 76.2885-146.646941 0-98.902544-80.176041-179.078585-179.078585-179.078585s-179.078585 80.176041-179.078585 179.078585c0 60.651358 30.156834 114.252137 76.2885 146.646941-31.013341 11.80179-59.544141 29.005614-84.133166 51.097772-50.834782 45.671179-78.82937 106.616226-78.82937 171.609473 0 8.114818 0.179079 13.518898 1.193175 22.279423 0.470721 4.068665 1.876744 7.79964 3.970428 11.011798 4.293793 7.453762 10.69048 12.249999 10.69048 12.249999 71.334675 48.192605 157.330258 76.333526 249.897513 76.333526 246.848061 0 446.956611-200.109574 446.956611-446.956611S758.521626 64.696488 511.674589 64.696488zM383.761314 467.379757c0-34.167171 13.305027-66.288752 37.465287-90.447988 24.159236-24.159236 56.281841-37.465287 90.447988-37.465287s66.288752 13.305027 90.447988 37.465287c24.159236 24.159236 37.465287 56.281841 37.465287 90.447988s-13.305027 66.288752-37.465287 90.447988c-24.159236 24.159236-56.281841 37.465287-90.447988 37.465287s-66.288752-13.305027-90.447988-37.465287C397.066341 533.668509 383.761314 501.546927 383.761314 467.379757zM511.674589 907.444401c-53.454446 0-105.281835-10.457166-154.044422-31.081902-21.145599-8.943696-41.312918-19.643386-60.423161-31.984459-0.094144-2.240017-0.119727-4.589528-0.119727-7.643074 0-104.875582 96.263437-190.19783 214.58731-190.19783s214.58731 85.322248 214.58731 190.19783c0 2.555196-0.076748 5.127787-0.193405 7.701402-19.086707 12.319583-39.232536 22.99369-60.349483 31.92613C616.956424 896.987235 565.128011 907.444401 511.674589 907.444401z" p-id="17786"></path> 
+        </svg><p>我的</p> </a> </li> 
+     </ul>
+    </article> 
+   </section> 
+   <script type="text/javascript" src="js/webutils.js"></script> 
+   <script type="text/javascript" src="js/common.js"></script> 
+   <script type="text/javascript" src="js/group_top.js"></script> 
+   <script src="js/group-commjs.js" type="text/javascript"></script> 
+   <script src="js/popcard.js" type="text/javascript"></script> 
+   <script>
+    var uploadServerUrl='http://wx.inxedu.com';
+$(function(){
+    goTop();//返回顶部
+    fnShow();//公共下拉方法
+    //wmNavFun();//移动端导航显示与隐藏
+
+});
+function login()
+{
+$("#loginfrom").show();
+$("#dl").show()
+	$("#zc").hide()
+}
+function closewin()
+{
+	$("#loginfrom").hide();
+}
+function dialogRegister()
+{
+	$("#dl").hide()
+	$("#zc").show()
+}
+function dialoglogin()
+{
+	$("#dl").show()
+	$("#zc").hide()
+}
+</script> 
+  </div>  
+ </body>
+</html>

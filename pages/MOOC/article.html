@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
@@ -24,9 +24,44 @@
 <script type="text/javascript" src="js/webutils.js"></script>
 <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript">
-   
+
+    function killErrors() {
+        return true;
+    }
+    window.onerror = killErrors;
+    window.onload = function (){
+        //图片展示新闻
+        var AllNewsConsulting = new Array();
+        var AllNewsConsultingResult = function () {
+            jQuery("#BigPictureNews").html(AllNewsConsulting[0]);
+            jQuery("#smallPictureNews").html(AllNewsConsulting[1]);
+            jQuery("#NewsRankingList").html(AllNewsConsulting[2]);
+        }
+        getFromWS("frontmooc/getAllNews.template", AllNewsConsulting, AllNewsConsultingResult);
+        //新闻列表分页
+        var PageNewsConsulting = new Array();
+        var paras = "pageNumber=1";
+        var PageNewsConsultingResult = function () {
+            jQuery("#PageNews").html(PageNewsConsulting[0]);
+            jQuery("#deanpage").html(PageNewsConsulting[1]);
+        }
+        getFromWS("frontmooc/getPageNews.template",paras, PageNewsConsulting, PageNewsConsultingResult);
+
+	};
+
+    function goToPage(value){
+        var paras = "pageNumber=" + value;
+        var articleList = new Array();
+        var articleListResult = function(){
+            jQuery("#PageNews").html(articleList[0]);
+            jQuery("#deanpage").html(articleList[1]);
+        }
+        getFromWS("frontmooc/getPageNews.template",paras,articleList,articleListResult);
+    }
+
 </script>
 
 	<script>
@@ -130,7 +165,7 @@
 						<li><a href="shoollist.html" title="直播">名校</a></li>
 						<li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
 						<li><a href="group.html" title="社区" target="_blank">学问</a></li>
-						<li><a href="article.html" title="资讯">资讯</a></li>
+						<li class="current"><a href="article.html" title="资讯">资讯</a></li>
 
 						</ul>
 				</nav>
@@ -228,150 +263,19 @@
 	<div id="aCoursesList" class="bg-fa of">
 		<section class="container">
 			<section class="mt30 article-new-title clearfix">
-					<article class="a-n-l-box fl w50pre">
-						<div class="mr5">
-							<div class="big-pic pic-box-zx">
-								<div class="nr-infor">
-									<a href="articleinfo.html?id=9" target="_blank">
-										<section class="n-i-sebox">
-											<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
-											<div class="nr-i-zy">
-												<p class="c-fff fsize14">
-													
-		陈年将凡客2015的春夏新品发布会放在了五棵松——这个开演唱会的地方继798之后成了互联网公司的新宠，两个星期后，乐视的手机和新电视也要在这里发布。	
-........
-												</p>
-											</div>
-											<p class="nr-i-zy-btn tac">
-												查看详情
-											</p>
-										</section>
-									</a>
-								</div>
-								<a href="articleinfo.html?id=9" target="_blank" class="pic-a-n">
-									<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1442305533342.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1442305533342.jpg" alt="嘲讽陈年是很容易的事，但我更愿意祝他成功">
-								</a>
-								<a href="articleinfo.html?id=9" target="_blank" class="name-a-n">
-									<span class="txtOf">嘲讽陈年是很容易的事，但我更愿意祝他成功</span>
-								</a>
-							</div>
-						</div>
+					<article class="a-n-l-box fl w50pre" id="BigPictureNews">
+
 					</article>
-					<article class="a-n-r-box fl w50pre">
-						<div class="ml10">
-							<div class="small-pic clearfix mb10">
-								<div class="w50pre fl">
-											<div class="mr5 pic-box-zx">
-												<div class="nr-infor">
-													<a href="articleinfo.html?id=38" target="_blank">
-														<section class="n-i-sebox">
-															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
-															<div class="nr-i-zy">
-																<p class="c-fff fsize14">
-																	近期，中国第一起侵犯网络课件著作权的刑事案件做出判决，苏州工业园区法院一审判决认定，颜某侵犯沪江网著作权罪的事实清楚、证据确实、充分，判决颜某有期徒刑一年，缓刑........
-																</p>
-															</div>
-															<p class="nr-i-zy-btn tac">
-																查看详情
-															</p>
-														</section>
-													</a>
-												</div>
-												<a href="articleinfo.html?id=38" target="_blank" class="pic-a-n">
-													<img xsrc="http://wx.inxedu.com/images/upload/article/20161223/1482459616819.jpeg" src="http://wx.inxedu.com/images/upload/article/20161223/1482459616819.jpeg" alt="中国在线教育发展现状分析">
-												</a>
-												<a href="articleinfo.html?id=38" target="_blank" class="name-a-n">
-													<span class="txtOf">中国在线教育发展现状分析</span>
-												</a>
-											</div>
-										</div>
-									<div class="w50pre fl">
-											<div class="mr5 pic-box-zx">
-												<div class="nr-infor">
-													<a href="articleinfo.html?id=7" target="_blank">
-														<section class="n-i-sebox">
-															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
-															<div class="nr-i-zy">
-																<p class="c-fff fsize14">
-																	
-	“学习中国”APP界面。
-	记者2日获悉，中共最高学府中央党校已研发推出一款“学习中国”APP，网民可利用手机和平板电脑方便地学习查阅中共中央总书记习近........
-																</p>
-															</div>
-															<p class="nr-i-zy-btn tac">
-																查看详情
-															</p>
-														</section>
-													</a>
-												</div>
-												<a href="articleinfo.html?id=7" target="_blank" class="pic-a-n">
-													<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" alt="中国首款学习习近平重要讲话APP上线">
-												</a>
-												<a href="articleinfo.html?id=7" target="_blank" class="name-a-n">
-													<span class="txtOf">中国首款学习习近平重要讲话APP上线</span>
-												</a>
-											</div>
-										</div>
-									</div>
-							<div class="small-pic clearfix">
-								<div class="w50pre fl">
-											<div class="mr5 pic-box-zx">
-												<div class="nr-infor">
-													<a href="articleinfo.html?id=11" target="_blank">
-														<section class="n-i-sebox">
-															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
-															<div class="nr-i-zy">
-																<p class="c-fff fsize14">
-																		凡客之路，兴于衬衫，成于T恤。2015年的春夏之交，凡客再次发布了自己的T恤，种种迹象表明，陈年与他的凡客，这一次要，归来。凡客能否重温2011年的T恤辉煌？.....
-																</p>
-															</div>
-															<p class="nr-i-zy-btn tac">
-																查看详情
-															</p>
-														</section>
-													</a>
-												</div>
-												<a href="articleinfo.html?id=11" target="_blank" class="pic-a-n">
-													<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853211287.jpg" target="_blank" src="http://wx.inxedu.com/images/upload/article/20150910/1441853211287.jpg" alt="陈年重回T恤大战：凡客归来">
-												</a>
-												<a href="articleinfo.html?id=11" class="name-a-n">
-													<span class="txtOf">陈年重回T恤大战：凡客归来</span>
-												</a>
-											</div>
-										</div>
-									<div class="w50pre fl">
-											<div class="mr5 pic-box-zx">
-												<div class="nr-infor">
-													<a href="articleinfo.html?id=13" target="_blank">
-														<section class="n-i-sebox">
-															<h5 class="hLh30 fisze14 c-fff f-fM txtOf ml10 mr10 unFw">内容摘要：</h5>
-															<div class="nr-i-zy">
-																<p class="c-fff fsize14">
-																		【环球网综合报道】德国汉莎航空公司旗下的德国之翼(Germanwings)一架A320客机，3月24日从巴塞罗那飞往杜塞尔多夫途中，在法国南部阿尔卑斯山脉坠机。........
-																</p>
-															</div>
-															<p class="nr-i-zy-btn tac">
-																查看详情
-															</p>
-														</section>
-													</a>
-												</div>
-												<a href="articleinfo.html?id=13" target="_blank" class="pic-a-n">
-													<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" target="_blank" src="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" alt="法国总理证实失事客机无人生还">
-												</a>
-												<a href="articleinfo.html?id=13" class="name-a-n">
-													<span class="txtOf">法国总理证实失事客机无人生还</span>
-												</a>
-											</div>
-										</div>
-									</div>
+					<article class="a-n-r-box fl w50pre" >
+						<div class="ml10" id="smallPictureNews">
+
 						</div>
 					</article>
 				</section>
 			<section class="i-article mt30">
 				<div class="fl col-7">
 					<section class="bg-fff artil-list-box">
-                        <div class="c-s-dl-li c-s-dl-li-newatc">
+                        <!--<div class="c-s-dl-li c-s-dl-li-newatc">
                                 <ul class="clearfixon">
                                             <li class="current">
                                                 <a href="javascript:void(0)" onclick="queryData(this)" class="">全部</a>
@@ -389,385 +293,25 @@
                                                     <a href="javascript:void(0)" onclick="queryData(this)" class="">国际</a>
                                                 </li>
                                             </ul>
-                            </div>
+                            </div>-->
                         <!-- /无数据提示 开始-->
 						<!-- /无数据提示 结束-->
 						<article class="i-article-list">
 							<!-- /资讯列 开始-->
-								<ul>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=22" title="哈佛商学院院长：21世纪人人都需要创业精神" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150928/1443424120422.jpg" src="http://wx.inxedu.com/images/upload/article/20150928/1443424120422.jpg" alt="哈佛商学院院长：21世纪人人都需要创业精神">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/22 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=22" target="_blank" title="哈佛商学院院长：21世纪人人都需要创业精神" class="i-art-title">哈佛商学院院长：21世纪人人都需要创业精神</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	哈佛商学院现任院长尼汀·诺里亚(Nitin Nohria)的背景迥异于所有前任院长：身为印度裔美国人，他是哈佛商学院百年历史上第一位出生在美国之外的院长；...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:23</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=22">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('22',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise22_3 praiseCount vam fsize12 f-fM">( 2 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=23" title="雅思阅读能力提高有方法 文章精读可以这样做" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150928/1443424285823.jpg" src="http://wx.inxedu.com/images/upload/article/20150928/1443424285823.jpg" alt="雅思阅读能力提高有方法 文章精读可以这样做">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/23 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=23" target="_blank" title="雅思阅读能力提高有方法 文章精读可以这样做" class="i-art-title">雅思阅读能力提高有方法 文章精读可以这样做</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	关于雅思(课程)精读，首先，认真选择精读文章，只需10篇剑桥文章，你的成绩就可以在7.5以上。但这一前提是你不是流于形式，而是认真走心的读。
-	我一直认...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:23</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=23">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('23',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise23_3 praiseCount vam fsize12 f-fM">( 5 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=7" title="中国首款学习习近平重要讲话APP上线" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853023802.jpg" alt="中国首款学习习近平重要讲话APP上线">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/7 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=7" target="_blank" title="中国首款学习习近平重要讲话APP上线" class="i-art-title">中国首款学习习近平重要讲话APP上线</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	“学习中国”APP界面。
-	记者2日获悉，中共最高学府中央党校已研发推出一款“学习中国”APP，网民可利用手机和平板电脑方便地学习查阅中共中央总书记习近...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:22</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=7">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('7',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise7_3 praiseCount vam fsize12 f-fM">( 0 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=13" title="法国总理证实失事客机无人生还" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853275555.jpg" alt="法国总理证实失事客机无人生还">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/13 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=13" target="_blank" title="法国总理证实失事客机无人生还" class="i-art-title">法国总理证实失事客机无人生还</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">【环球网综合报道】德国汉莎航空公司旗下的德国之翼(Germanwings)一架A320客机，3月24日从巴塞罗那飞往杜塞尔多夫途中，在法国南部阿尔卑斯山脉坠机。...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:22</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=13">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('13',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise13_3 praiseCount vam fsize12 f-fM">( 0 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=14" title="背水一战的任天堂" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853318496.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853318496.jpg" alt="背水一战的任天堂">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/14 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=14" target="_blank" title="背水一战的任天堂" class="i-art-title">背水一战的任天堂</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	3月17日，任天堂与合作方DENA召开共同记者会，宣布两家将进行合作，将任天堂的经典游戏与人物形象带到手机上。
-DeNA表示，已经获得了任天堂全部人物的...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:22</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=14">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('14',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise14_3 praiseCount vam fsize12 f-fM">( 1 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=15" title="渠道之殇：三星手机中国没落背后" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853391646.jpg" src="http://wx.inxedu.com/images/upload/article/20150910/1441853391646.jpg" alt="渠道之殇：三星手机中国没落背后">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/15 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=15" target="_blank" title="渠道之殇：三星手机中国没落背后" class="i-art-title">渠道之殇：三星手机中国没落背后</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	在过去的2014年，在苹果手机大屏化和中国“高性价比军团”崛起的背景下，三星电子的手机业务已经步入窘境。日前，有
-国外分析师明确表示，三星电子正在成为下...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:22</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=15">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('15',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise15_3 praiseCount vam fsize12 f-fM">( 0 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=17" title="中国军舰协助英、德等10国从也门撤侨225人" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1441853445008.jpg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="中国军舰协助英、德等10国从也门撤侨225人">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/17 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=17" target="_blank" title="中国军舰协助英、德等10国从也门撤侨225人" class="i-art-title">中国军舰协助英、德等10国从也门撤侨225人</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	【环球时报记者郭媛丹报道】乘坐中国海军临沂舰撤离也门的225名外国公民当地时间2日19时15分平安抵达吉布提港。
-	此次撤离的225名外国公民来自巴基斯...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-06-08 17:22</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=17">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('17',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise17_3 praiseCount vam fsize12 f-fM">( 3 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=9" title="嘲讽陈年是很容易的事，但我更愿意祝他成功" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20150910/1442305533342.jpg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="嘲讽陈年是很容易的事，但我更愿意祝他成功">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/9 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=9" target="_blank" title="嘲讽陈年是很容易的事，但我更愿意祝他成功" class="i-art-title">嘲讽陈年是很容易的事，但我更愿意祝他成功</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-		陈年将凡客2015的春夏新品发布会放在了五棵松——这个开演唱会的地方继798之后成了互联网公司的新宠，两个星期后，乐视的手机和新电视也要在这里发布。	
-...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-05-23 09:27</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=9">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 1 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('9',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise9_3 praiseCount vam fsize12 f-fM">( 3 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=27" title="在线教育调查:时薪上万完全可能 有时上课到凌晨" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20160429/1461896485213.jpg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="在线教育调查:时薪上万完全可能 有时上课到凌晨">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/27 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=27" target="_blank" title="在线教育调查:时薪上万完全可能 有时上课到凌晨" class="i-art-title">在线教育调查:时薪上万完全可能 有时上课到凌晨</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">
-	中新网北京4月24日电 
-“在线教师1小时挣万元，收入超网红”，近日，这则新闻引发公众关注。在线教育现状究竟如何？连日来，记者采访了多位业内人士。在他们...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-05-23 09:24</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=27">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('27',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise27_3 praiseCount vam fsize12 f-fM">( 5 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
-										<li>
-												<aside class="i-article-pic">
-													<a href="articleinfo.html?id=38" title="中国在线教育发展现状分析" target="_blank">
-														<img xsrc="http://wx.inxedu.com/images/upload/article/20161223/1482459616819.jpeg" src="http://wx.inxedu.com/static/inxweb/img/news.gif" alt="中国在线教育发展现状分析">
-													</a>
-												</aside> <!-- http://wx.inxedu.com/web/article/showInfor/38 -->
-												<h3 class="hLh30 txtOf unFw">
-													<a href="articleinfo.html?id=38" target="_blank" title="中国在线教育发展现状分析" class="i-art-title">中国在线教育发展现状分析</a>
-												</h3>
-												<section class="i-q-txt mt10">
-													<p>
-														<span class="c-999 f-fA">近期，中国第一起侵犯网络课件著作权的刑事案件做出判决，苏州工业园区法院一审判决认定，颜某侵犯沪江网著作权罪的事实清楚、证据确实、充分，判决颜某有期徒刑一年，缓刑...</span>
-													</p>
-												</section>
-												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
-													<span class="fr">
-														<em class="icon18 i-n-xqtime">&nbsp;</em>
-														<tt class="c-999 f-fM">
-															<!-- 1小时前发布 -->
-															2017-05-23 09:24</tt>
-													</span>
-													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=38">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 1 )</tt>
-														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('38',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise38_3 praiseCount vam fsize12 f-fM">( 99 )</tt>
-														</a>
-													</span>
-												</section>
-											</li>
+								<ul id="PageNews">
+
+
 										</ul>
 								<!-- /资讯列表 结束-->
 						</article>
-						<article>
-							</article>
 						<!-- 公共分页 开始 -->
 						<form action="#" method="post" id="searchForm">
 							<input type="hidden" name="page.currentPage" id="pageCurrentPage" value="1">
 							<input type="hidden" name="queryArticle.queryKey" id="articleQueryKey" value="">
 							<input type="hidden" name="queryArticle.subjectId" id="articleQuerySubjectId" value="0">
 						</form>
-						<div>
-							<script type="text/javascript" src="http://wx.inxedu.com/static/common/web/js/page.js"></script>
-<div class="paging"> 
-		<a href="javascript:goPage(1);" title="">首</a>
-		<a id="backpage" class="undisable" href="javascript:void(0)" title="">&lt;</a>
-			<a href="javascript:void(0)" title="" class="current undisable">1</a><a href="#" title="">2</a><a id="nextpage" href="#" title="">&gt;</a>
-			<a href="#" title="">末</a>
-		<div class="clear"></div>
-	</div>
+						<div class="pgs cl" id="deanpage">
 
-
-<script type="text/javascript">
-    var totalPageSize =2;
-    var currentPage =0<1 ? 1 :1;
-    var totalPage = 2;
-    showPageNumber();
-</script><div class="clear"></div>
 						</div>
 						<!-- 公共分页 结束 -->
 					</section>
@@ -780,67 +324,7 @@ DeNA表示，已经获得了任天堂全部人物的...</span>
 		</h2>
 		</header>
 	<section class="i-article-list r-art-wrap">
-		<ul>
-			<li class="lt2">
-						<aside class="orderNum"><span>1</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=38" target="_blank" title="中国在线教育发展现状分析" class="i-art-title">中国在线教育发展现状分析</a>
-						</h3>
-						</li>
-				<li class="lt2">
-						<aside class="orderNum"><span>2</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=23" target="_blank" title="雅思阅读能力提高有方法 文章精读可以这样做" class="i-art-title">雅思阅读能力提高有方法 文章精读可以这样做</a>
-						</h3>
-						</li>
-				<li class="lt2">
-						<aside class="orderNum"><span>3</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=27" target="_blank" title="在线教育调查:时薪上万完全可能 有时上课到凌晨" class="i-art-title">在线教育调查:时薪上万完全可能 有时上课到凌晨</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>4</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=17" target="_blank" title="中国军舰协助英、德等10国从也门撤侨225人" class="i-art-title">中国军舰协助英、德等10国从也门撤侨225人</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>5</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=9" target="_blank" title="嘲讽陈年是很容易的事，但我更愿意祝他成功" class="i-art-title">嘲讽陈年是很容易的事，但我更愿意祝他成功</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>6</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=15" target="_blank" title="渠道之殇：三星手机中国没落背后" class="i-art-title">渠道之殇：三星手机中国没落背后</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>7</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=7" target="_blank" title="中国首款学习习近平重要讲话APP上线" class="i-art-title">中国首款学习习近平重要讲话APP上线</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>8</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=14" target="_blank" title="背水一战的任天堂" class="i-art-title">背水一战的任天堂</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>9</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=22" target="_blank" title="哈佛商学院院长：21世纪人人都需要创业精神" class="i-art-title">哈佛商学院院长：21世纪人人都需要创业精神</a>
-						</h3>
-						</li>
-				<li>
-						<aside class="orderNum"><span>10</span></aside>
-						<h3 class="hLh30 txtOf">
-							<a href="articleinfo.html?id=20" target="_blank" title="MBA过来人亲述：联考英语复习经验" class="i-art-title">MBA过来人亲述：联考英语复习经验</a>
-						</h3>
-						</li>
+		<ul id="NewsRankingList">
 				</ul>
 	</section>
 	</div>

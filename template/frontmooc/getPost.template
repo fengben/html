@@ -1,32 +1,85 @@
+<% debugMsg("---------in getPost-----")
+
+///查询置顶
+///查询精华
+///查询热帖
+///仅仅按照日期查询
+///:sql = "select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time from moocpost inner join mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time DESC limit 0,5"
+:sql="select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time desc limit 0,5"
+changeRecordSet(:sql)
+:totalNumber = recordCount()
+debugMsg("------totalNumber"#:totalNumber)
+%>
+
+
+
 <div id="indexTopicAll">
 </div>
 <section class="isAct-list" id="aCoursesList">
     <div id="indexTopicAll">
         <ul class="img-page-1 otShow">
-            <li><a class="isAct_a" name="u-001" rel="popUserCard" href="javascript:void(0)"
-                   onclick="toBrowseUserCenter(7)" userinfoid="7" title=""> <img class="isAct-img"
-                                                                                 src="http://wx.inxedu.com/images/upload/userAppImage/20180328/1522224555888.jpg"
-                                                                                 alt=""/> </a>
+            ///bug
+            ///页面与bootstrap冲突,加入一个空li,缓解冲突
+            <li></li>
+            <%If :totalNumber >0
+            Repeat
+            %>
+            <!-- TODO 跳转到个人界面-->
+            <li><a class="isAct_a" name="u-001" rel="popUserCard"  href="userInfo.html?id=<%=uid%>"> <img class="isAct-img"
+                                                 src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
+                                                 alt=""/> </a>
                 <div class="isAct-title">
-                    <a href="groupInfo.html" title="进入查看" target="_blank" class="isAct-title-name" style="
+                    <a href="groupInfo.html?id=<%=id%>" title="进入查看"
+                       target="_blank" class="isAct-title-name" style="
 
-									">cdsc</a>
-                    <!-- 火热-->
-                    <!-- 置顶 -->
-                    <!-- 精华 -->
+									"><%=title%></a>
+
                 </div>
-                <p class="isAct-desc-wrap"><a href="groupInfo.html" title="进入查看" target="_blank">sdaddd </a>
+                <p class="isAct-desc-wrap"><a href="groupInfo.html?id=id=<%=id%>"
+                                              title="进入查看" target="_blank">
+                    <%=body%></a></p>
+                    <a
+                        href="groupinfo.html?id=67" title="进入查看"
+                        target="_blank" class="topic_imgs"> <span
+                        class="topic_img_box"><img
+                        src="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
+                        xsrc="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
+                        class="topic_content_img" alt=""/></span> <span
+                        class="topic_img_box"><img
+                        src="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
+                        xsrc="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
+                        class="topic_content_img" alt=""/></span> <span
+                        class="topic_img_box"><img
+                        src="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
+                        xsrc="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
+                        class="topic_content_img" alt=""/></span> <span
+                        class="topic_img_box"><img
+                        src="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
+                        xsrc="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
+                        class="topic_content_img" alt=""/></span> <span
+                        class="topic_img_box"><img
+                        src="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
+                        xsrc="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
+                        class="topic_content_img" alt=""/></span> </a>
+
                 <div class="clear"></div>
                 <div class="isAct-attr">
-                    <span class="numb view" title="浏览 2"><em class="icon14">&nbsp;</em>2</span>
-                    <span class="numb msg" title="评论 0"><em class="icon14">&nbsp;</em>0</span>
-                    <span class="numb zan" title="点赞 0"><em class="icon14">&nbsp;</em>0</span>
-                    <a href="javascript:void(0)" onclick="#" title="" name="u-002" userinfoid="7">inxedu！</a>
+                                                                <span class="numb view" title="浏览 "><em
+                                                                        class="icon14">&nbsp;</em><%=view_num%></span>
+                    <span class="numb msg" title="评论 "><em class="icon14">&nbsp;</em><%=comments%></span>
+                    <span class="numb zan" title="点赞 "><em class="icon14">&nbsp;</em><%=likes%></span>
+                    <!--<a href="javascript:void(0)"
+                       onclick="toBrowseUserCenter(2)" title="" name="u-002"
+                       userinfoid="2">吃货</a>-->
                     <font class="view">来自于</font>
-                    <a class="vam belong-group" href="#">[习惯一个人的音乐]</a>
-                    <span>9分钟前</span>
+                    <a class="vam belong-group" href="userinfo.html?id=<%=uid%>"><%=nickname%></a>
+                    <span><%=publish_data%></span>
                 </div>
             </li>
+            <%
+            EndRepeat
+            EndIf
+            %>
         </ul>
     </div>
 </section>

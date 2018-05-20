@@ -12,9 +12,9 @@ Repeat
   			<section class="course-img">
   				<a href="couinfo.html?id=<%=id%>" target="_blank">
     				 <%If pic_id!=0%>
-    					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
+    					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280px" height="160px" >
     				 <%Else%>
-    				     <img src="/pages/MOOC/picture/default_course.png"  width="280" height="160">
+    				     <img src="/pages/MOOC/picture/default_course.png"  width="280px" height="160px">
                    <%EndIf%>
   				</a>
   			</section>

@@ -1,11 +1,11 @@
 
 <%
 If :major_id == 2018112858180021535
-	:querystr="select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile  limit 8 offset 0"
-	changeRecordSet(:querystr ,(:pageNumber-1)*10);
+	:querystr="select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile  limit ? ,8"
+	changeRecordSet(:querystr ,(:pageNumber-1)*8);
 	Else
-:selectSql = "select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile where major_id = ? limit 8 offset 0"
-changeRecordSet(:selectSql,S(:major_id));
+:selectSql = "select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile where major_id = ? limit ? ,8"
+changeRecordSet(:selectSql,S(:major_id),(:pageNumber-1)*8);
 EndIf
 :totalNumber = recordCount()
 If :totalNumber >0

@@ -1,0 +1,581 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]><html class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9"><![endif]-->
+<!--[if IE 9]><html class="lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+ <!--<![endif]-->
+ <head> 
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui" /> 
+
+  <meta name="apple-mobile-web-app-capable" content="yes" /> 
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" /> 
+  <meta content="telephone=no" name="format-detection" /> 
+  <title>中国十大难懂的方言你的家乡排第几？详情-武汉大学出版社-中国在线教育平台第一品牌</title> 
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> 
+  <link rel="stylesheet" type="text/css" href="css/reset_3.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/global_3.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/webstyle.css" /> 
+  <link rel="stylesheet" type="text/css" href="css/mw_300_768.css" media="screen and (min-width: 300px) and (max-width: 768px)" /> 
+  <!--[if lt IE 9]><script src="js/html5_6.js"></script><![endif]--> 
+  <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script> 
+  <script type="text/javascript" charset="utf-8" src="js/ueditor.config.js"></script> 
+  <script type="text/javascript" charset="utf-8" src="js/ueditor.all.min.js"> </script> 
+  <script src="js/tipiccommon.js" type="text/javascript"></script> 
+  <script>
+        var topicId = "76";
+    </script> 
+  <script>
+
+        var mobileRegex=/^1[0-9]{10}$/; //验证手机正则
+
+        var emailRegex=/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/; //验证邮箱正则
+
+	</script> 
+ </head> 
+ <body> 
+  <div id="in-wrap"> 
+   <div class="h-mobile-mask"></div> 
+   <div class="leftMenu-mobile"> 
+    <section class="leftMenu-box"> 
+     <section> 
+      <div class="u-face-pic"> 
+       <img src="picture/avatar-boy_6.gif" alt="" class="userImgPhoto cusImgClass" /> 
+      </div> 
+      <h4 class="hLh30 txtOf"> <span class="userNameClass"> <span class="c-999" onclick="lrFun(1)">登录</span> </span> </h4> 
+      <div class="hLh30"> 
+       <a href="javascript:togouc('/groupuc/uinfo')" title="个人资料设置" class="c-999">个人资料设置</a> 
+      </div> 
+     </section> 
+     <nav class="nav-mobile-ul"> 
+      <ul class="clearfix">
+       <li><a href="default.html" title="首页">首页</a></li>
+       <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
+       <li><a href="shoollist.html" title="直播">名校</a></li>
+       <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
+       <li><a href="group.html" title="社区" target="_blank">学问</a></li>
+       <li><a href="article.html" title="资讯">资讯</a></li>
+
+
+      </ul> 
+     </nav> 
+    
+    </section> 
+   </div> 
+   <div class="main-warp"> 
+    <div class="main-infor"> 
+     <header id="header"> 
+      <section class="header-wrap"> 
+       <div class="header-pc"> 
+        <section class="fr h-r"> 
+         <aside class="h-r-user-box fr"> 
+          <ul class="undis headerLogined"> 
+           <li> <a href="javascript:togouc('/groupuc/index');" title="个人主页"> <img src="" class="vam u-face-img cusImgClass" width="30" height="30" alt="" /> <span class="vam disIb cusName" title=""></span> </a> 
+            <section class="fn-sub-box"> 
+             <div class="fn-sub-wrap fn-sub"> 
+              <dl class="clearfix"> 
+               <dd> 
+                <a title="个人主页" href="javascript:togouc('/groupuc/index')">个人主页</a> 
+                <a title="wo的小组" href="javascript:togouc('/groupuc/mygroup')">wo的小组</a> 
+                <a title="wo的话题" href="javascript:togouc('/groupuc/mytopic')">wo的话题</a> 
+                <a title="wo的好友" href="javascript:togouc('/groupuc/myfans')">wo的好友</a> 
+                <a title="资料设置" href="javascript:togouc('/groupuc/uinfo')">资料设置</a> 
+                <a title="查看站内信" href="http://wx.inxedu.com/groupuc/letter">查看站内信</a> 
+                <a title="" href="javascript:void(0)" onclick="javascript:exit('group')">退出</a> 
+               </dd> 
+              </dl> 
+             </div> 
+            </section> </li> 
+          
+          </ul> 
+          <ul id="notLogin" class="undis"> 
+           <li> <a href="javascript:lrFun(1)" title=""> <span class="vam disIb" title="">登录</span> </a> </li> 
+          </ul> 
+          <div class="clear"></div> 
+         </aside> 
+         <aside class="h-r-search"> 
+        
+         </aside> 
+        </section> 
+        <section class="fl h-l"> 
+         <h1 class="logo"> <a href="http://wx.inxedu.com" title="武汉大学出版社"><img src="picture/logo.png" height="42" width="auto" /></a> </h1> 
+         <nav class="nav-pc"> 
+          <ul> 
+      
+           <li><a href="/" title="网校首页" target="_blank">网校首页</a></li> 
+          
+             <div class="DT-arrow">
+            
+             </div> </a> 
+            <section class="fn-sub-box"> 
+             <div class="fn-sub-wrap fn-sub"> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">职业资格&middot;考证：</b>
+               </dt> 
+               <dd> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">IT&middot;互联网技术：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/10">互联网中国科技</a> 
+                <a title="" href="groupinfo.html?id=/20">互联网的圆桌会议室</a> 
+                <a title="" href="groupinfo.html?id=/15">程序员书屋</a> 
+                <a title="" href="groupinfo.html?id=/9">爱科技,爱创意,我们是技术控</a> 
+                <a title="" href="groupinfo.html?id=/13">科技创意</a> 
+                <a title="" href="groupinfo.html?id=/32">奔跑吧！指尖上的愤青们儿</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">艺术设计&middot;创作：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/30">习惯一个人的音乐</a> 
+                <a title="" href="groupinfo.html?id=/29">音乐，人类的灵魂</a> 
+                <a title="" href="groupinfo.html?id=/12">一个背包一台单反一个爱拍照的人</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">兴趣&middot;生活&middot;理财：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/24">生活需要游戏，但人生不能游戏</a> 
+                <a title="" href="groupinfo.html?id=/14">享受生活，enjoy yourself</a> 
+                <a title="" href="groupinfo.html?id=/19">金融交流</a> 
+                <a title="" href="groupinfo.html?id=/31">金融众筹，让筹者不再发愁</a> 
+                <a title="" href="groupinfo.html?id=/11">吃货的世界</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">语言学习&middot;留学：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/28">愿得一学霸，白首不分离</a> 
+                <a title="" href="groupinfo.html?id=/27">我爱法语</a> 
+                <a title="" href="groupinfo.html?id=/18">英语口语交流组</a> 
+                <a title="" href="groupinfo.html?id=/25">板绘学习指南小组</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">学历升学&middot;考研：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/17">用车轮丈量生命</a> 
+                <a title="" href="groupinfo.html?id=/26">汗水、是脂肪在哭泣！</a> 
+                <a title="" href="groupinfo.html?id=/16">爱体育,爱运动</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">会计：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/34">会计超值特惠班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">心理学：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/40">心理学培训班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">高中：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/35">高中教师资格证全程保过班</a> 
+                <a title="" href="groupinfo.html?id=/42">高中零基小提琴班</a> 
+                <a title="" href="groupinfo.html?id=/43">高中化学学习班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">建筑师：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/37">二级建造师精品教学班</a> 
+                <a title="" href="groupinfo.html?id=/38">水利水电工程管理与实务</a> 
+                <a title="" href="groupinfo.html?id=/44">建设工程法规学习班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">IT互联网：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/33">java精品就业班</a> 
+                <a title="" href="groupinfo.html?id=/39">企业人力资源管理师一级视频教程全集</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">初中：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/36">初中国家教师资格考试专用班</a> 
+               </dd> 
+              </dl> 
+              <dl class="clearfix"> 
+               <dt>
+                <b class="fsize14 c-master">小学：</b>
+               </dt> 
+               <dd> 
+                <a title="" href="groupinfo.html?id=/45">写作基础培训班</a> 
+                <a title="" href="groupinfo.html?id=/41">幼儿资格证—综合素质学习</a> 
+               </dd> 
+              </dl> 
+             </div> 
+            </section> </li> 
+          </ul> 
+          <div class="clear"></div> 
+         </nav> 
+        </section> 
+        <div class="clear"></div> 
+       </div> 
+       <div class="header-mobile"> 
+        <h1 class="logo"> <a href="#" title="武汉大学出版社"><img src="picture/logo.png" height="36" width="auto" /></a> </h1> 
+        <section> 
+         <aside class="h-r-user-box fr"> 
+          <ul> 
+           <li class="mw-nav-tap"> 
+            <div class="mw-nav-icon"></div> </li> 
+          </ul> 
+          <div class="clear"></div> 
+         </aside> 
+         <aside class="h-r-search"> 
+          
+         </aside> 
+         <div class="clear"></div> 
+        </section> 
+        <div class="clear"></div> 
+       </div> 
+      </section> 
+     </header> 
+     <section class="s-main"> 
+      <div class="viewport"> 
+       <div class="mt10"> 
+        <section class="hLh30 c-999 fsize12 txtOf"> 
+         <a href="/group/index" title="首页" class="c-999 fsize12">首页</a> \ 
+         <a href="groupinfo.html?id=/10" title="互联网中国科技" class="c-999 fsize12">互联网中国科技</a> \ 
+         <span>中国十大难懂的方言你的家乡排第几？</span> 
+        </section> 
+        <section class="mt10"> 
+         <article class="fl col-7"> 
+          <div class="is-box pd15 of"> 
+           <section class="mt20 is-b-top-in"> 
+            <h2 class="topic-name pr hLh30"> <span class="fsize18 c-333 vam" style=" color:#FFA105 ; max-width: 85%; ">中国十大难懂的方言你的家乡排第几？</span> <i class="icon-jh" title="精华">精华</i> <span class="MarkClass"></span> </h2> 
+            <section class="isAct-list topic-t-attr pr"> 
+             <ul> 
+              <li> <a class="isAct_a" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title="雷欧斯"> <img class="isAct-img" src="picture/3_2.jpg" alt="雷欧斯" /></a> 
+               <div class="isAct-attr"> 
+                <div class="clearfix"> 
+                 <div class="fl isA-newtab-left"> 
+                  <a class="vam fsize14 c-master f-fM name" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title="雷欧斯">雷欧斯</a> 
+                  <span class="vam fsize12 c-999 f-fM ml20 time">2016-01-19 10:36</span> 
+                 </div> 
+                 <div class="isA-newtab fr"> 
+                  <span class="numb view" title="浏览 36"><em class="icon14">&nbsp;</em>36</span> 
+                  <span class="numb msg" title="评论 6"><em class="icon14">&nbsp;</em><span class="topic_comment_num">6</span></span> 
+                  <span class="topic numb zan" title="点赞 5"><em class="icon14">&nbsp;</em>5</span> 
+                 </div> 
+                </div> 
+                <div class="mt10"> 
+                 <aside class="fr"> 
+                  <a href="javascript:void(0)" onclick="goReportPage('76','ht')" title="举报" class="c-666 fsize12">举报</a> 
+                  <a href="javascript: void(0);" onclick="fcFun(this);" title="评论话题 ✈" class="cBtn cj-team ml10 mo-cj-team">评论话题 ↕</a> 
+                 </aside> 
+                 <div class="fl isA-b-left"> 
+                  <a class="vam belong-group" href="groupinfo.html?id=/10">[互联网中国科技]</a> 
+                  <span class="vam">分类：IT&middot;互联网技术</span>
+                 </div> 
+                 <p class="clear"></p> 
+                </div> 
+               </div> </li> 
+             </ul> 
+            </section> 
+            <div class="mt20 gro-topic-wrap"> 
+             <div class="cont-t"> 
+              <div class="">
+                &nbsp; 中国地大物博，语言也成为一个地域的文化特色，一方面文化差异，方言难懂难交流，另一方面随着普通话越来越普及，越来越多的方言被忘记，小伙伴们现在还会说家乡话吗？ 
+				<img src="picture/1523862135113027609.jpg" title="1523862135113027609.jpg" alt="2014-08-19 171209.jpg" /></p>
+               <div class="mod_bd editorBody clear" style="margin:30px 0px 0px;padding:0px;word-wrap:break-word;zoom:1;overflow:hidden;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal !important;font-size:16px !important;line-height:30px !important;font-family:arial, 微软雅黑 !important;color:#333333;letter-spacing:normal;orphans:auto;text-align:start;text-indent:0px;text-transform:none;white-space:normal;widows:1;word-spacing:0px;-webkit-text-stroke-width:0px;background-color:#FFFFFF;"> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp;<span class="Apple-converted-space">&nbsp;</span><img src="picture/s1745b4_1511dfbef5a__7fd4_1.jpg" id="1447912592202" style="margin:0px;padding:0px;word-wrap:break-word;border:0px none;vertical-align:middle;max-width:100%;" /> </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp; 网上也是评选出中国十大难懂的方言，引起各方热议，大家看看家乡的方言都上榜了没&middot;&middot;&middot; </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp;<img src="picture/s_76406f29_1511dfee291__7fd7_1.png" id="1447912651960" style="margin:0px;padding:0px;word-wrap:break-word;border:0px none;vertical-align:middle;max-width:100%;" /> </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> <img src="picture/s3814f58e_1511dfbf087__7fe2_1.png" id="1447912669783" style="margin:0px;padding:0px;word-wrap:break-word;border:0px none;vertical-align:middle;max-width:100%;" /> </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp;&nbsp; 近日由陈建斌导演的《一个勺子》即将上映，为了能够入乡随俗，更好的刻画剧中人物特色，剧中使用西北方言，电影名称中“勺子”即西北方言“傻子”的意思。 </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp;<img src="picture/s_58e560f2_1511dfc80fd__7fd3_1.gif" id="1447912794149" style="margin:0px;padding:0px;word-wrap:break-word;border:0px none;vertical-align:middle;max-width:100%;" /> </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp;&nbsp; 方言在电影中出现也是越来越普遍，你在观看电影中，你都能听懂哪些地方的方言？这些难懂的方言你会说吗？快来跟小格分享下~~ </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;<span class="Apple-converted-space">&nbsp;</span><img src="picture/s3814f58e_1511dfbf087__7fe0_1.gif" id="1447912919812" style="margin:0px;padding:0px;word-wrap:break-word;border:0px none;vertical-align:middle;max-width:100%;" /> </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> <strong>活动时间：</strong>2015.11.19-2015.11.26 </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> <strong>活动规则：</strong> </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> 1、点击<strong><span style="color:#EB6120;">“我要参加”</span></strong>报名活动，留下有效的<strong><span style="color:#EB6120;">姓名、电话、地址</span></strong>等相关信息（想拿奖品的用户，要认真填写哦）； </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> 2、在本活动页面<strong><span style="color:#EB6120;">上传电影中带有方言的片段截图以及自己的家乡方言</span></strong>； </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> 3、符合1+2条件即可参与评选，幸运观众有精美礼品拿哦！ </p> 
+                <p style="margin:0px;padding:0px;word-wrap:break-word;"> PS：小伙伴们可通过个人影迹页面，查询活动进度和评选结果。评选结果将于活动结束后7个工作日内公布。 </p> 
+               </div>
+              </div> 
+             </div> 
+            </div> 
+            <div> 
+             <section class="cy-tree"> 
+              <dl class="mt10 dt-s-z-p"> 
+               <dd class="cy-t-list"> 
+                <figure onclick="fcFun(this);"> 
+                 <a class="dt-s-z-icon pr dt-s-z-icon-1" href="javascript: void(0);" onclick="fcFun(this)" title="评论"> <em class="icon30">&nbsp;</em> </a> 
+                 <figcaption>
+                  <span title="评论" class="c-999 fsize14 topic_comment_num">6</span>
+                 </figcaption> 
+                </figure> 
+                <figure class="dz-btn of"> 
+                 <a title="点赞" href="javascript: void(0);" onclick="topicPraise(76)" class="dt-s-z-icon pr dt-s-z-icon-2"> <em class="icon30">&nbsp;</em> </a> 
+                 <figcaption class="hLh20 txtOf">
+                  <span id="topicPraise" class="c-999 fsize14" title="点赞">5</span>
+                 </figcaption> 
+                 <figcaption class="dz-num">
+                  <span class="c-red fsize16">+1</span>
+                 </figcaption> 
+                </figure> 
+                <figure> 
+                 <a class="dt-s-z-icon pr dt-s-z-icon-3" href="javascript: void(0);" title="分享"> <em class="icon30">&nbsp;</em> </a> 
+                 <figcaption> 
+                  <span title="分享" class="c-999 fsize14">分享</span> 
+                 </figcaption> 
+                 <figcaption class="of pa t-share-wrap"> 
+                  <div class="bdsharebuttonbox bdshare-button-style1-32" data-bd-bind="1446013522303"> 
+                   <a data-cmd="weixin" class="bds_weixin" href="#" title="分享到微信"></a>
+                   <a data-cmd="tsina" class="bds_tsina" href="#" title="分享到新浪微博"></a>
+                   <a data-cmd="qzone" class="bds_qzone" href="#" title="分享到QQ空间"></a>
+                   <a data-cmd="tqq" class="bds_tqq" href="#" title="分享到腾讯微博"></a>
+                   <a data-cmd="renren" class="bds_renren" href="#" title="分享到人人网"></a> 
+                  </div> 
+                  <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","tsina","qzone","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
+                 </figcaption> 
+                </figure> 
+                <div class="clear"></div> 
+               </dd> 
+              </dl> 
+             </section> 
+            </div> 
+           </section> 
+       <section class="mt20"> 
+            <div class="c-c-wrap"> 
+             <span id="commentList"> </span> 
+			 <div class="c-comm-list" style="">
+	<section class="isAct-list" style="">
+		<!-- /公用无数据提示 开始-->
+		<!-- /公用无数据提示 结束-->
+		<ul class="cc-mm-ul" style="">
+				<li class="comment" style="">
+						<a class="isAct_a" href="javascript:void(0)" onclick="toBrowseUserCenter(533)" title="barrycom"><img class="isAct-img" src="http://wx.inxedu.com/static/gro/img/avatar-boy.gif" alt="barrycom"></a>
+						<div class="c-comm-title">
+							<span class="floor c-green">1楼</span> <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)" title="barrycom" class="c-u-name c-master fsize14 vam">barrycom</a>
+							<span class="c-time c-ccc vam">0秒前</span>
+						</div>
+						<div class="c-a-p clearfix">
+							<p>dfsfsdfsfdsfsd</p></div>
+						<div class="isAct-attr of hLh30">
+							<a class="numb msg" href="javascript:void(0)" onclick="showcommentHide('twoCommentShowHide','0',2)" title="评论 0"> <em class="icon14">&nbsp;</em><span class="commentDto_comment_num_2">0</span>
+							</a><a href="javascript:void(0)" onclick="commentPraise(2)" id="commentPraiseATitle_2" title="点赞 0" class="numb zan">
+									<em class="icon14">&nbsp;</em><span id="commentPraise_2">0</span>
+							</a>
+							<a href="javascript:void(0);" onclick="isDelComment('2',1)" title="删除" class="jubao fsize12 c-ccc undis fr delMarkClass">删除</a>
+							</div>
+						
+						</li>
+
+				</ul>
+		</section>
+</div>
+             <section class="reply-area" id="fc-rep"> 
+              <div class="reply-a-b"> 
+               <form action="#" method="post" id="oneComment"> 
+                <div class="rep-txtarea"> 
+                 <textarea name="comment.commentContent" placeholder="输入您要评论的内容！" id="oneCommentContent"></textarea> 
+                 <input type="hidden" name="comment.topicId" value="110" /> 
+                 <input type="hidden" name="comment.parentCommentId" value="0" /> 
+                 <input type="hidden" name="comment.praiseNumber" value="0" /> 
+                 <input type="hidden" name="comment.commentNumber" value="0" /> 
+                </div> 
+                <script>
+                                                    $(function(){
+                                                        var height = $("#oneCommentContent").height()*0.96;
+                                                        initfrontUM("oneCommentContent","100%",height);
+                                                    });
+                                                </script> 
+                <div class="hLh30 mt10"> 
+                 <span class="fr"><tt class="fsize12 c-red" id="oneCommentErrorMessage" style="display: none;">你还没有输入任何内容！</tt>&nbsp;<a href="javascript:createComment('one')" title="发表" class="cBtn cb-send">发 表</a></span> 
+                 <span class="fl"> <label class="c-666 fsize12 new-tl-btn-gro"><input type="checkbox" name="comment.mark" value="1" />仅楼主可见回复</label> </span> 
+                 <div class="clear"></div> 
+                </div> 
+               </form> 
+              </div> 
+             </section> 
+			 
+             <div class="clear"></div> 
+            </div> 
+           </section> 
+          </div> 
+         </article> 
+
+         <aside class="fl col-3"> 
+          <section class="s-r-wrap pr"> 
+           <div class="is-box pd15 mo-is-box"> 
+            <section class="mt10 pr"> 
+             <img src="picture/lz-icon_1.png" width="66" height="66" class="lzIcon" alt="楼主" /> 
+             <div class="u-face-card"> 
+              <a class="isAct_a" rel="popUserCard" href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title="雷欧斯"> <img class="isAct-img" src="picture/3_2.jpg" alt="雷欧斯" /></a> 
+              <h6 class="hLh20 mt10"> <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)" userinfoid="3" title="雷欧斯" class="fsize12 c-666 vam">雷欧斯</a> <em class="sex girl vam" title="girl">&nbsp;</em> </h6> 
+              <p class="hLh30 txtOf"><em class="area icon16" title="北京市&middot;北京市&middot;北京市"> &nbsp;</em><span class="fsize12 c-999 vam">北京市&middot;北京市&middot;北京市</span></p> 
+              <section class="group-txt-infor"> 
+               <span class="fsize12 c-999"></span> 
+              </section> 
+              <section class="u-face-t-link"> 
+               <a href="javascript:void(0)" onclick="dialogFun(&quot;发私信&quot;,&quot;雷欧斯&quot;,3,&quot;3&quot;);" title="发消息" class="cBtn">发消息</a> 
+               <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)" title="Ta的主页" class="cBtn">Ta的主页</a> 
+              </section> 
+             </div> 
+            </section> 
+           </div> 
+           <div id="r-fixedTop"> 
+            <div class="is-box mt20" style="overflow: inherit;"> 
+             <section class="cy-tree"> 
+              <dl class="mt10 dt-s-z-p"> 
+               <dd class="cy-t-list"> 
+                <figure onclick="fcFun(this);"> 
+                 <a title="评论" href="javascript: void(0);" class="dt-s-z-icon pr dt-s-z-icon-1"> <em class="icon30">&nbsp;</em> </a> 
+                 <figcaption class="hLh20 txtOf">
+                  <span class="c-999 fsize14" title="评论">评论</span>
+                 </figcaption> 
+                </figure> 
+                <figure class="dz-btn of"> 
+                 <a title="点赞" href="javascript: void(0);" class="dt-s-z-icon pr dt-s-z-icon-2" onclick="topicPraise()"> <em class="icon30">&nbsp;</em> </a> 
+                 <figcaption class="hLh20 txtOf">
+                  <span class="c-999 fsize14" title="点赞">点赞</span>
+                 </figcaption> 
+                 <figcaption class="dz-num">
+                  <span class="c-red fsize16">+1</span>
+                 </figcaption> 
+                </figure> 
+                <figure> 
+                 <a title="分享" href="javascript: void(0);" class="dt-s-z-icon pr dt-s-z-icon-3"> <em class="icon30">&nbsp;</em> </a> 
+                 <figcaption class="hLh20 txtOf"> 
+                  <span class="c-999 fsize14" title="分享">分享</span> 
+                 </figcaption> 
+                 <figcaption class="of pa t-share-wrap"> 
+                  <div class="bdsharebuttonbox"> 
+                   <a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a>
+                   <a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a>
+                   <a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a>
+                   <a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a>
+                   <a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a> 
+                  </div> 
+                  <script>window._bd_share_config={"commo   登录后才可自由浏览该内容~~~ n":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"32"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","tsina","qzone","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script> 
+                 </figcaption> 
+                </figure> 
+                <div class="clear"></div> 
+               </dd> 
+              </dl> 
+             </section> 
+            </div> 
+            <div class="mt20"> 
+             <section class="is-box"> 
+              <header class="is-title"> 
+               <aside class="fr mt10"> 
+                <a href="javascript:groupHotTopic(10)" title="换一换" class="fsize12 c-999">换一换</a> 
+               </aside> 
+               <ol class="is-title-ol"> 
+                <li class="current"><a title="本组热门话题" href="javascript:void(0)">本组热门话题</a></li> 
+               </ol> 
+               <div class="clear"></div> 
+              </header> 
+              <section class="r-toPic-list"> 
+               <ol class="hot-toPic" id="hotTopicRecommend"> 
+               </ol> 
+              </section> 
+             </section> 
+            </div> 
+           </div> 
+          </section> 
+         </aside> 
+         <div class="clear"></div> 
+        </section> 
+       </div> 
+      </div> 
+     </section> 
+     <script>
+    $(function () {
+        rftFun();//左侧区域滚动固定
+        topicCommentPaging();//一级评论分页和二级评论与回复分页
+        groupHotTopic("10");//组热门话题
+        browserRedirect();//用户信息悬浮显示
+    });
+
+
+
+</script> 
+    </div> 
+   </div> 
+  </div> 
+  <div class="mo-footer"> 
+   <footer id="footer"> 
+    <section class="viewport"> 
+     <dl class="footer-elem"> 
+      <dt> 
+       <a href="#" title="武汉大学出版社"><img src="picture/logo.png" /></a> 
+      </dt> 
+      <dd> 
+       <ol class="footer-ol">
+         <li><span>24小时服务热线：027-87215590 &nbsp;Email：cbs22@whu.edu.cn &nbsp;工作时间：9:00-18:00</span></li>
+         <li><span>Copyright &copy;2013-2017 版权所有武大出版传媒股份公司  鄂ICP备15053495号 京公网安备11010802018055</span></li> 
+        <li><span>Powered By <a target="_blank" href="#" title="网站开发技术支持(武汉大学出版社)" class="c-666">武汉大学国家网络安全学院</a></span> </li>
+       </ol> 
+      </dd> 
+     </dl> 
+     <div class="clear"></div> 
+    </section> 
+   </footer> 
+   <section class="mo-foot"> 
+   
+   </section> 
+   <script type="text/javascript" src="js/webutils_6.js"></script> 
+   <script type="text/javascript" src="js/common_6.js"></script> 
+   <script type="text/javascript" src="js/group_top_3.js"></script> 
+   <script src="js/group-commjs_3.js" type="text/javascript"></script> 
+   <script src="js/popcard_3.js" type="text/javascript"></script> 
+   <script>
+
+    var uploadServerUrl='';
+
+$(function(){
+
+    goTop();//返回顶部
+
+    fnShow();//公共下拉方法
+
+    //wmNavFun();//移动端导航显示与隐藏
+
+});
+
+function createComment()
+{
+	$(".cc-mm-ul").append('<li class="comment" style=""> <a class="isAct_a" href="javascript:void(0)" onclick="toBrowseUserCenter(533)" title="barrycom"><img class="isAct-img" src="http://wx.inxedu.com/static/gro/img/avatar-boy.gif" alt="barrycom" /></a> <div class="c-comm-title"> <span class="floor c-green">1楼</span> <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)" title="barrycom" class="c-u-name c-master fsize14 vam">barrycom</a> <span class="c-time c-ccc vam">0秒前</span> </div> <div class="c-a-p clearfix"> <p>dfsfsdfsfdsfsd</p></div> <div class="isAct-attr of hLh30"> <a class="numb msg" href="javascript:void(0)" onclick="#" title="评论 0"> <em class="icon14">&nbsp;</em><span class="commentDto_comment_num_2">0</span> </a><a href="javascript:void(0)" onclick="commentPraise(2)" id="commentPraiseATitle_2" title="点赞 0" class="numb zan"> <em class="icon14">&nbsp;</em><span id="commentPraise_2">0</span> </a> <a href="javascript:void(0);" onclick="#" title="删除" class="jubao fsize12 c-ccc undis fr delMarkClass">删除</a> </div> </li>');
+}
+
+</script> 
+  </div>  
+ </body>
+</html>

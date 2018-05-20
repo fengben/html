@@ -1,0 +1,93 @@
+<%
+///新闻页面分页展示
+:sql = "select FOUND_ROWS,A.id, B.name, A.title, A.content_text, A.pic_id ,A.count  ,A.publish_date from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 order by A.on_top asc ,A.id asc  limit ?,8"
+changeRecordSet(:sql,(:pageNumber-1)*8);
+:totalNumber = recordCount()
+debugMsg("--------------=urlid-----------------"#:totalNumber
+
+If :totalNumber>0
+  Repeat
+%>
+<li>
+												<aside class="i-article-pic">
+													<a href="articleinfo.html?id=<%=id%>" title="哈佛商学院院长：21世纪人人都需要创业精神" target="_blank">
+														<%If pic_id!=0%>
+                                                           			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  >
+                                                           <%Else%>
+                                                           			 <img src="/pages/resouce/image/timg.jpg"  width="180px" height="119.52px">
+                                                           <%EndIf%>
+													</a>
+												</aside>
+												<h3 class="hLh30 txtOf unFw">
+													<a href="articleinfo.html?id=<%=id%>" target="_blank" title="<%=title%>" class="i-art-title"><%=title%></a>
+												</h3>
+												<section class="i-q-txt mt10">
+													<p>
+														<span class="c-999 f-fA"><%=content_text%></span>
+													</p>
+												</section>
+												<section class="hLh20 mt10 pr10 a-list-extrainfo clearfix">
+													<span class="fr">
+														<em class="icon18 i-n-xqtime">&nbsp;</em>
+														<tt class="c-999 f-fM">
+															<!-- 1小时前发布 -->
+															<%=publish_date%></tt>
+													</span>
+													<span class="fl">
+														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=<%=id%>">
+															<em class="icon18">&nbsp;</em>
+															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														</a>
+														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('22',3)">
+															<em class="icon18">&nbsp;</em>
+															<tt class="addPraise22_3 praiseCount vam fsize12 f-fM">( 2 )</tt>
+														</a>
+													</span>
+												</section>
+											</li>
+<%
+EndRepeat
+EndIf
+%>
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 8%>
+<%:totalPage=ceil(:FOUND_ROWS,8)%>
+
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToPage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToPage(1)">首页</a>
+             <%EndIf%>
+
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToPage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="nextpage" href="javascript:goToPage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="nextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =8;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = <%=:totalPage%>;
+   showPageNumber() ;
+</script>

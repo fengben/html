@@ -1,6 +1,6 @@
 ///获取计算机栏目课程数据
 <%
-:sql = "select A.id, A.title, A.content_text, A.on_top,A.publish_date,A.school, A.count, A.pic_id, A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=2018112858650021541 or B.parent_id=2018112858650021541) order by A.on_top desc,A.id desc limit 6 offset 0"
+:sql = "select A.id, A.title, A.content_text, A.on_top,A.publish_date,A.school, A.count, A.pic_id, A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=(select id from mooccolumns WHERE  sort =1) or B.parent_id=(select id from mooccolumns WHERE  sort =1)) order by A.on_top desc,A.id desc  limit 6 offset 0"
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0

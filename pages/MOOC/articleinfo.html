@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
@@ -23,10 +23,39 @@
 <script type="text/javascript" src="js/webutils.js"></script>
 <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
 
-<script type="text/javascript">
-  
 
+    <script type="text/javascript">
+    function killErrors() {
+        return true;
+    }
+    window.onerror = killErrors;
+    //获取地址栏参数，name:参数名称
+    function getUrlParms(name){
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)
+            return unescape(r[2]);
+        return null;
+    }
+    var urlid = getUrlParms("id");
+    window.onload = function () {
+        //新闻详情内容展示
+        var CategoryCourseDetailMap = new Array();
+        var paras = "urlid=" + urlid;
+        var CategoryCourseDetailMapResult = function () {
+
+            jQuery("#newDetail").html(CategoryCourseDetailMap[0]);
+        }
+        getFromWS("frontmooc/getNewsDetail.template", paras,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
+
+
+    };
+      var title = document.getElementById("newstitle").innerText;
+       // var title = jQuery("#newstitle")
+        alert(title);
+        jQuery("#currentTitle").text(title);
 </script>
 
 </head>
@@ -96,103 +125,14 @@
 						
 							资讯列表
 						</a>
-					\ <span class="c-333 fsize14">嘲讽陈年是很容易的事，但我更愿意祝他成功</span>
+					\ <span class="c-333 fsize14" id="currentTitle"> </span>
 				</section>
 				<div class="clearfix">
 					<div class="fl col-7">
 						<section class="artil-list-box bg-fff">
-							<article class="article-infor-box">
-								<h3 class="unFw">
-									<span class="fsize20 c-333 f-fM">嘲讽陈年是很容易的事，但我更愿意祝他成功</span>
-								</h3>
-								<section class="hLh20 mt20 pb10 mreadnum clearfix">
-								<span class="fr">
-									<em class="icon18 i-n-xqtime">&nbsp;</em>
-									<tt class="c-999 f-fM">
-										<!-- 1小时前发布 -->
-										2017-05-23 09:27</tt>
-								</span>
-								<span class="fl">
-									<a class="noter-dy mr30 c-999 f-fM" title="评论" href="#commentContent">
-										<em class="icon18">&nbsp;</em>
-										<tt class="vam fsize12 f-fM totalResultComment"> 0 </tt>
-									</a>
-									<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('9',3)">
-										<em class="icon18">&nbsp;</em>
-										<tt class="addPraise9_3 praiseCount vam fsize12 f-fM"> 0 </tt>
-									</a>
-								</span>
-								</section>
-								<div id="art-infor-body"><p class="MsoNormal">
-		陈年将凡客2015的春夏新品发布会放在了五棵松——这个开演唱会的地方继798之后成了互联网公司的新宠，两个星期后，乐视的手机和新电视也要在这里发布。	</p><p class="MsoNormal">
-		凡客发布会的开场让人仿佛穿越到了去年的8月，只不过那时陈年说的是衬衫，而这次是T恤，然后又是穿山越岭，飞过重洋遍寻供应商和设计师打造优质T恤的故
-事。陈年普及了做T恤的一些基本知识以及T恤衫的痛点，而他要做的是改善用户体验。这里涉及5个日本公司和6个中国公司以及1个美国公司的故事。	</p><p class="MsoNormal">
-		于是，陈年很快被调侃了。某IT老记在朋友圈说他“邯郸学步学小米，干脆卖给小米做纪念品算了”。	</p><p class="MsoNormal">
-		小米的雷军，也是凡客的投资人之一就在现场，第一排，最中间的位置。我拍了雷军的后脑勺。	</p><p class="MsoNormal">
-		这时候陈年正在说他“只想做好一件T恤”，一件“可以穿30年、白T恤不会发黄、黑T恤不会发红”的“T恤”。他说到2014年的自己“心慌意乱”，一心要做减法，只想做黑T恤，因为他和雷军都只穿黑T恤。	</p><p class="MsoNormal">
-		这是大家都很熟悉的陈年，一个不介意暴露自己的软肋、被调侃为“总在反思”的人。	</p><p class="MsoNormal">
-		然后他批评中国的设计师只知道把阿玛尼、普拉达的新品拿来给老板选，完全没有任何技术含量。联系到去年凡客的衬衫发布会后被时尚圈狂踩的局面，我估计今年凡客和陈年会被骂得更惨。	</p><p class="MsoNormal">
-		陈年对此有心理准备，他说肯定会有很多人说凡客做的不过是基本功，根本不懂时尚。但“基本功对于中国恰恰是最重要的”。	</p><p class="MsoNormal">
-		踩完了中国设计师，他说“还好我们有日本设计师”。他用了一批日本的设计师，从T恤的版型设计到印花T恤上的各种图案，基本全由日本设计师包办，只有一个系列图案的设计师来自中国。	</p><p class="MsoNormal">
-		这是整个发布会里我最喜欢的环节，这一次陈年把自己的文艺范做到了产品里。每个T恤图案的设计师都被隆而重之地推出，画猫跳广场舞的顾湘；说“愤怒时会画
-下一条线和……”的长场雄；会放电的萌系少年德田有希，他画的其中一幅画说“我听到了眼泪滴下的声音，其实只是放了一个屁”；还有从星际穿越获取灵感试图
-画出五维空间的Yoshirotten，他说“地球已经无法满足我的想象”。	</p><p class="MsoNormal">
-		陈年把他们称为艺术家。他再次反省自己说，“过去15年来我更关心主流、共性，想把人扁平化”，但现在从艺术家的身上体会到独特的灵魂才最可贵，甚至他们的“神经病”也是独特的一部分，“世界万物值得留恋，因其参差多样”。	</p><p class="MsoNormal">
-		凡客的猫和这些设计师是非常聪明的选择，让我又一次感到凡客正在给自己的品牌注入新的能量，更多样的，更亚次元的，更年轻，更萌酷的东西。	</p><p class="MsoNormal">
-		发布会的最后，陈年说，五棵松是他到北京后落脚的第一个地方，当年租的农家院就在离万事达中心不远的地方。他想起了当年和朋友们的共同理想，就是做一点真正好的东西出来。在经历了这么多年的起起落落之后，他希望自己“不要因为走得太远而忘记为什么出发”。	</p><p class="MsoNormal">
-		从第一次见陈年，就能感到他身上的文人气。这一点让他显得不那么像一个典型的商人，他的改不了的文艺腔、爱抒情爱反省的毛病让他在凡客如日中天时备受追捧，到凡客走下坡路时又屡遭嘲讽。	</p><p class="MsoNormal">
-		嘲讽陈年是一件容易的事，但我更愿意祝他成功，因为陈年这个人，也因为凡客是一家有故事有情怀一直在努力做事的企业。有的企业不错，但是无趣，比如三星。
-而凡客是那种让人想起来总有点感触的企业。说到凡客时，我的一个同事的问题是：它还活着吗？已经被市场遗忘了吧？在淘宝、京东们，甚至后来的聚美优品、唯
-品会客流如织的时候，很少有人记得陈年曾经是中国最早的电商拓荒者之一，今年也已是凡客的第8个年头。连它模仿的美国PPG都已经死了，凡客还活着，虽然
-活得不那么光鲜。如果它如雷军所说“三五年又王者归来”，这会是一个很励志的故事，让人觉得生意场上也不都是尔虞我诈翻脸无情，也有百折不挠百炼成钢这种
-事。	</p><p class="MsoNormal">
-		陈年做电商是2000年和雷军一起做卓越网开始的，那时卖的是书和音像制品，后来卓越网卖给了亚马逊，陈年几经周折在2007年创办了凡客。我第一次看到
-凡客的标志性大盒子，是由办公室里最文艺范的海丽下的单。那时在网上买衣服还是一件很新很酷的事，主要由城市里的小资们引领风潮。所以凡客最早的用户是北
-京上海的小资一族。	</p><p class="MsoNormal">
-		那时候的凡客只卖最简单款式的T恤、Polo衫和衬衣，以男款为主，质地很好，价格也真的很便宜。没有广告，完全靠口碑传播，凡客就这样一点点做了起来。我在海丽的带动下成了凡客的用户，每年断断续续会在凡客上下几单，都是最实用的T恤袜子之类。	</p><p class="MsoNormal">
-		再然后，凡客体风靡一时，凡客转眼间成了陈年口中的“平民时尚”，满大街都是韩寒穿着凡客T恤的广告，各大论坛上都是网友们戏谑的各种“凡客体”。凡客上卖的东西越来越多，越来越杂。小资们慢慢不屑于再穿凡客，但便宜加酷的形象使凡客成了大学生们的最爱。	</p><p class="MsoNormal">
-		这是2010年。媒体追着陈年要采访，追着他问凡客什么时候上市。而陈年和凡客一门心思想的是再放个“炸弹”，再来个“爆款”。可是风光转眼即逝，凡客最
-风光的时候正是中国概念股在美国最不受待见的时候，或许是一念之差，或许是一步之差，凡客没有上市，转过年来就是电商的冬天。当陈年还在批评京东扩张越快
-亏得越狠的时候，2011年4月，京东拿到了C轮融资的15亿美元，再接着2013年拿到了D轮融资的7亿美元。一直到上市，京东还没有盈利，但在自营电
-商的模式里，它成了跑得最快的那个。	</p><p class="MsoNormal">
-		做企业有时就是这样，拼的是一口气。如果和京东拼速度的时候，陈年胆子再大一点，吹得猛一点，撒钱再勇敢一点，也许凡客现在是另一个模式。可是陈年过不去
-自己这一关，他身上的文人气让他在和刘强东这样的悍将较量时落了下风。到后来媒体开始质疑凡客库存的时候，他或者避而不谈，或者气急之下口不择言。	</p><p class="MsoNormal">
-		在疯狂扩张和随后的清库存中，凡客不知不觉间沦落成了地摊货。它和淘宝、京东很快就不再是一个层面的对手了，再然后，它的对手变成了传统的服装企业。	</p><p class="MsoNormal">
-		掉到了制造业的坑里在某些人看来是悲剧，但陈年毕竟是陈年。这一次他和雷军给凡客的新定位是做一件小事，从做好一件衬衫一件T恤开始，向日本和德国企业学习，让中国人用上真正好的东西。现在这是一件小事，但是做好了未来也许是颠覆传统服装制造业的大事。	</p><p class="MsoNormal">
-		这的确是小米模式在服装业的一个翻版。陈年转了一大圈，又回到了起点，不过，现在刚好可以搭上互联网+的新概念。对于自称“凑过热闹也热闹过的”陈年，这或许不那么重要了，重要的是用户还会不会认可凡客，凡客还能不能活下去。	</p><p class="MsoNormal">
-		凡客未来要靠产品活下去。和手机一样，服装业最大的问题一直是品牌和库存。很多企业都倒在库存问题上，比如李宁。凡客在疯狂扩张的那几年后也栽在库存上，所以凡客要活下去，我最想知道的是凡客怎么来控制库存。	</p><p class="MsoNormal">
-		做品牌营销向来是陈年的长项，陈年也一直很会卖东西，他总能赋予他卖的东西很大的内涵，仿佛他卖的不是一件T恤，而是一种文化，甚至一个民族的未来。这是凡客至今仍然拥有一群粉丝的原因，也是像我这样的人对凡客总心有戚戚的原因。	</p><p class="MsoNormal">
-		凡客一直卖得都不错。凡客没有拼过淘宝，也没拼过京东，耽误陈年的并不是文艺腔和情怀，而是对于企业战略和执行力的一种掌控。未来陈年需要证明的是自己不仅会卖东西，还会管理企业，更重要的是有踩得准市场的远见。	</p><p class="MsoNormal">
-		&nbsp;一个像陈年这样的元老级的电商人物有勇气从头再来，无论如何都值得尊敬。套用陈年的话说，世间万物贵在参差百态，企业亦如是。每个企业都有自己擅长的套路和打法，活下来不容易，活得好更难，活得久就难上就难。	</p><p class="MsoNormal">
-		在来发布会的路上，我的一个同事遇到了一个凡客的用户，他从高中就开始买凡客，现在脚上还蹬着一双凡客的帆布鞋。凡客再难，也已经第8个年头了。我衷心希
-望凡客活下去，而且活得好。在第9个年头的时候，再拿出一件新的既融合他的文艺腔，又能博得尊重和买单的产品——毕竟，已经越来越接近制造企业角色的凡
-客，要靠产品说话，靠销量活下去。	</p><div>
-										<tt class="c-999 f-fM">
-												评论：<span class="totalResultComment">0</span>
-											</tt> <tt class="c-999 f-fM ml20">
-											点赞：<span class="addPraise9_3 praiseCount">0</span>
-											</tt>
-										<tt class="c-999 f-fM ml20">
-										阅读：<span class="clickNum"></span>
-									</tt>
-									</div>
-								</div>
-								<section class="mt20 tac" id="sharebutton">
-										<div class="bdsharebuttonbox clearfix disIb">
-											<div class="pr disIb fl of">
-												<a href="javascript:void(0)" onclick="addActiclePraise('9',3)"  title="" class="zan-icon dz-btn pr"></a>
-												<div class="dz-num">
-													<span class="c-red fsize16">+1</span>
-												</div>
-											</div>
-											<a title="分享到微信" href="#" class="bds_weixin fl" data-cmd="weixin">
-												<em class="share-fir-icon icon30"></em>
-											</a>
-											<a title="分享到新浪微博" href="#" class="bds_tsina fl" data-cmd="tsina"></a>
-										</div>
-										<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-									</section>
-								</article>
+                            <div id="newDetail">
+
+                            </div>
 							<!-- 文章评论 开始 -->
 							<div class="mt30 pr20 mb50 commentHtml"></div>
 							</section>

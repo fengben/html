@@ -1,0 +1,114 @@
+///获取栏目一课程数据
+<%
+:sql = "select id,name from mooccolumns WHERE  sort =1"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+
+                    <section class="container">
+                        <header class="comm-title">
+                            <div class="live-small-tit" >
+                                <span class="fr mt15 mr10 hyh"> <a class="c-master"
+                                                                   href="showcoulist.html?id=2018112858650021541"
+                                                                   title="更多" onclick="">更多&gt;&gt;</a> </span>
+                                <h2 class="fl tac tit-header " >
+                                    <span class="c-master"><%=name%></span>
+                                </h2>
+                                <ul class="clearfix">
+                                    <li class="current"><a href="javascript:void(0)" onclick="selectSubject(210,this)">全部</a>
+                                    </li>
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(211,this)">一级建造师</a></li>-->
+                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(213,this)">二级建造师</a></li>-->
+                                </ul>
+                            </div>
+                        </header>
+                        <!--<section class="live-moblie-fl">-->
+                            <!--<a onclick="selectSubject(211,this)" href="javascript:void(0)">一级建造师</a>-->
+                            <!--<a onclick="selectSubject(213,this)" href="javascript:void(0)">二级建造师</a>-->
+                        <!--</section>-->
+                        <article class="live-no-title">
+                            <div class="comm-course-list of">
+                                <div class="com-live-no-box">
+                                    <div class="c-l-n-left">
+                                        <ul>
+                                            <li class="liv-fist-box">
+                                                <div class="d3-left-pic" >
+                                                 <a href="<%=urlstr%>" target="_blank">
+                                                <%If pic_id!=0%>
+                                                			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
+                                                <%Else%>
+                                                			<img src="/pages/MOOC/picture/Columns_default.jpg"  width="220" height="500">
+                                                <%EndIf%>
+                                                </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="c-l-n-right d3-in-right">
+                                        <ul class="clearfix subject210" id="AllCourse01">
+                                        </ul>
+                                        <ul style="display:none" class="clearfix subject211" id="FirstArchitect">
+                                        </ul>
+                                        <ul style="display:none" class="clearfix subject213" id="SecondArchitect">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </article>
+                    </section>
+
+  <%
+  EndRepeat
+  EndIf
+  %>
+$_@_$
+  ///获取计算机栏目一课程数据
+  <%
+  :sql = "select A.id, A.title, A.content_text, A.on_top,A.publish_date,A.school, A.count, A.pic_id, A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=(select id from mooccolumns WHERE  sort =1) or B.parent_id=(select id from mooccolumns WHERE  sort =1)) order by A.on_top desc,A.id desc  limit 6 offset 0"
+  changeRecordSet(:sql);
+  :totalNumber = recordCount()
+  If :totalNumber >0
+  Repeat
+  %>
+  <%If on_top == 0%>
+     <li class="">
+     		<div class="cc-l-wrap">
+     			<section class="course-img">
+     				<a href="couinfo.html?id=<%=id%>" target="_blank">
+      				 <%If pic_id!=0%>
+      					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
+      				 <%Else%>
+      				     <img src="/pages/MOOC/picture/default_course.png"  width="280" height="160">
+                     <%EndIf%>
+     				</a>
+     			</section>
+     			<div class="bg-f8 coure-bg-g">
+     				<h3 class="hLh30 txtOf">
+     					<a class="course-title fsize16 c-333" href="couinfo.html?id=<%=id%>" target="_blank"><%=title%></a>
+     				</h3>
+                   <section class="mt10 hLh20 of">
+                    <div class="fl">
+                      <span class="c-666 fsize12 f-fM vam">开班时间：<%=course_start%>~<%=course_end%></span>
+                      ///<span class="c-666 fsize12 f-fM vam"><%=course_start%>--<%=course_end%></span>
+                    </div>
+                   </section>
+     					<section class="mt10 hLh20 of">
+     						<span class="fr">
+     							<tt class="c-green fsize12 f-fA">免费</tt>
+     						</span>
+     						<span class="fl jgAttr c-ccc f-fA">
+   	///						<tt class="c-999 f-fA mr10"><%=school%></tt>
+     ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
+     						</span>
+     					</section>
+     			</div>
+     		</div>
+     </li>
+      <%EndIf%>
+  <%
+  EndRepeat
+  EndIf
+  %>

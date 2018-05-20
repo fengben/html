@@ -1716,7 +1716,7 @@ a.current-1 .m-tree-icon {background-position: 0 -212px}
 .syD tt {display: inline-block;font-weight: bold;font-size: 14px;linle-height: 32px;height: 32px;text-align: center;width: 30px;margin: 0 3px;overflow: hidden;vertical-align: middle;font-family: "\5FAE\8F6F\96C5\9ED1", "&#x5FAE;&#x8F6F;&#x96C5;&#x9ED1", "Microsoft YaHei"}
 .syD-live tt{width: 40px;height: 40px;background-position: -218px -417px;font-size: 18px;line-height: 40px;}
 .article-new-title .pic-box-zx{position: relative;overflow: hidden;}
-.pic-a-n img{display: block;width: 100%;height: auto;}
+.pic-a-n img{display: block;width: 100%;}
 .name-a-n{position: absolute;background: url("../images/black-bg-hf.png") repeat top left;bottom:0;left: 0;color: #fff;height: 36px;line-height: 36px;font-size: 14px;display: block;width: 100%;}
 .name-a-n span{display: block;margin: 0 15px;}
 .article-new-title .big-pic .name-a-n{height: 42px;line-height: 42px;font-size: 16px;}

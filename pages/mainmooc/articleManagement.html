@@ -438,7 +438,10 @@
 					
 				}
 			}
-           alert(flag);
+           //
+            //
+            //
+            // alert(flag);
             $("#modal-article #topArticle").val($("#top" + flag).val());
             $("#modal-article #school").val($("#school" + flag).val());
             $("#modal-article #articleContent").val($("#content" + flag).val());
@@ -574,7 +577,8 @@ function uploadAppendix(){
 
 			var result = new Array()
 			var processResult = function(){
-				alert(result[0]);
+
+                // alert(result[0]);
 				$("#modal-article #appendixName").val("")
 			}
 		    var paras = "appendixId=" + $("#modal-article #appendixId").val();
@@ -591,7 +595,7 @@ function uploadAppendix(){
     function doSave() {
         var title = $("#modal-article #title").val();
         var school = $("#modal-article #school").val();
-        alert(school);
+        //alert(school);
         if(school!= ""){
             //查询数据库是否有相应学校
             var schoolcontent = new Array();
@@ -601,7 +605,7 @@ function uploadAppendix(){
                 if(schoolcontent[0] !="no"){
                     var schoollist = schoolcontent[0].split(";");
                     $("#modal-article #school").val(schoollist[2]);
-                    alert(schoollist[2]);
+                    //alert(schoollist[2]);
                 }esle
                 {
                     $("#modal-article #school").val();

@@ -1,6 +1,6 @@
 <%
 ///新闻资讯图片展示
-:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 order by A.on_top desc,A.id desc limit 2 offset 0"
+:sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 and A.pic_id !=0 order by A.on_top desc,A.id desc limit 2 offset 0"
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber>0
@@ -10,12 +10,12 @@ If :totalNumber>0
    <div class="inwarp">
            <a  class="pic-a-n d3-pic-a-n" href="view.html?id=<%=id%>" target="_blank">
    <%If pic_id!=0%>
-   			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  >
+   			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" width="268px" height="178px" >
    <%Else%>
-   			<img src="/pages/resouce/image/default.png" >
+   			 <img src="/pages/resouce/image/timg.jpg"  width="268px" height="178px">
    <%EndIf%>
    		</a>
-   		 <a class="d3-name-news-in" href="view.html?id=<%=id%>" >
+   		 <a class="d3-name-news-in" href="articleinfo.html?id=<%=id%>" >
                       <span class="txtOf f-fM dis c-333 fsize16 mt5"><%=title%></span>
             </a>
             <div class="d3-nr-news-in mt5">
@@ -39,7 +39,7 @@ If :totalNumber>0
 <li class="li-1">
     <div class="li-1-in">
       <em class="d2-b-l-ico">&nbsp;</em>
-        <a href="view.html?id=<%=id%>" title="" class="name f-fM c-666"><%=title%></a>
+        <a href="articleinfo.html?id=<%=id%>" title="" class="name f-fM c-666"><%=title%></a>
          <span class="time f-fM c-666"><%=publish_date%></span>
   </div>
 </li>

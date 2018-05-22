@@ -25,6 +25,9 @@
     <link rel="stylesheet" type="text/css" href="css/webstyle.css"/>
     <link rel="stylesheet" type="text/css" href="css/mw_300_768.css"
           media="screen and (min-width: 300px) and (max-width: 768px)"/>
+  <!--  <link rel="stylesheet" type="text/css" href="css/reset.css">-->
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/theme.css">
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5_3.js"></script><![endif]-->
@@ -34,19 +37,37 @@
     <script src="/scripts/htmleditor/lang/zh_CN.js"></script>
     <script src="jquery/jquery.ztree.core.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
-
+    <script type="text/javascript" src="js/page.js"></script>
 
     <script>
 
         jQuery(document).ready(function () {
             var postArray = new Array();
-
+            var paras = "pageNumber=1";
             function showPostsResult() {
                 $("#aCoursesList").html(postArray[0]);
+                $("#deanpage").html(postArray[1]);
             }
 
-            getFromWS("frontmooc/getPost.template", postArray, showPostsResult);
+            getFromWS("frontmooc/getPost.template", paras,postArray, showPostsResult);
+            var recomendPost = new Array();
+            function recoPostResult() {
+                $("#hotTopicRecommend").html(recomendPost[0]);
+            }
+             getFromWS("frontmooc/recomendHotPost.template", paras,recomendPost, recoPostResult);
         })
+
+        //分页实现
+        function goToPage(value){
+            //alert(value);
+            var paras = "pageNumber=" + value;
+            var articleList = new Array();
+            var articleListResult = function(){
+                jQuery("#aCoursesList").html(articleList[0]);
+                jQuery("#deanpage").html(articleList[1]);
+            }
+            getFromWS("frontmooc/getPost.template",paras,articleList,articleListResult);
+        }
 
         function setArticle(flag) {
             $("#bufferArticleId").val(flag);
@@ -522,7 +543,7 @@
                                 <div class="is-box">
                                     <header class="is-title">
                                         <ol class="is-title-ol">
-                                            <li class="current"><a href="" title="热门小组">热门论题</a></li>
+                                            <li class="current"><a href="" title="热门小组">明星大咖</a></li>
                                         </ol>
                                         <div class="clear"></div>
                                     </header>
@@ -763,18 +784,52 @@
                                         <section class="isAct-list" id="aCoursesList">
 
                                         </section>
-                                        <section class="paginationWrap">
+                                       <!-- <section class="paginationWrap">
                                             <div class="pagination pagination-large">
                                                 <ul id="pageFlag">
                                                 </ul>
                                             </div>
-                                        </section>
+                                        </section>-->
+                                        <!-- 公共分页 开始 -->
+                                        <div class="pgs cl" id="deanpage">
+
+
+                                        </div>
+                                        <!-- 公共分页 结束 -->
                                     </div>
                                 </div>
                             </section>
                         </article>
                         <aside class="fl col-3">
-
+                            <section class="s-r-wrap">
+                                <div class="pc-sr-btn-box">
+                                    <a href="javascript:setArticle(0)" title="" class="cBtn cj-team">+ 创建话题&nbsp;</a>
+                                </div>
+                                <div class="mt20">
+                                    <section class="is-box">
+                                        <header class="is-title">
+                                            <aside class="fr mt10">
+                                                <a href="javascript:groupHotTopic(0)" title="换一换" class="fsize12 c-999">换一换</a>
+                                            </aside>
+                                            <ol class="is-title-ol">
+                                                <li class="current">
+                                                    <a title="本组热门话题" href="javascript:void(0)">热门话题</a>
+                                                </li>
+                                            </ol>
+                                            <div class="clear"></div>
+                                        </header>
+                                        <section class="r-toPic-list">
+                                            <ol class="hot-toPic" id="hotTopicRecommend">
+                                                <!--<li class="txtOf">-->
+                                                    <!--<span class="fr"><i title="阅读量" class="c-999 fsize12">10</i></span>-->
+                                                    <!--<a href="http://wx.inxedu.com/group/topic/topicInfor/85"-->
+                                                       <!--title="写出你最爱的一句歌词" class="tp-txt vam">写出你最爱的一句歌词</a>-->
+                                                <!--</li>-->
+                                            </ol>
+                                        </section>
+                                    </section>
+                                </div>
+                            </section>
                         </aside>
                         <div class="clear"></div>
                     </div>
@@ -837,9 +892,11 @@
                 };
                 //document.onreadystatechange = drcFun;
             </script>
+
         </div>
     </div>
 </div>
+<div>
 <link rel="stylesheet" href="assets/css/bootstrap.css"/>
 <link rel="stylesheet" href="assets/css/xenon-core.css"/>
 <link rel="stylesheet" href="assets/css/xenon-forms.css"/>
@@ -849,9 +906,9 @@
 <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css"/>
 <link rel="stylesheet" href="assets/css/zTreeStyle.css"/>
 
-<button class="btn btn-secondary btn-icon btn-icon-standalone"
-        style="margin-left:5px;" onclick="setArticle(0)">新的话题
-</button>
+<!--<button class="btn btn-secondary btn-icon btn-icon-standalone"-->
+        <!--style="margin-left:5px;" onclick="setArticle(0)">新的话题-->
+<!--</button>-->
 <div class="modal fade" id="modal-article">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -986,6 +1043,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="mo-footer">

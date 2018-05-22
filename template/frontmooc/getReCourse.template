@@ -1,0 +1,47 @@
+///推荐课程
+<%
+:sql = "select A.id, A.title, A.content_text, A.publish_date,A.on_top,A.school, A.count, A.pic_id,A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and B.id !=2018088683860003597 order by A.count desc limit 4 offset 0"
+changeRecordSet(:sql);
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+ <%If:on_top != 1%>
+  <li class="">
+  		<div class="cc-l-wrap">
+  			<section class="course-img">
+  				<a href="couinfo.html?id=<%=id%>" target="_blank">
+    				 <%If pic_id!=0%>
+    					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="280" height="160" >
+    				 <%Else%>
+    				     <img src="/pages/MOOC/picture/default_course.png"  width="280" height="160">
+                   <%EndIf%>
+  				</a>
+  			</section>
+  			<div class="bg-f8 coure-bg-g">
+  				<h3 class="hLh30 txtOf">
+  					<a class="course-title fsize16 c-333" href="couinfo.html?id=<%=id%>" target="_blank"><%=title%></a>
+  				</h3>
+                <section class="mt10 hLh20 of">
+                 <div class="fl">
+                    <span class="c-666 fsize12 f-fM vam">开班时间：<%=course_start%>~<%=course_end%></span>
+                    ///<span class="c-666 fsize12 f-fM vam"><%=course_start%>--<%=course_end%></span>
+                 </div>
+                </section>
+  					<section class="mt10 hLh20 of">
+  						<span class="fr">
+  							<tt class="c-green fsize12 f-fA">免费</tt>
+  						</span>
+  						<span class="fl jgAttr c-ccc f-fA">
+ 		///					<tt class="c-999 f-fA mr10"><%=school%></tt>
+  		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
+  						</span>
+  					</section>
+  			</div>
+  		</div>
+  </li>
+ <%EndIf%>
+<%
+EndRepeat
+EndIf
+%>

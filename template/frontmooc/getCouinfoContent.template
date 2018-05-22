@@ -18,10 +18,14 @@ If recordCount()>0
 $_@_$
 ///课程内容
 <%
-:selectSql = "select title, content,pic_id, publisher,appendix_id,article_type,course_start,course_end,course_addr from moocarticle where id= ?"
-changeRecordSet(:selectSql,S(:id));
-If recordCount()>0
-	Repeat
+debugMsg("-------------------------"#:id)
+:sql="select title, content,pic_id, publisher,appendix_id,article_type,course_start,count,course_end,course_addr from moocarticle where id= ?"
+:x=changeRecordSet(:sql,L(:id))
+debugMsg("--------------"#count)
+:count_num=count +1
+    :sql1="update moocarticle set count=? where id=?"
+    :xx=execSQL(:sql1,L(:count_num),L(:id))
+
 %>
            <div class="cours-big-box">
                  <article class="c-v-pic-wrap">
@@ -59,7 +63,7 @@ If recordCount()>0
                       <aside>
                        <em class="icon16 lls-ico">&nbsp;</em>
                        <tt class="c-666 f-fM vam fsize14 mr5">浏览数</tt>
-                       <tt class="c-333 f-fM vam fsize14">291</tt>
+                       <tt class="c-333 f-fM vam fsize14"><%=count%></tt>
                       </aside> </li>
                     </ol>
                    </section>

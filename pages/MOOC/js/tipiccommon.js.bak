@@ -1,48 +1,32 @@
 /* 话题点赞 */
 var topicMark = 0;
-function topicPraise(topicId) {
-
+function topicPraise() {
     if (topicMark == 0) {
         $.ajax({
-            //url: baselocation + "/ajax/topicPraise",
-            url: homeAddress() + "one/mainmooc/likePost.template",
-            type: 'post',
+            url: baselocation + "/ajax/topicPraise",
+            data: {"id": topicId,},
+            dataType: "json",
+            type: "post",
             async: false,
-            dataType: 'json',
-            data: {
-                'id': topicId,// staff@qq.com   template里面@被替换成了%40
-            },
             success: function (result) {
-                alert(result)
-                if (result) {
+                if (result.success) {
                     var n = $("#topicPraise").text();
                     n++;
                     $("#topicPraise").text(n);
                     $(".topic.numb.zan").attr("title", "点赞 " + n).html('<em class="icon14"> </em>' + n);
                     topicMark = 1;
-                    // dialogFun("提示信息", "亲，点赞成功", 5);
+                    dialogFun("提示信息", "亲，点赞成功", 5);
                     var _dznum = $(".dz-btn").find(".dz-num");
-                    _dznum.stop().animate({"opacity": "0", "bottom": "90px"}, 1000, function () {
-                        _dznum.css({"opacity": "1", "bottom": "-26px"})
+                    _dznum.stop().animate({"opacity" : "0" , "bottom" : "90px"}, 1000, function() {
+                        _dznum.css({"opacity" : "1" , "bottom" : "-26px"})
                     });
 
                 } else {
                     dialogFun("提示信息", "系统异常,请稍后重试", 1);
                 }
-            },
-           error: function (jqXHR, textStatus, errorThrown) {
-            // /*弹出jqXHR对象的信息*/
-            // alert(jqXHR.responseText);
-            // alert(jqXHR.status);
-            // alert(jqXHR.readyState);
-            // alert(jqXHR.statusText);
-            // /*弹出其他两个参数的信息*/
-            // alert(textStatus);
-            // alert(errorThrown);
-        }
+            }
         })
     } else {
-
         dialogFun("提示信息", "你已经点过赞了~~~", 5);
     }
 }
@@ -53,14 +37,13 @@ function commentPraise(id){
     var praisefalg = $("#commentPraise_"+id).attr("praisefalg");
     if (praisefalg != "1") {
         $.ajax({
-            // url: baselocation + "/group/ajax/commentPraise",
-            url: homeAddress() + "one/mainmooc/likePost.template",
+            url: baselocation + "/group/ajax/commentPraise",
             data: {"id": id},
             dataType: "json",
             type: "post",
             async: false,
             success: function (result){
-                if (result) {
+                if (result.success) {
                     var n = $("#commentPraise_"+id).text();
                     n++;
                     $("#commentPraise_"+id).text(n);
@@ -256,7 +239,7 @@ function queryActivityJoinPage(pageNum){
 }
 
 //ajax分页显示还踢评论
-function topicCommentPaging(topicId) {
+function topicCommentPaging() {
     ajaxPage("/group/ajax/topicCommentPaging/"+topicId+"", "", 1, topicCallBack);
 }
 //评论分页

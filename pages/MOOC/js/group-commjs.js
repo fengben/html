@@ -132,22 +132,23 @@ function dialogFun(dTitle,dTxt,num,url) {
                     zIndex : "9999"
                 });
             _this.dCommEle = $('<div id="dialog-shadow" class="dialog-shadow"><div class="dContent"><header id="dHead" class="dHead"><span class="c-333 ml20">'+_this.dTitle+'</span></header><a href="javascript:void(0)" title="关闭" class="dClose">&nbsp;</a><div id="dcWrap" class="dcWrap">内容区域</div></div></div>').appendTo($("body")).addClass("bounceIn");
-            $.ajax({
-                url:baselocation+"/group/ajax/commonDialog",
-                data:{"dialog.title":dTitle,
-                    "dialog.conent":dTxt,
-                    "dialog.index":num,
-                    "dialog.url":url
-                },
-                type:"post",
-                dataType:"text",
-                async:false,
-                success:function(result){
-                    $("#dcWrap").html(result);
-                },error:function(){
-                    $("#dcWrap").html("获取异常,请稍后再试试");
-                }
-            });
+            // $.ajax({
+            //     url:baselocation+"/group/ajax/commonDialog",
+            //     data:{"dialog.title":dTitle,
+            //         "dialog.conent":dTxt,
+            //         "dialog.index":num,
+            //         "dialog.url":url
+            //     },
+            //     type:"post",
+            //     dataType:"text",
+            //     async:false,
+            //     success:function(result){
+            //         $("#dcWrap").html(result);
+            //     },error:function(){
+            //         $("#dcWrap").html("获取异常,请稍后再试试");
+            //     }
+            // });
+             $("#dcWrap").html("你已经赞过了");
 
 
             _this.position();

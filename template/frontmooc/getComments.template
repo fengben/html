@@ -1,5 +1,5 @@
 <%
-:commentSql = "select author,body,publish_time,to_char(publish_time,'yyyy-mm-dd hh24:mm:ss'),comments,likes,floor,head_portrait,nickname,mooc_userprofile.id as uid from mooc_comments inner join mooc_userprofile on mooc_comments.author = mooc_userprofile.email where pid=? order by publish_time desc limit 0,3"
+:commentSql = "select mooc_comments.id as id,author,body,publish_time,to_char(publish_time,'yyyy-mm-dd hh24:mm:ss'),comments,likes,floors,head_portrait,nickname,mooc_userprofile.id as uid from mooc_comments inner join mooc_userprofile on mooc_comments.author = mooc_userprofile.email where pid=? order by publish_time desc limit 0,5"
 :x=changeRecordSet(:commentSql,L(:id))
 :totalNumber = recordCount()
 debugMsg("---------recordCount--"#:totalNumber)
@@ -8,13 +8,13 @@ debugMsg("---------recordCount--"#:totalNumber)
       Repeat
  %>
 
-<li class="comment" style="">
+<li class="comment" id="<%=id%>" style="">
     <a class="isAct_a"  href="userInfo.html?id=<%=uid%>" title="barrycom"><img
             class="isAct-img"
             src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
             alt="barrycom"></a>
     <div class="c-comm-title">
-        <span class="floor c-green"><%=floor%>楼</span> <a
+        <span class="floor c-green"><%=floors%>楼</span> <a
              href="userInfo.html?id=<%=uid%>" title="nickname"
             class="c-u-name c-master fsize14 vam"><%=nickname%></a>
         <span class="c-time c-ccc vam"><%=to_char%></span>
@@ -23,15 +23,15 @@ debugMsg("---------recordCount--"#:totalNumber)
         <p><%=body%></p></div>
     <div class="isAct-attr of hLh30">
         <a class="numb msg" href="javascript:void(0)"
-           onclick="showcommentHide('twoCommentShowHide','0',2)"
+           onclick="commentComment('<%=id%>','<%=floors%>楼','<%=nickname%>');"
            title="评论 0"> <em class="icon14">&nbsp;</em><span
                 class="commentDto_comment_num_2"><%=comments%></span>
         </a><a href="javascript:void(0)"
-               onclick="commentPraise(2)"
-               id="commentPraiseATitle_2" title="点赞 0"
+               onclick="commentPraise('<%=id%>')"
+               id="commentPraiseATitle_<%=id%>" title="点赞 0"
                class="numb zan">
         <em class="icon14">&nbsp;</em><span
-            id="commentPraise_2"><%=likes%></span>
+            id="commentPraise_<%=id%>"><%=likes%></span>
     </a>
         <a href="javascript:void(0);"
            onclick="isDelComment('2',1)" title="删除"

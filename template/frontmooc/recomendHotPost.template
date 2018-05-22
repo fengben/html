@@ -1,0 +1,24 @@
+<%
+///根据评论数显示最火话题
+debugMsg("*******************************************")
+:sql="select id,title,body,view_num,publish_time from moocpost where is_hot =? order by publish_time limit 0,3"
+:t="true"
+changeRecordSet(:sql,S(:t))
+:totalNumber = recordCount()
+debugMsg("------totalNumber"#:totalNumber)
+
+%>
+<li></li>
+ <%If :totalNumber >0
+            Repeat
+            %>
+
+<li class="txtOf">
+    <span class="fr"><i title="阅读量" class="c-999 fsize12"><%=view_num%></i></span>
+    <a href="groupInfo.html?id=<%=id%>"
+       title="写出你最爱的一句歌词" class="tp-txt vam"><%=title%></a>
+</li>
+ <%
+            EndRepeat
+            EndIf
+            %>

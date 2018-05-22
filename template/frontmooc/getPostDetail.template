@@ -18,7 +18,7 @@ EndIf
 %>
 <section class="hLh30 c-999 fsize12 txtOf">
     <a href="/pages/MOOC/group.html" title="首页" class="c-999 fsize12">首页</a> \
-    <a href="groupinfo.html?id=/10" title="互联网中国科技" class="c-999 fsize12">互联网中国科技</a> \
+    
     <!--标题-->
     <span><%=title%></span>
 </section>
@@ -98,7 +98,7 @@ EndIf
                                 </figure>
                                 <figure class="dz-btn of">
                                     <a title="点赞" href="javascript: void(0);"
-                                       onclick="topicPraise(76)"
+                                       onclick="topicPraise('<%=:id%>')"
                                        class="dt-s-z-icon pr dt-s-z-icon-2"> <em class="icon30">&nbsp;</em>
                                     </a>
                                     <figcaption class="hLh20 txtOf">
@@ -175,8 +175,8 @@ EndIf
                                                                       placeholder="输入您要评论的内容！"
                                                                       id="oneCommentContent"></textarea>
                                     <input type="hidden" name="comment.topicId" value="110"/>
-                                    <input type="hidden" name="comment.parentCommentId"
-                                           value="0"/>
+                                    <input type="hidden" name="comment.parentCommentId" id="commentpid"
+                                           value="<%=:id%>"/>
                                     <input type="hidden" name="comment.praiseNumber" value="0"/>
                                     <input type="hidden" name="comment.commentNumber"
                                            value="0"/>
@@ -191,7 +191,7 @@ EndIf
                                                             <span class="fr"><tt class="fsize12 c-red"
                                                                                  id="oneCommentErrorMessage"
                                                                                  style="display: none;">你还没有输入任何内容！</tt>&nbsp;<a
-                                                                    href="javascript:createComment('one')" title="发表"
+                                                                    href="javascript:createComment()" title="发表"
                                                                     class="cBtn cb-send">发 表</a></span>
                                     
                                     <div class="clear"></div>
@@ -214,7 +214,7 @@ EndIf
                          alt="楼主"/>
                     <div class="u-face-card">
                         <a class="isAct_a" rel="popUserCard" href="userInfo.html?id=<%=uid%>" title="雷欧斯"> <img
-                                class="isAct-img" src="picture/3_2.jpg" /></a>
+                                class="isAct-img" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" /></a>
                         <h6 class="hLh20 mt10"><a href="userInfo.html?id=<%=uid%>"
                                                   title="author" class="fsize12 c-666 vam"><%=nickname%></a>
                             <% If sex=="女" %>
@@ -310,7 +310,7 @@ EndIf
                     </section>
                 </div>
                 <div class="mt20">
-                    <section class="is-box">
+                 <!--   <section class="is-box">
                         <header class="is-title">
                             <aside class="fr mt10">
                                 <a href="javascript:groupHotTopic(10)" title="换一换"
@@ -326,7 +326,7 @@ EndIf
                             <ol class="hot-toPic" id="hotTopicRecommend">
                             </ol>
                         </section>
-                    </section>
+                    </section> -->
                 </div>
             </div>
         </section>

@@ -27,7 +27,9 @@
 <script type="text/javascript" src="js/common.js"></script>
    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
 	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/page.js"></script>
 	<script type="text/javascript">
+
         function killErrors() {
             return true;
         }
@@ -46,9 +48,7 @@
 	</script>
 	<script type="text/javascript">
         window.onload = function () {
-
             var paras = "id=" + id;
-
             var Teacontent = new Array();
             var TeacontentResult = function () {
                 //	老师介绍
@@ -57,8 +57,29 @@
             }
             // alert(paras);
             getFromWS("frontmooc/getTeacherContent.template", paras, Teacontent, TeacontentResult);
-
+            //老师的主讲课程
+            var CategoryCourseDetailMap = new Array();
+            var paras = "id=" + id;
+            paras += "$^@^$pageNumber=1";
+            var  CategoryCourseDetailMapResult = function () {
+                jQuery("#teacherCourse").html(CategoryCourseDetailMap[0]);
+                //alert(CategoryCourseDetailMap[0]);
+                //jQuery("#deanpage").html(CategoryCourseDetailMap[1]);
+            }
+            getFromWS("frontmooc/getTeacherMajor.template", paras,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
+			//alert(paras);
         };
+        function goToPage(value){
+            //alert(value);
+            var paras = "pageNumber=" + value;
+            paras += "$^@^$id=" + id;
+            var articleList = new Array();
+            var articleListResult = function(){
+                jQuery("#teacherCourse").html(articleList[0]);
+                jQuery("#deanpage").html(articleList[1]);
+            }
+            getFromWS("frontmooc/getTeacherMajor.template",paras,articleList,articleListResult);
+        }
 	</script>
 
 </head>
@@ -256,199 +277,17 @@
 						<!-- /无数据提示 开始-->
 						<!-- /无数据提示 结束-->
 						<article class="comm-course-list">
-							<ul class="of">
-								<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="#" target="_blank" >
-													<img xsrc="picture/1482394317503.jpg" src="picture/1482394317503.jpg" class="img-responsive" alt="机电工程管理与实务">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="#" target="_blank" title="机电工程管理与实务" class="course-title fsize16 c-333">机电工程管理与实务</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-master fsize14 f-fM">￥0.01</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">20人购买</tt>
-														<tt class="c-999 f-fA span-2">1浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1485229913614.jpg" src="picture/1485229913614.jpg" class="img-responsive" alt="高中零基础怎样学好音乐">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="高中零基础怎样学好音乐" class="course-title fsize16 c-333">高中零基础怎样学好音乐</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-master fsize14 f-fM">￥3.00</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">9人购买</tt>
-														<tt class="c-999 f-fA span-2">137浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1485227265969.jpg" src="picture/1485230352811.jpg" class="img-responsive" alt="初中美术">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="初中美术" class="course-title fsize16 c-333">计算机基础</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-master fsize14 f-fM">￥33.00</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">0人购买</tt>
-														<tt class="c-999 f-fA span-2">19浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1485226157132.jpg" src="picture/1519463402508.jpg" class="img-responsive" alt="初中语文">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="初中语文" class="course-title fsize16 c-333">计算机进阶</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-master fsize14 f-fM">￥80.00</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">0人购买</tt>
-														<tt class="c-999 f-fA span-2">25浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1482458234957.jpg" src="picture/1519463402508.jpg" class="img-responsive" alt="直播-变态心理学与健康心理学">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="直播-变态心理学与健康心理学" class="course-title fsize16 c-333">直播-变态心理学与健康心理学</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-green fsize12 f-fA">免费</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">0人购买</tt>
-														<tt class="c-999 f-fA span-2">2378浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1482391558235.jpg" src="picture/1519463402508.jpg" class="img-responsive" alt="Excel实战技巧视频教程">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="Excel实战技巧视频教程" class="course-title fsize16 c-333">Excel实战技巧视频教程</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-master fsize14 f-fM">￥0.01</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">1人购买</tt>
-														<tt class="c-999 f-fA span-2">1698浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1482391915174.jpg" src="picture/1482391915174.jpg" class="img-responsive" alt="水利水电工程管理与实务">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="水利水电工程管理与实务" class="course-title fsize16 c-333">水利水电工程管理与实务</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-green fsize12 f-fA">免费</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">0人购买</tt>
-														<tt class="c-999 f-fA span-2">2802浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
-									<li>
-											<div class="cc-l-wrap">
-												<section class="course-img">
-													<a href="couinfo.html" target="_blank" >
-													<img xsrc="picture/1482392046565.jpg" src="picture/1519463402508.jpg" class="img-responsive" alt="幼儿资格证—综合素质学习">
-														</a>
-														</section>
-												<div class="coure-bg-g">
-													<h3 class="hLh30 txtOf">
-														<a href="couinfo.html" target="_blank" title="幼儿资格证—综合素质学习" class="course-title fsize16 c-333">幼儿资格证—综合素质学习</a>
-													</h3>
-													<section class="mt10 hLh20 of">
-														<span class="fr"><tt class="c-master fsize14 f-fM">￥0.01</tt></span>
-														<span class="fl jgAttr c-ccc f-fA">
-														<tt class="c-999 f-fA mr10">0人购买</tt>
-														<tt class="c-999 f-fA span-2">2081浏览</tt>
-													</span>
-													</section>
-												</div>
-											</div>
-										</li>
+							<ul class="of" id="teacherCourse">
+
+
 									</ul>
 							<div class="clear"></div>
 						</article>
 						<!-- 公共分页 开始 -->
-						<div>
-							<form action="#" method="post" id="searchForm">
-								<input type="hidden" name="page.currentPage" id="pageCurrentPage" value="1">
-							</form>
-							<script type="text/javascript" src="js/page.js"></script>
-<div class="paging"> 
-		<a href="couinfo.html" title="">首</a>
-		<a id="backpage" class="undisable" href="#" title="">&lt;</a>
-			<a id="nextpage" href="javascript:goPage(2);" title="">&gt;</a>
-			<a href="couinfo.html" title="">末</a>
-		<div class="clear"></div>
-	</div>
+						<!--<div class="pgs cl" id="deanpage">
 
 
-<script type="text/javascript">
-    var totalPageSize =2;
-    var currentPage =0<1 ? 1 :1;
-    var totalPage = 2;
-    showPageNumber();
-</script></div>
+						</div>-->
 						<!-- 公共分页 结束 -->
 					</section>
 				</div>

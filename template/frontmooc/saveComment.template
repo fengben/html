@@ -1,0 +1,47 @@
+<%
+debugMsg("--------in save comment------"#:pid#:body#:author#:type)
+If :type==0
+    ///被回复的是帖子
+    ///被回复的帖子,评论+1
+    ///查询被回复的帖子
+    :fsql="select comments,floors from moocpost where id=?"
+    :x=changeRecordSet(:fsql,L(:pid))
+    debugMsg("-----comments"#comments#"---and floors---"#floors)
+    :comment_plus1 = comments +1
+    :floor_plus1 = floors +1
+
+    :aid = tuid()
+    ///不采用事物,不好
+    ///:sql = "insert into mooc_comments(id,pid,body,author,floors,comments) values(?,?,?,?,?,?)"
+    ///:res=execSQL(:sql,L(:aid),L(:pid),S(:body),S(:author),L(:floor_plus1),L(0))
+
+    ///:sql2="update moocpost set comments=? where id=?"
+    ///:xx=execSQL(:sql2,L(:comment_plus1),L(:pid))
+
+    ///:sql3 = " update moocpost set floors=? where id=?"
+    ///:xxx=execSQL(:sql3,L(:floor_plus1),L(:pid))
+
+
+    ///采用事物
+    :sql1=merge("insert into mooc_comments(id,pid,body,author,floors,comments) values(?,?,?,?,?,?)",:aid,L(:pid),S(:body),S(:author),L(:floor_plus1),L(0))
+    :sql2=merge("update moocpost set comments=?,floors=? where id=?",L(:comment_plus1),L(:floor_plus1),L(:pid))
+    :res = execTransaction(:sql1,:sql2)
+    debugMsg("res-------------------------"#:res)
+Else
+    /// 已废弃,前台无法展示对评论的评论
+    debugMsg("------------"#:type#"++++++++"#:pid)
+    ///对评论进行评论
+    :fsql="select comments,floors from mooc_comments where id=?"
+    :x=changeRecordSet(:fsql,L(:pid))
+
+    :comments_plus1 = 1+comments
+    :aid = tuid()
+    :sql1=merge("insert into mooc_comments(id,pid,body,author,floors,comments) values(?,?,?,?,?,?)",:aid,L(:pid),S(:body),S(:author),L(floors),L(0))
+    :sql2=merge("update mooc_comments set comments=? where id=?",L(:comments_plus1),L(:pid))
+    :res = execTransaction(:sql1,:sql2)
+     debugMsg("++++++++++"#:res)
+
+EndIf
+%>
+
+<%Exit(:res)%>

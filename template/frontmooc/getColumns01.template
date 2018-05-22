@@ -11,23 +11,23 @@ Repeat
                         <header class="comm-title">
                             <div class="live-small-tit" >
                                 <span class="fr mt15 mr10 hyh"> <a class="c-master"
-                                                                   href="showcoulist.html?id=2018112858650021541"
+                                                                   href="showcoulist.html?id=<%=id%>"
                                                                    title="更多" onclick="">更多&gt;&gt;</a> </span>
                                 <h2 class="fl tac tit-header " >
                                     <span class="c-master"><%=name%></span>
                                 </h2>
                                 <ul class="clearfix">
-                                    <li class="current"><a href="javascript:void(0)" onclick="selectSubject(210,this)">全部</a>
+                                    <li class="current"><a href="javascript:void(0)" onclick="selectSubject(110,this)">全部</a>
                                     </li>
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(211,this)">一级建造师</a></li>-->
-                                    <!--<li><a href="javascript:void(0)" onclick="selectSubject(213,this)">二级建造师</a></li>-->
+                        ///            <li><a href="javascript:void(0)" onclick="selectSubject(111,this)">一级建造师</a></li>
+                        ///            <li><a href="javascript:void(0)" onclick="selectSubject(112,this)">二级建造师</a></li>
                                 </ul>
                             </div>
                         </header>
-                        <!--<section class="live-moblie-fl">-->
-                            <!--<a onclick="selectSubject(211,this)" href="javascript:void(0)">一级建造师</a>-->
-                            <!--<a onclick="selectSubject(213,this)" href="javascript:void(0)">二级建造师</a>-->
-                        <!--</section>-->
+                        <section class="live-moblie-fl">
+                            <a onclick="selectSubject(111,this)" href="javascript:void(0)">一级建造师</a>
+                            <a onclick="selectSubject(112,this)" href="javascript:void(0)">二级建造师</a>
+                      </section>
                         <article class="live-no-title">
                             <div class="comm-course-list of">
                                 <div class="com-live-no-box">
@@ -36,22 +36,22 @@ Repeat
                                             <li class="liv-fist-box">
                                                 <div class="d3-left-pic" >
                                                  <a href="<%=urlstr%>" target="_blank">
-                                                <%If pic_id!=0%>
-                                                			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
-                                                <%Else%>
+                                               /// <%If pic_id!=0%>
+                                                ///			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
+                                              ///  <%Else%>
                                                 			<img src="/pages/MOOC/picture/Columns_default.jpg"  width="220" height="500">
-                                                <%EndIf%>
+                                              ///  <%EndIf%>
                                                 </a>
                                                 </div>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="c-l-n-right d3-in-right">
-                                        <ul class="clearfix subject210" id="AllCourse01">
+                                        <ul class="clearfix subject110" id="AllCourse01">
                                         </ul>
-                                        <ul style="display:none" class="clearfix subject211" id="FirstArchitect">
+                                        <ul style="display:none" class="clearfix subject111" id="FirstArchitect">
                                         </ul>
-                                        <ul style="display:none" class="clearfix subject213" id="SecondArchitect">
+                                        <ul style="display:none" class="clearfix subject112" id="SecondArchitect">
                                         </ul>
                                     </div>
                                 </div>
@@ -100,8 +100,8 @@ $_@_$
      							<tt class="c-green fsize12 f-fA">免费</tt>
      						</span>
      						<span class="fl jgAttr c-ccc f-fA">
-   	///						<tt class="c-999 f-fA mr10"><%=school%></tt>
-     ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
+   					///		<tt class="c-999 f-fA mr10"><%=school%></tt>
+     		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
      						</span>
      					</section>
      			</div>

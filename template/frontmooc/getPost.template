@@ -4,9 +4,9 @@
 ///查询精华
 ///查询热帖
 ///仅仅按照日期查询
-///:sql = "select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time from moocpost inner join mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time DESC limit 0,5"
-:sql="select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time desc limit 0,5"
-changeRecordSet(:sql)
+///:sql = "select FOUND_ROWS,moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time from moocpost inner join mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time DESC limit ?,5"
+:sql="select FOUND_ROWS,moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time desc limit ?,5"
+changeRecordSet(:sql,(:pageNumber-1)*5)
 :totalNumber = recordCount()
 debugMsg("------totalNumber"#:totalNumber)
 %>
@@ -35,7 +35,7 @@ debugMsg("------totalNumber"#:totalNumber)
 									"><%=title%></a>
 
                 </div>
-                <p class="isAct-desc-wrap"><a href="groupInfo.html?id=id=<%=id%>"
+                <p class="isAct-desc-wrap"><a href="groupInfo.html?id=<%=id%>"
                                               title="进入查看" target="_blank">
                     <%=body%></a></p>
                     <a
@@ -83,3 +83,46 @@ debugMsg("------totalNumber"#:totalNumber)
         </ul>
     </div>
 </section>
+
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 5%>
+<%:totalPage=ceil(:FOUND_ROWS,5)%>
+
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToPage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToPage(1)">首页</a>
+             <%EndIf%>
+
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToPage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="nextpage" href="javascript:goToPage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="nextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =5;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = <%=:totalPage%>;
+    showPageNumber() ;
+</script>

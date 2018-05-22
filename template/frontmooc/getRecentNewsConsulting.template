@@ -8,7 +8,7 @@ If :totalNumber>0
 %>
  <li>
    <div class="inwarp">
-           <a  class="pic-a-n d3-pic-a-n" href="view.html?id=<%=id%>" target="_blank">
+           <a  class="pic-a-n d3-pic-a-n" href="articleinfo.html?id=<%=id%>" target="_blank">
    <%If pic_id!=0%>
    			<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" width="268px" height="178px" >
    <%Else%>
@@ -65,7 +65,7 @@ If :totalNumber>0
    			<img src="/pages/resouce/image/default.png" >
    <%EndIf%>
    		</a>
-   		 <a class="d3-name-news-in" href="view.html?id=<%=id%>" >
+   		 <a class="d3-name-news-in" href="articleinfo.html?id=<%=id%>" >
                       <span class="txtOf f-fM dis c-333 fsize16 mt5"><%=title%></span>
             </a>
             <div class="d3-nr-news-in mt5">

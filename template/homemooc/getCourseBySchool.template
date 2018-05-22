@@ -1,8 +1,8 @@
 <%If :id == ""
 	Exit ""
   Else
-      :sql = "select id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = ? limit 6 "
-      changeRecordSet(:sql, :id);
+      :sql = "select FOUND_ROWS,id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = ? limit ?,6 "
+      changeRecordSet(:sql, :id,(:pageNumber-1)*6);
 EndIf
 If recordCount()>0
 	Repeat
@@ -33,8 +33,8 @@ If recordCount()>0
      							<tt class="c-green fsize12 f-fA">免费</tt>
      						</span>
      						<span class="fl jgAttr c-ccc f-fA">
-    							<tt class="c-999 f-fA mr10"><%=school%></tt>
-     ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
+
+     		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
      						</span>
      					</section>
      			</div>
@@ -44,3 +44,45 @@ If recordCount()>0
 EndRepeat
 EndIf
 %>
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 6%>
+<%:totalPage=ceil(:FOUND_ROWS,6)%>
+
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToPage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToPage(1)">首页</a>
+             <%EndIf%>
+
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToPage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="nextpage" href="javascript:goToPage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="nextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =6;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = <%=:totalPage%>;
+    showPageNumber() ;
+</script>

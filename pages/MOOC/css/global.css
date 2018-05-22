@@ -318,7 +318,6 @@ a.current-1 .m-tree-icon {background-position: 0 -212px}
 .coures-jbicon img{display: block;width: 100%;height: 100%;}
 .img-responsive {
     max-width: 100%;
-    height: auto;
     display: block;
     transition: .8s;
     -webkit-transition: .8s
@@ -375,7 +374,7 @@ a.current-1 .m-tree-icon {background-position: 0 -212px}
 }
 
 #aCoursesList,.i-question,.u-body {
-    padding-bottom: 80px
+    
 }
 #aCoursesList.index-bg{padding-bottom: 0}
 #aCoursesList.uc-index-warp{padding-bottom: 0;}

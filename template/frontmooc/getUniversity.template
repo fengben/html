@@ -1,6 +1,6 @@
 
 <%
-:sql = "select A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=2018088683070003565 or B.parent_id=2018088683070003565) order by A.on_top desc,A.id desc limit 4 offset 0"
+:sql = "select A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=2018088683070003565 or B.parent_id=2018088683070003565) order by A.on_top desc,A.id asc limit 4 offset 0"
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0
@@ -15,9 +15,9 @@ Repeat
 			<section class="course-img">
 	  		<a href="shool.html?id=<%=id%>" target="_blank">
          <%If pic_id!=0%>
-      	  <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="220" height="62" >
+      	  <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="180" height="62" >
          <%Else%>
-              <img src="/pages/resouce/image/default.png"  width="220" height="62">
+              <img src="/pages/resouce/image/default.png"  width="180" height="62">
           <%EndIf%>
         </a>
 ///		<div class="in-2-mask">

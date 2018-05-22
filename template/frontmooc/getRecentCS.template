@@ -20,7 +20,7 @@ Repeat
    			</section>
    			<div class="bg-f8 coure-bg-g">
    				<h3 class="hLh30 txtOf">
-   					<a class="course-title fsize16 c-333" href="couinfo.html?id=<%=id%>" target="_blank"><%=title%></a>
+   					<a class="course-title fsize16 c-333" href="couinfo.html?id=<%=id%>" target="_blank" ><%=title%></a>
    				</h3>
                  <section class="mt10 hLh20 of">
                   <div class="fl">

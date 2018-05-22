@@ -30,6 +30,7 @@
 
 	<script type="text/javascript" src="js/swiper-2.1.0.js"></script>
 	<script type="text/javascript" src="js/live-index.js"></script>
+	<script type="text/javascript" src="js/page.js"></script>
 
 	<style type="text/css">
 		.n-i-m-bottom{display: block}
@@ -48,23 +49,51 @@
                 return null;
             }
             var id = getUrlParms("id");
+
         window.onload = function () {
             //学校课程全部分类展示
             var content = new Array();
+            var paras = "id="+id;
+            paras += "$^@^$pageNumber=1";
             var contentResult = function(){
                 jQuery("#SchoolCourse").html(content[0]);
+                jQuery("#deanpage").html(content[1]);
+
             }
-            getFromWS("homemooc/getCourseBySchool.template","id="+id,content,contentResult);
+            getFromWS("homemooc/getCourseBySchool.template",paras,content,contentResult);
           //学校下的老师数据读取
 			var paras= "school_id=" +id;
+            paras += "$^@^$pageNumber=1";
             var Teacontent = new Array();
             var TeacontentResult = function(){
                 jQuery("#Teacontent").html(Teacontent[0]);
+                jQuery("#teacherDeanpage").html(Teacontent[1]);
             }
             getFromWS("frontmooc/getSchoolTeacher.template",paras,Teacontent,TeacontentResult);
 
         };
 
+        function goToPage(value){
+            var paras = "id=" +  id;
+            paras += "$^@^$pageNumber=" + value;
+            var articleList = new Array();
+            var articleListResult = function(){
+                jQuery("#SchoolCourse").html(articleList[0]);
+                jQuery("#deanpage").html(articleList[1]);
+            }
+            getFromWS("homemooc/getCourseBySchool.template",paras,articleList,articleListResult);
+        }
+        function goToTeacherPage(value){
+            // alert(value);
+            var paras = "school_id=" +  id;
+            paras += "$^@^$pageNumber=" + value;
+            var articleList = new Array();
+            var articleListResult = function(){
+                jQuery("#Teacontent").html(articleList[0]);
+                jQuery("#teacherDeanpage").html(articleList[1]);
+            }
+            getFromWS("frontmooc/getSchoolTeacher.template",paras,articleList,articleListResult);
+        }
         window.onerror = killErrors;
 	</script>
 
@@ -255,7 +284,7 @@
 						<!--</div>-->
 						<div class="swiper-slide swiper-slide-duplicate swiper-slide-visible swiper-slide-active" style="width: 100%; height: 100%;">
 							<a target="_blank" href="/">
-								<img class="imgload" src="https://nos.netease.com/edu-image/AA2A12B8BC46F4B9F68666311A5C24EE.jpg?imageView&thumbnail=1280y200&quality=100" alt="直播首页banner 1" style=" max-width: 100%; max-height: 100%;">
+								<img class="imgload" src="\pages\resouce\picture\default_course.jpg" alt="直播首页banner 1" style=" max-width: 100%; max-height: 100%;">
 							</a>
 						<!--</div>-->
 					</div></div>
@@ -272,9 +301,9 @@
 				<section class="container">
 					<header class="comm-title">
 						<div class="live-small-tit">
-					<span class="fr mt15 mr10 hyh">
+					<!--<span class="fr mt15 mr10 hyh">
 						<a class="c-master" href="#" title="更多" onclick="">更多</a>
-					</span>
+					</span>-->
 							<h2 class="fl tac tit-header">
 								<span class="c-333">课程</span>
 							</h2>
@@ -302,13 +331,18 @@
 					</article>
 				</section>
 			</div>
+			<!-- 课程分页 开始 -->
+			<div class="pgs cl" id="deanpage">
 
+
+			</div>
+			<!-- 课程分页 结束 -->
 			<div class="bg-fff of">
 				<section class="container">
 					<header class="comm-title">
-					<span class="fr mt15 mr10 hyh">
+					<!--<span class="fr mt15 mr10 hyh">
 						<a class="c-master" href="#" title="更多" onclick="">更多</a>
-					</span>
+					</span>-->
 						<h2 class="fl tac tit-header">
 							<span class="c-333">老师列表</span>
 						</h2>
@@ -323,7 +357,13 @@
 				</section>
 			</div>
 		</div>
+
 	</div>
+	<!-- 老师分页 开始 -->
+	<div class="pgs cl" id="teacherDeanpage">
+
+	</div>
+	<!-- 老师分页 结束 -->
 </div>
 </div>
 <div class="mo-footer">

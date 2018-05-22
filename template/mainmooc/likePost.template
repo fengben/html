@@ -1,0 +1,30 @@
+<%
+///先查找是否点赞话题,在查找点赞是否为评论,点赞成功返回1,失败返回0
+debugMsg("-----++++++++++-------------------"#L(:id))
+:sql="select likes from moocpost where id=?"
+:x=changeRecordSet(:sql,L(:id))
+If :x=="ok"
+    :like1 = likes +1
+    :sql1="update moocpost set likes=? where id =?"
+    :res=execSQL(:sql1,L(:like1),L(:id))
+%>
+
+    <%Exit1%>
+<%
+Else
+    :sql1="select likes from mooc_comments where id=?"
+    :xx=changeRecordSet(:sql1,L(:id))
+    If  :xx=="ok"
+         :like1 = likes +1
+         :sql1="update mooc_comments set likes=? where id =?"
+         :res=execSQL(:sql1,L(:like1),L(:id))
+         %>
+         <%Exit1%>
+     <%
+     EndIf
+     %>
+     <%Exit0%>
+<%
+EndIf
+%>
+<%Exit0%>

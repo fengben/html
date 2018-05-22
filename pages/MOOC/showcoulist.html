@@ -98,7 +98,7 @@
         }
 
         function goToPage(value){
-            alert(value);
+            //alert(value);
                 var paras = "pageNumber=" + value;
                 paras += "$^@^$urlid=" + currentid;
                 var articleList = new Array();
@@ -142,7 +142,7 @@
 
                         <aside class="h-r-search">
                             <div class="pr h-r-s-box-cx">
-                                <form action="/showcoulist" method="post" id="headerformSearch" onsubmit="return toSearch()">
+                                <form action="search.html" method="get" id="headerformSearch" onsubmit="return toSearch()">
                                     <label class="h-r-s-box"><input type="text" value="" id="headerSearchName" name="queryCourse.courseName" placeholder="搜索...">
                                         <button class="s-btn" type="submit"> <em class="icon18">&nbsp;</em> </button></label>
                                 </form>
@@ -176,7 +176,7 @@
                 <div class="">
                     <div class="container">
                         <section class="path-wrap txtOf hLh30">
-                            <a class="c-999 fsize14" href="#" title="">首页</a>
+                            <a class="c-999 fsize14" href="default.html" title="">首页</a>
                             \
                             <span class="c-333 fsize14">课程列表</span>
                         </section>

@@ -1,6 +1,6 @@
 
 <%
-:sql = "select A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=2018088683070003565 or B.parent_id=2018088683070003565) order by A.on_top desc,A.id desc "
+:sql = "select A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=2018088683070003565 or B.parent_id=2018088683070003565) order by A.on_top desc,A.id asc "
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0

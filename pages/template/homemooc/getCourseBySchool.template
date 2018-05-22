@@ -34,7 +34,7 @@ If recordCount()>0
      						</span>
      						<span class="fl jgAttr c-ccc f-fA">
     							<tt class="c-999 f-fA mr10"><%=school%></tt>
-     ///		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
+     		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>
      						</span>
      					</section>
      			</div>

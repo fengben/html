@@ -1,7 +1,7 @@
 <%
 
-:selectSql = "select id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile where school_id = ? limit 4 offset 0"
-changeRecordSet(:selectSql,S(:school_id));
+:selectSql = "select FOUND_ROWS,id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile where school_id = ? limit ?,4"
+changeRecordSet(:selectSql,S(:school_id),(:pageNumber-1)*4);
 EndIf
 :totalNumber = recordCount()
 If :totalNumber >0
@@ -33,3 +33,45 @@ Repeat
 EndRepeat
 EndIf
 %>
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 4%>
+<%:totalPage=ceil(:FOUND_ROWS,4)%>
+
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToTeacherPage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToTeacherPage(1)">首页</a>
+             <%EndIf%>
+
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToTeacherPage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="teacherNextpage" href="javascript:goToTeacherPage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="teacherNextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToTeacherPage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToTeacherPage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =4;
+    var currentPage =0<1 ? 1 :1;
+    var totalPage = <%=:totalPage%>;
+    showTeacherPageNumber() ;
+</script>

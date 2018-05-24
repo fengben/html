@@ -50,11 +50,18 @@
             }
 
             getFromWS("frontmooc/getPost.template", paras,postArray, showPostsResult);
+
             var recomendPost = new Array();
             function recoPostResult() {
                 $("#hotTopicRecommend").html(recomendPost[0]);
             }
              getFromWS("frontmooc/recomendHotPost.template", paras,recomendPost, recoPostResult);
+
+            var famousResult = new Array();
+            function showFamous() {
+                $("#famours").html(famousResult[0]);
+            }
+            getFromWS("frontmooc/showFamous.template", paras,famousResult, showFamous);
         })
 
         //分页实现
@@ -67,6 +74,20 @@
                 jQuery("#deanpage").html(articleList[1]);
             }
             getFromWS("frontmooc/getPost.template",paras,articleList,articleListResult);
+        }
+
+        //根据分类显示话题
+        function changePost(type) {
+            var postArray = new Array();
+            var paras = "pageNumber=1";
+            paras += "$^@^$type=" + type;
+
+            function showPostsResult() {
+                $("#aCoursesList").html(postArray[0]);
+                $("#deanpage").html(postArray[1]);
+            }
+
+            getFromWS("frontmooc/getPost.template", paras, postArray, showPostsResult);
         }
 
         function setArticle(flag) {
@@ -202,6 +223,18 @@
 
         var editor;
 
+        function getPicturlSrc(context) {
+            var re = /<img.*?(?:>|\/>)/gi;
+            res = context.match(re)
+            top5img = "";
+            for (var i = 0; i < res.length; i++) {
+                top5img += "<span class=\"topic_img_box\">"
+                    + res[i].slice(0, 4) + " class=\"topic_content_img\"" + res[i].slice(4)
+                    + "</span>";
+            }
+            return top5img
+        }
+
         function createEditor() {
 
 
@@ -275,7 +308,8 @@
             // var picIds = $("#bufferPicIds").val();
             // var content = editor.html();
             var content_text = editor.text();
-
+            top5img = getPicturlSrc(content_text);
+            // return
             //kindeditor中嵌入文章中的图片,音频,视频等保存的是路径
             // e.g <img src="/one/downloadFile.spe?dtype=Sqldb&mode=html&fileid=2018123270230001002" alt="" />
             //提前保存的图片正则为 pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg|\.png]))[\'|\"].*?[\/]?>/";
@@ -297,14 +331,14 @@
             // paras += "$^@^$picIds=" + picIds;
             // paras += "$^@^$picId=" + picId;
             // paras += "$^@^$appendixId=" + appendixId;
-
+            paras += "$^@^$top5img=" + top5img;
             paras += "$^@^$operation=" + operation;
             var objs = new Array();
             var afterSavePost = function () {
                 if (objs[0] == "ok") {
                     $("#modal-article #bufferPicIds").val("");
                     $("#modal-article").modal('hide');
-                    reloadArticle(type);
+                    changePost(3);
                 } else {
                     alert("存储失败");
                 }
@@ -552,201 +586,8 @@
                                             <a class="arrow-left s-arrow" href="#"></a>
                                             <a class="arrow-right s-arrow" href="#"></a>
                                             <section class="t-slide-wrap">
-                                                <div class="swiper-container">
-                                                    <div class="swiper-wrapper">
-                                                        <div class="swiper-slide">
-                                                            <section class="hot-team-wrap">
-                                                                <ol class="team-ol clearfix">
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="#" title="" class="team-pic"> <img
-                                                                                    src="picture/1459160169083233084.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="习惯一个人的音乐"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a href="#"
-                                                                                                       title="习惯一个人的音乐"
-                                                                                                       class="team-name">习惯一个人的音乐</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">张三</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="#" title="" class="team-pic"> <img
-                                                                                    src="picture/1448531721513138044.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="互联网的圆桌会议室"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a href="#"
-                                                                                                       title="互联网的圆桌会议室"
-                                                                                                       class="team-name">互联网的圆桌会议室</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">张三</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="#" title="" class="team-pic"> <img
-                                                                                    src="picture/1448529928595019911.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="互联网中国科技"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a href="#"
-                                                                                                       title="互联网中国科技"
-                                                                                                       class="team-name">互联网中国科技</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">李四</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                </ol>
-                                                                <div class="clear"></div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <section class="hot-team-wrap">
-                                                                <ol class="team-ol clearfix">
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="groupinfo.html?id=/17" title=""
-                                                                               class="team-pic"> <img
-                                                                                    src="picture/1448531844991402040.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="用车轮丈量生命"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a
-                                                                                    href="groupinfo.html?id=/17"
-                                                                                    title="用车轮丈量生命" class="team-name">用车轮丈量生命</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">李四</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="groupinfo.html?id=/15" title=""
-                                                                               class="team-pic"> <img
-                                                                                    src="picture/1448529891494225219.jpg"
-                                                                                    width="80" height="80" alt="程序员书屋"/>
-                                                                            </a>
-                                                                            <h6 class="hLh20 txtOf"><a
-                                                                                    href="groupinfo.html?id=/15"
-                                                                                    title="程序员书屋" class="team-name">程序员书屋</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">王五</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="groupinfo.html?id=/28" title=""
-                                                                               class="team-pic"> <img
-                                                                                    src="picture/1459160397472434203.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="愿得一学霸，白首不分离"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a
-                                                                                    href="groupinfo.html?id=/28"
-                                                                                    title="愿得一学霸，白首不分离"
-                                                                                    class="team-name">愿得一学霸，白首不分离</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">赵六</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                </ol>
-                                                                <div class="clear"></div>
-                                                            </section>
-                                                        </div>
-                                                        <div class="swiper-slide">
-                                                            <section class="hot-team-wrap">
-                                                                <ol class="team-ol clearfix">
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="groupinfo.html?id=/27" title=""
-                                                                               class="team-pic"> <img
-                                                                                    src="picture/1459160229100083181.jpg"
-                                                                                    width="80" height="80" alt="我爱法语"/>
-                                                                            </a>
-                                                                            <h6 class="hLh20 txtOf"><a
-                                                                                    href="groupinfo.html?id=/27"
-                                                                                    title="我爱法语"
-                                                                                    class="team-name">我爱法语</a></h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">六七</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="groupinfo.html?id=/9" title=""
-                                                                               class="team-pic"> <img
-                                                                                    src="picture/1448529764557725730.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="爱科技,爱创意,我们是技术控"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a
-                                                                                    href="groupinfo.html?id=/9"
-                                                                                    title="爱科技,爱创意,我们是技术控"
-                                                                                    class="team-name">爱科技,爱创意,我们是技术控</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">张三成</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                    <li>
-                                                                        <div class="team-ele-box">
-                                                                            <a href="groupinfo.html?id=/24" title=""
-                                                                               class="team-pic"> <img
-                                                                                    src="picture/1459160305175105688.jpg"
-                                                                                    width="80" height="80"
-                                                                                    alt="生活需要游戏，但人生不能游戏"/> </a>
-                                                                            <h6 class="hLh20 txtOf"><a
-                                                                                    href="groupinfo.html?id=/24"
-                                                                                    title="生活需要游戏，但人生不能游戏"
-                                                                                    class="team-name">生活需要游戏，但人生不能游戏</a>
-                                                                            </h6>
-                                                                            <section class="mt10 hLh20 team-number">
-                                                                                <span class="c-999">楼主</span>
-                                                                            </section>
-                                                                            <section class="mt10 hLh20 team-jr-btn">
-
-                                                                            </section>
-                                                                        </div>
-                                                                    </li>
-                                                                </ol>
-                                                                <div class="clear"></div>
-                                                            </section>
-                                                        </div>
-                                                    </div>
+                                                <div class="swiper-container" id="famours">
+                                                   <!--明星人物-->
                                                 </div>
                                             </section>
                                             <div class="pagination"></div>
@@ -762,12 +603,12 @@
               <span class="s-vv-txt"><q class="vam fsize12 c-666">全部</q>&nbsp;
                <s class="sm-sj"></s></span>
                                                 <ol class="s-vv-ol" style="display: none;">
-                                                    <li class="current"><a href="javascript: void(0)" name="all">全部</a>
+                                                    <li class="current"><a href="javascript: void(0)" onclick="changePost(3)" name="all">全部</a>
                                                     </li>
-                                                    <li class=""><a href="javascript: void(0)" name="top">置顶</a></li>
-                                                    <li class=""><a href="javascript: void(0)" name="essence">精华</a>
+                                                    <li class=""><a href="javascript: void(0)" name="top" onclick="changePost(0)">置顶</a></li>
+                                                    <li class=""><a href="javascript: void(0)" name="essence" onclick="changePost(1)" >精华</a>
                                                     </li>
-                                                    <li class=""><a href="javascript: void(0)" name="fiery">火热</a></li>
+                                                    <li class=""><a href="javascript: void(0)" name="fiery" onclick="changePost(2)">火热</a></li>
                                                 </ol>
                                             </div>
                                         </aside>
@@ -809,7 +650,7 @@
                                     <section class="is-box">
                                         <header class="is-title">
                                             <aside class="fr mt10">
-                                                <a href="javascript:groupHotTopic(0)" title="换一换" class="fsize12 c-999">换一换</a>
+                                                <!--<a href="javascript:groupHotTopic(0)" title="换一换" class="fsize12 c-999">换一换</a>-->
                                             </aside>
                                             <ol class="is-title-ol">
                                                 <li class="current">

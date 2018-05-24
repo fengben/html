@@ -1,9 +1,9 @@
 ///新建一个话题
 <%If :operation=="newArticle" %>
-	<%:insertSql = "insert into moocpost(id,title,author,body) values(?,?,?,?)"%>
+	<%:insertSql = "insert into moocpost(id,title,author,body,top5img) values(?,?,?,?,?)"%>
 	<%
 	:aid = tuid();
-	:x = execSQL(:insertSql,:aid,S(:title),S(:publisher),S(:content_text))
+	:x = execSQL(:insertSql,:aid,S(:title),S(:publisher),S(:content_text),S(:top5img))
 	 %>
 	<%Exit(:x)%>
 <%EndIf%>

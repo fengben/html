@@ -148,7 +148,7 @@ function dialogFun(dTitle,dTxt,num,url) {
             //         $("#dcWrap").html("获取异常,请稍后再试试");
             //     }
             // });
-             $("#dcWrap").html("你已经赞过了");
+             $("#dcWrap").html(dTxt);
 
 
             _this.position();

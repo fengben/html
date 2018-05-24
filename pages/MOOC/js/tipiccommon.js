@@ -13,7 +13,7 @@ function topicPraise(topicId) {
                 'id': topicId,// staff@qq.com   template里面@被替换成了%40
             },
             success: function (result) {
-                alert(result)
+                // alert(result)
                 if (result) {
                     var n = $("#topicPraise").text();
                     n++;

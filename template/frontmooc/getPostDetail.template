@@ -1,7 +1,7 @@
 
 <%
 debugMsg("-------------------------"#:id)
-:sql="select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,to_char(publish_time,'yyyy-mm-dd hh24:mi') as publish_time,nickname,head_portrait,introduction,sex from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where moocpost.id=?"
+:sql="select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,to_char(publish_time,'yyyy-mm-dd hh24:mi') as publish_time,nickname,head_portrait,city,sex from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where moocpost.id=?"
 :x=changeRecordSet(:sql,L(:id))
 debugMsg("--------------"#view_num)
 :view=view_num +1
@@ -224,9 +224,9 @@ EndIf
                             <%EndIf%>
                         </h6>
                         <p class="hLh30 txtOf"><em class="area icon16"
-                                                   title="introduction">
+                                                   title="city">
                             &nbsp;</em><span
-                                class="fsize12 c-999 vam"><%=introduction%></span></p>
+                                class="fsize12 c-999 vam"><%=city%></span></p>
                         <section class="group-txt-infor">
                             <span class="fsize12 c-999"></span>
                         </section>
@@ -256,7 +256,7 @@ EndIf
                                 <figure class="dz-btn of">
                                     <a title="点赞" href="javascript: void(0);"
                                        class="dt-s-z-icon pr dt-s-z-icon-2"
-                                       onclick="topicPraise()"> <em class="icon30">&nbsp;</em>
+                                       onclick="topicPraise('<%=:id%>')"> <em class="icon30">&nbsp;</em>
                                     </a>
                                     <figcaption class="hLh20 txtOf">
                                         <span class="c-999 fsize14" title="点赞">点赞</span>

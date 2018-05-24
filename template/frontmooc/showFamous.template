@@ -1,0 +1,116 @@
+<%
+:sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brife from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 0"
+changeRecordSet(:sql,)
+:totalNumber = recordCount()
+%>
+
+<div class="swiper-wrapper">
+    <div class="swiper-slide">
+        <section class="hot-team-wrap">
+            <ol class="team-ol clearfix">
+            <%If :totalNumber >0
+            Repeat
+            %>
+                <li>
+                    <div class="team-ele-box">
+                        <a href="userInfo.html?id=<%=uid%>" title="" class="team-pic"> <img
+                                src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
+                                width="80" height="80"
+                                alt="<%=nickname%>"/> </a>
+                        <h6 class="hLh20 txtOf"><a href="userInfo.html?id=<%=uid%>"
+                                                   title="<%=nickname%>"
+                                                   class="team-name"><%=brife%></a>
+                        </h6>
+                        <section class="mt10 hLh20 team-number">
+                            <span class="c-999"><%=nickname%></span>
+                        </section>
+                        <section class="mt10 hLh20 team-jr-btn">
+
+                        </section>
+                    </div>
+                </li>
+          <%
+            EndRepeat
+            EndIf
+          %>
+            </ol>
+            <div class="clear"></div>
+        </section>
+    </div>
+    <div class="swiper-slide">
+        <section class="hot-team-wrap">
+            <ol class="team-ol clearfix">
+
+            <%
+            :sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brife from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 3"
+            changeRecordSet(:sql,)
+            :totalNumber = recordCount()
+            If :totalNumber >0
+            Repeat
+            %>
+
+                <li>
+                    <div class="team-ele-box">
+                        <a href="userInfo.html?id=<%=uid%>" title=""
+                           class="team-pic"> <img
+                                src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
+                                width="80" height="80"
+                                alt="用车轮丈量生命"/> </a>
+                        <h6 class="hLh20 txtOf"><a
+                                href="userInfo.html?id=<%=uid%>"
+                                title="<%=brife%>" class="team-name"><%=brife%></a>
+                        </h6>
+                        <section class="mt10 hLh20 team-number">
+                            <span class="c-999"><%=nickname%></span>
+                        </section>
+                        <section class="mt10 hLh20 team-jr-btn">
+
+                        </section>
+                    </div>
+                </li>
+           <%
+            EndRepeat
+            EndIf
+          %>
+            </ol>
+            <div class="clear"></div>
+        </section>
+    </div>
+    <div class="swiper-slide">
+        <section class="hot-team-wrap">
+            <ol class="team-ol clearfix">
+             <%
+            :sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brife from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 3"
+            changeRecordSet(:sql,)
+            :totalNumber = recordCount()
+            If :totalNumber >0
+            Repeat
+            %>
+                <li>
+                    <div class="team-ele-box">
+                        <a href="userInfo.html?id=<%=uid%>" title=""
+                           class="team-pic"> <img
+                                src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
+                                width="80" height="80" alt="我爱法语"/>
+                        </a>
+                        <h6 class="hLh20 txtOf"><a
+                                href="userInfo.html?id=<%=uid%>"
+                                title="<%=nickname%>"
+                                class="team-name"><%=brife%></a></h6>
+                        <section class="mt10 hLh20 team-number">
+                            <span class="c-999"><%=nickname%></span>
+                        </section>
+                        <section class="mt10 hLh20 team-jr-btn">
+
+                        </section>
+                    </div>
+                </li>
+           <%
+            EndRepeat
+            EndIf
+           %>
+            </ol>
+            <div class="clear"></div>
+        </section>
+    </div>
+</div>

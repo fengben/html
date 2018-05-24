@@ -1,0 +1,17 @@
+<% debugMsg("---------in getPost-----"#:type)
+
+If :type == 0
+    debugMsg("---------***************-----"#:type)
+Else
+    If :type == 1
+    debugMsg("---------***************ElseIf-----"#:type)
+
+    Else
+        If :type ==2
+            debugMsg("---------***************elseelseif-----"#:type)
+        Else
+            debugMsg("---------***************elseelselse-----"#:type)
+        EndIf
+    EndIf
+EndIf
+%>

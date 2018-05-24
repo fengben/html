@@ -1,14 +1,27 @@
 <% debugMsg("---------in getPost-----")
+///type=0,查询置顶,type=1,查询精华,type=0,查询热帖
+If :type == 0
+     ///查询置顶
+    :sql="select FOUND_ROWS,moocpost.id as id,top5img,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' and is_top='t' order by publish_time desc limit ?,5"
+Else
+    If :type == 1
+     ///查询精华
+        :sql="select FOUND_ROWS,moocpost.id as id,top5img,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' and is_essence='t' order by publish_time desc limit ?,5"
+    Else
+        If :type ==2
+             ///查询热帖
+            :sql="select FOUND_ROWS,moocpost.id as id,top5img,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' and is_hot='t' order by publish_time desc limit ?,5"
+        Else
+             ///仅仅按照日期查询
+            ///:sql = "select FOUND_ROWS,moocpost.id as id,top5img,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time from moocpost inner join mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time DESC limit ?,5"
+            :sql="select FOUND_ROWS,moocpost.id as id,top5img,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time desc limit ?,5"
+        EndIf
+    EndIf
+EndIf
 
-///查询置顶
-///查询精华
-///查询热帖
-///仅仅按照日期查询
-///:sql = "select FOUND_ROWS,moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time from moocpost inner join mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time DESC limit ?,5"
-:sql="select FOUND_ROWS,moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,publish_time,nickname,head_portrait from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where is_del='f' order by publish_time desc limit ?,5"
 changeRecordSet(:sql,(:pageNumber-1)*5)
 :totalNumber = recordCount()
-debugMsg("------totalNumber"#:totalNumber)
+debugMsg("-----------------------------------------------------top5img"#top5img)
 %>
 
 
@@ -38,29 +51,17 @@ debugMsg("------totalNumber"#:totalNumber)
                 <p class="isAct-desc-wrap"><a href="groupInfo.html?id=<%=id%>"
                                               title="进入查看" target="_blank">
                     <%=body%></a></p>
+                    <% If top5img !="" %>
+                    <% If top5img !="__null__" %>
                     <a
                         href="groupinfo.html?id=67" title="进入查看"
-                        target="_blank" class="topic_imgs"> <span
-                        class="topic_img_box"><img
-                        src="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
-                        xsrc="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
-                        class="topic_content_img" alt=""/></span> <span
-                        class="topic_img_box"><img
-                        src="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
-                        xsrc="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
-                        class="topic_content_img" alt=""/></span> <span
-                        class="topic_img_box"><img
-                        src="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
-                        xsrc="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
-                        class="topic_content_img" alt=""/></span> <span
-                        class="topic_img_box"><img
-                        src="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
-                        xsrc="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
-                        class="topic_content_img" alt=""/></span> <span
-                        class="topic_img_box"><img
-                        src="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
-                        xsrc="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
-                        class="topic_content_img" alt=""/></span> </a>
+                        target="_blank" class="topic_imgs">
+
+                       <%=top5img%> </a>
+                       <%
+                       EndIf
+                       EndIf
+                       %>
 
                 <div class="clear"></div>
                 <div class="isAct-attr">

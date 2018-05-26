@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Xenon Boostrap Admin Panel" />
+	<meta name="author" content="" />
+
+	<title>MOOC平台后台管理</title>
+<!--
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
+-->
+	<link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+
+	<link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+
+	<link rel="stylesheet" href="assets/css/xenon-core.css">
+
+	<link rel="stylesheet" href="assets/css/xenon-forms.css">
+
+	<link rel="stylesheet" href="assets/css/xenon-components.css">
+
+	<link rel="stylesheet" href="assets/css/xenon-skins.css">
+
+	<link rel="stylesheet" href="assets/css/main.css">
+
+
+
+	<script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="/scripts/uploadfile.js"></script>
+
+	<script>
+	    var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
+        var classification = localStorage.getItem('classification');
+        var loginName = localStorage.getItem('loginName');
+        if(!userId || !userToken || !classification || !loginName ||loginName != "admin"){
+
+            location.href="articleManagement.html";
+       		}
+
+	</script>
+
+
+</head>
+<body class="page-body">
+<script>
+	//保持(被选中的)侧边栏高亮
+    function keepActive(){
+        $("#a_pictureManagement").parent().addClass('active');
+    }
+	jQuery(document).ready(function($) {
+		var userName = localStorage.getItem("loginName");
+		$(".user-info-menu #loginName").html(userName);
+		$("#userName").html(userName+" , 你好 ! ");
+		//加载侧边栏
+        var html = new Array();
+        var htmlResult = function(){
+            $("#main-menu").append(html[0]);
+            keepActive();
+        }
+        getFromWS("mainmooc/getNav.template","classification="+classification +"$^@^$loginName="+loginName, html, htmlResult);
+
+	});
+</script>
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed">
+			<div class="sidebar-menu-inner">
+				<header class="logo-env">
+					<div class="logo">
+						<a href="#" class="logo-expanded">
+							<img src="assets/images/logo@2x.png" width="80" alt="" />
+						</a>
+						<a href="#" class="logo-collapsed">
+							<img src="assets/images/logo-collapsed@2x.png" width="40" alt="" />
+						</a>
+					</div>
+
+					<div class="mobile-menu-toggle visible-xs">
+						<a href="#" data-toggle="user-info-menu">
+							<i class="fa-bell-o"></i>
+							<span class="badge badge-success">7</span>
+						</a>
+
+						<a href="#" data-toggle="mobile-menu">
+							<i class="fa-bars"></i>
+						</a>
+					</div>
+				</header>
+
+				<ul id="main-menu" class="main-menu">
+
+				</ul>
+
+			</div>
+
+		</div>
+
+		<div class="main-content">
+
+
+			<nav class="navbar user-info-navbar" role="navigation">
+
+
+				<ul class="user-info-menu left-links list-inline list-unstyled">
+
+					<li class="hidden-sm hidden-xs">
+						<a href="#" data-toggle="sidebar">
+							<i class="fa-bars"></i>
+						</a>
+					</li>
+				</ul>
+				<ul class="user-info-menu left-links list-inline list-unstyled">
+					<a href="#" data-toggle="sidebar" title="武汉大学出版社">
+						<img src="images/logo.png" width="170" alt="武汉大学出版社" />
+					</a>
+				</ul>
+
+
+
+				<ul class="user-info-menu right-links list-inline list-unstyled">
+
+					<li class="dropdown user-profile">
+						<a href="#" data-toggle="dropdown">
+							<img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+							<span id="loginName"></span>
+						</a>
+					</li>
+
+					<li>
+						<a href="#" onclick="logout()">
+							<i class="fa-power-off"  style="color:red;font-size:18px;"></i>
+						</a>
+					</li>
+
+				</ul>
+
+			</nav>
+
+<script type="text/javascript">
+jQuery(document).ready(function ($) {					
+	var obj_pic = new Array();
+	var processResult_pic = function () {
+		//var pic = obj_pic[0].replace(/\'/g, '\"');
+		//var picInfo = pic.replace(/&/g, '\'');
+		jQuery("#articlePanel").html(obj_pic[0]);
+	}
+	getFromWS("mainmooc/getPictureList.template", "operation=getAllPicture", obj_pic, processResult_pic);
+
+});
+
+
+function update_file(old_id){
+	//alert("点击修改按钮,传入的老的id为:"+old_id);
+	var titleid = "title" + old_id;var urlstrid = "urlstr" + old_id;var fileid = "file1" + old_id;
+
+	var title = $("#"+titleid).val();	
+	var urlstr = $("#"+urlstrid).val();
+	var file = $("#"+fileid).val();	
+	if (!title || !urlstr ) {
+	    alert("请把标题，图片链接,补充完整");
+	    return;
+	}
+	if(null==file || !file){//如果不更改图片
+		alert("仅仅修改标题和链接");
+		var paras1 = "old_id=" + old_id;
+		paras1 += "$^@^$title=" + title;
+		paras1 += "$^@^$urlstr=" + urlstr;
+		paras1 += "$^@^$operation=editNoPicture";
+		var objs_editNoPic = new Array();
+		
+		var afterUpdateNoPic = function () {
+			if (objs_editNoPic[0] == "ok") {
+				alert("执行结果："+objs[0]);
+				location.reload(true);
+			}
+			else {
+				alert("更改标题，链接失败");
+		   	}
+		}
+		getFromWS("mainmooc/savePicture.template", paras1, objs_editNoPic, afterUpdateNoPic);
+	
+	}
+	else{//如果更改图片
+	var afterUpdateUploadFile = function(new_id){//uploadToDatabase执行成功后返回的图片的新的id 	
+		//alert("上传图片,得到新的id为:"+new_id);
+		var paras = "old_id=" + old_id;
+		paras += "$^@^$new_id=" + new_id;
+		paras += "$^@^$title=" + title;
+		paras += "$^@^$urlstr=" + urlstr;
+		paras += "$^@^$operation=editPicture";
+		var objs = new Array();
+		
+		var afterUpdatePic = function () {
+		    if (objs[0] == "ok") {
+			
+			var objd = new Array();
+			var afterDeletePicFromUploadTable = function(){
+				alert("objd："+objd[0]);
+				 if (objd[0] == "ok") {
+					 alert("更改图片的执行结果："+objd[0]);
+					 location.reload(true);
+				}
+				else {
+					alert("删除upload表中的图片失败");
+		   		 }
+			};
+			getFromWS("mainmooc/savePicture.template", "operation=deletePictureFromUploadTable$^@^$id=" + old_id, objd, afterDeletePicFromUploadTable);
+			
+		    } else {
+			alert("修改index_picture_info表中的图片失败");
+		    }
+		};
+		getFromWS("mainmooc/savePicture.template", paras, objs, afterUpdatePic);
+	}
+	uploadToDatabase(fileid,afterUpdateUploadFile,"databaseType=PostgresXL");
+    }
+}
+</script>
+		 <div class="page-title">
+			    <div class="title-env">
+				<h1 class="title">图片管理</h1>
+				<p class="description">management of picture</p></div>
+			    <div class="breadcrumb-env">
+				<ol class="breadcrumb bc-1">
+				    <li>
+				        <a href="articleManagement.html">
+				            <i class="fa-home"></i>Home</a>
+				    </li>
+				    <li class="active">
+				        <strong>management of picture</strong></li>
+				</ol>
+			    </div>
+			</div>
+
+	<div style="height:423px; margin-top:10px; padding:0px 5px;overflow:scroll;"  id="allcontent" align=center>
+                         
+		 <table border=0>
+		    <thead>
+		    <tr>
+		        <th>标题</th>
+		        <th>链接地址</th>
+		        <th>图片</th>
+		        <th>操作</th>                                    
+		    </tr>
+		    </thead>
+		    <tbody id="articlePanel" class="middle-align">
+
+		    </tbody>
+		</table>
+      		
+        </div>
+
+	<tr>
+        <td width=190>
+            <input id="newtitle" value="" type="text" style="width:180px" />
+        </td>
+        <td width=190>
+            <input id="newurlstr" value="" type="text" style="width:180px" />
+        </td>
+        <td colspan=2 width=420>
+            <FORM METHOD="POST" id="newform1" name="newform1" ENCTYPE="multipart/form-data">
+                <INPUT TYPE="FILE" NAME="NEWFILE1" id="newFile" class="btn" style="width:210px;display:inline-block">
+                <input type="button" value="新增图片" style="width:68px;" onclick='javascript:doSave();'
+                />
+            </FORM>
+        </td>
+    </tr>
+<script type="text/javascript">
+ function doSave() {
+        var title = $("#newtitle").val();
+        var urlstr = $("#newurlstr").val();
+        var file = $("#newFile").val();	
+        if (!title || !urlstr || !file) {
+            alert("请把标题，图片链接，图片补充完整");
+            return;
+        }
+	var afterUploadFile = function(tid){//uploadToDatabase执行成功后返回的图片的id
+		alert(tid);
+		var paras = "id=" + tid;
+		paras += "$^@^$title=" + title;
+		paras += "$^@^$urlstr=" + urlstr;
+		paras += "$^@^$operation=newPicture";
+		var objs = new Array();
+		var afterSavePic = function () {
+		    if (objs[0] == "ok") {
+		        alert("执行结果："+objs[0]);
+            		location.reload(true);
+		    } else {
+		        alert("新增图片失败");
+		    }
+		};
+		getFromWS("mainmooc/savePicture.template", paras, objs, afterSavePic);
+	}
+	uploadToDatabase("newFile",afterUploadFile,"databaseType=PostgresXL")
+
+    }
+
+</script>
+
+
+
+	 <footer class="main-footer sticky footer-type-1">
+		        <div class="footer-inner">
+		            <div class="footer-text">&copy; 2017
+						<strong>MOOC平台</strong>
+						<a href="#" target="_blank">MOOC平台管理系统</a>- Collect from
+						<a href="#" title="国家网络安全学院" target="_blank">国家网络安全学院</a></div>
+		            <div class="go-up">
+		                <a href="#" rel="go-top">
+		                    <i class="fa-angle-up"></i>
+		                </a>
+		            </div>
+		        </div>
+            </footer>
+		</div>
+	</div>
+
+	<div class="page-loading-overlay">
+		<div class="loader-2"></div>
+	</div>
+
+	<!-- Bottom Scripts -->
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/TweenMax.min.js"></script>
+	<script src="assets/js/resizeable.js"></script>
+	<script src="assets/js/joinable.js"></script>
+	<script src="assets/js/xenon-api.js"></script>
+	<script src="assets/js/xenon-toggles.js"></script>
+
+	<!-- Imported scripts on this page -->
+	<script src="assets/js/xenon-widgets.js"></script>
+	<script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
+	<script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+	<script src="assets/js/toastr/toastr.min.js"></script>
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="assets/js/xenon-custom.js"></script>
+</body>
+
+</html>

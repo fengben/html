@@ -64,7 +64,7 @@ If recordCount()>0
 
   :i=1
      Repeat
-        If :loginName =="admin"
+        If :classification == 1
 %>
         		<tr>
         			<td>
@@ -89,8 +89,8 @@ If recordCount()>0
         				<input style="display:none" id="appendixId<%=id%>"  value='<%=appendix_id%>'>
         			</td>
         			<td><span  id="publisher<%=id%>" title="<%=publisher%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(publisher,0,5)%></span></td>
-        			<td><span  id="publishDate<%=id%>" title="<%=modify_date%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=modify_date%></span></td>
-        			<td><span  id="name<%=id%>" title="<%=name%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(name,0,5)%></span>
+        			<td><span  id="publishDate<%=id%>" title="<%=modify_date%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(content,0,5)%></span></td>
+        			<td><span  id="name<%=id%>" title="<%=name%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=on_top%></span>
         				<input id="type<%=id%>" value="<%=article_type%>" style="display:none">
         			</td>
         			<td style="white-space: nowrap;">

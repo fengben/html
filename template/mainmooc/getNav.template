@@ -1,14 +1,14 @@
 
 <%debugMsg("in getNav classification is==========="#:classification)%>
 <%If :classification=="1"%>
-<li >
-    <a href="userInfo.html" id="a_userInfo">
-        <i class="linecons-user"></i>
-        <span class="title">个人中心</span>
-        <div class="title" style="padding-left:30px">Personal Center</div>
-    </a>
+///<li >
+    ///<a href="userInfo.html" id="a_userInfo">
+       /// <i class="linecons-user"></i>
+        ///<span class="title">个人中心</span>
+        ///<div class="title" style="padding-left:30px">Personal Center</div>
+   /// </a>
    
-</li>
+///</li>
 <li>
     <a href="articleManagement.html" id="a_articleManagement">
         <i class="linecons-note"></i>
@@ -64,21 +64,21 @@
 <%EndIf%>
 
 <%If :classification=="2018096277110017073"%>
-<li class="has-sub">
-    <a href="main.html" id="a_main">
-        <i class="linecons-user"></i>
-        <span class="title">个人中心</span>
-        <div class="title" style="padding-left:30px">Personal Center</div>
-    </a>
-    <ul>
-        <li>
-            <a href="userInfo.html" id="a_userInfo">
-            <i class="fa-renren"></i>
-            <span class="title">个人信息</span></a>
-        </li>
+///<li class="has-sub">
+   /// <a href="main.html" id="a_main">
+      ///  <i class="linecons-user"></i>
+       /// <span class="title">个人中心</span>
+        ///<div class="title" style="padding-left:30px">Personal Center</div>
+   /// </a>
+   /// <ul>
+      ///  <li>
+           /// <a href="userInfo.html" id="a_userInfo">
+            ///<i class="fa-renren"></i>
+           /// <span class="title">个人信息</span></a>
+      ///  </li>
 
-    </ul>
-</li>
+   /// </ul>
+///</li>
 <li>
     <a href="articleManagement.html" id="a_articleManagement">
         <i class="linecons-note"></i>
@@ -105,20 +105,20 @@
 </li>
 <%EndIf%>
 <%If :classification=="2018100654880024366"%>
-<li class="has-sub">
-    <a href="main.html" id="a_main">
-        <i class="linecons-user"></i>
-        <span class="title">个人中心</span>
-        <div class="title" style="padding-left:30px">Personal Center</div>
-    </a>
-    <ul>
-        <li>
-            <a href="userInfo.html" id="a_userInfo">
-            <i class="fa-renren"></i>
-            <span class="title">个人信息</span></a>
-        </li>
-    </ul>
-</li>
+///<li class="has-sub">
+   /// <a href="main.html" id="a_main">
+     ///   <i class="linecons-user"></i>
+      ///  <span class="title">个人中心</span>
+       /// <div class="title" style="padding-left:30px">Personal Center</div>
+   /// </a>
+    ///<ul>
+      ///  <li>
+          ///  <a href="userInfo.html" id="a_userInfo">
+           /// <i class="fa-renren"></i>
+          ///  <span class="title">个人信息</span></a>
+        ///</li>
+    ///</ul>
+///</li>
 <script>
       function fileSpaceManagement(){
       $("#mainContent").html("");

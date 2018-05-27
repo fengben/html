@@ -13,7 +13,7 @@
         var userToken = localStorage.getItem('userToken');
         var classification = localStorage.getItem('classification');
         var loginName = localStorage.getItem('loginName');
-        if(!userId || !userToken || !classification || !loginName ||loginName != "admin"){
+        if(!userId || !userToken || !classification || !loginName ||classification != 1){
 
             location.href="articleManagement.html";
        		}
@@ -31,8 +31,7 @@
     <link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
     
     <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css" />
-   
-    
+
     <script src="assets/js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
     <script type="text/javascript" src="/scripts/uploadfile.js"></script>
@@ -139,14 +138,14 @@ jQuery(document).ready(function ($) {
 
 	}
 	}
-	getFromWS("mainmooc/getColumns.template", "operation=getAllColumns", obj_tree, processResult_tree);
+	getFromWS("mainmooc/getColumns.template", "operation=getAllColumns"+"$^@^$classification="+classification, obj_tree, processResult_tree);
 
 	//将一级栏目数量传到此页面（陈）
 	var obj_count = new Array();
 	var processResult_count = function () {
 		$('#firstColumCount').val(obj_count[0]);
 	}
-	getFromWS("mainmooc/getColumns.template", "operation=getFirstColumCount", obj_count, processResult_count);
+	getFromWS("mainmooc/getColumns.template", "operation=getFirstColumCount"+"$^@^$classification="+classification, obj_count, processResult_count);
 });
 
 </script>

@@ -2,6 +2,9 @@
 <%
         :sql = "select id, title, content_text, publish_date, count, pic_id from moocarticle where id=?"
         changeRecordSet(:sql,:urlid)
+        :count_num=count +1
+        :sql1="update moocarticle set count=? where id=?"
+        :xx=execSQL(:sql1,L(:count_num),:urlid)
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat
@@ -15,44 +18,40 @@ Repeat
 									<em class="icon18 i-n-xqtime">&nbsp;</em>
 									<tt class="c-999 f-fM">
 										<!-- 1小时前发布 -->
-										2017-05-23 09:27</tt>
+										<%=publish_date%></tt>
 								</span>
-								<span class="fl">
-									<a class="noter-dy mr30 c-999 f-fM" title="评论" href="#commentContent">
-										<em class="icon18">&nbsp;</em>
-										<tt class="vam fsize12 f-fM totalResultComment"> 0 </tt>
-									</a>
-									<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('9',3)">
-										<em class="icon18">&nbsp;</em>
-										<tt class="addPraise9_3 praiseCount vam fsize12 f-fM"> 0 </tt>
-									</a>
-								</span>
+								///<span class="fl">
+									///<a class="noter-dy mr30 c-999 f-fM" title="评论" href="#commentContent">
+									///	<em class="icon18">&nbsp;</em>
+										///<tt class="vam fsize12 f-fM totalResultComment"> 0 </tt>
+									///</a>
+									///<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('9',3)">
+									///	<em class="icon18">&nbsp;</em>
+										///<tt class="addPraise9_3 praiseCount vam fsize12 f-fM"> 0 </tt>
+									///</a>
+								///</span>
 								</section>
 								<div id="art-infor-body"><p class="MsoNormal"><%=content_text%>
 			</p><div>
-										<tt class="c-999 f-fM">
-												评论：<span class="totalResultComment">0</span>
-											</tt> <tt class="c-999 f-fM ml20">
-											点赞：<span class="addPraise9_3 praiseCount">0</span>
-											</tt>
+
 										<tt class="c-999 f-fM ml20">
-										阅读：<span class="clickNum"></span>
+										阅读：<span class="clickNum"></span><%=count%>
 									</tt>
 									</div>
 								</div>
 								<section class="mt20 tac" id="sharebutton">
-										<div class="bdsharebuttonbox clearfix disIb">
-											<div class="pr disIb fl of">
-												<a href="javascript:void(0)" onclick="addActiclePraise('9',3)"  title="" class="zan-icon dz-btn pr"></a>
-												<div class="dz-num">
-													<span class="c-red fsize16">+1</span>
-												</div>
-											</div>
-											<a title="分享到微信" href="#" class="bds_weixin fl" data-cmd="weixin">
-												<em class="share-fir-icon icon30"></em>
-											</a>
-											<a title="分享到新浪微博" href="#" class="bds_tsina fl" data-cmd="tsina"></a>
-										</div>
+										///<div class="bdsharebuttonbox clearfix disIb">
+											///<div class="pr disIb fl of">
+												///<a href="javascript:void(0)" onclick="addActiclePraise('9',3)"  title="" class="zan-icon dz-btn pr"></a>
+												///<div class="dz-num">
+													///<span class="c-red fsize16">+1</span>
+												///</div>
+											///</div>
+											///<a title="分享到微信" href="#" class="bds_weixin fl" data-cmd="weixin">
+												///<em class="share-fir-icon icon30"></em>
+											///</a>
+											///<a title="分享到新浪微博" href="#" class="bds_tsina fl" data-cmd="tsina"></a>
+										///</div>
 										<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 									</section>
 								</article>

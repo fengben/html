@@ -32,6 +32,7 @@
 	EndIf
 EndIf
 If :operation == "getGrantColumns"
+debugMsg(":classification==========++++++++++++++++++++++++++++++"#:classification);
 	If :classification == 1
 		:querystr="select id, name,parent_id from mooccolumns where id != 1 "
 	Else
@@ -60,6 +61,7 @@ If :operation == "getGrantColumns"
 	:parentIds = ""
 	:typelist = ""
 ///构造json，用来显示类型(栏目)的下拉列表树(ztree实现)
+debugMsg(":recordCount==========++++++++++++++++++++++++++++++"#:recordCount);
 	If recordCount()>0
 		Repeat
 			:data = jsonAddItem("","id",S(id))
@@ -83,6 +85,7 @@ changeRecordSet(:treeStr)
 	If recordCount() > 0
 		Repeat
 		:res = :res#id#":"#parent_id#";"#name#"&"
+		debugMsg(":res==========++++++++++++++++++++++++++++++"#:res);
 		EndRepeat
 	EndIf
 Exit(:res)

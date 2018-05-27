@@ -12,7 +12,7 @@ function showPageNumber() {
 		}
 	}
 	//pageHtml = pageHtml + '<li class="disabled"><a href="javascript:void(0)">' + currentPage + '</a></li>';
-	pageHtml = pageHtml + '<a href="javascript:goToPage(1)" title="" class="">' + currentPage + '</a>';
+    pageHtml = pageHtml + '<a href="javascript:void(0)" title="" class="current undisable">' + currentPage + '</a>';
 	for ( var i = 1; i < maxNum_new; i++) {
 		if (currentPage + i <= totalPage && discnt < 7) {
 			//pageHtml = pageHtml + "<li><a href='javascript:goPage("+ (currentPage + i) + ")'>" + (currentPage + i) + "</a></li>";
@@ -36,7 +36,7 @@ function showTeacherPageNumber() {
         }
     }
     //pageHtml = pageHtml + '<li class="disabled"><a href="javascript:void(0)">' + currentPage + '</a></li>';
-    pageHtml = pageHtml + '<a href="javascript:goToTeacherPage(1)" title="" class="">' + currentPage + '</a>';
+    pageHtml = pageHtml + '<a href="javascript:void(0)" title="" class="current undisable">' + currentPage + '</a>';
     for ( var i = 1; i < maxNum_new; i++) {
         if (currentPage + i <= totalPage && discnt < 7) {
             //pageHtml = pageHtml + "<li><a href='javascript:goPage("+ (currentPage + i) + ")'>" + (currentPage + i) + "</a></li>";

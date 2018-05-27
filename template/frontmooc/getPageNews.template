@@ -34,14 +34,15 @@ If :totalNumber>0
 															<%=publish_date%></tt>
 													</span>
 													<span class="fl">
-														<a class="noter-dy mr30 c-999 f-fM" title="回答" href="articleinfo.html?id=<%=id%>">
-															<em class="icon18">&nbsp;</em>
-															<tt class="vam fsize12 f-fM">( 0 )</tt>
+														<a class="noter-dy mr30 c-999 f-fM" title="浏览人数" href="articleinfo.html?id=<%=id%>">
+															///<em class="icon18">&nbsp;</em>
+															<span class="glyphicon glyphicon-eye-open"></span> <%=count%>
+															///<tt class="vam fsize12 f-fM">( 0 )</tt>
 														</a>
-														<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('22',3)">
-															<em class="icon18">&nbsp;</em>
-															<tt class="addPraise22_3 praiseCount vam fsize12 f-fM">( 2 )</tt>
-														</a>
+														///<a href="javascript: void(0);" title="赞一下" class="noter-zan f-fM c-999" onclick="addPraise('22',3)">
+															///<em class="icon18">&nbsp;</em>
+															///<tt class="addPraise22_3 praiseCount vam fsize12 f-fM">( 2 )</tt>
+														///</a>
 													</span>
 												</section>
 											</li>
@@ -87,7 +88,7 @@ $_@_$
 </div>
 <script>
     var totalPageSize =8;
-    var currentPage =0<1 ? 1 :1;
+    var currentPage =<%=:pageNumber%>;
     var totalPage = <%=:totalPage%>;
    showPageNumber() ;
 </script>

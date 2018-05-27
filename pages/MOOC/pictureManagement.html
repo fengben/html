@@ -39,7 +39,7 @@
         var userToken = localStorage.getItem('userToken');
         var classification = localStorage.getItem('classification');
         var loginName = localStorage.getItem('loginName');
-        if(!userId || !userToken || !classification || !loginName ||loginName != "admin"){
+        if(!userId || !userToken || !classification || !loginName ||classification != 1){
 
             location.href="articleManagement.html";
        		}

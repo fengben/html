@@ -1,4 +1,3 @@
-
 <%If :operation=="newArticle" %>
 	<%:insertSql = "insert into moocarticle(id,title,article_type,publisher,publish_date,pics,pic_id,appendix_id,on_top,content, content_text,school) values(?,?,?,?,now(),?,?,?,?,?,?,?)"%>
 	<%

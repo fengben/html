@@ -24,7 +24,8 @@ function isLogin(){
  */
 function getLoginUser(){
 	var user = null;
-	account=$.cookie('mooc_login_name');
+	// account=$.cookie('mooc_login_name');
+	account = localStorage.getItem("loginName")
 	//para = "account=" + account
 	$.ajax({
 		// url:baselocation+'/user/ajax/getloginUser',
@@ -70,8 +71,8 @@ function exit() {
     //        reload();
     // 	}
     // });
-    $.cookie('mooc_login_name', null);
-    $.cookie('mooc_password', null);
+    // $.cookie('mooc_login_name', null);
+    // $.cookie('mooc_password', null);
     logout()
     // reload();
 }

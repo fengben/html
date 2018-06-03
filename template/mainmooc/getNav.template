@@ -1,26 +1,19 @@
 
 <%debugMsg("in getNav classification is==========="#:classification)%>
 <%If :classification=="1"%>
-///<li >
-    ///<a href="userInfo.html" id="a_userInfo">
-       /// <i class="linecons-user"></i>
-        ///<span class="title">个人中心</span>
-        ///<div class="title" style="padding-left:30px">Personal Center</div>
-   /// </a>
-   
-///</li>
+
 <li>
     <a href="articleManagement.html" id="a_articleManagement">
         <i class="linecons-note"></i>
         <span class="title">课程管理</span>
-        <div class="title" style="padding-left:30px">management of article</div>
+       /// <div class="title" style="padding-left:30px">management of article</div>
     </a>
 </li>
 <li>
 	<a href="columnManagement.html" id="a_columnManagement">
 		<i class="linecons-note"></i>
 		<span class="title">栏目管理</span>
-		<div class="title" style="padding-left:30px">management of column</div>
+		///<div class="title" style="padding-left:30px">management of column</div>
 	</a>
 		
 </li>
@@ -28,14 +21,14 @@
 	<a href="pictureManagement.html" id="a_pictureManagement">
 		<i class="linecons-note"></i>
 		<span class="title">首页图片管理</span>
-		<div class="title" style="padding-left:30px">management of picture</div>
+		///<div class="title" style="padding-left:30px">management of picture</div>
 	</a>
 </li>
 <li class="has-sub">
 	<a href="#">
 		<i class="linecons-user"></i>
 		<span class="title">系统管理</span>
-		<div class="title" style="padding-left:30px">management of people</div>
+		///<div class="title" style="padding-left:30px">management of people</div>
 	</a>
 
 	<ul id="personManagement">
@@ -58,32 +51,18 @@
     <a href="resourceManagement.html" id="a_resourceManagement">
         <i class="linecons-note"></i>
         <span class="title">资源管理</span>
-        <div class="title" style="padding-left:30px">management of resource</div>
+        ///<div class="title" style="padding-left:30px">management of resource</div>
     </a>
 </li>
 <%EndIf%>
 
 <%If :classification=="2018096277110017073"%>
-///<li class="has-sub">
-   /// <a href="main.html" id="a_main">
-      ///  <i class="linecons-user"></i>
-       /// <span class="title">个人中心</span>
-        ///<div class="title" style="padding-left:30px">Personal Center</div>
-   /// </a>
-   /// <ul>
-      ///  <li>
-           /// <a href="userInfo.html" id="a_userInfo">
-            ///<i class="fa-renren"></i>
-           /// <span class="title">个人信息</span></a>
-      ///  </li>
 
-   /// </ul>
-///</li>
 <li>
     <a href="articleManagement.html" id="a_articleManagement">
         <i class="linecons-note"></i>
         <span class="title">课程管理</span>
-        <div class="title" style="padding-left:30px">management of article</div>
+        ///<div class="title" style="padding-left:30px">management of article</div>
     </a>
 </li>
 <script>
@@ -100,25 +79,12 @@
     <a href="resourceManagement.html" id="a_resourceManagement">
         <i class="linecons-note"></i>
         <span class="title">资源管理</span>
-        <div class="title" style="padding-left:30px">management of resource</div>
+        ///<div class="title" style="padding-left:30px">management of resource</div>
     </a>
 </li>
 <%EndIf%>
 <%If :classification=="2018100654880024366"%>
-///<li class="has-sub">
-   /// <a href="main.html" id="a_main">
-     ///   <i class="linecons-user"></i>
-      ///  <span class="title">个人中心</span>
-       /// <div class="title" style="padding-left:30px">Personal Center</div>
-   /// </a>
-    ///<ul>
-      ///  <li>
-          ///  <a href="userInfo.html" id="a_userInfo">
-           /// <i class="fa-renren"></i>
-          ///  <span class="title">个人信息</span></a>
-        ///</li>
-    ///</ul>
-///</li>
+
 <script>
       function fileSpaceManagement(){
       $("#mainContent").html("");
@@ -132,7 +98,7 @@
     <a href="resourceManagement.html" id="a_resourceManagement">
         <i class="linecons-note"></i>
         <span class="title">资源管理</span>
-        <div class="title" style="padding-left:30px">management of resource</div>
+        ///<div class="title" style="padding-left:30px">management of resource</div>
     </a>
 </li>
 

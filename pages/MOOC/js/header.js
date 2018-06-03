@@ -51,9 +51,11 @@ function showUserInfo() {
         // 头像
         var useImg = user.picImg;
         if (useImg == null || $.trim(useImg) == '') {
-            useImg = baselocation + '/static/inxweb/img/avatar-boy.gif';
+            // useImg = baselocation + '/static/inxweb/img/avatar-boy.gif';
+            useImg = "/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=2018133641480001001";
         } else {
-            useImg = staticServer + useImg;
+            // useImg = staticServer + useImg;
+            useImg =  "/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=" + useImg;
         }
         $("#userName").text(showName);
         $(".userImgPhoto").attr("src", useImg);

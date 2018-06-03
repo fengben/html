@@ -48,7 +48,8 @@
 <body class="page-body">
 <script>
     var newRole = 1;
-
+    var rootNode = {};
+    rootNode["id"] = 0;
     //保持(被选中的)侧边栏高亮
     function keepActive(){
         $("#personManagement").css("display", "block");
@@ -80,6 +81,7 @@
         var afterTreeResult = function (){
             //obj[0]为返回的字符串,由于拼接问题，删除最后一个空格
             var arr = obj[0].substring(0, obj[0].length-1);
+            //alert(obj[0]);
             arr = arr.split("&");
             var nodeArray = [];
             var rootNode = {};
@@ -94,20 +96,23 @@
     }
 
     function BFSPraseTree(array, res){
+
         for (var i = 0; i < array.length; i++) {
             //获取栏目的id和其父id
             var idx = array[i].indexOf(":");
             var idx_name = array[i].indexOf(";");
             var pid = array[i].substring(idx + 1, idx_name);
+
             var id = array[i].substring(0, idx);
             //获取栏目名称
             var column_name = array[i].substring(idx_name + 1);
             if( pid == 0){
-                var tmp = new treeNode(id, column_name, []);
+                var tmp = new treeNode(id, column_name,[]);
                 var curr = {};
                 curr["id"] = tmp.id;
                 curr["text"] = tmp.text;
                 curr["children"] = tmp.children;
+
                 //找到父节点
                 for(var j = 0; j < res.length; j++){
                     if(res[j]["id"] == pid){
@@ -130,10 +135,19 @@
 
 
     function insertNode(array, pid, id, name){
+        //rootNode["id"] = 2018112858180021535;
         for(var i = 0; i<array.length; i++){
+           /*// array[i]["id"] = rootNode["id"];
+            console.log(pid) ;
+           // console.log('======================================') ;
+            console.log(array[i]["id"]) ;
+            console.log('======================================') ;
+            console.log( array[i]["id"] == pid);*/
             if(array == undefined || array.length == 0){
+
                 return;
-            }else if(pid == array[i]["id"]){
+            }else if( array[i]["id"] == pid ){
+                console.log( pid == array[i]["id"]);
                 var curr = {};
                 curr["id"] = id;
                 curr["text"] = name;
@@ -308,15 +322,15 @@
         <div class="page-title">
             <div class="title-env">
                 <h1 class="title">角色管理</h1>
-                <p class="description">management of role</p></div>
+                <!--<p class="description">management of role</p>--></div>
             <div class="breadcrumb-env">
                 <ol class="breadcrumb bc-1">
                     <li>
                         <a href="articleManagement.html">
-                            <i class="fa-home"></i>Home</a>
+                            <i class="fa-home"></i>首页</a>
                     </li>
                     <li class="active">
-                        <strong>management of role</strong></li>
+                        <strong>角色管理</strong></li>
                 </ol>
             </div>
         </div>
@@ -416,7 +430,7 @@
     <script src="assets/js/joinable.js"></script>
     <script src="assets/js/xenon-api.js"></script>
     <script src="assets/js/xenon-toggles.js"></script>
-    <script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/datatables/js/jquery.dataTables.js"></script>
     <!-- Imported scripts on this page -->
     <script src="assets/js/datatables/dataTables.bootstrap.js"></script>
     <script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>

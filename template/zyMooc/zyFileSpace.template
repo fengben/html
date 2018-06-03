@@ -66,12 +66,13 @@
 
 
 		function saveRecord(){
+            //alert("in saveRecorsd");
     	    var dirName;
     	    var fileName;
     	    var selected = $("#popup_message #modifyAttribute").val();
     	    var uploadfile = $("#popup_message #modifyUploadFile").val();
-    	     alert("56545646546");
-    	     alert($("#popup_message #modifyDescription").val());
+    	     //alert("56545646546");
+    	     //alert($("#popup_message #modifyDescription").val());
     	    var description = $("#popup_message #modifyDescription").val();
     	    var parentDirName = $("#parentDirName").text();
     	    var paras;
@@ -90,6 +91,7 @@
     		 }else{
     			var additional_args="databaseType=PostgresXL&needThumbnail=false";
     		 }
+    		    //alert("next step into uploadToDatabase");
     			uploadToDatabase("popup_message #modifyUploadFile",doSaveFile,additional_args);
     			return;
     		}else if(selected == "目录"){
@@ -131,12 +133,14 @@
     		alert("文件夹名称不能包含\"/\"");
     		return;
     	    }
+
+    	         alert("para+++++++++++++"+paras);
                 getFromWS("adminUsers/fileSpaceModify.template",paras,obj,processResult1);
 }
     	function doSaveFile(rstr){
     		if(rstr == ""){return;}
     	    var parentDirName = $("#parentDirName").text();
-    	    alert($("#popup_message #modifyDescription").val());
+    	    //alert($("#popup_message #modifyDescription").val());
     	    var descriptions = $("#popup_message #modifyDescription").val();
     		paras = "fileId=" + rstr;
     		paras += "$^@^$parentDirName=" + parentDirName;
@@ -145,11 +149,12 @@
     	    paras += "$^@^$description=" + descriptions;
     		var obj = new Array();
     	        var processResult = function(){
-
     			refreshList();
     			hiClose();
     	    	};
-    	    	alert(paras);
+    	    	//alert(paras);
+    	    	//alert("next step in zyFileSpaceModify.template");
+
     		getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult);
 
     	}

@@ -1,9 +1,7 @@
-<%If :id == ""
-	Exit ""
-  Else
-      :sql = "select FOUND_ROWS,id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = ? limit ?,6 "
-      changeRecordSet(:sql, :id,(:pageNumber-1)*6);
-EndIf
+<%
+       :sql = "select FOUND_ROWS,id, course_start,course_end,title, publisher, modify_date, content, on_top, article_type, pics, pic_id, appendix_id, count,school from moocarticle WHERE school = (select schoolname from mooc_school where articleid = ? LIMIT 1)  limit ?,6  "
+      changeRecordSet(:sql, S(:articleid),(:pageNumber-1)*6);
+
 If recordCount()>0
 	Repeat
 %>
@@ -82,7 +80,7 @@ $_@_$
 </div>
 <script>
     var totalPageSize =6;
-    var currentPage =0<1 ? 1 :1;
+    var currentPage =<%=:pageNumber%>;
     var totalPage = <%=:totalPage%>;
     showPageNumber() ;
 </script>

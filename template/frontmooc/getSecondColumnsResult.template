@@ -12,7 +12,7 @@ If :totalNumber >0
               <dd>
               <%Repeat
               %>
-               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?id=2018112858650021541" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
               <%EndRepeat%>
               </dd>
              </dl>
@@ -35,7 +35,7 @@ If :totalNumber >0
               <dd>
               <%Repeat
               %>
-               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?id=2018112859970021584" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
               <%EndRepeat%>
               </dd>
              </dl>
@@ -58,7 +58,7 @@ If :totalNumber >0
               <dd>
               <%Repeat
               %>
-               <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+               <a href="showcoulist.html?id=2018112860600021632" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
               <%EndRepeat%>
               </dd>
              </dl>
@@ -82,7 +82,7 @@ $_@_$
                 <dd>
                 <%Repeat
                 %>
-                 <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+                 <a href="showcoulist.html?id=2018112861090021663" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
                 <%EndRepeat%>
                 </dd>
                </dl>
@@ -105,7 +105,7 @@ $_@_$
                   <dd>
                   <%Repeat
                   %>
-                   <a href="showcoulist.html?queryCourse.subjectId=317" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
+                   <a href="showcoulist.html?id=2018112861680021689" class="c-666 fsize14 f-fM"><%=name%><tt class="f-fM fsize14 v-i-tab-line">/</tt></a>
                   <%EndRepeat%>
                   </dd>
                  </dl>

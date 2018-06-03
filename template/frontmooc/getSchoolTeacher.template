@@ -71,7 +71,7 @@ $_@_$
 </div>
 <script>
     var totalPageSize =4;
-    var currentPage =0<1 ? 1 :1;
+    var currentPage =<%=:pageNumber%>;
     var totalPage = <%=:totalPage%>;
     showTeacherPageNumber() ;
 </script>

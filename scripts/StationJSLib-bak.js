@@ -308,7 +308,7 @@ function sendForm(urlstr,form1,callback){
                 alert("in sendform");
                 alert("Problem retrieving XML data:"+xrq.status);
         }}};
-    //alert(urlstr);
+
     xrq.open("POST",urlstr);
     xrq.send(form1);
 }

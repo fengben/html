@@ -104,11 +104,34 @@
         * 已登录用户有权限跳转edx观看视频
         * */
         function viewVideo() {
-            if ($.cookie('mooc_login_name')) {
-                $("#viewVideo").submit();
-            } else {
-                alert('请先登录')
+
+            // if ($.cookie('mooc_login_name')) {
+            //     $("#viewVideo").submit();
+            // } else {
+            //     alert('请先登录')
+            // }
+            var userId = localStorage.getItem('userId');
+            var userToken = localStorage.getItem('userToken');
+            var obj = new Array();
+            var processResult = function () {
+                if (obj[0] != "ok") {
+                    // alert("请重新登陆！");
+                    showlogin();
+                    return;
+                }
+                else {
+
+                    email = localStorage.getItem("loginName");
+                    passwd = localStorage.getItem("passWord");
+                    document.getElementById('mooc_login_name').value = email;
+                    document.getElementById('mooc_passwd').value = passwd;
+                    $("#viewVideo").submit();
+                    return;
+                }
             }
+            var paras = "$^@^$userId=" + userId;
+            paras += "$^@^$userToken=" + userToken;
+            getFromWS("zyMooc/security.template", paras, obj, processResult);
         }
     </script>
     <style type="text/css">
@@ -1288,6 +1311,11 @@
     function closewin() {
         $("#loginfrom").hide();
     }
+
+    // function dialogLoginAndReload() {
+    //     dialogLogin();
+    //     location.reload();
+    // }
 
     function dialogRegister(obj) {
         $('#d-s-head-tab').find('a').each(function () {

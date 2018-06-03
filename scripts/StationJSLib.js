@@ -91,30 +91,32 @@ function getFromWS(url_str,post_data_,outargs_,callback_,asy){
 }
 
 //之所以要使用回调函数，是因为调用web service本身采用的是异步模式
-function logout(){
+function logout() {
 
-	var obj = new Array();
-	var passResult = function(){
-	    if(obj[0]=="ok"){	
-		    var result = new Array();
-		    var processResult = function(){
-			if(result[0]=="ok"){
-			    for(var i=1;i<result.length;i++)
-					localStorage.removeItem(result[i]);
-					// location.href = "login.html";
-                location.href ='/pages/MOOC/default.html'
-		       		}
-		    	};    
-		    getFromWS("/CoreService/logout","",result,processResult);
-	    }else{
-			localStorage.removeItem("userId");
-			localStorage.removeItem("userToken");
-			localStorage.removeItem("classification");
-			localStorage.removeItem("loginName");
-			location.href = "login.html";
-		}
-	}
-	getFromWS("mainmooc/security.template",localStorageArgs(),obj,passResult);
+    var obj = new Array();
+    var passResult = function () {
+        if (obj[0] == "ok") {
+            var result = new Array();
+            var processResult = function () {
+                if (result[0] == "ok") {
+                    for (var i = 1; i < result.length; i++)
+                    localStorage.removeItem(result[i]);
+                    // location.href = "login.html";
+                }
+                localStorage.removeItem("passWord");
+                location.href = '/pages/MOOC/default.html'
+            };
+            getFromWS("/CoreService/logout", "", result, processResult);
+        } else {
+            localStorage.removeItem("userId");
+            localStorage.removeItem("userToken");
+            localStorage.removeItem("classification");
+            localStorage.removeItem("loginName");
+            // location.href = "login.html";
+            getFromWS("/CoreService/logout", "", result, processResult);
+        }
+    }
+    getFromWS("mainmooc/security.template", localStorageArgs(), obj, passResult);
 
 
 }
@@ -141,6 +143,7 @@ function login(loginName,passwd,callback){
         //obj[3]=loginName;
         callback(obj);
     };
+    localStorage.setItem("passWord",passwd);
     getFromWS("/CoreService/login","loginName="+loginName+"$^@^$passwd="+passwd,obj,processResult);
 }
 

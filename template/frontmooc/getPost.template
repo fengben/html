@@ -123,7 +123,7 @@ $_@_$
 </div>
 <script>
     var totalPageSize =5;
-    var currentPage =0<1 ? 1 :1;
+    var currentPage =<%=:pageNumber%>;
     var totalPage = <%=:totalPage%>;
     showPageNumber() ;
 </script>

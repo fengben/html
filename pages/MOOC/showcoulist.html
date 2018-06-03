@@ -78,6 +78,8 @@
 
                 jQuery("#CategoryCourseDetail").html(CategoryCourseDetailMap[0]);
                 jQuery("#deanpage").html(CategoryCourseDetailMap[1]);
+                jQuery("#CountCourse").html(CategoryCourseDetailMap[2]);
+                jQuery("#TimeCourse").html(CategoryCourseDetailMap[3]);
             }
             getFromWS("frontmooc/getCategoryCourseDetail.template", paras,CategoryCourseDetailMap, CategoryCourseDetailMapResult);
 
@@ -92,6 +94,8 @@
             var processResult = function(){
                 jQuery("#CategoryCourseDetail").html(obj[0]);
                 jQuery("#deanpage").html(obj[1]);
+                jQuery("#CountCourse").html(obj[2]);
+                jQuery("#TimeCourse").html(obj[3]);
             }
             getFromWS("frontmooc/getCategoryCourseDetail.template",paras,obj,processResult);
 
@@ -105,6 +109,8 @@
                 var articleListResult = function(){
                     jQuery("#CategoryCourseDetail").html(articleList[0]);
                     jQuery("#deanpage").html(articleList[1]);
+                    jQuery("#CountCourse").html(articleList[2]);
+                    jQuery("#TimeCourse").html(articleList[3]);
                 }
             getFromWS("frontmooc/getCategoryCourseDetail.template",paras,articleList,articleListResult);
         }
@@ -227,15 +233,16 @@
                         <div class="js-wrap ">
                             <section class="clearfix">
                                 <ol class="js-tap clearfix fl" id="ol1">
-                                    <li class="current bg-orange"><a title="默认排序" onclick="go2(this)" href="javascript:void(0)">默认排序</a></li>
+                                    <li class="" >
+                                        <a title="默认排序" onclick="selectSubject(511,this)" href="javascript:void(0)">默认排序</a></li>
                                     <li class="pr ">
-                                        <a title="时间" onclick="go2(this)" href="#">时间
+                                        <a title="时间" onclick="selectSubject(522,this)">时间
                                             <span class="c-master fsize14 f-fM">
 										</span>
                                         </a>
                                     </li>
                                     <li class=""  >
-                                        <a  class="current" title="热度" onclick="go2(this)" href="#">热度
+                                        <a  class="current" title="热度" onclick="selectSubject(533,this)">热度
                                             <span class="c-master fsize14 f-fM">
 										</span>
                                         </a>
@@ -243,39 +250,44 @@
                                     <li class="
 
 								">
-                                        <a title="价格" onclick="go2(this)" href="#">价格
+                                        <a title="价格" onclick="selectSubject(533,this)">价格
                                             <span class="c-master fsize14 f-fM">
 										</span>
                                         </a>
                                     </li>
                                 </ol>
-                                <article class="fr">
-                                    <label onclick="#" class="c-kcfl  ml20">
-                                        <em class="icon14 c-chb-ico">
-                                            <input type="checkbox" class="chen-c-fl">
-                                        </em>
-                                        <tt class="vam fsize14 c-666 f-fM">套 餐</tt>
-                                    </label>
-                                    <label onclick="#" class="c-kcfl   ml20">
-                                        <em class="icon14 c-chb-ico">
-                                            <input value="true" type="checkbox" class="chen-c-fl">
-                                        </em>
-                                        <tt class="vam fsize14 c-666 f-fM">免 费</tt>
-                                    </label>
-                                    <label onclick="#" class="c-kcfl   ml20">
-                                        <em class="icon14 c-chb-ico">
-                                            <input value="true" type="checkbox" class="chen-c-fl">
-                                        </em>
-                                        <tt class="vam fsize14 c-666 f-fM">可砍价</tt>
-                                    </label>
-                                </article>
+                                <!--<article class="fr">-->
+                                    <!--<label onclick="#" class="c-kcfl  ml20">-->
+                                        <!--<em class="icon14 c-chb-ico">-->
+                                            <!--<input type="checkbox" class="chen-c-fl">-->
+                                        <!--</em>-->
+                                        <!--<tt class="vam fsize14 c-666 f-fM">套 餐</tt>-->
+                                    <!--</label>-->
+                                    <!--<label onclick="#" class="c-kcfl   ml20">-->
+                                        <!--<em class="icon14 c-chb-ico">-->
+                                            <!--<input value="true" type="checkbox" class="chen-c-fl">-->
+                                        <!--</em>-->
+                                        <!--<tt class="vam fsize14 c-666 f-fM">免 费</tt>-->
+                                    <!--</label>-->
+                                    <!--<label onclick="#" class="c-kcfl   ml20">-->
+                                        <!--<em class="icon14 c-chb-ico">-->
+                                            <!--<input value="true" type="checkbox" class="chen-c-fl">-->
+                                        <!--</em>-->
+                                        <!--<tt class="vam fsize14 c-666 f-fM">可砍价</tt>-->
+                                    <!--</label>-->
+                                <!--</article>-->
                             </section>
                         </div>
 
                         <div class="couresnew-big">
                             <article class="comm-course-list">
-                                <ul class="of" id="CategoryCourseDetail">
+                                <ul  class="clearfix subject511" id="CategoryCourseDetail">
                                 </ul>
+                                <ul style="display:none" class="clearfix subject522" id="TimeCourse">
+                                </ul>
+                                <ul style="display:none" class="clearfix subject533" id="CountCourse">
+                                </ul>
+
                                 <div class="clear"></div>
                             </article>
                         </div>
@@ -585,6 +597,17 @@
         $(obj).parent().attr("class","current")
 //$(obj).parent.attr("class","current")
 //	obj.parent().attr("class","current");
+    }
+    function selectSubject(subjectId,obj) {
+        var ulclass = ".subject"+ subjectId;
+        /*隐藏所有*/
+        $(ulclass).parent().find("ul").hide();
+        /*显示选中*/
+        $(ulclass).show();
+        /*去除导航选中*/
+        $(obj).parent().parent().find("li").removeClass("current");
+        /*点击导航添加选中*/
+        $(obj).parent().addClass("current")
     }
 </script>
 </body>

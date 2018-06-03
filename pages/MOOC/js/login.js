@@ -763,8 +763,8 @@ function dialogLogin(jumpType) {
         if (fig == "failed") {
             alert("登录失败：" + results[0].substring(7));
         } else {
-            $.cookie('mooc_login_name', loginName);
-            $.cookie('mooc_password', password);
+            // $.cookie('mooc_login_name', loginName);
+            // $.cookie('mooc_password', password);
             //$("#loginForm_back,#loginfrom").hide();
             if (jumpType == 'ucIndex') {
                 window.location.href = "/uc/index";
@@ -947,8 +947,8 @@ function dialogRegister(jumpType) {
                         if (fig == "failed") {
                             alert("登录失败：" + results[0].substring(7));
                         } else {
-                            $.cookie('mooc_login_name', emailVal);
-                            $.cookie('mooc_password', passwdVal);
+                            // $.cookie('mooc_login_name', emailVal);
+                            // $.cookie('mooc_password', passwdVal);
 
                             $("#dClose").click();
                             showUserInfo();//Í·²¿ÏÔÊ¾ÓÃ»§ÐÅÏ¢

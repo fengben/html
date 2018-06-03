@@ -66,6 +66,7 @@
 
 
 	function saveRecord(){
+	    alert("in saveRecord");
 	    var dirName;
 	    var fileName;
 	    var selected = $("#popup_message #modifyAttribute").val();

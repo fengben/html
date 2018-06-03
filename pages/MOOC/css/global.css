@@ -318,7 +318,7 @@ a.current-1 .m-tree-icon {background-position: 0 -212px}
 .coures-jbicon img{display: block;width: 100%;height: 100%;}
 .img-responsive {
     max-width: 100%;
-    display: block;
+    /*display: block;*/
     transition: .8s;
     -webkit-transition: .8s
 }

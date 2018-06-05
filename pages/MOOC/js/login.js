@@ -255,52 +255,55 @@ var scrollLoad = (function (options) {
  *** index == 2 : ������ʾ������;
  *** index == 3 : ȷ����ʾ������
  */
-function dialog(dTitle, msg, index, url) {
-    if (index == 19) {
-        var locUrl = window.parent.location + "";
-        if (self.frameElement && self.frameElement.tagName == "IFRAME" && locUrl.indexOf("/uc/play/") != -1) {
-            url = 'fromCoursePlayer';//���Բ��Ŵ��� ��ʾ��ͬ����ʾ��
-        }
-    }
-    $("#tisbutt,#dClose,#qujiao").click();
-    var oBg = $('<div class="bMask"></div>').appendTo($("body")),
-        dialogEle = $('<div class="dialogWrap"><div class="dialog-ele"><h4 class="d-s-head pr"><a id="dClose" href="javascript:void(0)" title="�ر�" class="dClose icon16 pa">&nbsp;</a><span class="d-s-head-txt">' + dTitle + '</span></h4><div class="of bg-fff"><div id="dcWrap" class="mt20 mb20 ml20 mr20 "></div></div></div></div>').appendTo($("body"));
-    $.ajax({
-        url: baselocation + "/dialog/ajax/showPage",
-        data: {
-            "dTitle": dTitle,
-            "msg": msg,
-            "index": index,
-            "url": url,
-            "dataOne": arguments[4],
-            "dataTwo": arguments[5],
-            "dataThree": arguments[6],
-            "dataFour": arguments[7]
-        },
-        type: 'post',
-        dataType: 'text',
-        async: false,
-        success: function (result) {
-            $("#dcWrap").html(result);
-            /*7Ϊ�ϴ�ͷ�� �����ϴ�ͼƬ���*/
-            if (index == 7) {
-                uploadImg('fileupload', 'uploadfile');
-            }
-            var dTop = (parseInt(document.documentElement.clientHeight, 10) / 2) + (parseInt(document.documentElement.scrollTop || document.body.scrollTop, 10)),
-                dH = dialogEle.height(),
-                dW = dialogEle.width(),
-                dHead = $(".dialog-ele>h4");
-            dialogEle.css({"top": (dTop - (dH / 2)), "margin-left": -(dW / 2)});
-            //dHead.css({"width" : (dW-"12")}); //ie7�¼�����;
-            $("#tisbutt,#dClose,#qujiao").bind("click", function () {
-                dialogEle.remove();
-                oBg.remove();
-            });
-        }
-    })
-
-
-}
+//重复
+// function dialog(dTitle, msg, index, url) {
+//     alert("in dialog");
+//     // if (index == 19) {
+//     //     var locUrl = window.parent.location + "";
+//     //     if (self.frameElement && self.frameElement.tagName == "IFRAME" && locUrl.indexOf("/uc/play/") != -1) {
+//     //         url = 'fromCoursePlayer';//���Բ��Ŵ��� ��ʾ��ͬ����ʾ��
+//     //     }
+//     // }
+//     // $("#tisbutt,#dClose,#qujiao").click();
+//     // var oBg = $('<div class="bMask"></div>').appendTo($("body")),
+//     //     dialogEle = $('<div class="dialogWrap"><div class="dialog-ele"><h4 class="d-s-head pr"><a id="dClose" href="javascript:void(0)" title="�ر�" class="dClose icon16 pa">&nbsp;</a><span class="d-s-head-txt">' + dTitle + '</span></h4><div class="of bg-fff"><div id="dcWrap" class="mt20 mb20 ml20 mr20 "></div></div></div></div>').appendTo($("body"));
+//     // alert("in dialog");
+//     // $.ajax({
+//     //     url: baselocation + "/dialog/ajax/showPage",
+//     //     data: {
+//     //         "dTitle": dTitle,
+//     //         "msg": msg,
+//     //         "index": index,
+//     //         "url": url,
+//     //         "dataOne": arguments[4],
+//     //         "dataTwo": arguments[5],
+//     //         "dataThree": arguments[6],
+//     //         "dataFour": arguments[7]
+//     //     },
+//     //     type: 'post',
+//     //     dataType: 'text',
+//     //     async: false,
+//     //     success: function (result) {
+//     //         $("#dcWrap").html(result);
+//     //         /*7Ϊ�ϴ�ͷ�� �����ϴ�ͼƬ���*/
+//     //         if (index == 7) {
+//     //             uploadImg('fileupload', 'uploadfile');
+//     //         }
+//     //         var dTop = (parseInt(document.documentElement.clientHeight, 10) / 2) + (parseInt(document.documentElement.scrollTop || document.body.scrollTop, 10)),
+//     //             dH = dialogEle.height(),
+//     //             dW = dialogEle.width(),
+//     //             dHead = $(".dialog-ele>h4");
+//     //         dialogEle.css({"top": (dTop - (dH / 2)), "margin-left": -(dW / 2)});
+//     //         //dHead.css({"width" : (dW-"12")}); //ie7�¼�����;
+//     //         $("#tisbutt,#dClose,#qujiao").bind("click", function () {
+//     //             dialogEle.remove();
+//     //             oBg.remove();
+//     //         });
+//     //     }
+//     // })
+//
+//
+// }
 
 
 var ajaxUrl;//��¼�ϴ�ajax��ҳ��url

@@ -1,0 +1,56 @@
+<%
+:sql = "SELECT name,nickname,head_portrait,birthday,brief,phone_number,city,school FROM mooc_userprofile where email=?"
+:x = changeRecordSet(:sql,S(:loginName))
+%>
+
+<ol class="u-account-li u-account-li-new">
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">账 号：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=:loginName%></span>
+    </li>
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">昵 称：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=nickname%></span>
+    </li>
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">姓 名：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=name%></span>
+    </li>
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">生 日：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=birthday%></span>
+    </li>
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">学 校：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=school%></span>
+    </li>
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">手机号：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=phone_number%></span>
+    </li>
+     <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">现居城市：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=city%></span>
+    </li>
+    <li>
+        <label class="u-a-title">
+            <span class="fsize16 c-999">个人介绍：</span>
+        </label>
+        <span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><%=brief%></span>
+    </li>
+
+</ol>

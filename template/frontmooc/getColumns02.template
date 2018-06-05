@@ -99,6 +99,15 @@ $_@_$
      						<span class="fr">
      							<tt class="c-green fsize12 f-fA">免费</tt>
      						</span>
+     							<span class="fr" id="collection">
+
+                              							<a href="javascript: void(0);" title="收藏" class="noter-zan f-fM c-999 " onclick="addPraise('<%=id%>')">
+                                                                                <em class="icon20" onclick="add(this)">&nbsp;</em>
+                                                                                </a>
+                                                                               /// <tt class="c-999 f-fA">2</tt>
+                                                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              						</span>
+
      						<span class="fl jgAttr c-ccc f-fA">
    		///					<tt class="c-999 f-fA mr10"><%=school%></tt>
      		       				<tt class="c-999 f-fA"><%=count%>浏览</tt>

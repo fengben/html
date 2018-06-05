@@ -1,0 +1,44 @@
+<ol class="u-account-li u-account-li-new">
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">账 号：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">barrycom</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">昵 称：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">张飞</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">姓 名：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">这是谁的</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">学 校：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">武汉大学</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">专 业：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">计算机</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">手机号：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">13987014556</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">邮 箱：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">33222@qq.com</span>
+										</li>
+										</ol>

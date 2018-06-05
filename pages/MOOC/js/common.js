@@ -252,32 +252,82 @@ function dialog(dTitle,msg,index,url) {
     $("#tisbutt,#dClose,#qujiao").click();
     var oBg = $('<div class="bMask"></div>').appendTo($("body")),
         dialogEle = $('<div class="dialogWrap"><div class="dialog-ele"><h4 class="d-s-head pr"><a id="dClose" href="javascript:void(0)" title="关闭" class="dClose icon16 pa">&nbsp;</a><span class="d-s-head-txt">'+dTitle+'</span></h4><div class="of bg-fff"><div id="dcWrap" class="mt20 mb20 ml20 mr20 "></div></div></div></div>').appendTo($("body"));
-    $.ajax({
-        url : baselocation + "/dialog/ajax/showPage",
-        data:{"dTitle":dTitle,"msg":msg,"index":index,"url":url,"dataOne":arguments[4],"dataTwo":arguments[5],"dataThree":arguments[6],"dataFour":arguments[7]},
-        type : 'post',
-        dataType : 'text',
-        async : false,
-        success : function(result) {
-            $("#dcWrap").html(result);
-            /*7为上传头像 加载上传图片插件*/
-            if (index==7){
-                uploadImg('fileupload','uploadfile');
-            }
-            var dTop = (parseInt(document.documentElement.clientHeight, 10)/2) + (parseInt(document.documentElement.scrollTop || document.body.scrollTop, 10)),
-                dH = dialogEle.height(),
-                dW = dialogEle.width(),
-                dHead = $(".dialog-ele>h4");
-            dialogEle.css({"top" : (dTop-(dH/2)) , "margin-left" : -(dW/2)});
-            //dHead.css({"width" : (dW-"12")}); //ie7下兼容性;
-            $("#tisbutt,#dClose,#qujiao").bind("click", function() {dialogEle.remove();oBg.remove();});
-        }
-    })
-
-
-
+    // $.ajax({
+    //     url : baselocation + "/dialog/ajax/showPage",
+    //     data:{"dTitle":dTitle,"msg":msg,"index":index,"url":url,"dataOne":arguments[4],"dataTwo":arguments[5],"dataThree":arguments[6],"dataFour":arguments[7]},
+    //     type : 'post',
+    //     dataType : 'text',
+    //     async : false,
+    //     success : function(result) {
+    //         $("#dcWrap").html(result);
+    //         /*7为上传头像 加载上传图片插件*/
+    //         if (index==7){
+    //             uploadImg('fileupload','uploadfile');
+    //         }
+    //         var dTop = (parseInt(document.documentElement.clientHeight, 10)/2) + (parseInt(document.documentElement.scrollTop || document.body.scrollTop, 10)),
+    //             dH = dialogEle.height(),
+    //             dW = dialogEle.width(),
+    //             dHead = $(".dialog-ele>h4");
+    //         dialogEle.css({"top" : (dTop-(dH/2)) , "margin-left" : -(dW/2)});
+    //         //dHead.css({"width" : (dW-"12")}); //ie7下兼容性;
+    //         $("#tisbutt,#dClose,#qujiao").bind("click", function() {dialogEle.remove();oBg.remove();});
+    //     }
+    // })
+    // $("#dcWrap").html(result);
+    /*7为上传头像 加载上传图片插件*/
+    if (index == 7) {
+        uploadImg('fileupload', 'uploadfile');
+        alert('after upload')
+    }
+    var dTop = (parseInt(document.documentElement.clientHeight, 10) / 2) + (parseInt(document.documentElement.scrollTop || document.body.scrollTop, 10)),
+        dH = dialogEle.height(),
+        dW = dialogEle.width(),
+        dHead = $(".dialog-ele>h4");
+    dialogEle.css({"top": (dTop - (dH / 2)), "margin-left": -(dW / 2)});
+    //dHead.css({"width" : (dW-"12")}); //ie7下兼容性;
+    $("#tisbutt,#dClose,#qujiao").bind("click", function () {
+        dialogEle.remove();
+        oBg.remove();
+    });
 }
 
+function uploadImg() {
+    $("#upLoadImg").click();
+}
+
+function getUrlString(name) {
+    // alert("hahaha");
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return "";
+}
+
+function uploadHeadImg() {
+    alert('in upload headportrail')
+    var userName = localStorage.getItem("loginName");
+    var file = $("#upLoadImg").val();
+    var afterUploadFile = function(tid){//uploadToDatabase执行成功后返回的图片的id
+		alert(tid);
+		var paras = "picId=" + tid;
+		var uid = uid;
+		// paras += "$^@^$title=" + title;
+		// paras += "$^@^$urlstr=" + urlstr;
+		// paras += "$^@^$operation=newPicture";
+		var objs = new Array();
+		var afterSavePic = function () {
+		    if (objs[0] == "ok") {
+		        alert("执行结果："+objs[0]);
+            		location.reload(true);
+		    } else {
+		        alert("新增图片失败");
+		    }
+		};
+		getFromWS("mainmooc/saveHeadImg.template", paras, objs, afterSavePic);
+	}
+	uploadToDatabase("newFile",afterUploadFile,"databaseType=PostgresXL")
+
+}
 
 var ajaxUrl;//记录上次ajax分页的url
 var ajaxparameters;//记录上次ajax分页的参数

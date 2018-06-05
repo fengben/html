@@ -179,14 +179,35 @@
         var classification = localStorage.getItem('classification');
         var loginName = localStorage.getItem('loginName');
         jQuery(document).ready(function () {
+
             var recentColumns = new Array();
             var paras = "loginName=" +loginName;
             var processCoResult = function () {
                 jQuery("#Allcollections").html(recentColumns[0]);
-                alert(recentColumns[0]);
+                //alert(recentColumns[0]);
             }
             getFromWS("frontmooc/getCollections.template", paras,recentColumns, processCoResult);
+
 		});
+        //取消收藏
+        function cancel(flag) {
+            var paras = "courseId=" + flag;
+            paras +="$^@^$collector="+loginName;
+            paras += "$^@^$operation=cancelCollection";
+            var obj = new Array();
+            var processCollection= function () {
+                //alert(obj);
+                alert("您已经取消收藏!");
+                var recentColumns = new Array();
+                var paras = "loginName=" +loginName;
+                var processCoResult = function () {
+                    jQuery("#Allcollections").html(recentColumns[0]);
+                    //alert(recentColumns[0]);
+                }
+                getFromWS("frontmooc/getCollections.template", paras,recentColumns, processCoResult);
+            }
+            getFromWS("frontmooc/saveCollection.template", paras,obj, processCollection);
+        }
 	</script>
 </head>
 <body class="W-body">
@@ -324,7 +345,7 @@
 			</li>
 		
 			<li>
-				<a href="myfav.html" title="我的收藏">
+				<a href="myFav.html" title="我的收藏">
 					<em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的收藏</tt>
 				</a>
 			</li>

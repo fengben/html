@@ -118,7 +118,7 @@ a.current-1 .m-tree-icon {background-position: 0 -212px}
 .v-play-btn em {background-position: -39px -65px}
 .noter-dy em {background-position: -42px -160px}
 .noter-dy:hover em {background-position: -42px -137px}
-.noter-zan em {background-position: -42px -185px}
+.noter-zan em {background-position: -42px -185px;height:25px;}
 .noter-zan:hover em {background-position: -42px -266px}
 .dClose,.icon-close {background-position: -42px -215px}
 .dClose:hover,.icon-close:hover {background-position: -42px -244px}

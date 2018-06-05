@@ -1,5 +1,5 @@
 <%
-:sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brife from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 0"
+:sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brief from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 0"
 changeRecordSet(:sql,)
 :totalNumber = recordCount()
 %>
@@ -19,7 +19,7 @@ changeRecordSet(:sql,)
                                 alt="<%=nickname%>"/> </a>
                         <h6 class="hLh20 txtOf"><a href="userInfo.html?id=<%=uid%>"
                                                    title="<%=nickname%>"
-                                                   class="team-name"><%=brife%></a>
+                                                   class="team-name"><%=brief%></a>
                         </h6>
                         <section class="mt10 hLh20 team-number">
                             <span class="c-999"><%=nickname%></span>
@@ -42,7 +42,7 @@ changeRecordSet(:sql,)
             <ol class="team-ol clearfix">
 
             <%
-            :sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brife from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 3"
+            :sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brief from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 3"
             changeRecordSet(:sql,)
             :totalNumber = recordCount()
             If :totalNumber >0
@@ -58,7 +58,7 @@ changeRecordSet(:sql,)
                                 alt="用车轮丈量生命"/> </a>
                         <h6 class="hLh20 txtOf"><a
                                 href="userInfo.html?id=<%=uid%>"
-                                title="<%=brife%>" class="team-name"><%=brife%></a>
+                                title="<%=brief%>" class="team-name"><%=brief%></a>
                         </h6>
                         <section class="mt10 hLh20 team-number">
                             <span class="c-999"><%=nickname%></span>
@@ -80,7 +80,7 @@ changeRecordSet(:sql,)
         <section class="hot-team-wrap">
             <ol class="team-ol clearfix">
              <%
-            :sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brife from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 3"
+            :sql="SELECT comments_num,author,email,mooc_userprofile.id as uid,head_portrait,nickname,brief from ( SELECT author,SUM(comments) as comments_num  FROM moocpost GROUP BY author ) as a INNER JOIN mooc_userprofile on a.author = mooc_userprofile.email ORDER BY comments_num desc LIMIT 3 offset 3"
             changeRecordSet(:sql,)
             :totalNumber = recordCount()
             If :totalNumber >0
@@ -96,7 +96,7 @@ changeRecordSet(:sql,)
                         <h6 class="hLh20 txtOf"><a
                                 href="userInfo.html?id=<%=uid%>"
                                 title="<%=nickname%>"
-                                class="team-name"><%=brife%></a></h6>
+                                class="team-name"><%=brief%></a></h6>
                         <section class="mt10 hLh20 team-number">
                             <span class="c-999"><%=nickname%></span>
                         </section>

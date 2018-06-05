@@ -1,0 +1,6 @@
+<%
+	:updateSql = "update mooc_userprofile set nickname = ?, name = ?, school = ?, phone_number = ?, city = ?, brief = ?, birthday=?  where email = ?"
+	:x = execSQL(:updateSql, S(:nickname), S(:name), S(:school), S(:phoneNumber), S(:city), S(:intro), S(:birthday), S(:loginName))
+	Exit(:x)
+%>
+

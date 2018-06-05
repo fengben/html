@@ -17,7 +17,7 @@ Repeat
           <%EndIf%>
 	</a>
 	<h4 class="hLh30 tac txtOf unFw">
-		<a class="name fsize18 c-333 f-fM" href="teacher/80"><%=name%></a>
+		<a class="name fsize18 c-333 f-fM" href="teacherinfo.html?id=<%=id%>"><%=name%></a>
 	</h4>
 	<input value="1" type="hidden">
 	<h5 class="hLh30 fsize14 c-999 f-fM tac txtOf unFw">&nbsp;首席讲师</h5>

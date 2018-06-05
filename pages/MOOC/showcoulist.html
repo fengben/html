@@ -27,7 +27,8 @@
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
     <script type="text/javascript" src="js/page.js"></script>
-
+    <link rel="stylesheet" href="css/index.css"/>
+<link rel="stylesheet" type="text/css" href="css/player.css"/>
     <script type="text/javascript">
         function killErrors() {
             return true;
@@ -86,7 +87,7 @@
         };
         //按专业分类时的点击展示每个栏目
         function CourseCategory(flag){
-            currentid=flag
+            currentid=flag;
             var paras = "urlid=" + flag;
             //alert(flag);
             paras += "$^@^$pageNumber=1";
@@ -114,6 +115,36 @@
                 }
             getFromWS("frontmooc/getCategoryCourseDetail.template",paras,articleList,articleListResult);
         }
+        //收藏课程
+        function addPraise(flag){
+            //防止未登陆用户收藏
+            var userId = localStorage.getItem('userId');
+            var userToken = localStorage.getItem('userToken');
+            var classification = localStorage.getItem('classification');
+            var loginName = localStorage.getItem('loginName');
+            //alert(loginName);
+            if(!userId || !userToken || !classification || !loginName ){
+                alert("登录或注册后才能收藏哦！")
+                //showdialoglogin(this);
+            }else{
+                //alert("hello");
+                var collection = new Array();
+                var paras = "courseId="+flag;
+                paras += "$^@^$collector="+loginName;
+                paras +="$^@^$operation=collection";
+                var processCollection= function () {
+                    //alert(collection);
+                    if (collection[0] == "exist") {
+                        alert("您已经收藏过了哦!");
+                    }else{
+                        alert("您已成功收藏该课程");
+                        return;
+                    }
+                }
+                getFromWS("frontmooc/saveCollection.template", paras,collection, processCollection);
+                //alert(paras);
+            }
+        }
     </script>
 
     <script type="text/javascript" src="js/course.js"></script>
@@ -125,58 +156,91 @@
 
     <div class="main-warp">
         <div class="main-infor" >
-            <!-- 公共头引入 -->
-            <!-- /global header begin-->
-            <header id="header" class="all-header">
-                <section class="container">
-                    <h1 id="logo" class="logo">
-                        <a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
-                        <a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="武汉大学出版社">
-                            <img src="picture/mo-back.png">
-                        </a>
-                    </h1>
-                    <div class="h-r-nsl">
-                        <ul class="nav">
-                            <li><a href="default.html" title="首页">首页</a></li>
-                            <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                            <li><a href="shoollist.html" title="直播">名校</a></li>
-                            <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
-                            <li><a href="group.html" title="社区" target="_blank">学问</a></li>
-                            <li><a href="article.html" title="资讯">资讯</a></li>
-                        </ul>
-                        <!-- / nav -->
+           <!-- 公共头引入 -->
+				<!-- /global header begin-->
+<header id="header" class="all-header">
+	<section class="container">
+		<h1 id="logo" class="logo">
+			<a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
+			<a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="武汉大学出版社">
+				<img src="picture/mo-back.png">
+			</a>
+		</h1>
+		<div class="h-r-nsl">
+			<ul class="nav">
+					<li><a href="default.html" title="首页" >首页</a></li>
+						<li><a href="showcoulist.html" title="录播" >课程</a></li>
+						<li><a href="shoollist.html" title="直播" >名校</a></li>
+						<li><a href="teacherlist.html" title="班级" >名师</a></li>
+						<li><a href="group.html" title="社区" target="_blank">学问</a></li>
+						<li><a href="article.html" title="资讯" >资讯</a></li>
 
-                        <aside class="h-r-search">
-                            <div class="pr h-r-s-box-cx">
-                                <form action="search.html" method="get" id="headerformSearch" onsubmit="return toSearch()">
-                                    <label class="h-r-s-box"><input type="text" value="" id="headerSearchName" name="queryCourse.courseName" placeholder="搜索...">
-                                        <button class="s-btn" type="submit"> <em class="icon18">&nbsp;</em> </button></label>
-                                </form>
-                            </div>
-                        </aside>
-                    </div>
-                    <aside class="mw-nav-btn">
-                        <div class="mw-nav-icon"></div>
-                    </aside>
-                    <aside class="mw-nav-seach mw-nav-seach-d1">
-                        <form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
-                            <label>
-                                <input type="text" value="" placeholder="" id="h5HeaderSearchName" class="f-fM h1-mw-seach-input i_h_gb_s_input">
-                                <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
-                            </label>
-                        </form>
+				</ul>
+			<!-- / nav -->
+			<ul class="h-r-login clearfix">
+				<li class="undis h-login-li" id="no-login">
+					<a href="javascript:login()" title="登录">
+						<em class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span>
+					</a>
+				</li>
+				<li class="tit-new-list undis h-login-li" id="is-login-one">
+					<a href="#" title="消息" id="headerMsgCountId">
+						<em class="news-icon">&nbsp;</em>
+					</a>
+					<q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+						<div class="tit-n-warp">
+							<ol id="letter">
 
-                        <div class="exam-mo-test-time tac">
-                            <span class="time c-fff f-fM vam examTimer"></span>
-                            <a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
-                        </div>
+							</ol>
+							<div class="new-tit-box tac mt10 mb20" style="display:none">
+								<a href="#" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+							</div>
+						</div>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="#" title="">
+						<img src="" width="30" height="30" class="vam picImg" alt="">
+						<span class="vam disIb c-master" id="userName"></span>
+					</a>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="#" title="帮助" class="vam">
+						<span class="vam disIb c-fff">帮助</span>
+					</a>
+				</li>
+				<li class="h-r-user undis h-login-li loginedLiShow">
+					<a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
+						<span class="vam disIb c-fff">退出</span>
+					</a>
+				</li>
+				<!-- /未登录显示第1 li；登录后显示第2，3 li -->
+			</ul>
+			<aside class="h-r-search">
 
-                    </aside>
-                    <div class="clear mobile-clear"></div>
-                </section>
-            </header>
-            <!-- /global header end-->
-            <!-- 公共头引入 -->
+			</aside>
+		</div>
+		<aside class="mw-nav-btn">
+			<div class="mw-nav-icon"></div>
+		</aside>
+		<aside class="mw-nav-seach mw-nav-seach-d1">
+			<form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+				<label>
+					<input type="text" value="" placeholder="" id="h5HeaderSearchName" class="f-fM h1-mw-seach-input i_h_gb_s_input">
+					<a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+				</label>
+			</form>
+
+				<div class="exam-mo-test-time tac">
+					<span class="time c-fff f-fM vam examTimer"></span>
+					<a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
+					</div>
+
+		</aside>
+		<div class="clear mobile-clear"></div>
+	</section>
+</header>
+<!-- /global header end-->
+<!-- 公共头引入 -->
 
             <div id="aCoursesList" class="bg-f8 of">
                 <div class="">

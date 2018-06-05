@@ -9,6 +9,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta content="telephone=no" name="format-detection" />
@@ -18,13 +19,12 @@
 <link rel="stylesheet" type="text/css" href="css/web.css">
 <link rel="stylesheet" type="text/css" href="css/theme.css">
 <link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
-<title>我的收藏--中国在线教育平台第一品牌</title>
+<title>我的资料--中国在线教育平台第一品牌</title>
 	<!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/webutils.js"></script>
 <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-	<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
 
 <script type="text/javascript">
     var baselocation = "http://wx.inxedu.com";
@@ -41,157 +41,30 @@
     var numberRegex=/^[0-9]*$/; //éªè¯æ°å­æ­£å
 </script><script type="text/javascript" src="js/uctop.js"></script>
 	
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
+<script type="text/javascript" src="js/jquery.jcrop.min.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
 <script type="text/javascript">
 
-	$(function () {
-		if(true){
-			$("#examId").removeClass('current').next().removeClass('current');
-            $("#courseId").addClass('current');
-			$("#classId").removeClass('current');
-			$("#mobileSelectCourse").addClass('m-current');
-			$("#mobileSelectExam").removeClass('m-current');
-			$("#mobileSelectQst").removeClass('m-current');
-			$("#mobileSelectClass").removeClass('m-current');
-		}
-		if(false){
-			$("#examId").addClass('current').prev().removeClass('current');
-            $("#qstId").removeClass('current');
-			$("#classId").removeClass('current');
-			$("#mobileSelectExam").addClass('m-current');
-			$("#mobileSelectCourse").removeClass('m-current');
-			$("#mobileSelectQst").removeClass('m-current');
-			$("#mobileSelectClass").removeClass('m-current');
-		}
-		if(false){
-			$("#examId").removeClass('current').prev().removeClass('current');
-            $("#qstId").addClass('current');
-			$("#classId").removeClass('current');
-			$("#mobileSelectQst").addClass('m-current');
-			$("#mobileSelectCourse").removeClass('m-current');
-			$("#mobileSelectExam").removeClass('m-current');
-			$("#mobileSelectClass").removeClass('m-current');
-		}
-        if(false){
-			$("#qstId").removeClass('current');
-            $("#examId").removeClass('current').prev().removeClass('current');
-            $("#classId").addClass('current');
-            $("#mobileSelectClass").addClass('m-current');
-            $("#mobileSelectCourse").removeClass('m-current');
-            $("#mobileSelectExam").removeClass('m-current');
-			$("#mobileSelectQst").removeClass('m-current');
-        }
-	});
-	/**
-	 * 切换课程/试卷/试题收藏
-	 */
-	function changeContent(type) {
-		if (type=="COURSE"){
-			$("#sign").val("COURSE");
-			$("#type").val("COURSE");
-		}
-		if (type=="EXAM"){
-			$("#sign").val("COURSE");
-			$("#type").val("EXAM");
-		}
-		if(type=="QUESTION"){
-			$("#sign").val("QUESTION");
-			$("#type").val("QUESTION");
-		}
-        if (type=="CLASS"){
-            $("#sign").val("COURSE");
-            $("#type").val("CLASS");
-        }
-		$("#searchForm").submit();
+	var oldEmail="33222@qq.com";
+	var oldMobile="13987014556";
+	var oldUserName="barrycom";
+$(function(){
+	showTab('0');//选项控制显示
+	var index= "0";
+	if(index==0){
+        $("#mobileSelectUser0").addClass('m-current');
 	}
-	/**
-	 * 全选或反选 
-	 */
-	function selectAll(em) {
-		$("input[name='favouriteId']").prop('checked', $(em).prop('checked'));
-	}
-
-	/**
-	 * 批量删除收藏
-	 */
-	function batchDelFav() {
-		var arr = $("input[name='favouriteId']:checked");
-		if (arr == null || arr.length == 0) {
-			dialog("删除提示", "请选择要删除的收藏课程！", 1);
-			return;
-		}
-		var favouriteIdStr = "";
-		$('input[name="favouriteId"]:checked').each(function() {
-			favouriteIdStr = favouriteIdStr + $(this).val() + ",";
-		});
-		favouriteIdStr = favouriteIdStr.substring(0, favouriteIdStr.length - 1);
-		dialog("删除提示", "确认要删除选择的收藏课程？", 2, "http://wx.inxedu.com/uc/deleteFaveorite/"
-				+ favouriteIdStr);
-	}
-
-	//取消收藏课程/试卷
-	function delConfirm(courseId,qstId) {
-		dialog("删除提示", "确认要删除此收藏？", 2, "javascript:void(0)' onclick='deleteFaveorite("+courseId+","+qstId+")'");
-	}
-
-	function deleteFaveorite(courseId,qstId) {
-        var type = $("#type").val();
-        var sign = $("#sign").val();
-		$("#tisbutt,.dClose,#qujiao").click();
-		if(sign=='COURSE'){
-			$.ajax({
-				url: '/uc/deleteFaveorite/' + courseId,
-				type: 'post',
-				data: {"type": type},
-				dataType: 'json',
-				success: function (result) {
-					if (result.success == true) {
-						msgshow("删除成功", "true", "3000");
-						window.location.reload();
-					} else {
-						msgshow(result.message, "false", "3000");
-					}
-				}
-			});
-		}
-		if(sign=='QUESTION') {
-			$.ajax({
-				type: "POST",
-				dataType: "json",
-				url: baselocation + "/exam/quest/notFavorite/" + qstId,
-				data: {},
-				async: false,
-				success: function (result) {
-					if (result.success == true) {
-						msgshow("删除成功", "true", "3000");
-						window.location.reload();
-					} else {
-						msgshow(result.message, "false", "3000");
-					}
-				}
-			});
-		}
-	}
+    if(index==1){
+        $("#mobileSelectUser1").addClass('m-current');
+    }
+});
 </script>
-	<script type="text/javascript">
-        var userId = localStorage.getItem('userId');
-        var userToken = localStorage.getItem('userToken');
-        var classification = localStorage.getItem('classification');
-        var loginName = localStorage.getItem('loginName');
-        jQuery(document).ready(function () {
-            var recentColumns = new Array();
-            var paras = "loginName=" +loginName;
-            var processCoResult = function () {
-                jQuery("#Allcollections").html(recentColumns[0]);
-                alert(recentColumns[0]);
-            }
-            getFromWS("frontmooc/getCollections.template", paras,recentColumns, processCoResult);
-		});
-	</script>
 </head>
 <body class="W-body">
 	<input type="hidden" id="mydomain" value=""/>
-
+	
 		<div class="main-warp">
 			<div class="main-infor">
 				<!-- 公共头引入，开始 -->
@@ -235,7 +108,7 @@
 						</div>
 				</li>
 				<li class="h-r-user undis h-login-li loginedLiShow">
-					<a href="http://wx.inxedu.com/uc/index" title="">
+					<a href="#" title="">
 						<img src="" width="30" height="30" class="vam picImg" alt="">
 						<span class="vam disIb c-master" id="userName"></span>
 					</a>
@@ -324,7 +197,7 @@
 			</li>
 		
 			<li>
-				<a href="myfav.html" title="我的收藏">
+				<a href="myFav.html" title="我的收藏">
 					<em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的收藏</tt>
 				</a>
 			</li>
@@ -352,62 +225,154 @@
 							
 	<article class="col-80 fl">
 		<div class="u-r-cont">
-			<form action="http://wx.inxedu.com/uc/myFavorites" method="post" id="searchForm">
-				<input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1" style="width: 60px"/>
-				<input type="hidden" id="sign" name="sign" value="COURSE">
-				<input type="hidden" id="type" name="type" value="COURSE">
-			</form>
 			<section>
 				<div class="">
 					<section class="u-r-tit-all clearfix">
 						<h2 class="fl unFw m-xl-ashow">
-							<a href="javascript:void (0)" id="courseId" onclick="#" title="收藏课程" class="f-fH">收藏课程</a>
-                         
+							<a href="javascript:void (0)" id="courseId" onclick="#" title="基本信息" class="f-fH current">基本信息</a>
+							
 							</h2>
 						<section class="u-m-tit-abox fl">
 							<h2 class="unFw u-m-n-box">
-								<a href="javascript:void(0)" title="" class="f-fH mTitle current more">我的收藏</a>
+									<a href="javascript:void (0)"  onclick="" title="基本信息" class="f-fH mTitle current more">基本信息</a>
 								<em class="icon16 u-i-tbsj-ico">&nbsp;</em>
 							</h2>
 							<div class="u-m-tit-a-warp">
 								<div class="u-m-t-ab-in">
 									<ul>
-										<li id="mobileSelectCourse" class="">
-											<a href="javascript:void(0)" onclick="changeContent('COURSE')" class="">收藏课程</a>
-											<em class="u-i-m-ab-xz">&nbsp;</em>
-										</li>
-                                        <li id="mobileSelectExam" class="">
-											<a href="javascript:void(0)" onclick="changeContent('EXAM')" class="">收藏考试</a>
-											<em class="u-i-m-ab-xz">&nbsp;</em>
-										</li>
-										<li id="mobileSelectQst" class="">
-											<a href="javascript:void(0)" onclick="changeContent('QUESTION')" class="">收藏试题</a>
-											<em class="u-i-m-ab-xz">&nbsp;</em>
-										</li>
-                                        <li id="mobileSelectClass" class="">
-											<a href="javascript:void(0)" onclick="changeContent('CLASS')" class="">收藏班级</a>
-											<em class="u-i-m-ab-xz">&nbsp;</em>
-										</li>
-										</ul>
+											<li id="mobileSelectUser0" class="">
+												<a href="javascript:void (0)" onclick="#" title="基本信息" class="">基本信息</a>
+												<em class="u-i-m-ab-xz">&nbsp;</em>
+											</li>
+									
+									</ul>
 								</div>
 							</div>
 						</section>
 					</section>
-					<section class="u-r-all-box" id="Allcollections">
+					<div class="u-r-all-box" id="p_tCont">
+						<!--修改头像，开始-->
+						<div class="u-account-box">
+							<div class="clearfix">
+								<section class="fl u-acc-l">
+									<div class="tac ur-titpic">
+										<span class="u-r-t-picin">
+											<img  src="picture/avatar-boy.gif" >
+										</span>
+									</div>
+									<div class="tac ur-titbtn">
+										<a class="" href="javascript:void(0)" onclick="uploadImg()">修改头像</a>
+										<INPUT TYPE="FILE" NAME="NEWFILE1" onchange="uploadHeadImg()" id="headImg" style="display: none">
+									</div>
+								</section>
+								<div class="fl u-acc-bottom">
+									<!-- /修改个人头像 -->
+									<input type="button" class="commBtn bgGreen w80 ml50" id="deleImage" style="display: none">
+									<!--修改头像，结束-->
+									<form method="post" name="photoForm">
+										<input id="photoPath" type="hidden" value="" />
+										<input id="oldPhotoPath" type="hidden" value="" />
+										<input type="hidden" value="1" id="picture_width" />
+										<input type="hidden" value="1" id="picture_height" />
+										<input type="hidden" value="82" id="txt_top" />
+										<input type="hidden" value="73" id="txt_left" />
+										<input type="hidden" value="120" id="txt_DropWidth" />
+										<input type="hidden" value="120" id="txt_DropHeight" />
+										<input type="hidden" id="txt_Zoom" />
+									</form>
+									<!--修改头像，结束-->
+									<ol class="u-account-li u-account-li-new">
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">账 号：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">barrycom</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">昵 称：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right"><input placeholder="张飞"></span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">姓 名：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">这是谁的</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">学 校：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">武汉大学</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">专 业：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">计算机</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">手机号：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">13987014556</span>
+										</li>
+										<li>
+											<label class="u-a-title">
+												<span class="fsize16 c-999">邮 箱：</span>
+											</label>
+											<span class="disIb fsize16 c-666 f-fM vam  u-a-ti-right">33222@qq.com</span>
+										</li>
+										</ol>
+									<div class="mt10 hLh30 tac fsize14 c-333 f-fM">注：完善信息方便找回密码，账户更安全。</div>
+									<section class="u-o-right mt50 tac">
+										<a class="cou-kscp big-all-btn" href="javascript:void(0)" onclick="#">编 辑 资 料</a>
+									</section>
+								</div>
+							</div>
+						</div>
 
-						<!-- 公共分页 开始 -->
-						<script type="text/javascript" src="js/page.js"></script>
-<script type="text/javascript">
-    var totalPageSize =1;
-    var currentPage =0<1 ? 1 :1;
-    var totalPage = 1;
-    showPageNumber();
-</script><!-- 公共分页 结束 -->
-					</section>
+						<!--修改密码，开始-->
+						<div class="u-account-box undis">
+							<form method="post" name="pwdForm" id="pwdForm">
+								<input type="hidden" name="user.userId" value="533" />
+								<ol class="u-account-li tac">
+									<li>
+										<label class="u-a-title">
+											<span class="fsize16 c-999">旧密码</span>
+										</label>
+										<input type="password" class="u-a-inpt" name="nowPassword" value="" placeholder="" maxlength="16">
+										<span class="u-a-error"></span>
+									</li>
+									<li>
+										<label class="u-a-title">
+											<span class="fsize16 c-999">新密码</span>
+										</label>
+										<input type="password" class="u-a-inpt" name="newPassword" placeholder="" maxlength="16">
+										<span class="u-a-error"></span>
+									</li>
+									<li>
+										<label class="u-a-title">
+											<span class="fsize16 c-999">新密码确认</span>
+										</label>
+										<input type="password" class="u-a-inpt" name="confirmPwd" value="" placeholder="" maxlength="16">
+										<span class="u-a-error"></span>
+									</li>
+								</ol>
+							</form>
+							<section class="u-o-right mt50 tac">
+								<a href="javascript:void(0)" title="修 改 密 码" class="cou-kscp big-all-btn mr20" onclick="updatePwd();">修 改 密 码</a>
+								</section>
+						</div>
+						<!--修改密码，结束-->
+					</div>
 				</div>
 			</section>
+			<!-- /我的资料 -->
 		</div>
 	</article>
+	<!-- /右侧内容区 结束 -->
 <!-- /右侧内容区 结束 -->
 							<div class="clear"></div>
 						</div>
@@ -456,7 +421,7 @@
     </section>
    </footer>
 		<script type="text/javascript" src="js/footer.js"></script>
-	  <div class="r-fixed-wrap">
+<div class="r-fixed-wrap">
 	<div class="pr r-fix-box">
 		<ul class="r-fixed-ul">
 			<li id="goTopBtn" class="undis">

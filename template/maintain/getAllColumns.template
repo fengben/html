@@ -6,7 +6,6 @@
 	If recordCount()>0
 		Repeat
 		:allcolumnData = :allcolumnData#"{'id':'"#id#"','pId':'"#parent_id#"','text':'"#name#"'},"
-
 		EndRepeat
 		Exit(:allcolumnData)
 	EndIf

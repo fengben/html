@@ -1,175 +1,191 @@
-﻿<!DOCTYPE HTML>
-<!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="lt-ie9"> <![endif]-->
+<!DOCTYPE HTML>
+<!--[if lt IE 7]>
+<html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html>
 <!--<![endif]-->
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
 
-<meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta content="telephone=no" name="format-detection" />
-<link rel="shortcut icon" href="http://wx.inxedu.com/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="css/reset.css">
-<link rel="stylesheet" type="text/css" href="css/global.css">
-<link rel="stylesheet" type="text/css" href="css/web.css">
-<link rel="stylesheet" type="text/css" href="css/theme.css">
-<link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">
-<title>个人中心-中国在线教育平台第一品牌</title>
-	<!--[if lt IE 9]><script src="js/html5.js"></script><![endif]-->
-<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-<script type="text/javascript" src="js/webutils.js"></script>
-<script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
-<script type="text/javascript" src="js/common.js"></script>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="shortcut icon" href="http://wx.inxedu.com/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="css/web.css">
+    <link rel="stylesheet" type="text/css" href="css/theme.css">
+    <link href="css/mw_320_768.css" rel="stylesheet" type="text/css"
+          media="screen and (min-width: 320px) and (max-width: 768px)">
+    <title>个人中心-中国在线教育平台第一品牌</title>
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script><![endif]-->
+    <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="/scripts/uploadfile.js"></script>
 
-<script type="text/javascript">
-   
-</script><script type="text/javascript" src="js/uctop.js"></script>
-	
-    
+    <script type="text/javascript" src="js/webutils.js"></script>
+    <script type="text/javascript" src="js/headerh5searchcommon.js"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+
+    <script type="text/javascript">
+
+    </script>
+    <!--<script type="text/javascript" src="js/uctop.js"></script>-->
+
+
     <script>
         $(function () {
             /*sellType为取的课程类型，根据sellType给导航加选中状态*/
             var sellType = '';
             var isoverdue = 'false';
             /*是否查询的过期课程*/
-            if (isoverdue=="true"){
+            if (isoverdue == "true") {
                 $("#selectOVER").addClass("current");
                 $("#mobileSelectOVER").addClass("m-current");
                 $(".mTitle").text("过期课程");
-            }else if (sellType=="") {
-               /* 查询总课程没有sellType状态*/
+            } else if (sellType == "") {
+                /* 查询总课程没有sellType状态*/
                 $("#selectAll").addClass("current");
                 $("#mobileSelectAll").addClass("m-current");
                 /*移动端筛选标题*/
                 $(".mTitle").text("全部课程");
-            } else if (sellType=="COURSE"){
-                $("#select"+sellType).addClass("current");
-                $("#mobileSelect"+sellType).addClass("m-current");
+            } else if (sellType == "COURSE") {
+                $("#select" + sellType).addClass("current");
+                $("#mobileSelect" + sellType).addClass("m-current");
                 /*移动端筛选标题*/
                 $(".mTitle").text("录播课程");
-            } else if (sellType=="LIVE"){
-                $("#select"+sellType).addClass("current");
-                $("#mobileSelect"+sellType).addClass("m-current");
+            } else if (sellType == "LIVE") {
+                $("#select" + sellType).addClass("current");
+                $("#mobileSelect" + sellType).addClass("m-current");
                 /*移动端筛选标题*/
                 $(".mTitle").text("直播课程");
-            }  else if (sellType=="lineCourse"){
-                $("#select"+sellType).addClass("current");
-                $("#mobileSelect"+sellType).addClass("m-current");
+            } else if (sellType == "lineCourse") {
+                $("#select" + sellType).addClass("current");
+                $("#mobileSelect" + sellType).addClass("m-current");
                 /*移动端筛选标题*/
                 $(".mTitle").text("面授");
-            }else if (sellType=="PACKAGE"){
-                $("#select"+sellType).addClass("current");
-                $("#mobileSelect"+sellType).addClass("m-current");
+            } else if (sellType == "PACKAGE") {
+                $("#select" + sellType).addClass("current");
+                $("#mobileSelect" + sellType).addClass("m-current");
                 /*移动端筛选标题*/
                 $(".mTitle").text("直播课程");
             }
 
         });
+
         /*导航按钮点击事件*/
         function selectSelfCourse(type) {
-            if (type=="COURSE"){
+            if (type == "COURSE") {
                 $("#sellType").val("COURSE");
                 $("#over").val("")
             }
-            if (type=="LIVE"){
+            if (type == "LIVE") {
                 $("#sellType").val("LIVE");
                 $("#over").val("")
             }
-            if (type=="PACKAGE"){
+            if (type == "PACKAGE") {
                 $("#sellType").val("PACKAGE");
                 $("#over").val("")
             }
-            if (type=="OVER"){
+            if (type == "OVER") {
                 $("#sellType").val("");
                 $("#over").val("true")
             }
-            if (type=="lineCourse"){
+            if (type == "lineCourse") {
                 $("#sellType").val("lineCourse");
                 $("#over").val("")
             }
-            if (type=="All"){
+            if (type == "All") {
                 $("#sellType").val("");
                 $("#over").val("")
             }
             $("#searchForm").submit();
         }
+
         /*获取章节列表*/
-        function getCoursePackageList(courseId,obj) {
-            if($(obj).parent().find(".lh-menu-wrap").html()==null&&$(obj).parent().find("table.table_sche").length==0){
+        function getCoursePackageList(courseId, obj) {
+            if ($(obj).parent().find(".lh-menu-wrap").html() == null && $(obj).parent().find("table.table_sche").length == 0) {
                 $.ajax({
-                    url : baselocation + "/uc/ajax/coursePackageList/"+courseId,
-                    data:{},
-                    type : 'post',
-                    dataType : 'text',
-                    success : function(result) {
+                    url: baselocation + "/uc/ajax/coursePackageList/" + courseId,
+                    data: {},
+                    type: 'post',
+                    dataType: 'text',
+                    success: function (result) {
                         $(obj).parent().append(result);
                         showTable(obj);
                         $(obj).parent().find(".lh-menu-wrap").find(".endTime").html($(obj).prev().html())
                     }
                 });
-            }else{
+            } else {
                 showTable(obj);
             }
 
         }
+
         /**
          * 获得直播章节目录
          * @param num
          */
-        function getLiveKpointList(courseId,obj) {
-            if($(obj).parent().find("table.classIsEmpty").html()==null){
+        function getLiveKpointList(courseId, obj) {
+            if ($(obj).parent().find("table.classIsEmpty").html() == null) {
                 $.ajax({
-                    url : baselocation + "/front/ajax/liveKpointList/"+courseId,
-                    data:{},
-                    type : 'post',
-                    dataType : 'text',
-                    success : function(result) {
+                    url: baselocation + "/front/ajax/liveKpointList/" + courseId,
+                    data: {},
+                    type: 'post',
+                    dataType: 'text',
+                    success: function (result) {
                         $(obj).parent().append(result);
                         showTable(obj);
                     }
                 });
-            }else{
+            } else {
                 showTable(obj);
             }
         }
+
         /*直播列表展开隐藏*/
-        function showTable(obj){
-            if(!$(obj).hasClass("sch-open")){
+        function showTable(obj) {
+            if (!$(obj).hasClass("sch-open")) {
                 $(obj).siblings("#coursePackageList").hide();
                 $(obj).addClass("sch-open");
-                $(obj).parent().find("table").attr("style","display:none");
+                $(obj).parent().find("table").attr("style", "display:none");
                 $(obj).text("课程表展开∨");
-            }else{
+            } else {
                 $(obj).siblings("#coursePackageList").show();
                 $(obj).removeClass("sch-open");
-                $(obj).parent().find("table").attr("style","display:table");
+                $(obj).parent().find("table").attr("style", "display:table");
                 $(obj).text("课程表收起∧");
             }
         }
+
         /**
          * 获得课程章节目录
          * @param num
          */
-        function getCourseKpointList(courseId,obj) {
-            if($(obj).next().html()==""){
+        function getCourseKpointList(courseId, obj) {
+            if ($(obj).next().html() == "") {
                 $(obj).html("直播章节收起∧");
                 goBack = "true";
                 $.ajax({
-                    url : baselocation + "/front/ajax/courseKpointList/"+courseId+"/"+"2",
-                    data:{},
-                    type : 'post',
-                    dataType : 'text',
-                    success : function(result) {
+                    url: baselocation + "/front/ajax/courseKpointList/" + courseId + "/" + "2",
+                    data: {},
+                    type: 'post',
+                    dataType: 'text',
+                    success: function (result) {
                         $(obj).next().html(result);
                         treeMenu(); //课程树
                     }
                 });
-            }else {
+            } else {
                 $(obj).html("直播章节展开∨");
                 $(obj).next().html("")
             }
@@ -177,452 +193,489 @@
     </script>
 </head>
 <body class="W-body">
-	<input type="hidden" id="mydomain" value=""/>
-	
-		
-		<div class="main-warp">
-			<div class="main-infor">
-				<!-- 公共头引入，开始 -->
-				<!-- /global header begin-->
-<header id="header" class="all-header">
-	<section class="container">
-		<h1 id="logo" class="logo">
-			<a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
-			<a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="武汉大学出版社">
-				<img src="picture/mo-back.png">
-			</a>
-		</h1>
-		<div class="h-r-nsl">
-			<ul class="nav">
-				<li><a href="default.html" title="首页">首页</a></li>
-				<li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-				<li><a href="shoollist.html" title="直播">名校</a></li>
-				<li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
-				<li><a href="group.html" title="社区" target="_blank">学问</a></li>
-				<li><a href="article.html" title="资讯">资讯</a></li>
-				</ul>
-			<!-- / nav -->
-			<ul class="h-r-login clearfix">
-				<li class="undis h-login-li" id="no-login">
-					<a href="javascript:lrFun()" title="登录">
-						<em class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span>
-					</a>
-				</li>
-				<li class="tit-new-list undis h-login-li" id="is-login-one">
-					<a href="/uc/letter" title="消息" id="headerMsgCountId">
-						<em class="news-icon">&nbsp;</em>
-					</a>
-					<q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
-						<div class="tit-n-warp">
-							<ol id="letter">
-							
-							</ol>
-							<div class="new-tit-box tac mt10 mb20" style="display:none">
-								<a href="/uc/letter" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
-							</div>
-						</div>
-				</li>
-				<li class="h-r-user undis h-login-li loginedLiShow">
-					<a href="/uc/index" title="">
-						<img src="" width="30" height="30" class="vam picImg" alt="">
-						<span class="vam disIb c-master" id="userName"></span>
-					</a>
-				</li>
-				<li class="h-r-user undis h-login-li loginedLiShow">
-					<a href="/front/helpCenter" title="帮助" class="vam">
-						<span class="vam disIb c-fff">帮助</span>
-					</a>
-				</li>
-				<li class="h-r-user undis h-login-li loginedLiShow">
-					<a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
-						<span class="vam disIb c-fff">退出</span>
-					</a>
-				</li>
-				<!-- /未登录显示第1 li；登录后显示第2，3 li -->
-			</ul>
-			<aside class="h-r-search">
-				<div class="pr h-r-s-box-cx">
-					<form action="/front/showcoulist" method="post" id="headerformSearch" onsubmit="return toSearch()">
-						<label class="h-r-s-box"><input type="text" value="" id="headerSearchName" name="queryCourse.courseName" placeholder="搜索...">
-						<button class="s-btn" type="submit"> <em class="icon18">&nbsp;</em> </button></label>
-					</form>
-				</div>
-			</aside>
-		</div>
-		<aside class="mw-nav-btn">
-			<div class="mw-nav-icon"></div>
-		</aside>
-		<aside class="mw-nav-seach mw-nav-seach-d1">
-			<form action="" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
-				<label>
-					<input type="text" value="" placeholder="" id="h5HeaderSearchName" class="f-fM h1-mw-seach-input i_h_gb_s_input">
-					<a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
-				</label>
-			</form>
+<input type="hidden" id="mydomain" value=""/>
 
-				<div class="exam-mo-test-time tac">
-					<span class="time c-fff f-fM vam examTimer"></span>
-					<a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
-					</div>
 
-		</aside>
-		<div class="clear mobile-clear"></div>
-	</section>
-</header>
-<!-- /global header end-->
-<!-- 公共头引入，结束 -->
-				<div class="bg-fa of">
-					<!-- /个人中心 主体 开始 -->
-					<section class="container">
-						<div class="u-body mt30">
-							<!-- 左侧，开始 -->
-							<link rel="stylesheet" type="text/css" href="css/jquery.jcrop.min.css" />
-<script type="text/javascript" src="js/plupload.full.min.js"></script><menu class="col-20 fl uMenu">
-	<section class="of u-left-top">
-		<div class="u-face-pic">
-			<img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
-			<a href="javascript:void (0)" onclick="dialog('修改头像','',7)"title="" class="c-fff">修改头像</a>
-		</div>
-		<div class="hLh20 txtOf mt10 tac">
-			<a href="/uc/initUpdateUser/0" class="fsize14 c-333 userNameClass"><!-- 用户名 --></a>
-		</div>
-<div class="mt5 of tac">
+<div class="main-warp">
+    <div class="main-infor">
+        <!-- 公共头引入 -->
+        <!-- /global header begin-->
+        <header id="header" class="all-header">
+            <section class="container">
+                <h1 id="logo" class="logo"><a class="headerlogo" style="display: none;" href="/" title="武汉大学出版社"> <img
+                        src="picture/logo.png" width="100%" alt="武汉大学出版社"/> </a> <a class="headerfanhui"
+                                                                                    style="display: none"
+                                                                                    href="javascript:void (0)"
+                                                                                    onclick="goHistory('')"
+                                                                                    title="武汉大学出版社"> <img
+                        src="picture/mo-back.png"/> </a></h1>
+                <div class="h-r-nsl">
+                    <ul class="nav">
+                        <li><a href="default.html" title="首页">首页</a></li>
+                        <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
+                        <li><a href="shoollist.html" title="直播">名校</a></li>
+                        <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
+                        <li><a href="group.html" title="社区" target="_blank">学问</a></li>
+                        <li><a href="article.html" title="资讯">资讯</a></li>
+                    </ul>
+                    <!-- / nav -->
+                    <ul class="h-r-login clearfix">
+                        <li class="undis h-login-li" id="no-login"><a href="javascript:showlogin()" title="登录"> <em
+                                class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span> </a></li>
+                        <li class="tit-new-list undis h-login-li" id="is-login-one"><a href="/uc/letter" title="消息"
+                                                                                       id="headerMsgCountId"> <em
+                                class="news-icon">&nbsp;</em> </a> <q class="red-point" id="letterPoint"
+                                                                      style="display: none">&nbsp;</q>
+                            <div class="tit-n-warp">
+                                <ol id="letter">
+                                </ol>
+                                <div class="new-tit-box tac mt10 mb20" style="display:none">
+                                    <a href="/uc/letter" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="/uc/index" title=""> <img src=""
+                                                                                                               width="30"
+                                                                                                               height="30"
+                                                                                                               class="vam picImg"
+                                                                                                               alt=""/>
+                            <span class="vam disIb c-master" id="userName"></span> </a></li>
+                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="helpCenter" title="帮助" class="vam">
+                            <span class="vam disIb c-fff">帮助</span> </a></li>
+                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="javascript:void(0)" title="退出"
+                                                                               onclick="exit();" class=" vam"> <span
+                                class="vam disIb c-fff">退出</span> </a></li>
+                        <!-- /未登录显示第1 li；登录后显示第2，3 li -->
+                    </ul>
+                    <aside class="h-r-search">
+                        <div class="pr h-r-s-box-cx">
+                            <form action="showcoulist" method="post" id="headerformSearch" onsubmit="return toSearch()">
+                                <label class="h-r-s-box"><input type="text" value="" id="headerSearchName"
+                                                                name="queryCourse.courseName" placeholder="搜索..."/>
+                                    <button class="s-btn" type="submit"><em class="icon18">&nbsp;</em></button>
+                                </label>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
+                <aside class="mw-nav-btn">
+                    <div class="mw-nav-icon"></div>
+                </aside>
+                <aside class="mw-nav-seach mw-nav-seach-d1">
+                    <form action="" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+                        <label> <input type="text" value="" placeholder="" id="h5HeaderSearchName"
+                                       class="f-fM h1-mw-seach-input i_h_gb_s_input"/> <a href="javascript:void(0)"
+                                                                                          onclick="$('#headerformH5Search').submit();"
+                                                                                          class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+                        </label>
+                    </form>
+                    <div class="exam-mo-test-time tac">
+                        <span class="time c-fff f-fM vam examTimer"></span>
+                        <a href="javascript:void(0)" onclick="timePause(this)" title=""
+                           class="de-over-btn timePauseTag"></a>
+                    </div>
+                </aside>
+                <div class="clear mobile-clear"></div>
+            </section>
+        </header>
+        <!-- /global header end-->
+        <!-- 公共头引入 -->
+        <div class="bg-fa of">
+            <!-- /个人中心 主体 开始 -->
+            <section class="container">
+                <div class="u-body mt30">
+                    <!-- 左侧，开始 -->
+                    <link rel="stylesheet" type="text/css" href="css/jquery.jcrop.min.css"/>
+                    <script type="text/javascript" src="js/plupload.full.min.js"></script>
+                    <menu class="col-20 fl uMenu">
+                        <section class="of u-left-top">
+                            <div class="u-face-pic">
+                                <img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
+                                <a href="javascript:void (0)" onclick="uploadImg()" title=""
+                                   class="c-fff">修改头像 </a>
+                            </div>
+                            <INPUT TYPE="FILE" NAME="NEWFILE1" onchange="uploadHeadImg()" id="headImg" style="display: none">
+
+
+                            <div class="hLh20 txtOf mt10 tac">
+                                <a href="/uc/initUpdateUser/0" class="fsize14 c-333 userNameClass"><!-- 用户名 --></a>
+                            </div>
+                            <div class="mt5 of tac">
 				<span class="u-tit-vip" style="display: none">
 					<em class="vip-pic">
 						<img src="picture/vip.png">
 					</em>
 					<tt class="vam c-fff fsize12 f-fM">已开通vip</tt>
 				</span>
-				<a href="/uc/associator" class="u-tit-vip-gq" style="display: none" title="立即开通vip">
-					<em class="vip-pic">
-						<img src="picture/vip.png">
-					</em>
-					<tt class="vam c-fff fsize12 f-fM">未开通vip</tt>
-				</a>
+                                <a href="/uc/associator" class="u-tit-vip-gq" style="display: none" title="立即开通vip">
+                                    <em class="vip-pic">
+                                        <img src="picture/vip.png">
+                                    </em>
+                                    <tt class="vam c-fff fsize12 f-fM">未开通vip</tt>
+                                </a>
 
-		</div>
-<div class="clear"></div>
-	</section>
-	<div>
-		<ul id="navList" class="uM-list">
-			<li>
-				<a href="my.html" title="我的课程">
-					<em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的课程</tt>
-				</a>
-			</li>
-		
-			<li>
-				<a href="myFav.html" title="我的收藏">
-					<em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的收藏</tt>
-				</a>
-			</li>
-			<li>
-				<a href="myletter.html" title="消息中心">
-					<em class="icon24 uM-xxzx-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">消息中心</tt>
-				</a>
-			</li>
-		</ul>
-		<ul id="navList" class="uM-list">
-			<li>
-				<a href="myOrderList.html" title="我的订单">
-					<em class="icon24 uM-ddzx-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的订单</tt>
-				</a>
-			</li>
-			<li>
-				<a href="myinfo.html" title="个人信息">
-					<em class="icon24 uM-grzl-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">个人信息</tt>
-				</a>
-			</li>
-		</ul>
-	</div>
-</menu>
-<!-- /公共左侧菜单 结束 --><!-- 左侧，结束 -->
-							
-    <article class="col-80 fl">
-        <div class="u-r-cont-top-w">
-            <section>
-                <section class="u-r-tit-all clearfix">
-                    <h2 class="clearfix fl">
-                        <span class="f-fH unFw current">近期学习</span>
-                    </h2>
-                </section>
-                <section class="">
-                    <div class="u-r-all-box">
-                        <section class="no-data-wrap">
-                                <em class="icon30 no-data-ico">&nbsp;</em> <span class="c-666 fsize14 ml10 vam">还没有开始学习哦！~<a href="/front/showcoulist" class="c-master">马上去学习</a></span>
+                            </div>
+                            <div class="clear"></div>
+                        </section>
+                        <div>
+                            <ul id="navList" class="uM-list">
+                                <li>
+                                    <a href="my.html" title="我的课程">
+                                        <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">我的课程</tt>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="myFav.html" title="我的收藏">
+                                        <em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">我的收藏</tt>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="myletter.html" title="消息中心">
+                                        <em class="icon24 uM-xxzx-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">消息中心</tt>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul id="navList" class="uM-list">
+                                <li>
+                                    <a href="myOrderList.html" title="我的订单">
+                                        <em class="icon24 uM-ddzx-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">我的订单</tt>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="myinfo.html" title="个人信息">
+                                        <em class="icon24 uM-grzl-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">个人信息</tt>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </menu>
+                    <!-- /公共左侧菜单 结束 --><!-- 左侧，结束 -->
+
+                    <article class="col-80 fl">
+                        <div class="u-r-cont-top-w">
+                            <section>
+                                <section class="u-r-tit-all clearfix">
+                                    <h2 class="clearfix fl">
+                                        <span class="f-fH unFw current">近期学习</span>
+                                    </h2>
+                                </section>
+                                <section class="">
+                                    <div class="u-r-all-box">
+                                        <section class="no-data-wrap">
+                                            <em class="icon30 no-data-ico">&nbsp;</em> <span
+                                                class="c-666 fsize14 ml10 vam">还没有开始学习哦！~<a href="/front/showcoulist"
+                                                                                            class="c-master">马上去学习</a></span>
+                                        </section>
+                                    </div>
+                                </section>
                             </section>
                         </div>
-                </section>
-            </section>
-        </div>
-        <div class="u-r-cont">
-            <section class="">
-                <form id="searchForm" method="post" action="/uc/index">
-                    <input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1" />
-                    <input type="hidden" id="sellType" name="sellType" value="">
-                    <input type="hidden" id="over" name="ifOver" value="">
-                </form>
-                <div>
-                    <section class="u-r-tit-all clearfix">
-                        <h2 class="fl unFw m-xl-ashow">
-                            <a  href="javascript:void (0)" id="selectAll" onclick="#" title="全部课程" class="f-fH  more">全部课程</a>
-                           
-                        </h2>
-                        <section class="u-m-tit-abox fl">
-                            <h2 class="unFw u-m-n-box">
-                                <a href="javascript:void(0)" title="" class="f-fH mTitle current more">全部课程</a>
-                                <em class="icon16 u-i-tbsj-ico">&nbsp;</em>
-                            </h2>
-                            <div class="u-m-tit-a-warp">
-                                <div class="u-m-t-ab-in">
-                                    <ul>
-                                        <li  id="mobileSelectAll">
-                                            <a href="javascript:void(0)" onclick="#"  class="">全部课程</a>
-                                            <em class="u-i-m-ab-xz">&nbsp;</em>
-                                        </li>
-                              
-                                    </ul>
-                                </div>
-                            </div>
-                        </section>
-                   
-                        </section>
-                </div>
-                <div class="uc-index-warp" id="aCoursesList">
-                    <div class="u-i-cou-warp">
-                            <dl>
-                                        <dd class="u-order-list">
-                                            <section class="w50pre disIb vam u-o-left">
-                                                <div class="u-o-l-infor">
-                                                    <div class="c-cou-item">
-                                                        <div class="">
-                                                            <div>
-                                                                    <a class="u-ol-pic u-ol-pic-new"
-                                                                   
-                                                                        href="/uc/courseInfo/148"
-                                                                   
-                                                                   title="">
-                                                                    <img src="picture/1487838648951.jpg" class="img-responsive" alt="中国历史（展示）" />
-                                                                        </a>
-                                                                <h6 class="hLh30 txtOf name">
-                                                                    <a
-                                                                        
-                                                                                href="/uc/courseInfo/148"
-                                                                            
-                                                                            title="中国历史（展示）" class="fsize16 c-333">
+                        <div class="u-r-cont">
+                            <section class="">
+                                <form id="searchForm" method="post" action="/uc/index">
+                                    <input type="hidden" id="pageCurrentPage" name="page.currentPage" value="1"/>
+                                    <input type="hidden" id="sellType" name="sellType" value="">
+                                    <input type="hidden" id="over" name="ifOver" value="">
+                                </form>
+                                <div>
+                                    <section class="u-r-tit-all clearfix">
+                                        <h2 class="fl unFw m-xl-ashow">
+                                            <a href="javascript:void (0)" id="selectAll" onclick="#" title="全部课程"
+                                               class="f-fH  more">全部课程</a>
 
-                                                                        <tt class="c-master fsize16 f-fM">[ 录播 ]&nbsp;</tt>
-                                                                        中国历史（展示）</a>
-                                                                </h6>
-                                                                <section class="hLh20 mt10 of">
+                                        </h2>
+                                        <section class="u-m-tit-abox fl">
+                                            <h2 class="unFw u-m-n-box">
+                                                <a href="javascript:void(0)" title="" class="f-fH mTitle current more">全部课程</a>
+                                                <em class="icon16 u-i-tbsj-ico">&nbsp;</em>
+                                            </h2>
+                                            <div class="u-m-tit-a-warp">
+                                                <div class="u-m-t-ab-in">
+                                                    <ul>
+                                                        <li id="mobileSelectAll">
+                                                            <a href="javascript:void(0)" onclick="#" class="">全部课程</a>
+                                                            <em class="u-i-m-ab-xz">&nbsp;</em>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </section>
+
+                                    </section>
+                                </div>
+                                <div class="uc-index-warp" id="aCoursesList">
+                                    <div class="u-i-cou-warp">
+                                        <dl>
+                                            <dd class="u-order-list">
+                                                <section class="w50pre disIb vam u-o-left">
+                                                    <div class="u-o-l-infor">
+                                                        <div class="c-cou-item">
+                                                            <div class="">
+                                                                <div>
+                                                                    <a class="u-ol-pic u-ol-pic-new"
+
+                                                                       href="/uc/courseInfo/148"
+
+                                                                       title="">
+                                                                        <img src="picture/1487838648951.jpg"
+                                                                             class="img-responsive" alt="中国历史（展示）"/>
+                                                                    </a>
+                                                                    <h6 class="hLh30 txtOf name">
+                                                                        <a
+
+                                                                                href="/uc/courseInfo/148"
+
+                                                                                title="中国历史（展示）" class="fsize16 c-333">
+
+                                                                            <tt class="c-master fsize16 f-fM">[ 录播 ]&nbsp;</tt>
+                                                                            中国历史（展示）</a>
+                                                                    </h6>
+                                                                    <section class="hLh20 mt10 of">
                                                                     <span class="fl">
                                                                         <tt class="fsize13 c-999 f-fM vam">课时：</tt>
                                                                         <tt class="fsize13 c-999 f-fM vam">1</tt>
                                                                     </span>
-                                                                    <span class="fr">
+                                                                        <span class="fr">
                                                                            <tt class="fsize13 c-999 f-fM vam">有效期：</tt>
                                                                         <tt class="fsize13 c-999 f-fM vam ">2018-07-15</tt>
                                                                         </span>
-                                                                </section>
-                                                                <section class="hLh20 mt10 of">
+                                                                    </section>
+                                                                    <section class="hLh20 mt10 of">
                                                                     <span>
                                                                              <tt class="fsize13 c-999 f-fM vam">未学习</tt>
                                                                         </span>
                                                                     </section>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </section>
-                                            <section class="disIb vam u-i-jdbox col-3 tac mb15">
-                                                <div class="clearfix">
-                                                    <div class="disIb vam ml30 new-u-i-jdt-name">
-                                                        <span class="c-999 f-fM fsize14">总进度：</span>
-                                                    </div>
-                                                    <div class="disIb vam new-u-i-jdt">
-                                                        <div class="time-bar-wrap">
-                                                            <div class="lev-num-wrap" title="已学0%">
-                                                                <aside class='lev-num-bar bg-green' style="width: 0%;"></aside>
-                                                                <span class="lev-num"><big>0%</big>/<small>100%</small></span>
+                                                </section>
+                                                <section class="disIb vam u-i-jdbox col-3 tac mb15">
+                                                    <div class="clearfix">
+                                                        <div class="disIb vam ml30 new-u-i-jdt-name">
+                                                            <span class="c-999 f-fM fsize14">总进度：</span>
+                                                        </div>
+                                                        <div class="disIb vam new-u-i-jdt">
+                                                            <div class="time-bar-wrap">
+                                                                <div class="lev-num-wrap" title="已学0%">
+                                                                    <aside class='lev-num-bar bg-green'
+                                                                           style="width: 0%;"></aside>
+                                                                    <span class="lev-num"><big>0%</big>/<small>100%</small></span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </section>
-                                            <section class="col-2 disIb vam u-o-right">
-                                                <div class="tar u-o-r-btn-infor">
-                                                    <p class="mb20">
-                                                        <a href="/uc/courseInfo/148" class="cou-kscp" title="查看详情">查看详情</a>
-                                                            </p>
-                                                </div>
-                                            </section>
-                                            <div class="clear"></div>
-                                        </dd>
-                                    </dl>
+                                                </section>
+                                                <section class="col-2 disIb vam u-o-right">
+                                                    <div class="tar u-o-r-btn-infor">
+                                                        <p class="mb20">
+                                                            <a href="/uc/courseInfo/148" class="cou-kscp" title="查看详情">查看详情</a>
+                                                        </p>
+                                                    </div>
+                                                </section>
+                                                <div class="clear"></div>
+                                            </dd>
+                                        </dl>
 
+                                    </div>
+                                    <script type="text/javascript" src="js/page.js"></script>
+                                    <script type="text/javascript">
+                                        var totalPageSize = 1;
+                                        var currentPage = 0 < 1 ? 1 : 1;
+                                        var totalPage = 1;
+                                        showPageNumber();
+                                    </script>
                                 </div>
-                        <script type="text/javascript" src="js/page.js"></script>
-<script type="text/javascript">
-    var totalPageSize =1;
-    var currentPage =0<1 ? 1 :1;
-    var totalPage = 1;
-    showPageNumber();
-</script></div>
+                            </section>
+                            <!-- /我的课程 -->
+                        </div>
+                    </article>
+                    <script type="text/javascript" src="js/uc_index.js"></script>
+                    <!-- /右侧内容区 结束 -->
+                    <div class="clear"></div>
+                </div>
             </section>
-            <!-- /我的课程 -->
+            <!-- /个人中心 主体 结束 -->
         </div>
-    </article>
-<script type="text/javascript" src="js/uc_index.js"></script>
-<!-- /右侧内容区 结束 -->
-							<div class="clear"></div>
-						</div>
-					</section>
-					<!-- /个人中心 主体 结束 -->
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="mo-footer">
-		<!-- 公共底引入 -->
-		<script type="text/javascript" src="js/footer.js"></script>
- <footer id="footer">
-    <section class="container">
-     <div class="b-foot">
-      <section class="fl col-80">
-       <section class="mr20">
-        <div class="find-box">
-         <h4 class="hLh30 txtOf"> <span class="fsize18 f-fM c-fff">友情链接</span> </h4>
-         <ul class="flink-list clearfix">
-          <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学出版社</a></li>
-			 <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学国家网络安全学院</a></li>
-			 <li><a href="#" title="武汉大学出版社" target="_blank">武汉樱顶网络安全技术中心</a></li>
-			 <li><a href="../mainmooc/login.html" title="武汉大学出版社" target="_blank">后台管理</a></li>
-         </ul>
-         <div class="clear"></div>
+    </div>
+</div>
+</div>
+<div class="mo-footer">
+    <!-- 公共底引入 -->
+    <script type="text/javascript" src="js/footer.js"></script>
+    <footer id="footer">
+        <section class="container">
+            <div class="b-foot">
+                <section class="fl col-80">
+                    <section class="mr20">
+                        <div class="find-box">
+                            <h4 class="hLh30 txtOf"><span class="fsize18 f-fM c-fff">友情链接</span></h4>
+                            <ul class="flink-list clearfix">
+                                <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学出版社</a></li>
+                                <li><a href="http://cse.whu.edu.cn/" title="武汉大学出版社" target="_blank">武汉大学国家网络安全学院</a>
+                                </li>
+                                <li><a href="http://www.whuyingding.com/" title="武汉大学出版社"
+                                       target="_blank">武汉樱顶网络安全技术中心</a></li>
+                                <li><a href="articleManagement.html" title="武汉大学出版社" target="_blank">后台管理</a></li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                        <section class="b-f-link mt20">
+                            <a href="/front/helpCenter" title="帮助中心" target="_blank">帮助中心</a>|
+                            <a href="/front/helpCenter?id=194" title="联系我们" target="_blank">联系我们</a>|
+                            <a href="/front/helpCenter?id=193" title="关于我们" target="_blank">关于我们</a>|
+                            <span>服务热线：027-87215590</span>
+                            <span>Email：cbs22@whu.edu.cn</span>
+                        </section>
+                        <section class="b-f-link mt10">
+                            <span>Copyright &copy;2013-2017 版权所有武大出版传媒股份公司</span>
+                            <span class="c-666">Powered by<a title="武汉大学出版社" target="_blank" href="#" class="c-666">武汉大学国家网络安全学院</a></span>
+                            <!-- 统计代码 -->
+                        </section>
+                    </section>
+                </section>
+                <aside class="fl col-20 tar ewm-box">
+                    <span class="disIb tac"> <img src="picture/1481617339900.jpg" alt="" class="dis" width="140"
+                                                  height="140"/> <p class="hLh30 fsize14 c-999 f-fM mt10 tac">关注微信</p> </span>
+                </aside>
+                <div class="clear"></div>
+            </div>
+        </section>
+    </footer>
+    <div class="r-fixed-wrap">
+        <div class="pr r-fix-box">
+            <ul class="r-fixed-ul">
+                <li id="goTopBtn" class="undis">
+                    <a href="javascript: void(0)" title="返回顶部" class="bg-orange">
+                        <em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
+                    </a>
+                </li>
+                <li class="foot-zixun" id="shopCart">
+                    <a href="javascript:shopCartHtml()" title="查看详情" class="bg-orange pr" id="v-nav-first">
+                        <em class="r-f-icon-4">&nbsp;</em><!-- <span>查看详情</span> -->
+                        <tt class="shop-car-num" id="shopCartNum">0</tt>
+                    </a>
+                </li>
+                <li class="foot-zixun">
+                    <a href="https://www.inxedu.com" target="_blank" title="在线咨询" class="bg-orange">
+                        <em class="r-f-icon-1">&nbsp;</em><span>在线咨询</span>
+                    </a>
+                </li>
+                <li class="foot-zixun">
+                    <a href="JavaScript:void(0)" title="扫描关注" class="bg-orange">
+                        <em class="r-f-icon-2">&nbsp;</em><span>扫描关注</span>
+                        <div class="smgz-pic">
+                            <img src="picture/1481617339900.jpg" width="150" height="150" class="dis"/>
+                            <p class=" fsize14 f-fM c-666 tac">扫一扫，关注我们</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="shopcar-box fr" id="shopcarthtml">
+
+            </div>
         </div>
-        <section class="b-f-link mt20">
-         <a href="/front/helpCenter" title="帮助中心" target="_blank">帮助中心</a>|
-         <a href="/front/helpCenter?id=194" title="联系我们" target="_blank">联系我们</a>|
-         <a href="/front/helpCenter?id=193" title="关于我们" target="_blank">关于我们</a>|
-         <span>服务热线：027-87215590</span>
-         <span>Email：cbs22@whu.edu.cn</span>
-        </section>
-        <section class="b-f-link mt10">
-         <span>Copyright &copy;2013-2017 版权所有武大出版传媒股份公司</span>
-         <span class="c-666">Powered by<a title="武汉大学出版社" target="_blank" href="#" class="c-666">武汉大学国家网络安全学院</a></span>
-         <!-- 统计代码 -->
-        </section>
-       </section>
-      </section>
-      <aside class="fl col-20 tar ewm-box">
-       <span class="disIb tac"> <img src="picture/1481617339900.jpg" alt="" class="dis" width="140" height="140" /> <p class="hLh30 fsize14 c-999 f-fM mt10 tac">关注微信</p> </span>
-      </aside>
-      <div class="clear"></div>
-     </div>
+    </div>
+    <!--手机端回到顶部 开始-->
+    <div class="m-go-top-box">
+        <ul class="r-fixed-ul">
+            <li id="goTopBtn2" class="">
+                <a href="javascript: void(0)" title="返回顶部" class="bg-orange">
+                    <em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!--手机端回到顶部 开始-->
+    <section class="mo-foot">
+        <article class="mo-f-warp">
+            <ul class="clearfix mo-f-w-list" id="gn-ul">
+                <li style="width: 20.0%">
+                    <a href="/">
+                        <svg t="1486257228474" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="2464"
+                             width="32" height="32">
+                            <path d="M978.221 507.167l-469.737-439.203-469.737 437.913c-9.189 8.567-9.702 22.975-1.114 32.155 8.579 9.173 23.004 9.692 32.187 1.105l438.629-408.894 438.649 410.139c4.401 4.112 9.987 6.144 15.563 6.144 6.070 0 12.143-2.411 16.623-7.209 8.596-9.173 8.123-23.568-1.065-32.149v0zM978.221 507.167z"
+                                  fill="#333333" p-id="2465"></path>
+                            <path d="M834.88 516.187c-12.573 0-22.772 10.193-22.772 22.75v348.839h-182.185v-242.67h-242.91v242.67h-182.178v-348.839c0-12.557-10.189-22.75-22.771-22.75-12.59 0-22.777 10.193-22.777 22.75v394.338h273.275v-242.669h151.819v242.669h273.268v-394.338c0.001-12.557-10.201-22.75-22.768-22.75v0zM834.88 516.187z"
+                                  fill="#333333" p-id="2466"></path>
+                            <path d="M675.472 190.101h136.635v121.332c0 12.576 10.201 22.755 22.772 22.755 12.569 0 22.769-10.179 22.769-22.755v-166.831h-182.177c-12.576 0-22.777 10.174-22.777 22.75-0.001 12.572 10.201 22.75 22.777 22.75v0zM675.472 190.101z"
+                                  fill="#333333" p-id="2467"></path>
+                        </svg>
+                        <p>首页</p>
+                    </a>
+                </li>
+                <li style="width: 20.0%">
+                    <a href="/front/showcoulist">
+                        <svg t="1486257362855" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="5482"
+                             width="30" height="30">
+                            <path d="M229.499951 913.188218c-48.914036-7.229658-80.168878-68.500117-58.45432-114.993011 17.700127-37.899168 77.866439-44.274366 114.710578-43.379996 12.209066 0.296759 22.588461-10.589173 22.588461-22.588461 0-214.33967 0-428.679339 0-643.020032 0-12.211113-10.349719-22.588461-22.588461-22.588461-79.519078 0-156.825768 13.127995-188.981119 97.637738-14.056134 36.941354-9.794064 79.658248-9.794064 118.503974 0 140.217509 0 280.435017 0 420.652526 0 34.616402-1.300622 69.511143 0 104.108103 3.175319 84.488253 66.817802 147.707087 151.284565 150.829194 116.201535 1.707898 521.665127 0.956791 671.114904 0 21.049409 0 27.852348-24.02723 15.972786-38.561247-39.46278-48.27754-42.548048-113.524566 0-161.04793 19.342534-21.60404-12.502755-53.66013-31.94455-31.94455-60.080354 67.105351-56.141648 156.255787 0 224.937029 5.324262-12.853749 10.648524-25.707498 15.972786-38.561247-208.42496 0-416.84992 0-625.27488 0-45.63434 0-90.661859 2.997264-124.948757-35.18843-31.254841-34.808784-26.997887-78.81709-26.997887-121.741715 0-125.962853 0-251.925706 0-377.88856 0-50.012044-1.000793-100.139721 0-150.142555 0.601704-30.04427 6.29231-57.972343 26.997887-81.227999 34.031071-38.22151 80.371492-35.18843 126.600373-35.18843-7.529487-7.529487-15.058974-15.058974-22.588461-22.588461 0 214.33967 0 428.679339 0 643.020032 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-60.922535-1.479701-144.667867 18.272155-161.406087 86.262666-16.9613 68.895113 19.038612 149.897985 93.140307 160.850431C245.930155 960.955128 258.202667 917.430846 229.499951 913.188218L229.499951 913.188218z"
+                                  p-id="5483" fill="#333333"></path>
+                            <path d="M361.056196 111.795179c137.728828 0 277.028431-6.541997 414.573063 0 56.018851 8.659217 110.147656 42.715871 112.727411 105.47217 0.642636 15.646352 0 31.460526 0 47.115064 0 88.575338 0 177.150676 0 265.72499 0 68.37732 0 136.75464 0 205.130937 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-183.296653 0-366.592282 0-549.888935 0 7.529487 7.529487 15.058974 15.058974 22.588461 22.588461 0-215.344556 0-430.688089 0-646.032646 0-29.069059-45.176922-29.117155-45.176922 0 0 215.344556 0 430.688089 0 646.032646 0 12.211113 10.349719 22.588461 22.588461 22.588461 183.296653 0 366.592282 0 549.888935 0 12.211113 0 22.588461-10.349719 22.588461-22.588461 0-156.952658 0-313.904293 0-470.856951 0-82.908268-11.682064-153.384389-102.450347-182.328605-30.673603-9.781784-66.485227-13.762445-102.756315-15.243169-69.480444-0.192382-73.621764-0.192382-116.468618-0.192382-83.601046 0-167.202093 0-250.802116 0C331.987137 66.618257 331.939041 111.795179 361.056196 111.795179z"
+                                  p-id="5484" fill="#333333"></path>
+                            <path d="M510.185678 94.477768c0 113.695458 0 227.390917 0 341.086375 0 24.375154 29.352515 28.110221 42.092677 11.400654 29.27986-38.400588 58.559721-76.801177 87.840604-115.201765-11.825326 1.523703-23.651676 3.047406-35.477003 4.571109 29.826306 38.400588 59.652612 76.801177 89.479941 115.201765 12.533454 16.136515 38.561247 1.967818 38.561247-15.972786 0-113.695458 0-227.390917 0-341.086375 0-29.069059-45.176922-29.117155-45.176922 0 0 113.695458 0 227.390917 0 341.086375 12.853749-5.324262 25.707498-10.648524 38.561247-15.972786-29.826306-38.400588-59.652612-76.801177-89.479941-115.201765-9.933233-12.788258-27.79095-5.508457-35.477003 4.572132-29.27986 38.400588-58.559721 76.801177-87.839581 115.201765 14.030551 3.800559 28.062126 7.600095 42.092677 11.400654 0-113.695458 0-227.390917 0-341.086375C555.3626 65.408709 510.185678 65.360614 510.185678 94.477768L510.185678 94.477768z"
+                                  p-id="5485" fill="#333333"></path>
+                            <path d="M361.056196 879.8049c165.349909 0 330.700841 0 496.05075 0 29.069059 0 29.117155-45.176922 0-45.176922-165.349909 0-330.700841 0-496.05075 0C331.987137 834.627978 331.939041 879.8049 361.056196 879.8049L361.056196 879.8049z"
+                                  p-id="5486" fill="#333333"></path>
+                        </svg>
+                        <p>课程</p>
+                    </a>
+                </li>
+                <li style="width: 20.0%">
+                    <a href="/front/liveIndex">
+                        <svg t="1486257689517" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="11329"
+                             width="32" height="32">
+                            <path d="M438.615 605.87L629.76 438.615l-191.145-168.96V605.87z m240.635 332.8H344.745c-13.655 0-25.6-11.95-25.6-25.6 0-13.66 11.945-25.6 25.6-25.6H679.25c13.66 0 25.6 11.94 25.6 25.6 0 13.65-11.94 25.6-25.6 25.6z m179.538-453.14c-37.31 0.384-63.191 18.35-79.683 38.65-16.19-20.561-42.122-38.65-80.379-38.65-25.277 0-46.264 8.181-62.366 24.37-29.481 29.6-30.085 74.184-29.773 75.567-0.737 4.505-15.975 111.585 162.954 200.745a21.658 21.658 0 0 0 9.651 2.294 21.453 21.453 0 0 0 10.133-2.555C897.53 728.515 953.8 658.959 952.064 583.214c0.046-39.26-24.494-97.684-93.276-97.684z m-77.819 263.03c-144.297-75.736-136.213-154.287-135.542-160.953-0.046-8.356 3.226-35.63 18.335-50.785 8.161-8.213 19.01-12.206 33.213-12.206 48.057 0 60.396 43.878 61.573 48.737a22.62 22.62 0 0 0 21.602 17.423c9.933-1.09 19.553-6.625 22.369-16.558 0.594-2.002 14.474-49.1 63.483-49.602 50.642 0 51.185 54.722 51.236 59.714 1.275 56.5-47.007 114.54-136.269 164.23z"
+                                  fill="#333333" p-id="11330"></path>
+                            <path d="M177.495 738.99c-32.425 0-58.025-25.6-58.025-58.03v-486.4c0-32.425 25.6-58.025 58.025-58.025H846.51c32.42 0 58.02 25.6 58.02 58.025v228.623a319.078 319.078 0 0 1 49.5 7.133V194.56c1.7-59.735-47.79-109.225-107.52-109.225H177.495c-59.735 0-109.23 49.49-109.23 109.225v486.4c0 59.73 49.495 109.23 109.225 109.23h443.76a264.433 264.433 0 0 1-23.24-51.2H177.496z"
+                                  fill="#333333" p-id="11331"></path>
+                        </svg>
+                        <p>直播</p>
+                    </a>
+                </li>
+                <li style="width: 20.0%">
+                    <a href="/group/index">
+                        <svg t="1486258789373" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="23121"
+                             width="32" height="32">
+                            <path d="M464.2 622c0.8 0 1.6 0 2.4-0.1 96.3-9 120.4-71.5 119.8-103.3-0.3-14.1-11.5-24.9-26-24.9-14 0.3-25.2 11.9-24.9 26 0 0.5 0.1 44.7-73.7 51.6-14 1.3-24.3 13.7-22.9 27.7 1.3 13.1 12.4 23 25.3 23z"
+                                  p-id="23122"></path>
+                            <path d="M910.3 414.9c55.7-99.1 64.3-180.3 24-228.6-39.7-47.6-119.6-54.3-225.1-19-0.6 0.2-1 0.7-1.6 0.9-65.5-43.5-143.9-68.9-228.3-68.9-228.3-0.1-414 185.7-414 414 0 67.7 16.7 131.5 45.6 188-34.8 89.8-16.1 140 5.8 166.3 23.4 28.1 60.4 41.6 106.9 41.6 28.2 0 60-5 94.3-14.7 46.4 19.7 97.2 30.9 150.4 32.3v0.6h425.2V502.2h-0.6c-0.5-17.3-2.1-34.3-4.6-51 7.9-12.2 15.3-24.4 22-36.3z m-15.1-196.1c23.9 28.7 14.6 88.7-24.2 161.3-23-67.5-63-127.1-114.9-173.9 67.5-17.8 117.4-13.5 139.1 12.6z m-415.9-68.7c174.9 0 321.2 124.2 355.6 289.1-49.5 72.4-119.4 147.6-202.1 216.6-113.6 94.7-224.4 155.6-311.9 183.9-121-59-204.8-182.9-204.8-326.3 0-200.4 163-363.3 363.2-363.3z m-323.6 685c-13.7-16.4-16.7-43-9.3-76.6 28.1 38.1 62.3 71.5 101.6 98.1-43.6 5-76-2.1-92.3-21.5z m323.6 41.4c-28.8 0-56.6-3.7-83.5-10.1 83.6-36.2 176.8-94.4 269.5-171.7 68.6-57.2 129-118.9 177.2-180.2v361.9H479.3z"
+                                  p-id="23123"></path>
+                        </svg>
+                        <p>社区</p>
+                    </a>
+                </li>
+                <li style="width: 20.0%">
+                    <a href="javascript:h5FooterMyLogin();">
+                        <svg t="1486257862430" class="icon" style="" viewBox="0 0 1024 1024" p-id="17785" width="32"
+                             height="32">
+                            <path d="M511.674589 64.696488c-246.847038 0-446.956611 200.109574-446.956611 446.956611 0 94.231151 29.160133 181.651177 78.95012 253.727749 0 0 15.517415 21.547759 35.803437 9.270131 19.442818-11.768021 7.554046-34.44551 7.554046-34.44551-18.063401-24.635073-28.063149-46.14497-40.059368-74.507948-20.624736-48.762587-31.081902-100.589976-31.081902-154.044422 0-53.454446 10.457166-105.281835 31.081902-154.044422 19.931958-47.124274 48.477085-89.457428 84.842317-125.82266 36.365232-36.365232 78.698386-64.910359 125.82266-84.842317 48.762587-20.624736 100.589976-31.081902 154.044422-31.081902 53.454446 0 105.281835 10.457166 154.044422 31.081902 41.683355 17.630542 79.609129 42.012859 112.981191 72.572876l21.829168 21.586644c32.097022 34.219359 57.598836 73.345472 75.854619 116.506481 20.624736 48.762587 31.081902 100.589976 31.081902 154.044422 0 53.454446-10.457166 105.281835-31.081902 154.044422-19.931958 47.124274-48.477085 89.457428-84.842317 125.82266-5.247514 5.247514-10.634198 10.31288-16.127306 15.232936-7.247054-53.594639-33.886785-103.058191-76.816526-141.627624-24.589025-22.092158-53.120848-39.295981-84.133166-51.097772 46.131667-32.394804 76.2885-85.996606 76.2885-146.646941 0-98.902544-80.176041-179.078585-179.078585-179.078585s-179.078585 80.176041-179.078585 179.078585c0 60.651358 30.156834 114.252137 76.2885 146.646941-31.013341 11.80179-59.544141 29.005614-84.133166 51.097772-50.834782 45.671179-78.82937 106.616226-78.82937 171.609473 0 8.114818 0.179079 13.518898 1.193175 22.279423 0.470721 4.068665 1.876744 7.79964 3.970428 11.011798 4.293793 7.453762 10.69048 12.249999 10.69048 12.249999 71.334675 48.192605 157.330258 76.333526 249.897513 76.333526 246.848061 0 446.956611-200.109574 446.956611-446.956611S758.521626 64.696488 511.674589 64.696488zM383.761314 467.379757c0-34.167171 13.305027-66.288752 37.465287-90.447988 24.159236-24.159236 56.281841-37.465287 90.447988-37.465287s66.288752 13.305027 90.447988 37.465287c24.159236 24.159236 37.465287 56.281841 37.465287 90.447988s-13.305027 66.288752-37.465287 90.447988c-24.159236 24.159236-56.281841 37.465287-90.447988 37.465287s-66.288752-13.305027-90.447988-37.465287C397.066341 533.668509 383.761314 501.546927 383.761314 467.379757zM511.674589 907.444401c-53.454446 0-105.281835-10.457166-154.044422-31.081902-21.145599-8.943696-41.312918-19.643386-60.423161-31.984459-0.094144-2.240017-0.119727-4.589528-0.119727-7.643074 0-104.875582 96.263437-190.19783 214.58731-190.19783s214.58731 85.322248 214.58731 190.19783c0 2.555196-0.076748 5.127787-0.193405 7.701402-19.086707 12.319583-39.232536 22.99369-60.349483 31.92613C616.956424 896.987235 565.128011 907.444401 511.674589 907.444401z"
+                                  p-id="17786"></path>
+                        </svg>
+                        <p>我的</p>
+                    </a>
+                </li>
+            </ul>
+        </article>
     </section>
-   </footer>
-<div class="r-fixed-wrap">
-	<div class="pr r-fix-box">
-		<ul class="r-fixed-ul">
-			<li id="goTopBtn" class="undis">
-				<a href="javascript: void(0)" title="返回顶部" class="bg-orange">
-					<em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
-				</a>
-			</li>
-			<li class="foot-zixun" id="shopCart">
-				<a href="javascript:shopCartHtml()" title="查看详情" class="bg-orange pr" id="v-nav-first">
-					<em class="r-f-icon-4">&nbsp;</em><!-- <span>查看详情</span> -->
-					<tt class="shop-car-num" id="shopCartNum">0</tt>
-				</a>
-			</li>
-			<li class="foot-zixun">
-				<a href="https://www.inxedu.com" target="_blank" title="在线咨询" class="bg-orange">
-					<em class="r-f-icon-1">&nbsp;</em><span>在线咨询</span>
-				</a>
-			</li>
-			<li class="foot-zixun">
-				<a href="JavaScript:void(0)" title="扫描关注" class="bg-orange">
-					<em class="r-f-icon-2">&nbsp;</em><span>扫描关注</span>
-					<div class="smgz-pic">
-						<img src="picture/1481617339900.jpg" width="150" height="150" class="dis"/>
-						<p class=" fsize14 f-fM c-666 tac">扫一扫，关注我们</p>
-					</div>
-				</a>
-			</li>
-		</ul>
-		<div class="shopcar-box fr" id="shopcarthtml">
+    <script>
+        setTimeout(function () {
+            try {
+                headerIndexSubject();//第二三版首页 专业 显示 处理
+            } catch (err) {
+            }
 
-		</div>
-	</div>
+        }, 100)
+    </script>
+    <!-- 公共底引入 -->
 </div>
-<!--手机端回到顶部 开始-->
-<div class="m-go-top-box">
-	<ul class="r-fixed-ul">
-		<li id="goTopBtn2" class="">
-			<a href="javascript: void(0)" title="返回顶部" class="bg-orange">
-				<em class="r-f-icon-3">&nbsp;</em><span>返回顶部</span>
-			</a>
-		</li>
-	</ul>
-</div>
-<!--手机端回到顶部 开始-->
-<section class="mo-foot">
-	<article class="mo-f-warp">
-		<ul class="clearfix mo-f-w-list" id="gn-ul">
-			<li style="width: 20.0%">
-					<a href="/">
-							<svg t="1486257228474" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="2464"  width="32" height="32">
-						<path d="M978.221 507.167l-469.737-439.203-469.737 437.913c-9.189 8.567-9.702 22.975-1.114 32.155 8.579 9.173 23.004 9.692 32.187 1.105l438.629-408.894 438.649 410.139c4.401 4.112 9.987 6.144 15.563 6.144 6.070 0 12.143-2.411 16.623-7.209 8.596-9.173 8.123-23.568-1.065-32.149v0zM978.221 507.167z" fill="#333333" p-id="2465"></path>
-						<path d="M834.88 516.187c-12.573 0-22.772 10.193-22.772 22.75v348.839h-182.185v-242.67h-242.91v242.67h-182.178v-348.839c0-12.557-10.189-22.75-22.771-22.75-12.59 0-22.777 10.193-22.777 22.75v394.338h273.275v-242.669h151.819v242.669h273.268v-394.338c0.001-12.557-10.201-22.75-22.768-22.75v0zM834.88 516.187z" fill="#333333" p-id="2466"></path>
-						<path d="M675.472 190.101h136.635v121.332c0 12.576 10.201 22.755 22.772 22.755 12.569 0 22.769-10.179 22.769-22.755v-166.831h-182.177c-12.576 0-22.777 10.174-22.777 22.75-0.001 12.572 10.201 22.75 22.777 22.75v0zM675.472 190.101z" fill="#333333" p-id="2467"></path>
-					</svg><p>首页</p>
-					</a>
-				</li>
-			<li style="width: 20.0%">
-					<a href="/front/showcoulist">
-							<svg t="1486257362855" class="icon" style="" viewBox="0 0 1024 1024" version="1.1"  p-id="5482" width="30" height="30">
-						<path d="M229.499951 913.188218c-48.914036-7.229658-80.168878-68.500117-58.45432-114.993011 17.700127-37.899168 77.866439-44.274366 114.710578-43.379996 12.209066 0.296759 22.588461-10.589173 22.588461-22.588461 0-214.33967 0-428.679339 0-643.020032 0-12.211113-10.349719-22.588461-22.588461-22.588461-79.519078 0-156.825768 13.127995-188.981119 97.637738-14.056134 36.941354-9.794064 79.658248-9.794064 118.503974 0 140.217509 0 280.435017 0 420.652526 0 34.616402-1.300622 69.511143 0 104.108103 3.175319 84.488253 66.817802 147.707087 151.284565 150.829194 116.201535 1.707898 521.665127 0.956791 671.114904 0 21.049409 0 27.852348-24.02723 15.972786-38.561247-39.46278-48.27754-42.548048-113.524566 0-161.04793 19.342534-21.60404-12.502755-53.66013-31.94455-31.94455-60.080354 67.105351-56.141648 156.255787 0 224.937029 5.324262-12.853749 10.648524-25.707498 15.972786-38.561247-208.42496 0-416.84992 0-625.27488 0-45.63434 0-90.661859 2.997264-124.948757-35.18843-31.254841-34.808784-26.997887-78.81709-26.997887-121.741715 0-125.962853 0-251.925706 0-377.88856 0-50.012044-1.000793-100.139721 0-150.142555 0.601704-30.04427 6.29231-57.972343 26.997887-81.227999 34.031071-38.22151 80.371492-35.18843 126.600373-35.18843-7.529487-7.529487-15.058974-15.058974-22.588461-22.588461 0 214.33967 0 428.679339 0 643.020032 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-60.922535-1.479701-144.667867 18.272155-161.406087 86.262666-16.9613 68.895113 19.038612 149.897985 93.140307 160.850431C245.930155 960.955128 258.202667 917.430846 229.499951 913.188218L229.499951 913.188218z" p-id="5483" fill="#333333"></path>
-						<path d="M361.056196 111.795179c137.728828 0 277.028431-6.541997 414.573063 0 56.018851 8.659217 110.147656 42.715871 112.727411 105.47217 0.642636 15.646352 0 31.460526 0 47.115064 0 88.575338 0 177.150676 0 265.72499 0 68.37732 0 136.75464 0 205.130937 7.529487-7.529487 15.058974-15.058974 22.588461-22.588461-183.296653 0-366.592282 0-549.888935 0 7.529487 7.529487 15.058974 15.058974 22.588461 22.588461 0-215.344556 0-430.688089 0-646.032646 0-29.069059-45.176922-29.117155-45.176922 0 0 215.344556 0 430.688089 0 646.032646 0 12.211113 10.349719 22.588461 22.588461 22.588461 183.296653 0 366.592282 0 549.888935 0 12.211113 0 22.588461-10.349719 22.588461-22.588461 0-156.952658 0-313.904293 0-470.856951 0-82.908268-11.682064-153.384389-102.450347-182.328605-30.673603-9.781784-66.485227-13.762445-102.756315-15.243169-69.480444-0.192382-73.621764-0.192382-116.468618-0.192382-83.601046 0-167.202093 0-250.802116 0C331.987137 66.618257 331.939041 111.795179 361.056196 111.795179z" p-id="5484" fill="#333333"></path><path d="M510.185678 94.477768c0 113.695458 0 227.390917 0 341.086375 0 24.375154 29.352515 28.110221 42.092677 11.400654 29.27986-38.400588 58.559721-76.801177 87.840604-115.201765-11.825326 1.523703-23.651676 3.047406-35.477003 4.571109 29.826306 38.400588 59.652612 76.801177 89.479941 115.201765 12.533454 16.136515 38.561247 1.967818 38.561247-15.972786 0-113.695458 0-227.390917 0-341.086375 0-29.069059-45.176922-29.117155-45.176922 0 0 113.695458 0 227.390917 0 341.086375 12.853749-5.324262 25.707498-10.648524 38.561247-15.972786-29.826306-38.400588-59.652612-76.801177-89.479941-115.201765-9.933233-12.788258-27.79095-5.508457-35.477003 4.572132-29.27986 38.400588-58.559721 76.801177-87.839581 115.201765 14.030551 3.800559 28.062126 7.600095 42.092677 11.400654 0-113.695458 0-227.390917 0-341.086375C555.3626 65.408709 510.185678 65.360614 510.185678 94.477768L510.185678 94.477768z" p-id="5485" fill="#333333"></path><path d="M361.056196 879.8049c165.349909 0 330.700841 0 496.05075 0 29.069059 0 29.117155-45.176922 0-45.176922-165.349909 0-330.700841 0-496.05075 0C331.987137 834.627978 331.939041 879.8049 361.056196 879.8049L361.056196 879.8049z" p-id="5486" fill="#333333"></path>
-					</svg><p>课程</p>
-					</a>
-				</li>
-			<li style="width: 20.0%">
-					<a href="/front/liveIndex">
-							<svg t="1486257689517" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="11329" width="32" height="32">
-						<path d="M438.615 605.87L629.76 438.615l-191.145-168.96V605.87z m240.635 332.8H344.745c-13.655 0-25.6-11.95-25.6-25.6 0-13.66 11.945-25.6 25.6-25.6H679.25c13.66 0 25.6 11.94 25.6 25.6 0 13.65-11.94 25.6-25.6 25.6z m179.538-453.14c-37.31 0.384-63.191 18.35-79.683 38.65-16.19-20.561-42.122-38.65-80.379-38.65-25.277 0-46.264 8.181-62.366 24.37-29.481 29.6-30.085 74.184-29.773 75.567-0.737 4.505-15.975 111.585 162.954 200.745a21.658 21.658 0 0 0 9.651 2.294 21.453 21.453 0 0 0 10.133-2.555C897.53 728.515 953.8 658.959 952.064 583.214c0.046-39.26-24.494-97.684-93.276-97.684z m-77.819 263.03c-144.297-75.736-136.213-154.287-135.542-160.953-0.046-8.356 3.226-35.63 18.335-50.785 8.161-8.213 19.01-12.206 33.213-12.206 48.057 0 60.396 43.878 61.573 48.737a22.62 22.62 0 0 0 21.602 17.423c9.933-1.09 19.553-6.625 22.369-16.558 0.594-2.002 14.474-49.1 63.483-49.602 50.642 0 51.185 54.722 51.236 59.714 1.275 56.5-47.007 114.54-136.269 164.23z" fill="#333333" p-id="11330"></path>
-						<path d="M177.495 738.99c-32.425 0-58.025-25.6-58.025-58.03v-486.4c0-32.425 25.6-58.025 58.025-58.025H846.51c32.42 0 58.02 25.6 58.02 58.025v228.623a319.078 319.078 0 0 1 49.5 7.133V194.56c1.7-59.735-47.79-109.225-107.52-109.225H177.495c-59.735 0-109.23 49.49-109.23 109.225v486.4c0 59.73 49.495 109.23 109.225 109.23h443.76a264.433 264.433 0 0 1-23.24-51.2H177.496z" fill="#333333" p-id="11331"></path>
-					</svg><p>直播</p>
-					</a>
-				</li>
-			<li style="width: 20.0%">
-					<a href="/group/index">
-							<svg t="1486258789373" class="icon" style="" viewBox="0 0 1024 1024" version="1.1" p-id="23121" width="32" height="32">
-						<path d="M464.2 622c0.8 0 1.6 0 2.4-0.1 96.3-9 120.4-71.5 119.8-103.3-0.3-14.1-11.5-24.9-26-24.9-14 0.3-25.2 11.9-24.9 26 0 0.5 0.1 44.7-73.7 51.6-14 1.3-24.3 13.7-22.9 27.7 1.3 13.1 12.4 23 25.3 23z" p-id="23122"></path>
-						<path d="M910.3 414.9c55.7-99.1 64.3-180.3 24-228.6-39.7-47.6-119.6-54.3-225.1-19-0.6 0.2-1 0.7-1.6 0.9-65.5-43.5-143.9-68.9-228.3-68.9-228.3-0.1-414 185.7-414 414 0 67.7 16.7 131.5 45.6 188-34.8 89.8-16.1 140 5.8 166.3 23.4 28.1 60.4 41.6 106.9 41.6 28.2 0 60-5 94.3-14.7 46.4 19.7 97.2 30.9 150.4 32.3v0.6h425.2V502.2h-0.6c-0.5-17.3-2.1-34.3-4.6-51 7.9-12.2 15.3-24.4 22-36.3z m-15.1-196.1c23.9 28.7 14.6 88.7-24.2 161.3-23-67.5-63-127.1-114.9-173.9 67.5-17.8 117.4-13.5 139.1 12.6z m-415.9-68.7c174.9 0 321.2 124.2 355.6 289.1-49.5 72.4-119.4 147.6-202.1 216.6-113.6 94.7-224.4 155.6-311.9 183.9-121-59-204.8-182.9-204.8-326.3 0-200.4 163-363.3 363.2-363.3z m-323.6 685c-13.7-16.4-16.7-43-9.3-76.6 28.1 38.1 62.3 71.5 101.6 98.1-43.6 5-76-2.1-92.3-21.5z m323.6 41.4c-28.8 0-56.6-3.7-83.5-10.1 83.6-36.2 176.8-94.4 269.5-171.7 68.6-57.2 129-118.9 177.2-180.2v361.9H479.3z" p-id="23123"></path>
-					</svg><p>社区</p>
-					</a>
-				</li>
-			<li style="width: 20.0%">
-					<a href="javascript:h5FooterMyLogin();">
-							<svg t="1486257862430" class="icon" style="" viewBox="0 0 1024 1024" p-id="17785" width="32" height="32">
-						<path d="M511.674589 64.696488c-246.847038 0-446.956611 200.109574-446.956611 446.956611 0 94.231151 29.160133 181.651177 78.95012 253.727749 0 0 15.517415 21.547759 35.803437 9.270131 19.442818-11.768021 7.554046-34.44551 7.554046-34.44551-18.063401-24.635073-28.063149-46.14497-40.059368-74.507948-20.624736-48.762587-31.081902-100.589976-31.081902-154.044422 0-53.454446 10.457166-105.281835 31.081902-154.044422 19.931958-47.124274 48.477085-89.457428 84.842317-125.82266 36.365232-36.365232 78.698386-64.910359 125.82266-84.842317 48.762587-20.624736 100.589976-31.081902 154.044422-31.081902 53.454446 0 105.281835 10.457166 154.044422 31.081902 41.683355 17.630542 79.609129 42.012859 112.981191 72.572876l21.829168 21.586644c32.097022 34.219359 57.598836 73.345472 75.854619 116.506481 20.624736 48.762587 31.081902 100.589976 31.081902 154.044422 0 53.454446-10.457166 105.281835-31.081902 154.044422-19.931958 47.124274-48.477085 89.457428-84.842317 125.82266-5.247514 5.247514-10.634198 10.31288-16.127306 15.232936-7.247054-53.594639-33.886785-103.058191-76.816526-141.627624-24.589025-22.092158-53.120848-39.295981-84.133166-51.097772 46.131667-32.394804 76.2885-85.996606 76.2885-146.646941 0-98.902544-80.176041-179.078585-179.078585-179.078585s-179.078585 80.176041-179.078585 179.078585c0 60.651358 30.156834 114.252137 76.2885 146.646941-31.013341 11.80179-59.544141 29.005614-84.133166 51.097772-50.834782 45.671179-78.82937 106.616226-78.82937 171.609473 0 8.114818 0.179079 13.518898 1.193175 22.279423 0.470721 4.068665 1.876744 7.79964 3.970428 11.011798 4.293793 7.453762 10.69048 12.249999 10.69048 12.249999 71.334675 48.192605 157.330258 76.333526 249.897513 76.333526 246.848061 0 446.956611-200.109574 446.956611-446.956611S758.521626 64.696488 511.674589 64.696488zM383.761314 467.379757c0-34.167171 13.305027-66.288752 37.465287-90.447988 24.159236-24.159236 56.281841-37.465287 90.447988-37.465287s66.288752 13.305027 90.447988 37.465287c24.159236 24.159236 37.465287 56.281841 37.465287 90.447988s-13.305027 66.288752-37.465287 90.447988c-24.159236 24.159236-56.281841 37.465287-90.447988 37.465287s-66.288752-13.305027-90.447988-37.465287C397.066341 533.668509 383.761314 501.546927 383.761314 467.379757zM511.674589 907.444401c-53.454446 0-105.281835-10.457166-154.044422-31.081902-21.145599-8.943696-41.312918-19.643386-60.423161-31.984459-0.094144-2.240017-0.119727-4.589528-0.119727-7.643074 0-104.875582 96.263437-190.19783 214.58731-190.19783s214.58731 85.322248 214.58731 190.19783c0 2.555196-0.076748 5.127787-0.193405 7.701402-19.086707 12.319583-39.232536 22.99369-60.349483 31.92613C616.956424 896.987235 565.128011 907.444401 511.674589 907.444401z" p-id="17786"></path>
-					</svg><p>我的</p>
-					</a>
-				</li>
-			</ul>
-	</article>
-</section>
-<script>
-	setTimeout(function () {
-		try {
-			headerIndexSubject();//第二三版首页 专业 显示 处理
-		}catch (err){}
-
-	},100)
-</script>
-<!-- 公共底引入 -->
-	</div>
-    <input type="hidden" id="limitLogin" value="OFF"/>
+<input type="hidden" id="limitLogin" value="OFF"/>
 </body>
 
 </html>

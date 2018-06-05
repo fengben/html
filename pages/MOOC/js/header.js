@@ -57,7 +57,10 @@ function showUserInfo() {
             // useImg = staticServer + useImg;
             useImg =  "/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=" + useImg;
         }
+        userId = 'my.html?id='+user.userId
         $("#userName").text(showName);
+
+        $("#myInfo").attr("href", userId);
         $(".userImgPhoto").attr("src", useImg);
         $(".userImgPhoto").attr("alt", showName);
         $(".userNameClass").html(showName);

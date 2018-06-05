@@ -1,0 +1,26 @@
+<%
+If :operation == "collection"
+:sql="SELECT * from mooc_collection WHERE course_id = ? AND collector = ?"
+changeRecordSet(:sql,S(:courseId),S(:collector))
+:totalNumber = recordCount()
+If :totalNumber > 0
+debugMsg(:totalNumber#"update=================")
+   Exit("exist")
+   debugMsg(:totalNumber#"update=================")
+Else
+     :insertSql = "insert into mooc_collection(id,course_id,collector)values(?,?,?)"
+     :aid = tuid();
+     :x=execSQL(:insertSql,L(:aid),L(:courseId),S(:collector))
+   Exit(:x)
+EndIf
+EndIf
+%>
+
+<%
+If :operation =="cancelCollection"
+:sql="DELETE from mooc_collection WHERE course_id = ? AND collector = ?"
+:i=execSQL(:sql,S(:courseId),S(:collector))
+Exit(:x)
+EndIf
+%>
+

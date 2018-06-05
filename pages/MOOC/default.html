@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="css/global.css"/>
     <link rel="stylesheet" type="text/css" href="css/web.css"/>
     <link rel="stylesheet" type="text/css" href="css/theme.css"/>
+    <link rel="stylesheet" type="text/css" href="css/act/fonts/font.css">
     <link href="css/mw_320_768.css" rel="stylesheet" type="text/css"
           media="screen and (min-width: 320px) and (max-width: 768px)"/>
     <title>首页-武汉大学出版社-中国在线教育平台第一品牌</title>
@@ -197,7 +198,6 @@
                 jQuery("#ColumnsResult03").html(recentColumns03[0]);
                 jQuery("#AllCourse03").html(recentColumns03[1]);
 
-
             }
             getFromWS("frontmooc/getColumns03.template", recentColumns03, processCoResult03);
 
@@ -212,7 +212,52 @@
             getFromWS("frontmooc/getColumns04.template", recentColumns04, processCoResult04);
 
         });
+        //收藏课程
+        function addPraise(flag){
+            //防止未登陆用户收藏
+            var userId = localStorage.getItem('userId');
+            var userToken = localStorage.getItem('userToken');
+            var classification = localStorage.getItem('classification');
+            var loginName = localStorage.getItem('loginName');
+            //alert(loginName);
+            if(!userId || !userToken || !classification || !loginName ){
+                alert("登录或注册后才能收藏哦！")
+                //showdialoglogin(this);
+            }else{
+                //alert("hello");
+                var collection = new Array();
+                var paras = "courseId="+flag;
+                paras += "$^@^$collector="+loginName;
+                paras +="$^@^$operation=collection";
+                var processCollection= function () {
+                    //alert(collection);
+                    if (collection[0] == "exist") {
+                        alert("您已经收藏过了哦!");
+                    }else{
+                        alert("您已成功收藏该课程");
+                        return;
+                    }
+                }
+                getFromWS("frontmooc/saveCollection.template", paras,collection, processCollection);
+                //alert(paras);
+            }
+        }
 
+        //收藏变红色
+       /* function add(obj)
+
+        {
+
+            /!*$('.').find('a').each(function() {
+                //tmp = $(this).text();
+                $(this).css("background-color","#cb2020");
+            });*!/
+            //$(obj).addClass("current");
+            //$(obj).parent().attr("class","hover")
+            //$(obj).parent.attr("class","visited");
+           $(obj).on("mouseover")
+        }
+*/
     </script>
 </head>
 <body class="W-body">
@@ -286,12 +331,12 @@
                             </section>
                         </div>
                     </section>
-                    <div class="mt20 sf-lr-wrap tac">
+                    <!--<div class="mt20 sf-lr-wrap tac">
                         <h6 class="hLh20 mb15"><span class="c-666 fsize14">第三方快捷登录</span></h6>
                         <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
                         <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
-                        <!--<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>-->
-                    </div>
+                        &lt;!&ndash;<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>&ndash;&gt;
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -374,8 +419,8 @@
                                 </aside>
                                 <ul class="h3-n-list clearfix fl">
                                     <li><a href="default.html" title="首页">首页</a></li>
-                                    <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                                    <li><a href="shoollist.html" title="直播">名校</a></li>
+                                    <li><a href="showcoulist.html?id=2018112858180021535" title="课程">课程</a></li>
+                                    <li><a href="shoollist.html" title="名校">名校</a></li>
                                     <li><a href="teacherlist.html?id=2018112858180021535 " title="名师">名师</a></li>
                                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                                     <li><a href="article.html" title="资讯">资讯</a></li>
@@ -665,8 +710,8 @@
                                 <ul class="flink-list clearfix">
                                     <li><a href="#" title="武汉大学出版社" target="_blank">武汉大学出版社</a></li>
                                     <li><a href="http://cse.whu.edu.cn/" title="武汉大学国家网络安全学院">武汉大学国家网络安全学院</a></li>
-                                    <li><a href="#" title="武汉大学出版社" target="_blank">武汉樱顶网络安全技术中心</a></li>
-                                    <li><a href="articleManagement.html" title="武汉大学出版社" target="_blank">后台管理</a></li>
+                                    <li><a href="http://www.whuyingding.com/" title="武汉樱顶网络安全技术中心" target="_blank">武汉樱顶网络安全技术中心</a></li>
+                                    <li><a href="articleManagement.html" title="后台管理" target="_blank">后台管理</a></li>
                                 </ul>
                                 <div class="clear"></div>
                             </div>

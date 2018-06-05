@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+@charset "utf-8";
 .c-master,
 .live-cou-box ul li.current .live-three-angle .yk-DT-arrow *, .live-cou-box ul li.current .live-cb-wrap .live-cou-time .fr a, .live-cou-box ul li .live-cb-wrap .live-course-title:hover, .i-n-l-mane a:hover, .in-new-box-list ul li:hover a, .in-new-box-list ul li:hover h3, .in-n-r-l-ul li a:hover, .js-tap li .c-l-jgpx a:hover, .js-tap li .c-l-jgpx a.current,
 .c-s-dl .ejdl-box ul li a:hover, .c-s-dl .ejdl-box .c-s-dl-li ul li.current a, .c-s-dl .ejdl-box dt span, .sc-end a, .sc-end a:hover, .all-teacher-title .js-list-tit a:hover, .all-teacher-title .js-list-tit a.current, .q-r-r-num .r-b-num, .kj-link li a, .ei-i-close,
@@ -164,10 +164,7 @@
     background-color: #cb2020;
 }
 
-.noter-dy:hover, .noter-zan:hover,.c-red-n {
-    color: #cb2020;
-    text-decoration: none;
-}
+
 .c-red-live{color: #ff5050;}
 .js-tap li.current .c-l-jgpx a.js-tap li:hover .c-l-jgpx a, .js-tap li .c-l-jgpx a {
     color: #333;

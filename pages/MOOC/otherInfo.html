@@ -58,10 +58,20 @@
     <script type="text/javascript" src="js/user.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
-           showMyinfo();
-           showHeadImg();
-
+            showInfo()
         });
+        var uid = getUrlString("id");
+
+        function showInfo() {
+            // alert(uid)
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#headImg").html(array[0]);
+                $("#myInfo").html(array[1]);
+            }
+            getFromWS("frontmooc/showOtherInfo.template", "uid=" + uid, array, ProcessResult);
+        }
+
         function showHeadImg() {
             var userName = localStorage.getItem("loginName");
             var array = new Array();
@@ -70,8 +80,9 @@
             }
             getFromWS("frontmooc/getHeadImg.template", "loginName=" + userName, array, ProcessResult);
         }
+
         function showMyinfo() {
-             var userName = localStorage.getItem("loginName");
+            var userName = localStorage.getItem("loginName");
 
             var array = new Array();
             var ProcessResult = function () {
@@ -198,7 +209,7 @@
                             <div class="u-face-pic">
                                 <img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
                                 <!--<a href="javascript:void (0)" onclick="dialog('修改头像','',7)" title=""-->
-                                   <!--class="c-fff">修改头像</a>-->
+                                <!--class="c-fff">修改头像</a>-->
                             </div>
                             <div class="hLh20 txtOf mt10 tac">
                                 <a href="#" class="fsize14 c-333 userNameClass">
@@ -280,7 +291,7 @@
 
                                                     </div>
                                                     <div class="tac ur-titbtn">
-                                                        <a class="" >关注</a>
+                                                        <a class="">关注</a>
 
                                                     </div>
                                                 </section>
@@ -490,7 +501,7 @@
             }
 
         }, 100)
-        
+
     </script>
     <!-- 公共底引入 -->
 </div>

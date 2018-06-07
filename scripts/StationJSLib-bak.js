@@ -294,7 +294,8 @@ function sendForm(urlstr,form1,callback){
         if(xrq.readyState==4){// 4 = "loaded"
             if(xrq.status==200){// 200 = OK
                 if(typeof args[2]==="function"){
-                    alert(xrq.responseText);  
+                    //返回文件id
+                    //alert(xrq.responseText);
                     callback(xrq.responseText);
                 }else{
                     var divcontent=xrq.responseText.split('$_@_$');

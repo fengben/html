@@ -20,7 +20,7 @@
 
 	</script>
     <title>mooc后台管理</title>
-    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
     <!--link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/-->
     <!--link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/-->
     <link rel="stylesheet" href="assets/css/bootstrap.css"/>
@@ -39,9 +39,7 @@
     <script src="/scripts/htmleditor/kindeditor.js"></script>
     <script src="/scripts/htmleditor/lang/zh_CN.js"></script>
     <script src="jquery/jquery.ztree.core.js"></script>
-     <!--<script type="text/javascript" src="js/jquery.cookie.js"></script>-->
-        <script type="text/javascript" src="js/webutils.js"></script>
-
+     <script type="text/javascript" src="js/jquery.cookie.js"></script>
 
     
 </head>
@@ -376,10 +374,8 @@
 
     function createCourse() {
         createUrl = "//192.168.10.138/mylogin";
-        // email = $.cookie('mooc_login_name');
-        email = localStorage.getItem("loginName");
-        // passwd = $.cookie('mooc_password');
-        passwd = localStorage.getItem("passWord");
+        email = $.cookie('mooc_login_name');
+        passwd = $.cookie('mooc_password');
         createUrl += "?email=";
         createUrl += email;
         createUrl += "&password=";
@@ -474,7 +470,7 @@
             $("#modal-article #picId").val(picId);
 
             $("#modal-article #appendixId").val(appendixId);
-
+n
             if (picId != 0) {
                 $("#modal-article #picInput").attr("disabled", "disabled");
 				$("#modal-article #picImg").css("display","inline-block");
@@ -908,7 +904,7 @@ function ifTrabelInfoByColumnId(id){
                         <span id="loginName"></span></a>
                 </li>
                 <li>
-                    <a href="#" onclick="exit()">
+                    <a href="#" onclick="logout()">
                         <i class="fa-power-off" style="color:red;font-size:18px;"></i>
                     </a>
                 </li>
@@ -978,7 +974,7 @@ function ifTrabelInfoByColumnId(id){
 											<input type="checkbox" class="cbr">
 										</th>
                                         <th>标题</th>
-                                        <th>教师</th>
+                                        <th>发布者</th>
                                         <th>内容</th>
                                         <th>发布</th>
                                         <th>操作</th>
@@ -1050,7 +1046,7 @@ function ifTrabelInfoByColumnId(id){
                             </select>-->
                             <br/>
                             <br/>
-                            <label for="field-4" class="control-label">教师: </label>
+                            <label for="field-4" class="control-label">发布者: </label>
 
                             <input class="form-control" id="publisher" readonly="readonly"
                                    style="display:inline-block;width:15%"><br/>
@@ -1274,7 +1270,7 @@ function ifTrabelInfoByColumnId(id){
 <script src="assets/js/joinable.js"></script>
 <script src="assets/js/xenon-api.js"></script>
 <script src="assets/js/xenon-toggles.js"></script>
-<script src="assets/js/datatables/js/jquery.dataTables.js"></script>
+<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
 <!-- Imported scripts on this page -->
 <script src="assets/js/datatables/dataTables.bootstrap.js"></script>
 <script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>

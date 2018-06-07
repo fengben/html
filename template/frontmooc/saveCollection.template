@@ -24,3 +24,44 @@ Exit(:x)
 EndIf
 %>
 
+<%
+If :operation =="message"
+debugMsg(:receiver#"update=================")
+:sql="SELECT id, sender, receiver,private_message,send_date,is_delete FROM mooc_message WHERE is_delete = 1 AND receiver = ? ORDER BY send_date"
+changeRecordSet(:sql,S(:receiver))
+:totalNumber = recordCount()
+debugMsg(:totalNumber#"update=================")
+If :totalNumber > 0
+Repeat
+%>
+<li id="del2423">
+										<div>
+											<section class="u-s-l-txt">
+												<p class="fsize14 c-999"><%=private_message%></p>
+												<em class="wd-ico">
+													</em>
+												<a href="javascript:void (0)" onclick="delMessage('<%=id%>')" class="u-s-l-sc-ico" title="删除">
+													&nbsp;
+												</a>
+											</section>
+											<section class="clearfix hLh30">
+												<span class="fl">
+													<tt class="fsize14 c-999 f-fM"><%=send_date%></tt>
+													<tt class="fsize14 c-999 f-fM">
+														</tt>
+												</span>
+											</section>
+										</div>
+									</li>
+
+<%EndRepeat%>
+<%EndIf%>
+<%EndIf%>
+
+<%
+If :operation == "delmessage"
+:sql="UPDATE mooc_message SET is_delete = 0 WHERE receiver = ? AND id = ?"
+:i=execSQL(:sql,S(:receiver),S(:messageId))
+Exit(:x)
+EndIf
+%>

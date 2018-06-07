@@ -304,28 +304,23 @@ function getUrlString(name) {
 }
 
 function uploadHeadImg() {
-    alert('in upload headportrail')
     var userName = localStorage.getItem("loginName");
     var file = $("#upLoadImg").val();
     var afterUploadFile = function(tid){//uploadToDatabase执行成功后返回的图片的id
-		alert(tid);
 		var paras = "picId=" + tid;
-		var uid = uid;
-		// paras += "$^@^$title=" + title;
-		// paras += "$^@^$urlstr=" + urlstr;
-		// paras += "$^@^$operation=newPicture";
+		paras += "$^@^$loginName=" + userName;
+
 		var objs = new Array();
 		var afterSavePic = function () {
-		    if (objs[0] == "ok") {
-		        alert("执行结果："+objs[0]);
-            		location.reload(true);
-		    } else {
-		        alert("新增图片失败");
+            if (objs[0] == "ok") {
+                location.reload(true);
+            } else {
+                alert("新增图片失败");
 		    }
 		};
 		getFromWS("mainmooc/saveHeadImg.template", paras, objs, afterSavePic);
 	}
-	uploadToDatabase("newFile",afterUploadFile,"databaseType=PostgresXL")
+	uploadToDatabase("upLoadImg",afterUploadFile,"databaseType=PostgresXL")
 
 }
 

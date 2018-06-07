@@ -1,0 +1,22 @@
+<%
+/// operation=1,follow,operation=0,unfollow
+
+If :operation == 1
+    ///判断是否已经关注
+    :is_follow ="SELECT * FROM mooc_fans WHERE from_user=? and to_user=?"
+    :xx = changeRecordSet(:is_follow, S(:from_user), S(:to_user));
+    :totalNumber = recordCount()
+    debugMsg("1111111EEE"#:totalNumber)
+    If :totalNumber >0
+        Exit("ok")
+    EndIf
+    :sql = "insert into mooc_fans(id,from_user,to_user) values(?,?,?)"
+    :aid = tuid()
+    :x=execSQL(:sql,:aid,S(:from_user),S(:to_user))
+Else
+    :sql = "delete from mooc_fans where from_user=? and to_user = ?"
+     :x=execSQL(:sql, S(:from_user), S(:to_user))
+
+EndIf
+Exit(:x)
+%>

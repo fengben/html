@@ -24,7 +24,7 @@
     <link rel="stylesheet" type="text/css" href="css/theme.css">
     <link href="css/mw_320_768.css" rel="stylesheet" type="text/css"
           media="screen and (min-width: 320px) and (max-width: 768px)">
-    <title>我的订单--中国在线教育平台第一品牌</title>
+    <title>我的关注--中国在线教育平台第一品牌</title>
     <!--[if lt IE 9]>
     <script src="js/html5.js"></script><![endif]-->
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
@@ -41,8 +41,54 @@
 
 
     <script>
+        var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
+        var classification = localStorage.getItem('classification');
+        var loginName = localStorage.getItem('loginName');
+        jQuery(document).ready(function () {
+
+            showFanConetent(0);
+
+        });
+        //operation = 0 显示我关注的,1显示关注我的
+        function showFanConetent(operation) {
+            var recentColumns = new Array();
+
+            var paras = "loginName=" + loginName;
+            paras += "$^@^$operation="+operation;
+            var processCoResult = function () {
+                jQuery("#content").html(recentColumns[0]);
+                //alert(recentColumns[0]);
+            }
+            getFromWS("frontmooc/getFan.template", paras, recentColumns, processCoResult);
+        }
+
+        //取消收藏
+        function cancel(email,operation) {
+            var paras = "to_user=" + email;
+            paras += "$^@^$from_user=" + loginName;
+            //operation=0,follow,operation=1,unfollow
+            paras += "$^@^$operation="+operation;
+            var obj = new Array();
+            var processCollection = function () {
+                //alert(obj);
+
+                if (obj=="ok"){
+                    if(operation==0){
+                    alert("您已经取消关注!");}else {
+                        alert("您已经关注了ta")
+                    }
+                    showFanConetent(0);
+                }else {
+                    alert("服务器繁忙,请稍后再试.")
+                }
+            }
+            alert(paras)
+            getFromWS("frontmooc/follow.template", paras, obj, processCollection);
+        }
+
         $(function () {
-            $("#a-").addClass("current");
+            $("#follow").addClass("current");
             $("#mobileSelect").addClass("m-current");
         });
 
@@ -55,8 +101,7 @@
                 $(this).attr("class", "f-fH");
             });
             $(obj).addClass("current");
-            alert("in")
-
+            showFanConetent(obj)
         }
 
         /**
@@ -330,67 +375,72 @@
                         <!-- 左侧，开始 -->
                         <link rel="stylesheet" type="text/css" href="css/jquery.jcrop.min.css"/>
                         <script type="text/javascript" src="js/plupload.full.min.js"></script>
-                        <menu class="col-20 fl uMenu">
-                            <section class="of u-left-top">
-                                <div class="u-face-pic">
-                                    <img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
-                                    <a href="javascript:void (0)" onclick="dialog('修改头像','',7)" title="" class="c-fff">修改头像</a>
-                                </div>
-                                <div class="hLh20 txtOf mt10 tac">
-                                    <a href="http://wx.inxedu.com/uc/initUpdateUser/0"
-                                       class="fsize14 c-333 userNameClass"><!-- 用户名 --></a>
-                                </div>
-                                <div class="mt5 of tac">
+                    <menu class="col-20 fl uMenu">
+                        <section class="of u-left-top">
+                            <div class="u-face-pic">
+                                <img src="picture/avatar-boy.gif" alt="" class="userImgPhoto">
+                                <!--<a href="javascript:void (0)" onclick="dialog('修改头像','',7)" title=""-->
+                                   <!--class="c-fff">修改头像</a>-->
+                            </div>
+                            <div class="hLh20 txtOf mt10 tac">
+                                <a href="#" class="fsize14 c-333 userNameClass">
+                                    <!-- 用户名 --></a>
+                            </div>
+                            <div class="mt5 of tac">
 				<span class="u-tit-vip" style="display: none">
 					<em class="vip-pic">
 						<img src="picture/vip.png">
 					</em>
 					<tt class="vam c-fff fsize12 f-fM">已开通vip</tt>
 				</span>
-                                    <a href="http://wx.inxedu.com/uc/associator" class="u-tit-vip-gq"
-                                       style="display: none" title="立即开通vip">
-                                        <em class="vip-pic">
-                                            <img src="picture/vip.png">
-                                        </em>
-                                        <tt class="vam c-fff fsize12 f-fM">未开通vip</tt>
-                                    </a>
-
-                                </div>
-                                <div class="clear"></div>
-                            </section>
-                            <div>
-                                <ul id="navList" class="uM-list">
-                                    <li>
-                                        <a href="my.html" title="我的课程">
-                                            <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的课程</tt>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="myFav.html" title="我的收藏">
-                                            <em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的收藏</tt>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="myletter.html" title="消息中心">
-                                            <em class="icon24 uM-xxzx-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">消息中心</tt>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul id="navList" class="uM-list">
-                                    <li>
-                                        <a href="myOrderList.html" title="我的订单">
-                                            <em class="icon24 uM-ddzx-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的订单</tt>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="myinfo.html" title="个人信息">
-                                            <em class="icon24 uM-grzl-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">个人信息</tt>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <a href="#" class="u-tit-vip-gq" style="display: none"
+                                   title="立即开通vip">
+                                    <em class="vip-pic">
+                                        <img src="picture/vip.png">
+                                    </em>
+                                    <tt class="vam c-fff fsize12 f-fM">未开通vip</tt>
+                                </a>
                             </div>
-                        </menu>
+                            <div class="clear"></div>
+                        </section>
+                        <div>
+                            <ul id="navList" class="uM-list">
+                                <li>
+                                    <a href="my.html" title="我的课程">
+                                        <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">我的课程</tt>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="myFav.html" title="我的收藏">
+                                        <em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">我的收藏</tt>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="myletter.html" title="消息中心">
+                                        <em class="icon24 uM-xxzx-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">消息中心</tt>
+                                    </a>
+                                </li>
+                            </ul>
+                            <ul id="myfan" class="uM-list">
+                                <li>
+                                    <a href="myfan.html" title="我的订单">
+                                        <em class="icon24 uM-ddzx-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">我的关注</tt>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="myinfo.html" title="个人信息">
+                                        <em class="icon24 uM-grzl-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">个人信息</tt>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </menu>
                         <!-- /公共左侧菜单 结束 --><!-- 左侧，结束 -->
 
                         <article class="col-80 fl">
@@ -405,92 +455,15 @@
                                     <div class="">
                                         <section class="u-r-tit-all clearfix">
                                             <h2 class="unFw m-xl-ashow" id=tbs>
-                                                <a href="javascript:void(0)" id="a-" onclick="go(this)" class="f-fH">全部订单</a>
-                                                <a href="javascript:void(0)" onclick="go(this)" id="a-SUCCESS"
-                                                   class="f-fH">已购买</a>
-                                                <a href="javascript:void(0)" onclick="go(this)" id="a-INIT"
-                                                   class="f-fH">待付款</a>
-                                                <a href="javascript:void(0)" onclick="go(this)" id="a-CANCEL"
-                                                   class="f-fH">已取消</a>
-                                                <a href="javascript:void(0)" onclick="go(this)" id="a-REFUND"
-                                                   class="f-fH">已退款</a>
+                                                <a href="javascript:void(0)" onclick="go(0)" id="follow"
+                                                   class="f-fH">我的关注</a>
+                                                <a href="javascript:void(0)" onclick="go(1)" id="fan"
+                                                   class="f-fH">关注我的</a>
                                             </h2>
 
                                         </section>
-                                        <section class="orde-tab-new u-r-all-box">
-                                            <div class="o-tab-n-body">
-                                                <div>
-                                                    <div class="u-order-wrap">
-                                                        <dl>
-                                                            <dt class="clearfix">
-                                                                <span class="c-999 fsize14 fl"><tt
-                                                                        class="f-fM">订单号：</tt><tt class="f-fM c-666">53320180416155052102</tt></span>
-                                                                <span class="fr u-o-dt-time">
-												<tt class="f-fM">2018-04-16 15:50</tt>
-											</span>
-                                                            </dt>
-                                                            <dd class="u-order-list">
-                                                                <section class="w50pre disIb vam u-o-left">
-                                                                    <div class="mr30 u-o-l-infor">
-                                                                        <div class="c-cou-item">
-                                                                            <div class="">
-                                                                                <div>
-                                                                                    <a href="couinfo.html?id=146"
-                                                                                       class="u-ol-pic">
-                                                                                        <img src="picture/1487836180735.jpg"
-                                                                                             alt="">
-                                                                                    </a>
-                                                                                    <h6 class="hLh30 txtOf name">
-                                                                                        <a
-                                                                                                href="couinfo.html?id=146"
+                                        <section class="orde-tab-new u-r-all-box" id="content">
 
-                                                                                                title=""
-                                                                                                class="fsize14 c-666">
-                                                                                            [课程订单]&nbsp;作文写作（展示）</a>
-                                                                                    </h6>
-                                                                                    <section
-                                                                                            class="hLh30 txtOf mt10 u-o-l-jg">
-                                                                                        <span class="c-master fsize16">￥<font>0.10</font></span>
-                                                                                    </section>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </section>
-                                                                <section class="disIb vam u-o-maddile col-2 tac mb20">
-                                                                    <div class="disIb vam tac u-o-price">
-                                                                        <span class="c-999 f-fM fsize14">2018-04-16 15:50</span>
-                                                                    </div>
-                                                                </section>
-                                                                <section class="disIb vam col-2 tac mb20 col-2-new">
-                                                                    <div class="disIb vam tac u-o-m-zt">
-                                                                        <span class="c-red fsize14">未支付</span>
-                                                                    </div>
-                                                                </section>
-                                                                <section class="col-2 disIb vam u-o-right">
-                                                                    <div class="tac u-o-r-btn-infor">
-                                                                        <p class="c-999 f-fA mb10"><a href="#"
-                                                                                                      class="cou-kscp">继续支付</a>
-                                                                        </p>
-                                                                        <p class="mb20"><a href="#"
-                                                                                           class="cou-kscp gmkc">取消订单</a>
-                                                                        </p>
-                                                                    </div>
-                                                                </section>
-                                                                <div class="clear"></div>
-                                                            </dd>
-                                                        </dl>
-                                                    </div>
-                                                </div>
-                                                <!-- 公共分页 开始 -->
-                                                <script type="text/javascript" src="js/page.js"></script>
-                                                <script type="text/javascript">
-                                                    var totalPageSize = 1;
-                                                    var currentPage = 0 < 1 ? 1 : 1;
-                                                    var totalPage = 1;
-                                                    showPageNumber();
-                                                </script><!-- 公共分页 结束 -->
-                                            </div>
                                         </section>
                                     </div>
                                 </section>

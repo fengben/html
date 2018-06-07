@@ -1,0 +1,6 @@
+<%
+debugMsg("111111111111111111111111"#:loginName#:passwd#:passwd1)
+:sqlStr = "update user_passports set passwd = md5(?) where login_name = ? "
+:x=execSQL(:sqlStr, S(:passwd), S(:loginName))
+Exit(:x)
+%>

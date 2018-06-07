@@ -1,0 +1,80 @@
+<%
+If :operation == 0
+    :sql = "SELECT id,head_portrait,nickname,brief,email from mooc_userprofile WHERE email in (select to_user from mooc_fans where from_user=?)"
+Else
+
+    :sql = "SELECT id,head_portrait,nickname,brief,email from mooc_userprofile WHERE email in (select from_user from mooc_fans where to_user=?)"
+EndIf
+changeRecordSet(:sql,S(:loginName));
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+
+<div class="u-fav-list">
+    <ul>
+        <li>
+            <dl>
+                <dd class="u-order-list">
+                    <section class="col-6 disIb vam u-o-left">
+                        <div class="mr30 u-o-l-infor">
+                            <div class="c-cou-item">
+                                <div class="my-sc-box">
+                                    <div>
+                                        <a href="my.html?id=<%=id%>" target="_blank">
+                                            <%If head_portrait!=0%>
+                                            <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
+                                                 class="u-face-pic" width="170" height="95">
+                                            <%Else%>
+                                            <img src="/pages/MOOC/picture/default_course.png" width="170" height="95">
+                                            <%EndIf%>
+                                            <section class="hLh20 txtOf mt10">
+                                                <span class="fsize14 c-999 vam">ta：</span>
+                                                <span class="fsize14 c-999 vam"><%=nickname%></span>
+                                            </section>
+                                            <section class="hLh20 txtOf mt10 u-o-l-jg">
+  																			<span class="c-999 fsize13">
+  																				ta说：<%=brief%></span>
+                                            </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="disIb vam u-o-maddile col-tw tac mb10">
+                        <div class="disIb vam tac u-o-price">
+  														<span class="c-master f-fM fsize16">
+  															///￥<font>0.01</font>
+  														</span>
+                        </div>
+                    </section>
+                    <section class="col-tw disIb vam u-o-right">
+                        <div class="tac u-o-r-btn-infor">
+                            <p class="c-999 f-fA mb10"><a href="javascript:void(0)" onclick="cancel('<%=email%>', <%=:operation%>)"
+                                                          class="cou-kscp" style="margin-right: 0">
+                                                          <% If  :operation == 0 %>
+                                                          取消关注
+                                                          <% Else %>
+                                                          关注
+                                                          <%EndIf%>
+                                                          </a></p>
+                        </div>
+                    </section>
+                    <div class="clear"></div>
+                </dd>
+            </dl>
+        </li>
+    </ul>
+</div>
+<!-- 公共分页 开始 -->
+<script type="text/javascript" src="js/page.js"></script>
+<script type="text/javascript">
+    var totalPageSize = 1;
+    var currentPage = 0 < 1 ? 1 : 1;
+    var totalPage = 1;
+    showPageNumber();
+</script><!-- 公共分页 结束 -->
+<%
+EndRepeat
+EndIf
+%>

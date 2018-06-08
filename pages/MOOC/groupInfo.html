@@ -64,7 +64,6 @@
             function phraseComments() {
                 $("#comments").html(commentArray[0]);
             }
-
             getFromWS("frontmooc/getComments.template", paras, commentArray, phraseComments);
         }
 
@@ -396,7 +395,7 @@
             * */
             // $(".cc-mm-ul").append('<li class="comment" style=""> <a class="isAct_a" href="javascript:void(0)" onclick="toBrowseUserCenter(533)" title="barrycom"><img class="isAct-img" src="http://wx.inxedu.com/static/gro/img/avatar-boy.gif" alt="barrycom" /></a> <div class="c-comm-title"> <span class="floor c-green">1楼</span> <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)" title="barrycom" class="c-u-name c-master fsize14 vam">barrycom</a> <span class="c-time c-ccc vam">0秒前</span> </div> <div class="c-a-p clearfix"> <p>dfsfsdfsfdsfsd</p></div> <div class="isAct-attr of hLh30"> <a class="numb msg" href="javascript:void(0)" onclick="#" title="评论 0"> <em class="icon14">&nbsp;</em><span class="commentDto_comment_num_2">0</span> </a><a href="javascript:void(0)" onclick="commentPraise(2)" id="commentPraiseATitle_2" title="点赞 0" class="numb zan"> <em class="icon14">&nbsp;</em><span id="commentPraise_2">0</span> </a> <a href="javascript:void(0);" onclick="#" title="删除" class="jubao fsize12 c-ccc undis fr delMarkClass">删除</a> </div> </li>');
             comment = $("#oneCommentContent").val();
-            if (!$.cookie('mooc_login_name')) {
+            if (!localStorage.getItem("loginName")) {
                 $("#oneCommentErrorMessage").html("请先登录").show();
                 return
             }
@@ -418,7 +417,7 @@
                 }
 
                 paras = "pid=" + pid;
-                paras += "$^@^$author=" + $.cookie('mooc_login_name');
+                paras += "$^@^$author=" + localStorage.getItem('loginName');
                 paras += "$^@^$body=" + comment;
                 paras += "$^@^$type=" + type;
                 getFromWS("frontmooc/saveComment.template", paras, resultArry, phraseResut);

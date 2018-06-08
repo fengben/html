@@ -1,0 +1,35 @@
+<%
+/// operation=1,follow,operation=0,unfollow,operation=2,isfollow?
+///他人信息关注页面
+ debugMsg("******************************"#:loginName#:uid#"--"#:operation)
+If :operation == 2
+    ///判断是否已经关注
+    :is_follow ="SELECT * FROM mooc_fans WHERE from_user=? and to_user=(SELECT email FROM mooc_userprofile where id=?)"
+    :xx = changeRecordSet(:is_follow, S(:loginName), L(:uid));
+    :totalNumber = recordCount()
+    debugMsg("1111111EEE"#:totalNumber)
+    If :totalNumber >0
+        Exit("ok")
+    Else
+        Exit("bad")
+    EndIf
+
+Else
+    ///关注
+    If :operation == 1
+        debugMsg("******************************"#:uid)
+        :get_email = "SELECT email FROM mooc_userprofile WHERE ID=?"
+        :xx = changeRecordSet(:get_email, L(:uid));
+        debugMsg("*******************************"#:xx#email)
+        :sql = "insert into mooc_fans(id,from_user,to_user) values(?,?,?)"
+        :aid = tuid()
+        :x=execSQL(:sql,:aid,S(:loginName),S(email))
+    ///取消关注
+    Else
+         :sql = "delete from mooc_fans where from_user=? and to_user = (SELECT email FROM mooc_userprofile where id=?)"
+        :x=execSQL(:sql, S(:loginName), L(:uid))
+    EndIf
+
+EndIf
+Exit(:x)
+%>

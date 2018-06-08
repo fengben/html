@@ -1,6 +1,6 @@
 <%
 /// operation=1,follow,operation=0,unfollow
-
+///个人关注页面
 If :operation == 1
     ///判断是否已经关注
     :is_follow ="SELECT * FROM mooc_fans WHERE from_user=? and to_user=?"

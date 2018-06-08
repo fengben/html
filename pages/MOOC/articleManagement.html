@@ -372,10 +372,15 @@
         $("#appendixName").val(getFileName($("#appendixInput").val()));
     }
 
+    //登陆edx Studio
     function createCourse() {
+        email = localStorage.getItem("loginName");
+        passwd = localStorage.getItem("passWord");
+        if(!email || !passwd){
+            alert("服务器繁忙,请稍后继续")
+            return
+        }
         createUrl = "//192.168.10.138/mylogin";
-        email = $.cookie('mooc_login_name');
-        passwd = $.cookie('mooc_password');
         createUrl += "?email=";
         createUrl += email;
         createUrl += "&password=";

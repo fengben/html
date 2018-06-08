@@ -59,6 +59,7 @@
 
             var famousResult = new Array();
             function showFamous() {
+                alert(famousResult[0])
                 $("#famours").html(famousResult[0]);
             }
             getFromWS("frontmooc/showFamous.template", paras,famousResult, showFamous);

@@ -50,6 +50,7 @@
 
     <script type="text/javascript" charset="utf-8" src="lang/zh-cn/zh-cn.js"></script>
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/moocutil.js"></script>
 
     <script type="text/javascript">
         function killErrors() {
@@ -64,6 +65,98 @@
             var r = window.location.search.substr(1).match(reg);
             if (r != null) return unescape(r[2]);
             return "";
+        }
+
+        //获取评论数据
+        function showComment() {
+            var id = getUrlString("id");
+            var paras = "course_id=" + id;
+            paras += "$^@^$pageNumber=1";
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#course_comment").html(array[0]);
+                $("#CommentDeanpage").html(array[1]);
+            }
+            getFromWS("frontmooc/getCourseComments.template", paras, array, ProcessResult);
+
+
+        }
+
+        //获取笔记
+        function showNote() {
+            var id = getUrlString("id");
+            var paras = "course_id=" + id;
+            paras += "$^@^$pageNumber=1";
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#Course_notes").html(array[0]);
+                $("#NoteDeanpage").html(array[1]);
+            }
+            getFromWS("frontmooc/getNotes.template", paras, array, ProcessResult);
+
+
+        }
+
+        //评论
+        function doSaveComment() {
+            var loginName = localStorage.getItem("loginName");
+            var id = getUrlString("id");
+            var body = $('#course_comments #commentContent').val();
+
+
+            if (body == "") {
+                alert("请将信息输入完整");
+                return;
+            }
+            var paras = "author=" + loginName;
+            paras += "$^@^$body=" + body;
+            paras += "$^@^$course_id=" + id;
+
+
+            var objs = new Array();
+            var afterSaveResult = function () {
+                if (objs == "ok") {
+                    alert("评论成功");
+                    var body = $('#course_comments #commentContent').val("");
+                    showComment();
+                }
+                else {
+                    alert("评论失败");
+                    return;
+                }
+            }
+            getFromWS("frontmooc/saveCourseComments.template", paras, objs, afterSaveResult);
+        }
+
+        //笔记
+        function doSaveNotes() {
+            var loginName = localStorage.getItem("loginName");
+            var id = getUrlString("id");
+            var body = $('#course_notes #notesContent').val();
+
+
+            if (body == "") {
+                alert("请将信息输入完整");
+                return;
+            }
+            var paras = "author=" + loginName;
+            paras += "$^@^$body=" + body;
+            paras += "$^@^$course_id=" + id;
+
+
+            var objs = new Array();
+            var afterSaveResult = function () {
+                if (objs == "ok") {
+                    alert("添加成功");
+                    var body = $('#course_notes #notesContent').val("");
+                    showNote();
+                }
+                else {
+                    alert("添加失败");
+                    return;
+                }
+            }
+            getFromWS("frontmooc/saveNotes.template", paras, objs, afterSaveResult);
         }
 
         jQuery(document).ready(function () {
@@ -89,7 +182,7 @@
 
             paras += "$^@^$login_name=" + login_name;
             getFromWS("frontmooc/getCouinfoContent.template", paras, content, contentResult);
-             //推荐课程
+            //推荐课程
             var Recourse = new Array();
             var RecourseResult = function () {
 
@@ -99,7 +192,54 @@
             }
             getFromWS("frontmooc/getCouinfoRecourse.template", "id=" + id, Recourse, RecourseResult);
 
+            //   获取评论
+            var id = getUrlString("id");
+            var paras = "course_id=" + id;
+            paras += "$^@^$pageNumber=1";
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#course_comment").html(array[0]);
+                $("#CommentDeanpage").html(array[1]);
+            }
+            getFromWS("frontmooc/getCourseComments.template", paras, array, ProcessResult);
+
+            //   获取笔记
+            var paras = "course_id=" + id;
+            paras += "$^@^$pageNumber=1";
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#Course_notes").html(array[0]);
+                $("#NoteDeanpage").html(array[1]);
+            }
+            getFromWS("frontmooc/getNotes.template", paras, array, ProcessResult);
+
         });
+
+        function goToNotePage(value) {
+            var id = getUrlString("id");
+            var paras = "course_id=" + id;
+            paras += "$^@^$pageNumber=" + value;
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#Course_notes").html(array[0]);
+                $("#NoteDeanpage").html(array[1]);
+            }
+            getFromWS("frontmooc/getNotes.template", paras, array, ProcessResult);
+
+        }
+
+        function goToCommentPage(value) {
+            var id = getUrlString("id");
+            var paras = "course_id=" + id;
+            paras += "$^@^$pageNumber=" + value;
+            var array = new Array();
+            var ProcessResult = function () {
+                $("#course_comment").html(array[0]);
+                $("#CommentDeanpage").html(array[1]);
+            }
+            getFromWS("frontmooc/getCourseComments.template", paras, array, ProcessResult);
+
+        }
 
         /*
         * 已登录用户有权限跳转edx观看视频
@@ -124,7 +264,7 @@
 
                     email = localStorage.getItem("loginName");
                     passwd = localStorage.getItem("passWord");
-                    if(!email || !passwd){
+                    if (!email || !passwd) {
                         alert("服务器繁忙,请稍后继续");
                         return;
                     }
@@ -206,10 +346,9 @@
         <h4 class="d-s-head pr new-header" style="width: 380px;"><a id="dClose" onclick="closewin()"
                                                                     href="javascript:void(0)" title="关闭"
                                                                     class="dClose icon16 pa new-close">&nbsp;</a><span
-                id="d-s-head-tab" class="d-s-head-tab"><a href="javascript:void(0)" onclick="dialoglogin(this)"
-                                                          class="current">登录</a><a href="javascript:void(0)"
-                                                                                   onclick="dialogRegister(this)">注册</a></span>
-        </h4>
+                id="d-s-head-tab" class="d-s-head-tab">
+      <a href="javascript:void(0)" onclick="showdialoglogin(this)" class="current">登录</a>
+      <a href="javascript:void(0)" onclick="showdialogRegister(this)">注册</a></span></h4>
         <div class="of">
             <div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
                 <div id="d-s-head-cont" class="lrWrap">
@@ -219,24 +358,31 @@
                         </div>
                         <div>
                             <ol class="e-login-options">
-                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden"/> <input
-                                        id="u-email" placeholder="请输入账户/邮箱/手机号" name="" value=""
-                                        onkeyup="$(this).next().html('');" type="text"/>
+                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden"/>
+                                    <input
+                                            id="u-email" placeholder="请输入账户" name="" value=""
+                                            onkeyup="$(this).next().html('');" type="text"/>
                                     <p class="lr-tip-wrap"></p></li>
-                                <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password" placeholder="请输入密码"
+                                <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password"
+                                                                               placeholder="请输入密码"
                                                                                name="" value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="password"/>
                                     <p class="lr-tip-wrap"></p></li>
                             </ol>
                             <section class="hLh30 of pl10">
-                                <label class="hand c-999 vam fl"> <input id="autoThirty" style="vertical-align: -2px;"
-                                                                         checked="checked" type="checkbox"/> 自动登录
+                                <label class="hand c-999 vam fl"> <input id="autoThirty"
+                                                                         style="vertical-align: -2px;"
+                                                                         checked="checked" type="checkbox"/>
+                                    自动登录
                                 </label>
-                                <a class="vam ml10 c-blue fr" title="" href="/front/passwordRecovery">忘记密码?</a>
+                                <a class="vam ml10 c-blue fr" title=""
+                                   href="/front/passwordRecovery">忘记密码?</a>
                             </section>
                             <section class="mt20 tac mb50">
-                                <a class="e-login-btn" href="javascript:void(0)" title="登 录" onclick="dialogLogin()">登 录</a>
+                                <a class="e-login-btn" href="javascript:void(0)" title="登 录"
+                                   onclick="dialogLogin()">登
+                                    录</a>
                             </section>
                         </div>
                     </section>
@@ -246,13 +392,22 @@
                         </div>
                         <div>
                             <ol class="e-login-options">
-                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-name-reg" placeholder="请输入账号"
-                                                                               name="registerName" maxlength="50"
+                                <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-email-reg"
+                                                                               placeholder="请输入邮箱"
+                                                                               name="registerName"
+                                                                               maxlength="50"
                                                                                value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="text"/>
                                     <p class="lr-tip-wrap"></p></li>
-                                <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-reg" placeholder="请输入密码"
+                                <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-reg"
+                                                                               placeholder="请输入密码"
+                                                                               name="" value=""
+                                                                               onkeyup="$(this).next().html('');"
+                                                                               type="password"/>
+                                    <p class="lr-tip-wrap"></p></li>
+                                <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-rep"
+                                                                               placeholder="请确认密码"
                                                                                name="" value=""
                                                                                onkeyup="$(this).next().html('');"
                                                                                type="password"/>
@@ -265,12 +420,12 @@
                             </section>
                         </div>
                     </section>
-                    <div class="mt20 sf-lr-wrap tac">
+                    <!--<div class="mt20 sf-lr-wrap tac">
                         <h6 class="hLh20 mb15"><span class="c-666 fsize14">第三方快捷登录</span></h6>
                         <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
                         <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
-                        <a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>
-                    </div>
+                        &lt;!&ndash;<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>&ndash;&gt;
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -294,7 +449,7 @@
                     <ul class="nav">
                         <li><a href="default.html" title="首页">首页</a></li>
                         <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                        <li><a href="shoollist.html" title="直播">名校</a></li>
+                        <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
                         <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
                         <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                         <li><a href="article.html" title="资讯">资讯</a></li>
@@ -303,7 +458,7 @@
                     <ul class="h-r-login clearfix">
                         <li class="undis h-login-li" id="no-login"><a href="javascript:showlogin()" title="登录"> <em
                                 class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span> </a></li>
-                        <li class="tit-new-list undis h-login-li" id="is-login-one"><a href="/uc/letter" title="消息"
+                        <li class="tit-new-list undis h-login-li" id="is-login-one"><a href="myletter.html" title="消息"
                                                                                        id="headerMsgCountId"> <em
                                 class="news-icon">&nbsp;</em> </a> <q class="red-point" id="letterPoint"
                                                                       style="display: none">&nbsp;</q>
@@ -311,17 +466,17 @@
                                 <ol id="letter">
                                 </ol>
                                 <div class="new-tit-box tac mt10 mb20" style="display:none">
-                                    <a href="/uc/letter" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+                                    <a href="myletter.html" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
                                 </div>
                             </div>
                         </li>
-                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="/uc/index" title=""> <img src=""
-                                                                                                               width="30"
-                                                                                                               height="30"
-                                                                                                               class="vam picImg"
-                                                                                                               alt=""/>
+                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="myinfo.html" title=""> <img src=""
+                                                                                                                 width="30"
+                                                                                                                 height="30"
+                                                                                                                 class="vam picImg"
+                                                                                                                 alt=""/>
                             <span class="vam disIb c-master" id="userName"></span> </a></li>
-                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="helpCenter" title="帮助" class="vam">
+                        <li class="h-r-user undis h-login-li loginedLiShow"><a href="#" title="帮助" class="vam">
                             <span class="vam disIb c-fff">帮助</span> </a></li>
                         <li class="h-r-user undis h-login-li loginedLiShow"><a href="javascript:void(0)" title="退出"
                                                                                onclick="exit();" class=" vam"> <span
@@ -330,9 +485,9 @@
                     </ul>
                     <aside class="h-r-search">
                         <div class="pr h-r-s-box-cx">
-                            <form action="showcoulist" method="post" id="headerformSearch" onsubmit="return toSearch()">
+                            <form action="search.html" method="get" id="headerformSearch" onsubmit="return toSearch()">
                                 <label class="h-r-s-box"><input type="text" value="" id="headerSearchName"
-                                                                name="queryCourse.courseName" placeholder="搜索..."/>
+                                                                name="queryCourse.courseName" placeholder="搜索...">
                                     <button class="s-btn" type="submit"><em class="icon18">&nbsp;</em></button>
                                 </label>
                             </form>
@@ -343,18 +498,21 @@
                     <div class="mw-nav-icon"></div>
                 </aside>
                 <aside class="mw-nav-seach mw-nav-seach-d1">
-                    <form action="" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
-                        <label> <input type="text" value="" placeholder="" id="h5HeaderSearchName"
-                                       class="f-fM h1-mw-seach-input i_h_gb_s_input"/> <a href="javascript:void(0)"
-                                                                                          onclick="$('#headerformH5Search').submit();"
-                                                                                          class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+                    <form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+                        <label>
+                            <input type="text" value="" placeholder="" id="h5HeaderSearchName"
+                                   class="f-fM h1-mw-seach-input i_h_gb_s_input">
+                            <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();"
+                               class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
                         </label>
                     </form>
+
                     <div class="exam-mo-test-time tac">
                         <span class="time c-fff f-fM vam examTimer"></span>
                         <a href="javascript:void(0)" onclick="timePause(this)" title=""
                            class="de-over-btn timePauseTag"></a>
                     </div>
+
                 </aside>
                 <div class="clear mobile-clear"></div>
             </section>
@@ -378,317 +536,59 @@
                                 <section id="c-i-tabTitle" class=" fl">
                                     <span href="javascript:void(0)">课程介绍</span>
                                     <!--<a name="c-i" class="current" onclick="selectCourseInfo('courseContext',this)"-->
-                                       <!--title="课程详情" href="javascript: void(0)">课程详情</a>-->
+                                    <!--title="课程详情" href="javascript: void(0)">课程详情</a>-->
                                     <!--<a name="c-g" title="课程目录" onclick="selectCourseInfo('courseList',this)" "-->
                                     <!--href="javascript: void(0)">课程目录</a>-->
-                                    <!--<a name="c-c" title="课程评论" onclick="selectCourseInfo('courseComment',this)"-->
-                                       <!--href="javascript: void(0)">课程评论</a>-->
-                                    <!--<a name="c-z" title="课程作业" onclick="selectCourseInfo('courseContext1',this)"-->
-                                       <!--href="javascript: void(0)">课程作业</a>-->
+                                    <a name="c-c" title="课程评论" onclick="selectCourseInfo('courseComment',this)"
+                                       href="javascript: void(0)">课程评论</a>
+                                    <a name="c-z" title="课程笔记" onclick="selectCourseInfo('courseContext1',this)"
+                                       href="javascript: void(0)">课程笔记</a>
                                 </section>
                             </div>
                             <article class="ml10 mr10 new-c-i-b-warp">
                                 <div id="courseContext1" class="c-z-content" style="display: none">
+                                    <section class="lh-bj-list pr replyhtml" id="course_notes">
+                                        <ul>
+                                            <li class="unBr">
+
+                                                <div class="of">
+                                                    <section class="n-reply-wrap">
+                                                        <div class="numb-box">
+                                                            <fieldset><textarea name="" placeholder="输入您要添加的笔记"
+                                                                                id="notesContent"></textarea>
+                                                            </fieldset>
+                                                        </div>
+                                                        <p class="of mt5 tar pl10 pr10">
+                                                                    <span class="fl "><tt
+                                                                            class="c-red commentContentmeg"
+                                                                            style="display: none;"></tt></span>
+                                                            <a href="javascript:void(0);" title="笔记"
+                                                               onclick="doSaveNotes()"
+                                                               class="lh-reply-btn">添加</a>
+                                                        </p>
+                                                    </section>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </section>
                                     <section class="isAct-list" id="aCoursesList">
                                         <div id="indexTopicAll">
-                                            <ul class="img-page-1 otShow">
+                                            <ul class="img-page-1 otShow" id="Course_notes">
 
-                                                <li>
-                                                    <a class="isAct_a" name="u-001" rel="popUserCard"
-                                                       href="javascript:void(0)" onclick="toBrowseUserCenter(2)"
-                                                       userinfoid="2" title="">
-                                                        <img class="isAct-img"
-                                                             src="http://wx.inxedu.com/images/upload/group/customer/20170329/2.jpg"
-                                                             alt="">
-                                                    </a>
-                                                    <div class="isAct-title">
-                                                        <a href="groupinfo.html?id=67" title="进入查看" target="_blank"
-                                                           class="isAct-title-name" style="
-
-									">[课堂作业]如何处理大数据并发？</a>
-                                                        <!-- 火热-->
-                                                        <!-- 置顶 -->
-                                                        <!-- 精华 -->
-                                                    </div>
-                                                    <p class="isAct-desc-wrap">
-                                                        <a href="groupinfo.html?id=67" title="进入查看" target="_blank">
-                                                            来源：北大荒老师
-
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;这个世界上的奇妙题目。
-
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;明清...</a>
-                                                    </p>
-                                                    <a href="groupinfo.html?id=67" title="进入查看" target="_blank"
-                                                       class="topic_imgs">
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
-                                                                xsrc="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
-                                                                xsrc="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
-                                                                xsrc="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
-                                                                xsrc="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
-                                                                xsrc="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                    </a>
-                                                    <div class="clear"></div>
-                                                    <div class="isAct-attr">
-                                                        <span class="numb view" title="浏览 20"><em
-                                                                class="icon14">&nbsp;</em>20</span>
-                                                        <span class="numb msg" title="评论 1"><em
-                                                                class="icon14">&nbsp;</em>1</span>
-                                                        <span class="numb zan" title="点赞 0"><em
-                                                                class="icon14">&nbsp;</em>0</span>
-                                                        <a href="javascript:void(0)" onclick="#" title="" name="u-002"
-                                                           userinfoid="2">张老师</a>
-                                                        <span>2016-01-19 10:02:00</span>
-                                                    </div>
-
-                                                </li>
-
-
-                                                <li>
-                                                    <a class="isAct_a" name="u-001" rel="popUserCard"
-                                                       href="javascript:void(0)" onclick="toBrowseUserCenter(2)"
-                                                       userinfoid="2" title="">
-                                                        <img class="isAct-img"
-                                                             src="http://wx.inxedu.com/images/upload/group/customer/20170329/2.jpg"
-                                                             alt="">
-                                                    </a>
-                                                    <div class="isAct-title">
-                                                        <a href="groupinfo.html?id=67" title="进入查看" target="_blank"
-                                                           class="isAct-title-name" style="
-
-									">[交作业]如何处理大数据并发？</a>
-                                                        <!-- 火热-->
-                                                        <!-- 置顶 -->
-                                                        <!-- 精华 -->
-                                                    </div>
-                                                    <p class="isAct-desc-wrap">
-                                                        <a href="groupinfo.html?id=67" title="进入查看" target="_blank">
-                                                            来源：李曼
-
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;这个是应为：确实是啊？。
-
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                            &nbsp;&nbsp;&nbsp;&nbsp;明清...</a>
-                                                    </p>
-                                                    <a href="groupinfo.html?id=67" title="进入查看" target="_blank"
-                                                       class="topic_imgs">
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
-                                                                xsrc="http://img1.cache.netease.com/travel/2015/11/19/2015111915570115c02.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
-                                                                xsrc="http://img3.cache.netease.com/travel/2015/11/19/201511191557039cd7e_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
-                                                                xsrc="http://img4.cache.netease.com/travel/2015/11/19/20151119155705e6df4_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
-                                                                xsrc="http://img6.cache.netease.com/travel/2015/11/19/20151119155707cb22c_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                        <span class="topic_img_box"><img
-                                                                src="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
-                                                                xsrc="http://img4.cache.netease.com/travel/2015/11/19/201511191557093bc51_550.jpg"
-                                                                class="topic_content_img" alt=""></span>
-                                                    </a>
-                                                    <div class="clear"></div>
-                                                    <div class="isAct-attr">
-                                                        <span class="numb view" title="浏览 20"><em
-                                                                class="icon14">&nbsp;</em>20</span>
-                                                        <span class="numb msg" title="评论 1"><em
-                                                                class="icon14">&nbsp;</em>1</span>
-                                                        <span class="numb zan" title="点赞 0"><em
-                                                                class="icon14">&nbsp;</em>0</span>
-                                                        <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)"
-                                                           title="" name="u-002" userinfoid="2">吃货</a>
-                                                        <font class="view">来自于</font>
-
-                                                        <span>2016-01-19 10:02:00</span>
-                                                    </div>
-                                                </li>
 
                                             </ul>
-                                            <section class="s-c-u-wrap">
-                                                <div class="g-zl-wrap g-zl-dl s-c-u">
-                                                    <form id="form_couinfo">
-                                                        <dl>
-                                                            <dt><s class="fsize12 c-red vam">*</s> <span>标题</span></dt>
-                                                            <dd><label><input type="text"
-                                                                              placeholder="一个好的标题更能吸引大家的注意哦！"></label>
-                                                            </dd>
-                                                        </dl>
-                                                        <dl>
-                                                            <dd>
-                                                                <script id="editor" type="text/plain"
-                                                                        style="width:100%;height:300px;"></script>
+                                        </div>
+                                        <!-- 老师分页 开始 -->
+                                        <!--<div class="pgs cl" id="NoteDeanpage">
 
-                                                                <
-                                                                /dd>
-                                                                < /dl>
-
-                                                                < /form>
-                                                                < a
-                                                                href = "javascript:"
-                                                                class
-                                                                = "bg mr30 fsize14 f-fM"
-                                                                title = "发布"
-                                                                id = "baidueditor_submit" > 发布 < /a>
-                                                                    < /div>
-                                                                    < /section>
-
-                                                                    < div >
-
-                                                                    < /div>
-                                                                    < div >
-                                                                    < /div>
-
-                                                                    < script >
-                                                                    $(function () {
-                                                                        var ue = UE.getEditor('editor');
-                                                                        addPage();//显示分页
-                                                                        scrollLoad();
-                                                                    });
-                                                                $(window).scroll(function () {
-                                                                    // 并不是所有页面都要执行加载操作。
-                                                                    // 你也可以选择别的识别条件。
-                                                                    //获取网页的完整高度(fix)
-                                                                    var hght = document.body.scrollHeight;
-                                                                    //获取浏览器高度(fix)
-                                                                    var clientHeight = document.documentElement.clientHeight;
-                                                                    //获取网页滚过的高度(dynamic)
-                                                                    var top = window.pageYOffset ||
-                                                                        (document.compatMode == 'CSS1Compat' ?
-                                                                            document.documentElement.scrollTop :
-                                                                            document.body.scrollTop);
-                                                                    //当 top+clientHeight = scrollHeight的时候就说明到底儿了
-                                                                    //if(top>=(parseInt(hght)-clientHeight-150)){
-                                                                    //当滚动到分页的时候加载
-                                                                    if (top >= (parseInt($("#pageFlag").offset().top - 750))) {
-                                                                        if (scrollload) {
-                                                                            if ((scroll_currentPage - 1) % smpage == 0) {
-                                                                                scrolllpage = false;
-                                                                            }
-                                                                            if (scrolllpage) {
-                                                                                getAllTopic(topicType, 0);//话题/活动 list
-                                                                            }
-                                                                        }
-                                                                        ;
-                                                                    }
-                                                                    ;
-                                                                });
-
-                                                                /*
-                                                                 *添加分页的html
-                                                                 */
-                                                                function addPage() {
-                                                                    $(".loading").attr("realPageNum", "2");//保存要加载的下一页真实数
-                                                                    if ("false" == "true") {//最后一页
-                                                                        scrolllpage = false;//不再加载
-                                                                    } else {
-                                                                        scrolllpage = true;
-                                                                    }
-
-
-                                                                    //重新赋值分页的数据
-                                                                    var pageCurrentPage = Math.floor((parseInt("0")) / smpage) + 1;
-                                                                    var pagePageSize = "10" * smpage;
-                                                                    var pageTotalResultSize = "47";
-                                                                    var pageTotalPageSize = "5";
-                                                                    if (pageTotalResultSize == null || pageTotalResultSize == 0) {
-                                                                        pageTotalPageSize = 0;
-                                                                    } else {
-                                                                        pageTotalPageSize = Math.floor((pageTotalResultSize - 1)
-                                                                            / pagePageSize) + 1;
-                                                                    }
-                                                                    if (pageTotalPageSize > 1) {
-                                                                        //重新赋值分页的数据
-                                                                        str = "";
-                                                                        if (pageCurrentPage <= 1) {
-                                                                            str = str + '<li id="backpage" class="disabled"><a href="javascript:void(0)">← Prev</a></li>';
-                                                                        } else {
-                                                                            var num = pageCurrentPage - 1;
-                                                                            str = str + '<li id="backpage"><a href="javascript:getAllTopic(' + topicType + ',' + num
-                                                                                + ');">← Prev</a></li>';
-                                                                        }
-
-                                                                        var maxNum_new = 5;//最大显示页码数
-                                                                        var discnt = 1;
-
-                                                                        var v = 2;
-                                                                        if (pageTotalPageSize <= pageCurrentPage + 1) {
-                                                                            v = 3;
-                                                                        }
-                                                                        if (pageTotalPageSize <= pageCurrentPage) {
-                                                                            v = 4;
-                                                                        }
-                                                                        for (var i = v; i > 0; i--) {
-                                                                            if (pageCurrentPage > i) {
-                                                                                str = str + "<li><a href='javascript:getAllTopic("
-                                                                                    + topicType + "," + (pageCurrentPage - i) + ")'>" + (pageCurrentPage - i)
-                                                                                    + "</a></li>";
-                                                                                discnt++;
-                                                                            }
-                                                                            ;
-                                                                        }
-                                                                        str = str + '<li class="active"><a href="javascript:void(0)">'
-                                                                            + pageCurrentPage + '</a></li>';
-                                                                        for (var i = 1; i < maxNum_new; i++) {
-                                                                            if (pageCurrentPage + i <= pageTotalPageSize && discnt < 5) {
-                                                                                str = str + "<li><a href='javascript:getAllTopic("
-                                                                                    + topicType + "," + (pageCurrentPage + i) + ")'>" + (pageCurrentPage + i)
-                                                                                    + "</a></li>";
-                                                                                discnt++;
-                                                                            } else {
-                                                                                break;
-                                                                            }
-                                                                            ;
-                                                                        }
-                                                                        if (pageCurrentPage + 2 < pageTotalPageSize && pageTotalPageSize > 5) {
-                                                                            if (pageCurrentPage + 3 < pageTotalPageSize) {
-                                                                                str = str + "<li><span>...</span></li>";
-                                                                            }
-                                                                            str = str + "<li><a href='javascript:getAllTopic(" + topicType + "," + pageTotalPageSize + ")'>" + pageTotalPageSize + "</a></li>";
-                                                                        }
-                                                                        if (pageCurrentPage >= pageTotalPageSize) {
-                                                                            str = str + '<li id="nextpage" class="disabled"><a href="javascript:void(0)">Next →</a></li>';
-                                                                        } else {
-                                                                            str = str + '<li id="nextpage"><a href="javascript:getAllTopic('
-                                                                                + topicType + ',' + (pageCurrentPage + 1) + ')">Next →</a></li>';
-                                                                        }
-                                                                        $("#pageFlag").html(str);
-                                                                        $("#pageFlag").parent().parent().show();
-                                                                    } else {
-                                                                        //隐藏分页
-                                                                        $("#pageFlag").parent().parent().hide();
-                                                                        $("#pageFlag").html("");
-                                                                    }
-                                                                };
-
-                                                                </script>
-                                                </div>
-                                                <section class="loading tac" realpagenum="2" style="display: none;"><img
-                                                        alt="加载更多" class="vam" src="/static/gro/img/loading2.gif"> <span
-                                                        class="vam c-999 fsize12"> 正在努力加载中...</span></section>
-                                            </section>
-                                            <div>
+                                        </div>-->
+                                        <!-- 老师分页 结束 -->
+                                        <section class="loading tac" realpagenum="2" style="display: none;"><img
+                                                alt="加载更多" class="vam" src="/static/gro/img/loading2.gif"> <span
+                                                class="vam c-999 fsize12"> 正在努力加载中...</span></section>
+                                    </section>
+                                    <div>
                             </article>
                             <article class="ml10 mr10 new-c-i-b-warp">
                                 <div id="courseContext" class="c-i-content">
@@ -748,13 +648,10 @@
                                 <div id="courseComment" style="display: none" class="c-c-content">
                                     <div class="commentHtml">
                                         <div>
-                                            <section class="lh-bj-list pr replyhtml">
+                                            <section class="lh-bj-list pr replyhtml" id="course_comments">
                                                 <ul>
                                                     <li class="unBr">
-                                                        <aside class="noter-pic">
-                                                            <img width="50" height="50" class="picImg"
-                                                                 src="http://wx.inxedu.com/static/inxweb/img/avatar-boy.gif">
-                                                        </aside>
+
                                                         <div class="of">
                                                             <section class="n-reply-wrap">
                                                                 <div class="numb-box">
@@ -766,7 +663,8 @@
                                                                     <span class="fl "><tt
                                                                             class="c-red commentContentmeg"
                                                                             style="display: none;"></tt></span>
-                                                                    <a href="javascript:addComment();" title="回复"
+                                                                    <a href="javascript:void(0);" title="回复"
+                                                                       onclick=" doSaveComment()"
                                                                        class="lh-reply-btn">回复</a>
                                                                 </p>
                                                             </section>
@@ -776,211 +674,29 @@
                                             </section>
                                             <section class="">
                                                 <section class="question-list lh-bj-list pr">
-                                                    <ul class="pr10">
-                                                        <li>
-                                                            <aside class="noter-pic">
-                                                                <img width="50" height="50" class="picImg"
-                                                                     src="http://wx.inxedu.com/images/upload/userAppImage/20180328/1522224555888.jpg">
-                                                            </aside>
-                                                            <div class="of">
-								<span class="fl">
-								<font class="fsize12 c-blue">
-									inxedu！</font>
-								<font class="fsize12 c-999 ml5">评论：</font></span>
-                                                            </div>
-                                                            <div class="noter-txt mt5">
-                                                                <p>教程很全面</p>
-                                                            </div>
-                                                            <div class="of mt5">
-                                                                <span class="fr"><font class="fsize12 c-999 ml5">2016/12/27 10:46</font></span>
-                                                                <span class="fl">
-									<a class="noter-dy vam c-999" title="回复" href="javascript: void(0)"
-                                       onclick="queryCommentReply('299')">
-										<em class="icon18">&nbsp;</em>
-										<tt class="replyCount299 vam fsize12 f-fM ">(0)</tt>
-									</a>
-									<a href="javascript: void(0)" title="赞一下" class="noter-zan vam ml10  c-999"
-                                       onclick="addPraise('299',4)">
-										<em class="icon18">&nbsp;</em>
-										<tt class="addPraise299_4 praiseCount vam fsize12 f-fM">(<span>0</span>)</tt>
-									</a>
-								</span>
-                                                            </div>
-                                                            <div class="n-reply">
-                                                                <section class="n-reply-wrap">
-                                                                    <div class="numb-box">
-                                                                        <fieldset>
-                                                                            <textarea name=""
-                                                                                      class="commentReplyMsgContent299"></textarea>
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <p class="of mt5 tar pl10 pr10">
-                                                                        <span class="fl"><tt
-                                                                                class="c-red commentReplyMsg299"></tt></span>
-                                                                        <a onclick="addCommentReply('299')"
-                                                                           class="lh-reply-btn" title="回复"
-                                                                           href="javascript: void(0)">回复</a>
-                                                                    </p>
-                                                                </section>
-                                                                <div class="mt10 pl10 pr10 pb10 commentReply299"></div>
-                                                            </div> <!-- /回复盒子 -->
-                                                        </li>
-                                                        <li>
-                                                            <aside class="noter-pic">
-                                                                <img width="50" height="50" class="picImg"
-                                                                     src="http://wx.inxedu.com/images/upload/userAppImage/20180328/1522224555888.jpg">
-                                                            </aside>
-                                                            <div class="of">
-								<span class="fl">
-								<font class="fsize12 c-blue">
-									inxedu！</font>
-								<font class="fsize12 c-999 ml5">评论：</font></span>
-                                                            </div>
-                                                            <div class="noter-txt mt5">
-                                                                <p>很不错</p>
-                                                            </div>
-                                                            <div class="of mt5">
-                                                                <span class="fr"><font class="fsize12 c-999 ml5">2016/12/24 11:17</font></span>
-                                                                <span class="fl">
-									<a class="noter-dy vam c-999" title="回复" href="javascript: void(0)"
-                                       onclick="queryCommentReply('298')">
-										<em class="icon18">&nbsp;</em>
-										<tt class="replyCount298 vam fsize12 f-fM ">(0)</tt>
-									</a>
-									<a href="javascript: void(0)" title="赞一下" class="noter-zan vam ml10  c-999"
-                                       onclick="addPraise('298',4)">
-										<em class="icon18">&nbsp;</em>
-										<tt class="addPraise298_4 praiseCount vam fsize12 f-fM">(<span>0</span>)</tt>
-									</a>
-								</span>
-                                                            </div>
-                                                            <div class="n-reply">
-                                                                <section class="n-reply-wrap">
-                                                                    <div class="numb-box">
-                                                                        <fieldset>
-                                                                            <textarea name=""
-                                                                                      class="commentReplyMsgContent298"></textarea>
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <p class="of mt5 tar pl10 pr10">
-                                                                        <span class="fl"><tt
-                                                                                class="c-red commentReplyMsg298"></tt></span>
-                                                                        <a onclick="addCommentReply('298')"
-                                                                           class="lh-reply-btn" title="回复"
-                                                                           href="javascript: void(0)">回复</a>
-                                                                    </p>
-                                                                </section>
-                                                                <div class="mt10 pl10 pr10 pb10 commentReply298"></div>
-                                                            </div> <!-- /回复盒子 -->
-                                                        </li>
-                                                        <li>
-                                                            <aside class="noter-pic">
-                                                                <img width="50" height="50" class="picImg"
-                                                                     src="http://wx.inxedu.com/images/upload/group/customer/20170329/5.jpg">
-                                                            </aside>
-                                                            <div class="of">
-								<span class="fl">
-								<font class="fsize12 c-blue">
-									six</font>
-								<font class="fsize12 c-999 ml5">评论：</font></span>
-                                                            </div>
-                                                            <div class="noter-txt mt5">
-                                                                <p>老师讲的不错</p>
-                                                            </div>
-                                                            <div class="of mt5">
-                                                                <span class="fr"><font class="fsize12 c-999 ml5">2016/12/13 15:36</font></span>
-                                                                <span class="fl">
-									<a class="noter-dy vam c-999" title="回复" href="javascript: void(0)"
-                                       onclick="queryCommentReply('271')">
-										<em class="icon18">&nbsp;</em>
-										<tt class="replyCount271 vam fsize12 f-fM ">(0)</tt>
-									</a>
-									<a href="javascript: void(0)" title="赞一下" class="noter-zan vam ml10  c-999"
-                                       onclick="addPraise('271',4)">
-										<em class="icon18">&nbsp;</em>
-										<tt class="addPraise271_4 praiseCount vam fsize12 f-fM">(<span>0</span>)</tt>
-									</a>
-								</span>
-                                                            </div>
-                                                            <div class="n-reply">
-                                                                <section class="n-reply-wrap">
-                                                                    <div class="numb-box">
-                                                                        <fieldset>
-                                                                            <textarea name=""
-                                                                                      class="commentReplyMsgContent271"></textarea>
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <p class="of mt5 tar pl10 pr10">
-                                                                        <span class="fl"><tt
-                                                                                class="c-red commentReplyMsg271"></tt></span>
-                                                                        <a onclick="addCommentReply('271')"
-                                                                           class="lh-reply-btn" title="回复"
-                                                                           href="javascript: void(0)">回复</a>
-                                                                    </p>
-                                                                </section>
-                                                                <div class="mt10 pl10 pr10 pb10 commentReply271"></div>
-                                                            </div> <!-- /回复盒子 -->
-                                                        </li>
-                                                        <li>
-                                                            <aside class="noter-pic">
-                                                                <img width="50" height="50" class="picImg"
-                                                                     src="http://wx.inxedu.com/images/upload/group/customer/20170329/5.jpg">
-                                                            </aside>
-                                                            <div class="of">
-								<span class="fl">
-								<font class="fsize12 c-blue">
-									six</font>
-								<font class="fsize12 c-999 ml5">评论：</font></span>
-                                                            </div>
-                                                            <div class="noter-txt mt5">
-                                                                <p>这老师给力啊，讲的如此透彻</p>
-                                                            </div>
-                                                            <div class="of mt5">
-                                                                <span class="fr"><font class="fsize12 c-999 ml5">2016/06/24 17:18</font></span>
-                                                                <span class="fl">
-									<a class="noter-dy vam c-999" title="回复" href="javascript: void(0)"
-                                       onclick="queryCommentReply('65')">
-										<em class="icon18">&nbsp;</em>
-										<tt class="replyCount65 vam fsize12 f-fM ">(0)</tt>
-									</a>
-									<a href="javascript: void(0)" title="赞一下" class="noter-zan vam ml10  c-999"
-                                       onclick="addPraise('65',4)">
-										<em class="icon18">&nbsp;</em>
-										<tt class="addPraise65_4 praiseCount vam fsize12 f-fM">(<span>1</span>)</tt>
-									</a>
-								</span>
-                                                            </div>
-                                                            <div class="n-reply">
-                                                                <section class="n-reply-wrap">
-                                                                    <div class="numb-box">
-                                                                        <fieldset>
-                                                                            <textarea name=""
-                                                                                      class="commentReplyMsgContent65"></textarea>
-                                                                        </fieldset>
-                                                                    </div>
-                                                                    <p class="of mt5 tar pl10 pr10">
-                                                                        <span class="fl"><tt
-                                                                                class="c-red commentReplyMsg65"></tt></span>
-                                                                        <a onclick="addCommentReply('65')"
-                                                                           class="lh-reply-btn" title="回复"
-                                                                           href="javascript: void(0)">回复</a>
-                                                                    </p>
-                                                                </section>
-                                                                <div class="mt10 pl10 pr10 pb10 commentReply65"></div>
-                                                            </div> <!-- /回复盒子 -->
-                                                        </li>
-                                                    </ul>
+                                                    <div id="indexTopicAll01">
+                                                        <ul class="pr10" id="course_comment">
+
+
+                                                        </ul>
+                                                    </div>
+                                                   <!-- <div class="pgs cl" id="CommentDeanpage">
+
+                                                    </div>-->
                                                 </section>
                                             </section>
-                                            <!-- 公共分页 开始 -->
-                                            <script type="text/javascript"
-                                                    src="http://wx.inxedu.com/static/common/web/js/page.js"></script>
-                                            <script type="text/javascript">
-                                                var totalPageSize = 1;
-                                                var currentPage = 0 < 1 ? 1 : 1;
-                                                var totalPage = 1;
-                                                showAjaxPageNumber();
-                                            </script><!-- 公共分页 结束 -->
+                                            <!-- 老师分页 开始 -->
+
+                                            <!-- 老师分页 结束 -->
+                                            <!--&lt;!&ndash; 公共分页 开始 &ndash;&gt;-->
+                                            <!--<script type="text/javascript"-->
+                                            <!--src="http://wx.inxedu.com/static/common/web/js/page.js"></script>-->
+                                            <!--<script type="text/javascript">-->
+                                            <!--var totalPageSize = 1;-->
+                                            <!--var currentPage = 0 < 1 ? 1 : 1;-->
+                                            <!--var totalPage = 1;-->
+                                            <!--showAjaxPageNumber();-->
+                                            <!--</script>&lt;!&ndash; 公共分页 结束 &ndash;&gt;-->
                                         </div>
                                         <script>
                                             $(function () {
@@ -1038,7 +754,7 @@
                     <div id="Publisher">
 
                     </div>
-                    <div class="i-box mt25" >
+                    <div class="i-box mt25">
                         <div id="Recourse">
                         </div>
                     </div>
@@ -1305,45 +1021,8 @@
         }
     })
     $(".gscz-ej-li-big").css({"width": winW, "height": boyH});
+    
 
-
-    function showlogin() {
-        $("#loginfrom").show();
-        $("#dl").show()
-        $("#zc").hide()
-    }
-
-    function closewin() {
-        $("#loginfrom").hide();
-    }
-
-    // function dialogLoginAndReload() {
-    //     dialogLogin();
-    //     location.reload();
-    // }
-
-    function dialogRegister(obj) {
-        $('#d-s-head-tab').find('a').each(function () {
-            //tmp = $(this).text();
-
-            $(this).attr("class", "");
-        });
-
-        $(obj).attr("class", "current")
-        $("#dl").hide()
-        $("#zc").show()
-    }
-
-    // function dialoglogin(obj) {
-    //     $('#d-s-head-tab').find('a').each(function () {
-    //         //tmp = $(this).text();
-    //
-    //         $(this).attr("class", "");
-    //     });
-    //     $(obj).attr("class", "current")
-    //     $("#dl").show()
-    //     $("#zc").hide()
-    // }
 </script>
 </body>
 </html>

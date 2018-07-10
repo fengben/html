@@ -25,9 +25,16 @@
     <link rel="stylesheet" type="text/css" href="css/webstyle.css"/>
     <link rel="stylesheet" type="text/css" href="css/mw_300_768.css"
           media="screen and (min-width: 300px) and (max-width: 768px)"/>
-  <!--  <link rel="stylesheet" type="text/css" href="css/reset.css">-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/global.css">
     <link rel="stylesheet" type="text/css" href="css/theme.css">
+    <!--<link rel="shortcut icon" href="#favicon.ico" type="image/x-icon">-->
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <!--<link rel="stylesheet" type="text/css" href="css/web.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="css/theme.css">-->
+    <!--<link href="css/mw_320_768.css" rel="stylesheet" type="text/css" media="screen and (min-width: 320px) and (max-width: 768px)">-->
+
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
     <!--[if lt IE 9]>
     <script src="js/html5_3.js"></script><![endif]-->
@@ -44,37 +51,41 @@
         jQuery(document).ready(function () {
             var postArray = new Array();
             var paras = "pageNumber=1";
+
             function showPostsResult() {
                 $("#aCoursesList").html(postArray[0]);
                 $("#deanpage").html(postArray[1]);
             }
 
-            getFromWS("frontmooc/getPost.template", paras,postArray, showPostsResult);
+            getFromWS("frontmooc/getPost.template", paras, postArray, showPostsResult);
 
             var recomendPost = new Array();
+
             function recoPostResult() {
                 $("#hotTopicRecommend").html(recomendPost[0]);
             }
-             getFromWS("frontmooc/recomendHotPost.template", paras,recomendPost, recoPostResult);
+
+            getFromWS("frontmooc/recomendHotPost.template", paras, recomendPost, recoPostResult);
 
             var famousResult = new Array();
+
             function showFamous() {
-                alert(famousResult[0])
                 $("#famours").html(famousResult[0]);
             }
-            getFromWS("frontmooc/showFamous.template", paras,famousResult, showFamous);
+
+            getFromWS("frontmooc/showFamous.template", paras, famousResult, showFamous);
         })
 
         //分页实现
-        function goToPage(value){
+        function goToPage(value) {
             //alert(value);
             var paras = "pageNumber=" + value;
             var articleList = new Array();
-            var articleListResult = function(){
+            var articleListResult = function () {
                 jQuery("#aCoursesList").html(articleList[0]);
                 jQuery("#deanpage").html(articleList[1]);
             }
-            getFromWS("frontmooc/getPost.template",paras,articleList,articleListResult);
+            getFromWS("frontmooc/getPost.template", paras, articleList, articleListResult);
         }
 
         //根据分类显示话题
@@ -385,186 +396,280 @@
         <div class="main-infor">
 
 
-            <header id="header">
-                <section class="header-wrap">
-                    <div class="header-pc">
-                        <section class="fr h-r">
-                            <aside class="h-r-user-box fr">
+            <!--<header id="header">-->
+            <!--<section class="header-wrap">-->
+            <!--<div class="header-pc">-->
+            <!--<section class="fr h-r">-->
+            <!--<aside class="h-r-user-box fr">-->
 
-                                <ul id="notLogin" class="undis" style="display: block;">
+            <!--<ul id="notLogin" class="undis" style="display: block;">-->
 
-                                </ul>
-                                <div class="clear"></div>
-                            </aside>
-                            <aside class="h-r-search">
+            <!--</ul>-->
+            <!--<div class="clear"></div>-->
+            <!--</aside>-->
+            <!--<aside class="h-r-search">-->
 
-                            </aside>
-                        </section>
-                        <section class="fl h-l">
-                            <h1 class="logo"><a href="#" title="武大传媒"><img src="picture/logo.png" height="42"
-                                                                           width="auto"></a></h1>
-                            <nav class="nav-pc">
-                                <ul>
-                                    <li><a href="default.html" title="网校首页" target="_blank">网校首页</a></li>
-                                    <div class="DT-arrow">
+            <!--</aside>-->
+            <!--</section>-->
+            <!--<section class="fl h-l">-->
+            <!--<h1 class="logo"><a href="#" title="武大传媒"><img src="picture/logo.png" height="42"-->
+            <!--width="auto"></a></h1>-->
+            <!--<nav class="nav-pc">-->
+            <!--<ul>-->
+            <!--<li><a href="default.html" title="网校首页" target="_blank">网校首页</a></li>-->
+            <!--<div class="DT-arrow">-->
 
+            <!--</div>-->
+            <!--<section class="fn-sub-box">-->
+            <!--<div class="fn-sub-wrap fn-sub">-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">职业资格·考证：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">IT·互联网技术：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/10">互联网中国科技</a>-->
+            <!--<a title="" href="groupinfo.html?id=/20">互联网的圆桌会议室</a>-->
+            <!--<a title="" href="groupinfo.html?id=/15">程序员书屋</a>-->
+            <!--<a title="" href="groupinfo.html?id=/9">爱科技,爱创意,我们是技术控</a>-->
+            <!--<a title="" href="groupinfo.html?id=/13">科技创意</a>-->
+            <!--<a title="" href="groupinfo.html?id=/32">奔跑吧！指尖上的愤青们儿</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">艺术设计·创作：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/30">习惯一个人的音乐</a>-->
+            <!--<a title="" href="groupinfo.html?id=/29">音乐，人类的灵魂</a>-->
+            <!--<a title="" href="groupinfo.html?id=/12">一个背包一台单反一个爱拍照的人</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">兴趣·生活·理财：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/24">生活需要游戏，但人生不能游戏</a>-->
+            <!--<a title="" href="groupinfo.html?id=/14">享受生活，enjoy yourself</a>-->
+            <!--<a title="" href="groupinfo.html?id=/19">金融交流</a>-->
+            <!--<a title="" href="groupinfo.html?id=/31">金融众筹，让筹者不再发愁</a>-->
+            <!--<a title="" href="groupinfo.html?id=/11">吃货的世界</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">语言学习·留学：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/28">愿得一学霸，白首不分离</a>-->
+            <!--<a title="" href="groupinfo.html?id=/27">我爱法语</a>-->
+            <!--<a title="" href="groupinfo.html?id=/18">英语口语交流组</a>-->
+            <!--<a title="" href="groupinfo.html?id=/25">板绘学习指南小组</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">学历升学·考研：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/17">用车轮丈量生命</a>-->
+            <!--<a title="" href="groupinfo.html?id=/26">汗水、是脂肪在哭泣！</a>-->
+            <!--<a title="" href="groupinfo.html?id=/16">爱体育,爱运动</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">会计：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/34">会计超值特惠班</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">心理学：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/40">心理学培训班</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">高中：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/35">高中教师资格证全程保过班</a>-->
+            <!--<a title="" href="groupinfo.html?id=/42">高中零基小提琴班</a>-->
+            <!--<a title="" href="groupinfo.html?id=/43">高中化学学习班</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">建筑师：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/37">二级建造师精品教学班</a>-->
+            <!--<a title="" href="groupinfo.html?id=/38">水利水电工程管理与实务</a>-->
+            <!--<a title="" href="groupinfo.html?id=/44">建设工程法规学习班</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">IT互联网：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/33">java精品就业班</a>-->
+            <!--<a title="" href="groupinfo.html?id=/39">企业人力资源管理师一级视频教程全集</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">初中：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/36">初中国家教师资格考试专用班</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--<dl class="clearfix">-->
+            <!--<dt>-->
+            <!--<b class="fsize14 c-master">小学：</b>-->
+            <!--</dt>-->
+            <!--<dd>-->
+            <!--<a title="" href="groupinfo.html?id=/45">写作基础培训班</a>-->
+            <!--<a title="" href="groupinfo.html?id=/41">幼儿资格证—综合素质学习</a>-->
+            <!--</dd>-->
+            <!--</dl>-->
+            <!--</div>-->
+            <!--</section>-->
+            <!--</ul>-->
+            <!--<div class="clear"></div>-->
+            <!--</nav>-->
+            <!--</section>-->
+            <!--<div class="clear"></div>-->
+            <!--</div>-->
+            <!--<div class="header-mobile">-->
+            <!--<h1 class="logo"><a href="#" title="因酷在线教育软件"><img src="picture/logo.png" height="36"-->
+            <!--width="auto"></a></h1>-->
+            <!--<section>-->
+            <!--<aside class="h-r-user-box fr">-->
+            <!--<ul>-->
+            <!--<li class="mw-nav-tap">-->
+            <!--<div class="mw-nav-icon"></div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--<div class="clear"></div>-->
+            <!--</aside>-->
+            <!--<aside class="h-r-search">-->
+
+            <!--</aside>-->
+            <!--<div class="clear"></div>-->
+            <!--</section>-->
+            <!--<div class="clear"></div>-->
+            <!--</div>-->
+            <!--</section>-->
+            <!--</header>-->
+
+            <!-- 公共头引入 -->
+            <!-- /global header begin-->
+            <!-- 公共头引入 -->
+            <!-- /global header begin-->
+            <header id="header" class="all-header">
+                <section class="container">
+                    <h1 id="logo" class="logo">
+                        <a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
+                        <a class="headerfanhui" style="display: none" href="javascript:void (0)" onclick="goHistory('')"
+                           title="武汉大学出版社">
+                            <img src="picture/mo-back.png">
+                        </a>
+                    </h1>
+                    <div class="h-r-nsl">
+                        <ul class="nav">
+                            <li><a href="default.html" title="首页">首页</a></li>
+                            <li><a href="showcoulist.html" title="录播">课程</a></li>
+                            <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
+                            <li><a href="teacherlist.html" title="班级">名师</a></li>
+                            <li><a href="group.html" title="社区" target="_blank">学问</a></li>
+                            <li><a href="article.html" title="资讯">资讯</a></li>
+
+                        </ul>
+                        <!-- / nav -->
+                        <ul class="h-r-login clearfix">
+                            <li class="undis h-login-li" id="no-login">
+                                <a href="javascript:login()" title="登录">
+                                    <em class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span>
+                                </a>
+                            </li>
+                            <li class="tit-new-list undis h-login-li" id="is-login-one">
+                                <a href="#" title="消息" id="headerMsgCountId">
+                                    <em class="news-icon">&nbsp;</em>
+                                </a>
+                                <q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+                                <div class="tit-n-warp">
+                                    <ol id="letter">
+
+                                    </ol>
+                                    <div class="new-tit-box tac mt10 mb20" style="display:none">
+                                        <a href="#" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
                                     </div>
-                                    <section class="fn-sub-box">
-                                        <div class="fn-sub-wrap fn-sub">
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">职业资格·考证：</b>
-                                                </dt>
-                                                <dd>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">IT·互联网技术：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/10">互联网中国科技</a>
-                                                    <a title="" href="groupinfo.html?id=/20">互联网的圆桌会议室</a>
-                                                    <a title="" href="groupinfo.html?id=/15">程序员书屋</a>
-                                                    <a title="" href="groupinfo.html?id=/9">爱科技,爱创意,我们是技术控</a>
-                                                    <a title="" href="groupinfo.html?id=/13">科技创意</a>
-                                                    <a title="" href="groupinfo.html?id=/32">奔跑吧！指尖上的愤青们儿</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">艺术设计·创作：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/30">习惯一个人的音乐</a>
-                                                    <a title="" href="groupinfo.html?id=/29">音乐，人类的灵魂</a>
-                                                    <a title="" href="groupinfo.html?id=/12">一个背包一台单反一个爱拍照的人</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">兴趣·生活·理财：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/24">生活需要游戏，但人生不能游戏</a>
-                                                    <a title="" href="groupinfo.html?id=/14">享受生活，enjoy yourself</a>
-                                                    <a title="" href="groupinfo.html?id=/19">金融交流</a>
-                                                    <a title="" href="groupinfo.html?id=/31">金融众筹，让筹者不再发愁</a>
-                                                    <a title="" href="groupinfo.html?id=/11">吃货的世界</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">语言学习·留学：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/28">愿得一学霸，白首不分离</a>
-                                                    <a title="" href="groupinfo.html?id=/27">我爱法语</a>
-                                                    <a title="" href="groupinfo.html?id=/18">英语口语交流组</a>
-                                                    <a title="" href="groupinfo.html?id=/25">板绘学习指南小组</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">学历升学·考研：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/17">用车轮丈量生命</a>
-                                                    <a title="" href="groupinfo.html?id=/26">汗水、是脂肪在哭泣！</a>
-                                                    <a title="" href="groupinfo.html?id=/16">爱体育,爱运动</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">会计：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/34">会计超值特惠班</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">心理学：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/40">心理学培训班</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">高中：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/35">高中教师资格证全程保过班</a>
-                                                    <a title="" href="groupinfo.html?id=/42">高中零基小提琴班</a>
-                                                    <a title="" href="groupinfo.html?id=/43">高中化学学习班</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">建筑师：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/37">二级建造师精品教学班</a>
-                                                    <a title="" href="groupinfo.html?id=/38">水利水电工程管理与实务</a>
-                                                    <a title="" href="groupinfo.html?id=/44">建设工程法规学习班</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">IT互联网：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/33">java精品就业班</a>
-                                                    <a title="" href="groupinfo.html?id=/39">企业人力资源管理师一级视频教程全集</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">初中：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/36">初中国家教师资格考试专用班</a>
-                                                </dd>
-                                            </dl>
-                                            <dl class="clearfix">
-                                                <dt>
-                                                    <b class="fsize14 c-master">小学：</b>
-                                                </dt>
-                                                <dd>
-                                                    <a title="" href="groupinfo.html?id=/45">写作基础培训班</a>
-                                                    <a title="" href="groupinfo.html?id=/41">幼儿资格证—综合素质学习</a>
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                    </section>
-                                </ul>
-                                <div class="clear"></div>
-                            </nav>
-                        </section>
-                        <div class="clear"></div>
-                    </div>
-                    <div class="header-mobile">
-                        <h1 class="logo"><a href="#" title="因酷在线教育软件"><img src="picture/logo.png" height="36"
-                                                                           width="auto"></a></h1>
-                        <section>
-                            <aside class="h-r-user-box fr">
-                                <ul>
-                                    <li class="mw-nav-tap">
-                                        <div class="mw-nav-icon"></div>
-                                    </li>
-                                </ul>
-                                <div class="clear"></div>
-                            </aside>
-                            <aside class="h-r-search">
+                                </div>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow">
+                                <a href="#" title="">
+                                    <img src="" width="30" height="30" class="vam picImg" alt="">
+                                    <span class="vam disIb c-master" id="userName"></span>
+                                </a>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow">
+                                <a href="#" title="帮助" class="vam">
+                                    <span class="vam disIb c-fff">帮助</span>
+                                </a>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow">
+                                <a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
+                                    <span class="vam disIb c-fff">退出</span>
+                                </a>
+                            </li>
+                            <!-- /未登录显示第1 li；登录后显示第2，3 li -->
+                        </ul>
+                        <aside class="h-r-search">
 
-                            </aside>
-                            <div class="clear"></div>
-                        </section>
-                        <div class="clear"></div>
+                        </aside>
                     </div>
+                    <aside class="mw-nav-btn">
+                        <div class="mw-nav-icon"></div>
+                    </aside>
+                    <aside class="mw-nav-seach mw-nav-seach-d1">
+                        <form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+                            <label>
+                                <input type="text" value="" placeholder="" id="h5HeaderSearchName"
+                                       class="f-fM h1-mw-seach-input i_h_gb_s_input">
+                                <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();"
+                                   class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+                            </label>
+                        </form>
+
+                        <div class="exam-mo-test-time tac">
+                            <span class="time c-fff f-fM vam examTimer"></span>
+                            <a href="javascript:void(0)" onclick="timePause(this)" title=""
+                               class="de-over-btn timePauseTag"></a>
+                        </div>
+
+                    </aside>
+                    <div class="clear mobile-clear"></div>
                 </section>
             </header>
+            <!-- /global header end-->
+            <!-- 公共头引入 -->
+            <!-- /global header end-->
+            <!-- 公共头引入 -->
 
 
             <section class="s-main">
@@ -588,7 +693,7 @@
                                             <a class="arrow-right s-arrow" href="#"></a>
                                             <section class="t-slide-wrap">
                                                 <div class="swiper-container" id="famours">
-                                                   <!--明星人物-->
+                                                    <!--明星人物-->
                                                 </div>
                                             </section>
                                             <div class="pagination"></div>
@@ -604,12 +709,16 @@
               <span class="s-vv-txt"><q class="vam fsize12 c-666">全部</q>&nbsp;
                <s class="sm-sj"></s></span>
                                                 <ol class="s-vv-ol" style="display: none;">
-                                                    <li class="current"><a href="javascript: void(0)" onclick="changePost(3)" name="all">全部</a>
+                                                    <li class="current"><a href="javascript: void(0)"
+                                                                           onclick="changePost(3)" name="all">全部</a>
                                                     </li>
-                                                    <li class=""><a href="javascript: void(0)" name="top" onclick="changePost(0)">置顶</a></li>
-                                                    <li class=""><a href="javascript: void(0)" name="essence" onclick="changePost(1)" >精华</a>
+                                                    <li class=""><a href="javascript: void(0)" name="top"
+                                                                    onclick="changePost(0)">置顶</a></li>
+                                                    <li class=""><a href="javascript: void(0)" name="essence"
+                                                                    onclick="changePost(1)">精华</a>
                                                     </li>
-                                                    <li class=""><a href="javascript: void(0)" name="fiery" onclick="changePost(2)">火热</a></li>
+                                                    <li class=""><a href="javascript: void(0)" name="fiery"
+                                                                    onclick="changePost(2)">火热</a></li>
                                                 </ol>
                                             </div>
                                         </aside>
@@ -626,12 +735,12 @@
                                         <section class="isAct-list" id="aCoursesList">
 
                                         </section>
-                                       <!-- <section class="paginationWrap">
-                                            <div class="pagination pagination-large">
-                                                <ul id="pageFlag">
-                                                </ul>
-                                            </div>
-                                        </section>-->
+                                        <!-- <section class="paginationWrap">
+                                             <div class="pagination pagination-large">
+                                                 <ul id="pageFlag">
+                                                 </ul>
+                                             </div>
+                                         </section>-->
                                         <!-- 公共分页 开始 -->
                                         <div class="pgs cl" id="deanpage">
 
@@ -663,9 +772,9 @@
                                         <section class="r-toPic-list">
                                             <ol class="hot-toPic" id="hotTopicRecommend">
                                                 <!--<li class="txtOf">-->
-                                                    <!--<span class="fr"><i title="阅读量" class="c-999 fsize12">10</i></span>-->
-                                                    <!--<a href="http://wx.inxedu.com/group/topic/topicInfor/85"-->
-                                                       <!--title="写出你最爱的一句歌词" class="tp-txt vam">写出你最爱的一句歌词</a>-->
+                                                <!--<span class="fr"><i title="阅读量" class="c-999 fsize12">10</i></span>-->
+                                                <!--<a href="http://wx.inxedu.com/group/topic/topicInfor/85"-->
+                                                <!--title="写出你最爱的一句歌词" class="tp-txt vam">写出你最爱的一句歌词</a>-->
                                                 <!--</li>-->
                                             </ol>
                                         </section>
@@ -739,153 +848,153 @@
     </div>
 </div>
 <div>
-<link rel="stylesheet" href="assets/css/bootstrap.css"/>
-<link rel="stylesheet" href="assets/css/xenon-core.css"/>
-<link rel="stylesheet" href="assets/css/xenon-forms.css"/>
-<link rel="stylesheet" href="assets/css/xenon-components.css"/>
-<link rel="stylesheet" href="assets/css/xenon-skins.css"/>
-<link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
-<link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css"/>
-<link rel="stylesheet" href="assets/css/zTreeStyle.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-core.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-forms.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-components.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
+    <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css"/>
+    <link rel="stylesheet" href="assets/css/zTreeStyle.css"/>
 
-<!--<button class="btn btn-secondary btn-icon btn-icon-standalone"-->
-        <!--style="margin-left:5px;" onclick="setArticle(0)">新的话题-->
-<!--</button>-->
-<div class="modal fade" id="modal-article">
-    <div class="modal-dialog">
-        <div class="modal-content">
+    <!--<button class="btn btn-secondary btn-icon btn-icon-standalone"-->
+    <!--style="margin-left:5px;" onclick="setArticle(0)">新的话题-->
+    <!--</button>-->
+    <div class="modal fade" id="modal-article">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-            <div class="modal-header">
-                <button type="button" class="close" onclick="closeDia()">&times;</button>
-                <h4 class="modal-title">我的话题</h4>
-            </div>
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="closeDia()">&times;</button>
+                    <h4 class="modal-title">我的话题</h4>
+                </div>
 
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
 
-                        <div class="form-group">
-                            <label for="field-4" class="control-label">标题: </label>
-                            <input type="text" class="form-control" id="title" placeholder="标题"
-                                   style="display:inline-block;width:30%">
-                            <input type="text" id="articleId" style="display:none">
-                            <input type="text" id="bufferPicIds" value="" style="display:none">
-                            <!--<li class="title" style="display:inline-block">&nbsp;&nbsp;类型：<input id="typeSel"-->
-                            <!--type="text" readonly-->
-                            <!--value=""-->
-                            <!--style="width:120px;"/>-->
-                            <!--<a id="menuBtn" style="color:blue" href="#" onclick="showMenu('文章编辑'); return false;">选择类型</a>-->
-                            <!--</li>-->
-                            <!--<input type="text" id="type" value="" style="display:none">-->
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">标题: </label>
+                                <input type="text" class="form-control" id="title" placeholder="标题"
+                                       style="display:inline-block;width:30%">
+                                <input type="text" id="articleId" style="display:none">
+                                <input type="text" id="bufferPicIds" value="" style="display:none">
+                                <!--<li class="title" style="display:inline-block">&nbsp;&nbsp;类型：<input id="typeSel"-->
+                                <!--type="text" readonly-->
+                                <!--value=""-->
+                                <!--style="width:120px;"/>-->
+                                <!--<a id="menuBtn" style="color:blue" href="#" onclick="showMenu('文章编辑'); return false;">选择类型</a>-->
+                                <!--</li>-->
+                                <!--<input type="text" id="type" value="" style="display:none">-->
 
 
-                            <br/>
-                            <br/>
-                            <label for="field-4" class="control-label">发布者: </label>
+                                <br/>
+                                <br/>
+                                <label for="field-4" class="control-label">发布者: </label>
 
-                            <input class="form-control" id="publisher" readonly="readonly"
-                                   style="display:inline-block;width:15%"><br/>
+                                <input class="form-control" id="publisher" readonly="readonly"
+                                       style="display:inline-block;width:15%"><br/>
 
-                        </div>
-
-                    </div>
-
-                    <div class="col-md-12">
-
-                        <div class="form-group">
-                            <label for="field-4" class="control-label">图片: </label>
-                            <input type="text" value="0" id="picId" style="display:none">
-                            <input type="text" id="picName" class="form-control" style="display:none;width:30%"
-                                   readonly>
-                            <img id="picImg" src="" style="width:150px;height:60px">
-                            <input type="file" id="picInput" value="上传图片"
-                                   style="display:inline-block;width:70px;color: transparent;"
-                                   onchange="updatePicName()">
-                            <input type="button" value="删除图片" onclick="deletePic()">
+                            </div>
 
                         </div>
 
-                    </div>
-                    <div class="col-md-12">
+                        <div class="col-md-12">
 
-                        <div class="form-group">
-                            <label for="field-4" class="control-label">附件: </label>
-                            <input type="text" value="" id="appendixId" style="display:none">
-                            <input type="text" id="appendixName" class="form-control"
-                                   style="display:inline-block;width:30%" readonly>
-                            <input type="file" id="appendixInput" value="选择附件"
-                                   style="display:inline-block;width:70px;color: transparent;"
-                                   onchange="updateAppendixName()">
-                            <input type="button" value="上传文件" onclick="uploadAppendix()">
-                            <!--
-                                                        <input type="button" value="删除文件" onclick="deleteAppendix()">
-                            -->
-                        </div>
-                        <!--此div用来先显示已经上传的附件，可以删除和下载-->
-                        <div class="form-group" id="appendix-group">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">图片: </label>
+                                <input type="text" value="0" id="picId" style="display:none">
+                                <input type="text" id="picName" class="form-control" style="display:none;width:30%"
+                                       readonly>
+                                <img id="picImg" src="" style="width:150px;height:60px">
+                                <input type="file" id="picInput" value="上传图片"
+                                       style="display:inline-block;width:70px;color: transparent;"
+                                       onchange="updatePicName()">
+                                <input type="button" value="删除图片" onclick="deletePic()">
+
+                            </div>
 
                         </div>
-                    </div>
-                    <div class="col-md-12" id="travelInfo" style="display:none">
+                        <div class="col-md-12">
 
-                        <div class="form-group">
-                            <label class="control-label">特点: </label>
-                            <input type="text" placeholder="主题/口味等" id="theme" style="width:100px">
-                            <label class="control-label">所在地区: </label>
-                            <select id="district" style="width:80px">
-                                <option value="多宝镇">多宝镇</option>
-                                <option value="拖市镇">拖市镇</option>
-                                <option value="蒋湖">蒋湖</option>
-                                <option value="渔薪镇">渔薪镇</option>
-                                <option value="蒋场镇">蒋场镇</option>
-                                <option value="佛子山镇">佛子山镇</option>
-                                <option value="黄潭镇">黄潭镇</option>
-                                <option value="汪场镇">汪场镇</option>
-                                <option value="岳口镇">岳口镇</option>
-                                <option value="横林镇">横林镇</option>
-                                <option value="彭市镇">彭市镇</option>
-                                <option value="麻洋镇">麻洋镇</option>
-                                <option value="多祥镇">多祥镇</option>
-                                <option value="干驿镇">干驿镇</option>
-                                <option value="马湾镇">马湾镇</option>
-                                <option value="卢市镇">卢市镇</option>
-                                <option value="小板镇">小板镇</option>
-                                <option value="皂市镇">皂市镇</option>
-                                <option value="胡市镇">胡市镇</option>
-                                <option value="石河镇">石河镇</option>
-                                <option value="张港镇">张港镇</option>
-                                <option value="九真镇">九真镇</option>
-                                <option value="石家河镇">石家河镇</option>
-                                <option value="天门工业园">天门工业园</option>
-                                <option value="净潭乡">净潭乡</option>
-                            </select>
-                            <label class="control-label">费用: </label>
-                            <input type="text" placeholder="元(整数)" id="money" style="width:60px">
-                            <label class="control-label">详细地址: </label>
-                            <input type="text" placeholder="地址" id="address" style="width:150px">
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">附件: </label>
+                                <input type="text" value="" id="appendixId" style="display:none">
+                                <input type="text" id="appendixName" class="form-control"
+                                       style="display:inline-block;width:30%" readonly>
+                                <input type="file" id="appendixInput" value="选择附件"
+                                       style="display:inline-block;width:70px;color: transparent;"
+                                       onchange="updateAppendixName()">
+                                <input type="button" value="上传文件" onclick="uploadAppendix()">
+                                <!--
+                                                            <input type="button" value="删除文件" onclick="deleteAppendix()">
+                                -->
+                            </div>
+                            <!--此div用来先显示已经上传的附件，可以删除和下载-->
+                            <div class="form-group" id="appendix-group">
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-12">
+                        <div class="col-md-12" id="travelInfo" style="display:none">
 
-                        <div class="form-group">
-                            <label for="field-4" class="control-label">文章内容: </label>
-                            <textarea class="form-control" id="articleContent" style="height:300px">
+                            <div class="form-group">
+                                <label class="control-label">特点: </label>
+                                <input type="text" placeholder="主题/口味等" id="theme" style="width:100px">
+                                <label class="control-label">所在地区: </label>
+                                <select id="district" style="width:80px">
+                                    <option value="多宝镇">多宝镇</option>
+                                    <option value="拖市镇">拖市镇</option>
+                                    <option value="蒋湖">蒋湖</option>
+                                    <option value="渔薪镇">渔薪镇</option>
+                                    <option value="蒋场镇">蒋场镇</option>
+                                    <option value="佛子山镇">佛子山镇</option>
+                                    <option value="黄潭镇">黄潭镇</option>
+                                    <option value="汪场镇">汪场镇</option>
+                                    <option value="岳口镇">岳口镇</option>
+                                    <option value="横林镇">横林镇</option>
+                                    <option value="彭市镇">彭市镇</option>
+                                    <option value="麻洋镇">麻洋镇</option>
+                                    <option value="多祥镇">多祥镇</option>
+                                    <option value="干驿镇">干驿镇</option>
+                                    <option value="马湾镇">马湾镇</option>
+                                    <option value="卢市镇">卢市镇</option>
+                                    <option value="小板镇">小板镇</option>
+                                    <option value="皂市镇">皂市镇</option>
+                                    <option value="胡市镇">胡市镇</option>
+                                    <option value="石河镇">石河镇</option>
+                                    <option value="张港镇">张港镇</option>
+                                    <option value="九真镇">九真镇</option>
+                                    <option value="石家河镇">石家河镇</option>
+                                    <option value="天门工业园">天门工业园</option>
+                                    <option value="净潭乡">净潭乡</option>
+                                </select>
+                                <label class="control-label">费用: </label>
+                                <input type="text" placeholder="元(整数)" id="money" style="width:60px">
+                                <label class="control-label">详细地址: </label>
+                                <input type="text" placeholder="地址" id="address" style="width:150px">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+
+                            <div class="form-group">
+                                <label for="field-4" class="control-label">文章内容: </label>
+                                <textarea class="form-control" id="articleContent" style="height:300px">
 
 					            </textarea>
 
-                        </div>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn btn-white" onclick="closeDia()">关闭</button>
-                <button type="button" class="btn btn-info" onclick="doSave()">保存</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" onclick="closeDia()">关闭</button>
+                    <button type="button" class="btn btn-info" onclick="doSave()">保存</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <div class="mo-footer">

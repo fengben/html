@@ -1,0 +1,10 @@
+<%
+ debugMsg("---------in getPost-----"#:course_id)
+ 	:insertSql = "insert into mooc_course_comment(author,body,course_id,id) values(?,?,?,?)"%>
+<%
+	:aid = tuid();
+	:x = execSQL(:insertSql, S(:author),  S(:body), L(:course_id),:aid)
+%>
+<%	Exit(:x)
+%>
+

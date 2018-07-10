@@ -17,6 +17,14 @@
 	</a>
 		
 </li>
+<li>
+	<a href="bookManagement.html" id="a_bookManagement">
+		<i class="linecons-note"></i>
+		<span class="title">图书管理</span>
+		///<div class="title" style="padding-left:30px">management of column</div>
+	</a>
+
+</li>
 <li> 
 	<a href="pictureManagement.html" id="a_pictureManagement">
 		<i class="linecons-note"></i>
@@ -97,7 +105,7 @@
 <li>
     <a href="resourceManagement.html" id="a_resourceManagement">
         <i class="linecons-note"></i>
-        <span class="title">资源管理</span>
+        <span class="title">云盘管理</span>
         ///<div class="title" style="padding-left:30px">management of resource</div>
     </a>
 </li>

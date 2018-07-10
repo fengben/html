@@ -1,6 +1,6 @@
 
 <%:tmp=:pageNumber-1%>
-<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.publisher,A.publish_date,A.dir_name,A.description,FOUND_ROWS from ry_filespace as A, uploadedfiles as B where A.file_id=B.filetuid" %>
+<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.publisher,A.publish_date,A.dir_name,A.description,FOUND_ROWS from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid" %>
 <%:sql=:sql#" and B.filename like ? and B.contenttype like ? and A.file_id !=1" %>
 <%:sql=:sql#" order by A.publish_date desc,B.contenttype limit "#:tmp*:pageSize#","#:pageSize%>
 <%:x=changeRecordSet(:sql,S("%"+:infoType+"%"),S("%"+:fileType+"%"))%>
@@ -14,7 +14,7 @@
         $("#viewbox").html(html);
             hiBox('#viewbox',fileName,650,500,'');
         }else if(checkTv(fileName)){
-        var html = '<center><video src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" controls="true" width="550" height="400" autoplay="autoplay"/></center>';
+        var html = '<center><video src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'"  controls="true" width="550" height="400" autoplay="autoplay"/></center>';
         $("#viewbox").html(html);
             hiBox('#viewbox',fileName,650,500,'');
         }else if(checkWord(fileName)){

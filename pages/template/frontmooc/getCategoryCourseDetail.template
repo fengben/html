@@ -1,4 +1,4 @@
-<%debugMsg("--------------=-----------------"#:urlid)%>
+<%debugMsg("--------------=-122----------------"#:urlid)%>
 <%
 If :  urlid == 2018112858180021535
 		:querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.on_top desc,A.id desc limit ?,8"

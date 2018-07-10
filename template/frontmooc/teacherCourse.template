@@ -1,0 +1,16 @@
+<%
+/// 个人中心界面,如果是老师 ,显示进入后台课程管理的链接
+///查询用户角色
+:sql = "SELECT classification from user_passports WHERE login_name = ?"
+:x = changeRecordSet(:sql,S(:loginName))
+If :x == "ok"
+    If classification == 1 || classification == 2018096277110017073
+    %>
+   <a href="articleManagement.html" title="我的课程">
+ <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt
+  class="vam">我的课程</tt>
+ </a>
+    <%
+    EndIf
+EndIf
+%>

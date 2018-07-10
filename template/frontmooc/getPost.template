@@ -38,7 +38,7 @@ debugMsg("-----------------------------------------------------top5img"#top5img)
             Repeat
             %>
             <!-- TODO 跳转到个人界面-->
-            <li><a class="isAct_a" name="u-001" rel="popUserCard"  href="userInfo.html?id=<%=uid%>"> <img class="isAct-img"
+            <li><a class="isAct_a" name="u-001" rel="popUserCard"  href="otherInfo.html?id=<%=uid%>"> <img class="isAct-img"
                                                  src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
                                                  alt=""/> </a>
                 <div class="isAct-title">
@@ -73,7 +73,7 @@ debugMsg("-----------------------------------------------------top5img"#top5img)
                        onclick="toBrowseUserCenter(2)" title="" name="u-002"
                        userinfoid="2">吃货</a>-->
                     <font class="view">来自于</font>
-                    <a class="vam belong-group" href="userinfo.html?id=<%=uid%>"><%=nickname%></a>
+                    <a class="vam belong-group" href="otherInfo.html?id=<%=uid%>"><%=nickname%></a>
                     <span><%=publish_data%></span>
                 </div>
             </li>

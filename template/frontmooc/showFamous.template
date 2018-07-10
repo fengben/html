@@ -13,11 +13,11 @@ changeRecordSet(:sql,)
             %>
                 <li>
                     <div class="team-ele-box">
-                        <a href="userInfo.html?id=<%=uid%>" title="" class="team-pic"> <img
+                        <a href="otherInfo.html?id=<%=uid%>" title="" class="team-pic"> <img
                                 src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
                                 width="80" height="80"
                                 alt="<%=nickname%>"/> </a>
-                        <h6 class="hLh20 txtOf"><a href="userInfo.html?id=<%=uid%>"
+                        <h6 class="hLh20 txtOf"><a href="otherInfo.html?id=<%=uid%>"
                                                    title="<%=nickname%>"
                                                    class="team-name"><%=brief%></a>
                         </h6>
@@ -51,13 +51,13 @@ changeRecordSet(:sql,)
 
                 <li>
                     <div class="team-ele-box">
-                        <a href="userInfo.html?id=<%=uid%>" title=""
+                        <a href="otherInfo.html?id=<%=uid%>" title=""
                            class="team-pic"> <img
                                 src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
                                 width="80" height="80"
                                 alt="用车轮丈量生命"/> </a>
                         <h6 class="hLh20 txtOf"><a
-                                href="userInfo.html?id=<%=uid%>"
+                                href="otherInfo.html?id=<%=uid%>"
                                 title="<%=brief%>" class="team-name"><%=brief%></a>
                         </h6>
                         <section class="mt10 hLh20 team-number">
@@ -88,13 +88,13 @@ changeRecordSet(:sql,)
             %>
                 <li>
                     <div class="team-ele-box">
-                        <a href="userInfo.html?id=<%=uid%>" title=""
+                        <a href="otherInfo.html?id=<%=uid%>" title=""
                            class="team-pic"> <img
                                 src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
                                 width="80" height="80" alt="我爱法语"/>
                         </a>
                         <h6 class="hLh20 txtOf"><a
-                                href="userInfo.html?id=<%=uid%>"
+                                href="otherInfo.html?id=<%=uid%>"
                                 title="<%=nickname%>"
                                 class="team-name"><%=brief%></a></h6>
                         <section class="mt10 hLh20 team-number">

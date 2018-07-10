@@ -1,0 +1,41 @@
+<%
+If :operation=="getSomeArticle"
+		///:querystr= "select  A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A,mooccolumns as B where A.article_type=B.id and (B.id=? or B.parent_id=? or B.parent_id in (select id from mooccolumns where parent_id=?))  order by A.on_top desc,A.id desc"
+		:querystr="SELECT id,book_name,price,publishing_house, url FROM mooc_book where classification=? "
+		changeRecordSet(:querystr,:typeId)
+EndIf
+
+If :operation=="getAllArticle"
+		///:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id  order by A.on_top desc,A.id desc"
+		:querystr="SELECT id,book_name,price,publishing_house, url FROM mooc_book  "
+		changeRecordSet(:querystr)
+EndIf
+If recordCount()>0
+  :i=1
+%>
+         <% Repeat%>
+        		<tr>
+        			<td>
+        				<input type="checkbox" name="articleCheckBox" class="cbr" value="<%=id%>">
+        			</td>
+        			<td>
+                         <%=book_name%>
+        				<span  id="book_name<%=id%>" title="<%=book_name%>" style="display:none"> <%=book_name%></span>
+        			</td>
+        			<td><span  id="publishing_house<%=id%>" title="<%=publishing_house%>"  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(publishing_house,0,7)%></span></td>
+        			<td><span  id="book_url<%=id%>" "  style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=shortTitle(url,0,10)%></span></td>
+        			<td><span  id="book_price<%=id%>"   style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;"><%=price%></span>
+
+        			</td>
+        			<td style="white-space: nowrap;">
+
+        			<a href="javascript:void(0);" class="btn btn-secondary btn-sm btn-icon icon-left" data-id="<%=id%>" onclick="createBook('<%=id%>')">编辑</a>
+        			<a class="btn btn-danger btn-sm btn-icon icon-left" data-toggle="modal" data-target="#deleteModal" data-id="<%=id%>">删除</a>
+
+        			</td>
+        		</tr>
+        		<%EndRepeat%>
+
+<%EndIf%>
+
+

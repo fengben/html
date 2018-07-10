@@ -87,7 +87,8 @@ function getFromWS(url_str,post_data_,outargs_,callback_){
 }
 
 //之所以要使用回调函数，是因为调用web service本身采用的是异步模式
-function logout(){
+//弃用, 与station.js重复
+function _logout(){
 
     var obj = new Array();
     var passResult = function(){
@@ -97,7 +98,7 @@ function logout(){
                 if(result[0]=="ok"){
                     for(var i=1;i<result.length;i++)
                         localStorage.removeItem(result[i]);
-                    location.href = "login.html";
+                    location.href = "default.html";
                 }
             };
             getFromWS("/CoreService/logout","",result,processResult);
@@ -117,7 +118,8 @@ function logout(){
 
 //send loginname and password, to get userid and usertoken and classification
 //returning data are:id token classification
-function login(loginName,passwd,callback){
+//弃用,与station.js重复
+function _login(loginName,passwd,callback){
     if(arguments.length<3){
         alert("no enough arguments in login()");
         return;

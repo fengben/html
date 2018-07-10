@@ -1,0 +1,5 @@
+<%
+:sql = "SELECT name,nickname,head_portrait,birthday,brief,phone_number,city,school,email FROM mooc_userprofile where id=?"
+:x = changeRecordSet(:sql,L(:uid))
+%>
+<%=email%>

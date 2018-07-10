@@ -96,39 +96,39 @@
             }
             getFromWS("frontmooc/getAllColumnsResult.template", allColumnsMap, allColumnsMapResult);
 
-            var allSecondColumnsMap = new Array();
-            var  allSecondColumnsMapResult = function () {
-                jQuery("#allSecondColumnsList1").html(allSecondColumnsMap[0]);
-                jQuery("#allSecondColumnsList2").html(allSecondColumnsMap[1]);
-                jQuery("#allSecondColumnsList3").html(allSecondColumnsMap[2]);
-                jQuery("#allSecondColumnsList4").html(allSecondColumnsMap[3]);
-                jQuery("#allSecondColumnsList5").html(allSecondColumnsMap[4]);
-            }
-            $("#2018112858650021541").mouseover(function(){
-                //首页三级分类展示
-                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            });
-            $("#2018112859970021584").mouseover(function(){
-                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-
-            });
-            $("#2018112860600021632").mouseover(function(){
-                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            });
-            $("#2018112861090021663").mouseover(function(){
-                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            });
-            $("#2018112861680021689").mouseover(function(){
-                getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            });
+            // var allSecondColumnsMap = new Array();
+            // var  allSecondColumnsMapResult = function () {
+            //     jQuery("#allSecondColumnsList1").html(allSecondColumnsMap[0]);
+            //     jQuery("#allSecondColumnsList2").html(allSecondColumnsMap[1]);
+            //     jQuery("#allSecondColumnsList3").html(allSecondColumnsMap[2]);
+            //     jQuery("#allSecondColumnsList4").html(allSecondColumnsMap[3]);
+            //     jQuery("#allSecondColumnsList5").html(allSecondColumnsMap[4]);
+            // }
+            // $("#2018112858650021541").mouseover(function(){
+            //     //首页三级分类展示
+            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            // });
+            // $("#2018112859970021584").mouseover(function(){
+            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            //
+            // });
+            // $("#2018112860600021632").mouseover(function(){
+            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            // });
+            // $("#2018112861090021663").mouseover(function(){
+            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            // });
+            // $("#2018112861680021689").mouseover(function(){
+            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
+            // });
 
             //推荐194所高校
-            var recentUniversity = new Array();
-            var processUnResult = function () {
-
-                jQuery("#AllUniversity").html(recentUniversity[0]);
-            }
-            getFromWS("frontmooc/getUniversity.template", recentUniversity, processUnResult);
+            // var recentUniversity = new Array();
+            // var processUnResult = function () {
+            //
+            //     jQuery("#AllUniversity").html(recentUniversity[0]);
+            // }
+            // getFromWS("frontmooc/getUniversity.template", recentUniversity, processUnResult);
 
             //推荐课程
             var recentRecommendCourse = new Array();
@@ -193,6 +193,16 @@
 
             }
             getFromWS("frontmooc/getColumns04.template", recentColumns04, processCoResult04);
+
+            //首页栏目五信息读取
+            var recentColumns05 = new Array();
+            var processCoResult05 = function () {
+                jQuery("#ColumnsResult05").html(recentColumns05[0]);
+                jQuery("#AllCourse05").html(recentColumns05[1]);
+
+
+            }
+            getFromWS("frontmooc/getColumns05.template", recentColumns05, processCoResult05);
 
         });
         //收藏课程
@@ -348,13 +358,13 @@
                                     </li>
 
                                     <li class="undis loginedLiShow">
-                                        <a href="my.html" title="" class="h3-name">
+                                        <a href="myinfo.html" title="" class="h3-name">
                                             <img src="" width="30" height="30" class="vam picImg" alt="">
                                             <span class="vam disIb c-master" id="userName"></span>
                                         </a>
                                     </li>
                                     <li class="pr undis loginedLiShow" id="is-login-one">
-                                        <a href="# "title="消息" id="headerMsgCountId">
+                                        <a href="myletter.html "title="消息" id="headerMsgCountId">
                                         <em class="news-2-icon">&nbsp;</em>
                                         </a>
                                         <q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
@@ -403,7 +413,7 @@
                                 <ul class="h3-n-list clearfix fl">
                                     <li><a href="default.html" title="首页">首页</a></li>
                                     <li><a href="showcoulist.html?id=2018112858180021535" title="课程">课程</a></li>
-                                    <li><a href="shoollist.html" title="名校">名校</a></li>
+                                    <!--<li><a href="shoollist.html" title="名校">名校</a></li>-->
                                     <li><a href="teacherlist.html?id=2018112858180021535 " title="名师">名师</a></li>
                                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                                     <li><a href="article.html" title="资讯">资讯</a></li>
@@ -419,14 +429,14 @@
 
                                     </div>
                                 </section>
-                                <section class="n-item-right n-item-right-op">
-                                    <div class="j-cateright-wrap"  id="allSecondColumnsList1"></div>
-                                    <div class="j-cateright-wrap"  id="allSecondColumnsList2"></div>
-                                    <div class="j-cateright-wrap"  id="allSecondColumnsList3"></div>
-                                    <div class="j-cateright-wrap"  id="allSecondColumnsList4"></div>
-                                    <div class="j-cateright-wrap"  id="allSecondColumnsList5"></div>
+                                <!--<section class="n-item-right n-item-right-op">-->
+                                    <!--<div class="j-cateright-wrap"  id="allSecondColumnsList1"></div>-->
+                                    <!--<div class="j-cateright-wrap"  id="allSecondColumnsList2"></div>-->
+                                    <!--<div class="j-cateright-wrap"  id="allSecondColumnsList3"></div>-->
+                                    <!--<div class="j-cateright-wrap"  id="allSecondColumnsList4"></div>-->
+                                    <!--<div class="j-cateright-wrap"  id="allSecondColumnsList5"></div>-->
 
-                                </section>
+                                <!--</section>-->
                             </div>
                             <!--<div id="loginform" class="d3-ba-r-login undis" style="width:300px">-->
                                 <!--<div class="d3-b-r-top">-->
@@ -571,23 +581,23 @@
             <!-- /index slide -->
             <div id="aCoursesList" class="of index-bg">
                 <!-- /直播课程 开始 -->
-                <div class="of bg-f8">
-                    <section class="container">
-                        <header class="comm-title">
-                            <span class="fr mt20 mr10 hyh"><a href="javascript:void(0)" title="查看更多"
-                                                              class="c-master fsize14"
-                                                              onclick="window.location.href='shoollist.html'">更多&gt;&gt;</a></span>
-                            <h2 class="fl tac tit-header"><span class="c-333">全部194所合作高校 </span></h2>
-                        </header>
-                        <div>
-                            <article class="comm-course-list of demo2-i-live-list demo3-i-live-list">
-                                <ul class="of" id="AllUniversity">
+                <!--<div class="of bg-f8">-->
+                    <!--<section class="container">-->
+                        <!--<header class="comm-title">-->
+                            <!--<span class="fr mt20 mr10 hyh"><a href="javascript:void(0)" title="查看更多"-->
+                                                              <!--class="c-master fsize14"-->
+                                                              <!--onclick="window.location.href='shoollist.html'">更多&gt;&gt;</a></span>-->
+                            <!--<h2 class="fl tac tit-header"><span class="c-333">全部194所合作高校 </span></h2>-->
+                        <!--</header>-->
+                        <!--<div>-->
+                            <!--<article class="comm-course-list of demo2-i-live-list demo3-i-live-list">-->
+                                <!--<ul class="of" id="AllUniversity">-->
 
-                                </ul>
-                            </article>
-                        </div>
-                    </section>
-                </div>
+                                <!--</ul>-->
+                            <!--</article>-->
+                        <!--</div>-->
+                    <!--</section>-->
+                <!--</div>-->
                 <!-- /直播课程 结束 -->
                 <!-- /班级 开始 -->
                 <div class="of bg-f8">
@@ -619,7 +629,10 @@
                 </div>
                 <div class="of bg-f8  " id="ColumnsResult04" >
 
-               </div>
+            </div>
+                <div class="of bg-fff  " id="ColumnsResult05" >
+
+                </div>
                 <!--分类课程结束  -->
                 <!-- /网校名师 开始 -->
                 <div class="of bg-f8">

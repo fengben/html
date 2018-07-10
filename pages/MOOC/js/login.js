@@ -752,7 +752,6 @@ function sendEmailRegister() {
  * jumpType ��ת���� ucIndex �������� reload ��ǰҳ������ˢ�� Ĭ��ֻ��̬����ͷ����Ϣ
  */
 function dialogLogin(jumpType) {
-
     var loginName = $("#u-email").val();
     var password = $("#u-password").val();
 
@@ -784,7 +783,6 @@ function dialogLogin(jumpType) {
             // location.href="articleManagement.html";
         }
     }
-
     login(loginName, password, passResult);  //登录login
 
 

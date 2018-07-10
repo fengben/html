@@ -1,4 +1,4 @@
-///获取栏目一课程数据
+///获取栏目二课程数据
 <%
 :sql = "select id,name from mooccolumns WHERE  sort =2"
 changeRecordSet(:sql);

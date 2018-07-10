@@ -1,5 +1,5 @@
 <%
-:sql = "select id,head_portrait, name, school, major_id,nickname, birthday, age, sex, introduction  from mooc_userprofile limit 4 offset 0"
+:sql = "select mooc_userprofile.id,head_portrait,mooc_userprofile.email, mooc_userprofile.name, school, major_id,nickname, birthday, age, sex, introduction,classification  from mooc_userprofile INNER JOIN user_passports on mooc_userprofile.email = user_passports.login_name WHERE classification=2018096277110017073  limit 4 offset 0"
 changeRecordSet(:sql);
 :totalNumber = recordCount()
 If :totalNumber >0
@@ -9,9 +9,7 @@ Repeat
 <div class="demo-t-l-warp d3-t-l-warp">
 	<a class="pic" href="teacherinfo.html?id=<%=id%>" target="_self">
 		  <%If head_portrait!=0%>
-///         	<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" class="img-responsive" width="110" height="110" >
- ///暂时展示固定图片
-                 <img src="/pages/resouce/image/default.png"  width="110" height="110">
+         	<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" class="img-responsive" width="110" height="110" >
           <%Else%>
              <img src="/pages/resouce/image/default.png"  width="110" height="110">
           <%EndIf%>

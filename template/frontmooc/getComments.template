@@ -9,13 +9,13 @@ debugMsg("---------recordCount--"#:totalNumber)
  %>
 
 <li class="comment" id="<%=id%>" style="">
-    <a class="isAct_a"  href="userInfo.html?id=<%=uid%>" title="barrycom"><img
+    <a class="isAct_a"  href="otherInfo.html?id=<%=uid%>" title="barrycom"><img
             class="isAct-img"
             src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>"
             alt="barrycom"></a>
     <div class="c-comm-title">
         <span class="floor c-green"><%=floors%>楼</span> <a
-             href="userInfo.html?id=<%=uid%>" title="nickname"
+             href="otherInfo.html?id=<%=uid%>" title="nickname"
             class="c-u-name c-master fsize14 vam"><%=nickname%></a>
         <span class="c-time c-ccc vam"><%=to_char%></span>
     </div>

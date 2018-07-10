@@ -3,10 +3,10 @@
 <%
 If      :urlid != 2018112858180021535
        debugMsg("--------------=-----------------"#:pageNumber)
-        :sql = "select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id = ? ) order by A.on_top desc,A.id desc limit ?,8"
+        :sql = "select FOUND_ROWS,id, title, content_text, publish_date, count, pic_id from moocarticle  where  article_type = ? order by on_top desc,id desc  limit ?,8"
         changeRecordSet(:sql,:urlid,(:pageNumber-1)*8)
 Else
-        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.on_top desc,A.id desc limit ?,8"
+        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.on_top desc,A.id desc limit ?,8"
         changeRecordSet(:querystr,(:pageNumber-1)*8)
 EndIf
 :totalNumber = recordCount()
@@ -44,9 +44,9 @@ Repeat
   													</span>
   												</section>
   											</div>
-  											<div class="coures-jbicon">
-  													<img src="picture/c-vip-jb.png">
-  												</div>
+  										///	<div class="coures-jbicon">
+  										///			<img src="picture/c-vip-jb.png">
+  										///		</div>
   											</div>
   									</li>
 <%
@@ -101,10 +101,10 @@ $_@_$
 <%
 If      :urlid != 2018112858180021535
        debugMsg("--------------=-----------------"#:pageNumber)
-        :sql = "select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id = ? ) order by A.count desc,A.id desc limit ?,8"
+        :sql = "select FOUND_ROWS,id, title, content_text, publish_date, count, pic_id from moocarticle  where  article_type = ? order by count desc,id desc limit ?,8"
         changeRecordSet(:sql,:urlid,(:pageNumber-1)*8)
 Else
-        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.count desc,A.id desc limit ?,8"
+        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.count desc,A.id desc limit ?,8"
         changeRecordSet(:querystr,(:pageNumber-1)*8)
 EndIf
 :totalNumber = recordCount()
@@ -142,9 +142,10 @@ Repeat
   													</span>
   												</section>
   											</div>
-  											<div class="coures-jbicon">
-  													<img src="picture/c-vip-jb.png">
-  												</div>
+  											/// vip课程
+  											///<div class="coures-jbicon">
+  											///		<img src="picture/c-vip-jb.png">
+  											///	</div>
   											</div>
   									</li>
 <%
@@ -156,10 +157,10 @@ $_@_$
 <%
 If      :urlid != 2018112858180021535
        debugMsg("--------------=-----------------"#:pageNumber)
-        :sql = "select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id,A.course_start, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id = ? ) order by A.course_start desc,A.id desc limit ?,8"
+        :sql = "select FOUND_ROWS,id, title, content_text, publish_date, count, pic_id,course_start from moocarticle  where  article_type = ? order by course_start desc,id desc limit ?,8"
         changeRecordSet(:sql,:urlid,(:pageNumber-1)*8)
 Else
-        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id,A.course_start, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.parent_id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.course_start desc,A.id desc limit ?,8"
+        :querystr="select FOUND_ROWS,A.id, A.title, A.content_text, A.publish_date, A.count, A.pic_id,A.course_start, B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and ( B.id in (select id from mooccolumns where parent_id= 2018112858180021535) ) order by A.course_start desc,A.id desc limit ?,8"
         changeRecordSet(:querystr,(:pageNumber-1)*8)
 EndIf
 :totalNumber = recordCount()
@@ -197,9 +198,9 @@ Repeat
   													</span>
   												</section>
   											</div>
-  											<div class="coures-jbicon">
-  													<img src="picture/c-vip-jb.png">
-  												</div>
+  										///	<div class="coures-jbicon">
+  										///			<img src="picture/c-vip-jb.png">
+  										///		</div>
   											</div>
   									</li>
 <%

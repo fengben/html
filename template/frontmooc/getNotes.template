@@ -1,0 +1,104 @@
+<%
+
+:sql = "select FOUND_ROWS,mooc_course_notes.id as id,author,body,publish_time,to_char(publish_time,'yyyy-mm-dd hh24:mm:ss'),head_portrait,nickname,mooc_userprofile.id as uid from mooc_course_notes inner join mooc_userprofile on mooc_course_notes.author = mooc_userprofile.email where course_id=? order by publish_time desc limit ?,6"
+debugMsg("---------222222-----"#:to_char)
+changeRecordSet(:sql,L(:course_id),(:pageNumber-1)*6)
+:totalNumber = recordCount()
+If :totalNumber >0
+Repeat
+%>
+                                                        <li><a href="otherInfo.html?id=<%=uid%>">
+                                                            <aside class="noter-pic">
+                                                                <img width="50" height="50" class="picImg"
+                                                                     src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>">
+                                                            </aside> </a>
+                                                            <div class="of">
+								<span class="fl">
+								<font class="fsize12 c-blue">
+									<%=nickname%></font>
+								<font class="fsize12 c-999 ml5">添加笔记：</font></span>
+                                                            </div>
+                                                            <div class="noter-txt mt5">
+                                                                <p><%=body%></p>
+                                                            </div>
+                                                            <div class="of mt5">
+                                                                <span class="fr"><font class="fsize12 c-999 ml5"><%=to_char%></font></span>
+                                                                <span class="fl">
+									///<a class="noter-dy vam c-999" title="回复" href="javascript: void(0)"
+                                    ///   onclick="queryCommentReply('299')">
+									///	<em class="icon18">&nbsp;</em>
+									///	<tt class="replyCount299 vam fsize12 f-fM ">(0)</tt>
+									///</a>
+									///<a href="javascript: void(0)" title="赞一下" class="noter-zan vam ml10  c-999"
+                                   ///   onclick="topicPraise('<%=id%>')">
+									///	<em class="icon18">&nbsp;</em>
+									///	<tt class="addPraise299_4 praiseCount vam fsize12 f-fM">(<span>0</span>)</tt>
+									///</a>
+								</span>
+                                                            </div>
+                                                            <div class="n-reply">
+                                                                <section class="n-reply-wrap">
+                                                                    <div class="numb-box">
+                                                                        <fieldset>
+                                                                            <textarea name=""
+                                                                                      class="commentReplyMsgContent299"></textarea>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                    <p class="of mt5 tar pl10 pr10">
+                                                                        <span class="fl"><tt
+                                                                                class="c-red commentReplyMsg299"></tt></span>
+                                                                        <a onclick="addCommentReply('299')"
+                                                                           class="lh-reply-btn" title="回复"
+                                                                           href="javascript: void(0)">回复</a>
+                                                                    </p>
+                                                                </section>
+                                                                <div class="mt10 pl10 pr10 pb10 commentReply299"></div>
+                                                            </div> <!-- /回复盒子 -->
+                                                        </li>
+<%
+EndRepeat
+EndIf
+%>
+
+$_@_$
+<div class="paging">
+<%:i=1%>
+<%:totalPage = 0%>
+<%:totalPageSize = 6%>
+<%:totalPage=ceil(:FOUND_ROWS,6)%>
+
+<div>
+             <%If :pageNumber-1!=0%>
+             <a href="javascript:goToNotePage(1)">首页</a>
+             <%Else%>
+             <a class="undisable" href="javascript:goToNotePage(1)">首页</a>
+             <%EndIf%>
+
+            <%If :pageNumber-1 !=0%>
+             <a  id="backpage"  href="javascript:goToNotePage(<%=:pageNumber-1%>)"> &lt;</a>
+            <%Else%>
+            <a  id="backpage" class="undisable"  href="javascript:void(0)"> &lt;</a>
+            <%EndIf%>  /// sub的结果为0，就会不能动
+
+            <%If :pageNumber!=:totalPage && :totalPage != 0%>
+            <a id="nextpage" href="javascript:goToNotePage(<%=:pageNumber+1%>)">&gt;</a>
+             <%Else%>
+             <a id="nextpage" class="undisable" href="javascript:void(0)">&gt;</a>
+            <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
+
+             <%If :pageNumber!=:totalPage && :totalPage != 0%>
+             <a href="javascript:goToNotePage(<%=:totalPage%>)">尾页</a>
+              <%Else%>
+              <a class="undisable" href="javascript:goToNotePage(<%=:totalPage%>)">尾页</a>
+             <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
+
+           <div class="clear">
+           </div>
+           </div>
+</div>
+<script>
+    var totalPageSize =6;
+    var currentPage =<%=:pageNumber%>;
+    var totalPage = <%=:totalPage%>;
+    showPageNumber() ;
+</script>

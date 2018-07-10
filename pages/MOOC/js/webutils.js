@@ -73,7 +73,13 @@ function exit() {
     // });
     // $.cookie('mooc_login_name', null);
     // $.cookie('mooc_password', null);
-    logout()
+	 var loginName = localStorage.getItem('loginName')
+	if(loginName){
+	 	logout()
+	}
+    else {
+	 	 location.href = 'default.html'
+	}
     // reload();
 }
 function reload(){

@@ -74,7 +74,34 @@
                 //alert(collection[0]);
             }
             getFromWS("frontmooc/saveCollection.template", paras, collection, processCollection);
+            showCourseManagent();
+            showNetworkDisk();
         });
+
+        //教师用户,显示后台链接
+        function showCourseManagent() {
+            var loginName = localStorage.getItem('loginName');
+            var res = new Array();
+            var processResult = function () {
+                $("#isTeacher").html(res[0])
+            }
+            paras = "loginName=" +loginName;
+            getFromWS("frontmooc/teacherCourse.template",paras,res,processResult);
+        }
+        //学生用户，显示后台资源管理链接，即我的网盘
+        function showNetworkDisk(){
+            var loginName = localStorage.getItem('loginName');
+            var classification = localStorage.getItem('classification');
+            var res = new Array();
+            var obj = function () {
+                $("#isStudent").html(res[0]);
+                //alert(res[0]);
+            }
+            var paras = "loginName="+loginName;
+            paras += "$^@^$classification="+classification;
+            //alert(paras);
+            getFromWS("frontmooc/studentNetworkDisk.template",paras,res,obj);
+        }
 
         function delMessage(flag) {
             var loginName = localStorage.getItem('loginName');
@@ -121,7 +148,7 @@
                 <ul class="clearfix">
                     <li><a href="default.html" title="首页">首页</a></li>
                     <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                    <li><a href="shoollist.html" title="直播">名校</a></li>
+                    <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
                     <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                     <li><a href="article.html" title="资讯">资讯</a></li>
@@ -130,11 +157,11 @@
             </nav>
             <section class="u-m-dd">
                 <ul id="navList" class="uM-list">
-                    <li>
-                        <a href="#" title="我的课程">
-                            <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的课程</tt>
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="#" title="我的课程">-->
+                            <!--<em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt class="vam">我的课程</tt>-->
+                        <!--</a>-->
+                    <!--</li>-->
 
                     <li>
                         <a href="myFav.html" title="我的收藏">
@@ -195,19 +222,19 @@
                                 </a>
                             </li>
                             <li class="tit-new-list undis h-login-li" id="is-login-one">
-                                <a href="http://wx.inxedu.com/uc/letter" title="消息" id="headerMsgCountId">
+                                <a href="myletter.html" title="消息" id="headerMsgCountId">
                                     <em class="news-icon">&nbsp;</em>
                                 </a>
                                 <q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
-                                <div class="tit-n-warp">
-                                    <ol id="letter">
+                                <!--<div class="tit-n-warp">
+                                   &lt;!&ndash; <ol id="letter">
 
-                                    </ol>
+                                    </ol>&ndash;&gt;
                                     <div class="new-tit-box tac mt10 mb20" style="display:none">
                                         <a href="http://wx.inxedu.com/uc/letter" title="查看更多"
                                            class="fsize16 c-master f-fM disIb">查看更多</a>
                                     </div>
-                                </div>
+                                </div>-->
                             </li>
                             <li class="h-r-user undis h-login-li loginedLiShow">
                                 <a href="http://wx.inxedu.com/uc/index" title="">
@@ -302,13 +329,13 @@
                         </section>
                         <div>
                             <ul id="navList" class="uM-list">
-                                <li>
-                                    <a href="my.html" title="我的课程">
-                                        <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt
-                                            class="vam">我的课程</tt>
-                                    </a>
+                                <li id="isTeacher">
+
                                 </li>
 
+                                <li id="isStudent">
+
+                                </li>
                                 <li>
                                     <a href="myFav.html" title="我的收藏">
                                         <em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt

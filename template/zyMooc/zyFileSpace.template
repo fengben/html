@@ -1,7 +1,7 @@
 
 <%:tmp=:pageNumber-1%>
 
-<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description,FOUND_ROWS from ry_filespace as A, uploadedfiles as B where A.file_id=B.filetuid" %>
+<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description,FOUND_ROWS from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid" %>
 <%:sql=:sql#" and A.fullpath = '"#:parentDirName#"'" %>
 <%:sql=:sql#" order by A.file_id asc,dir_name asc limit "#:tmp*:pageSize#","#:pageSize%>
 <%:x=changeRecordSet(:sql)%>
@@ -135,7 +135,7 @@
     	    }
 
     	         alert("para+++++++++++++"+paras);
-                getFromWS("adminUsers/fileSpaceModify.template",paras,obj,processResult1);
+                getFromWS("zyMooc/zyFileSpaceModify.template",paras,obj,processResult1);
 }
     	function doSaveFile(rstr){
     		if(rstr == ""){return;}

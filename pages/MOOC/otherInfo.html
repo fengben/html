@@ -77,7 +77,10 @@
             var url = "otherFan.html?id=" + uid;
             location.href = url;
         }
-
+        function sendMessage() {
+            var url = "sendLetter.html?id=" + uid;
+            location.href = url;
+        }
         function follow(operation) {
             var userName = localStorage.getItem("loginName");
             var array = new Array();
@@ -155,7 +158,7 @@
                     <ul class="nav">
                         <li><a href="default.html" title="首页">首页</a></li>
                         <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                        <li><a href="shoollist.html" title="直播">名校</a></li>
+                        <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
                         <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
                         <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                         <li><a href="article.html" title="资讯">资讯</a></li>
@@ -277,7 +280,7 @@
 
                             <ul id="myfan" class="uM-list">
                                 <li>
-                                    <a href="javascript:void(0)" onclick="linkTofan()" title="我的订单">
+                                    <a href="javascript:void(0)" onclick="linkTofan()" title="关注">
                                         <em class="icon24 uM-ddzx-ico uM-list-ico mr5">&nbsp;</em><tt
                                             class="vam">ta的关注</tt>
                                     </a>
@@ -286,6 +289,12 @@
                                     <a href="#" title="个人信息">
                                         <em class="icon24 uM-grzl-ico uM-list-ico mr5">&nbsp;</em><tt
                                             class="vam">ta的信息</tt>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)" title="发送消息" onclick="sendMessage()">
+                                        <em class="icon24 uM-xxzx-ico uM-list-ico mr5">&nbsp;</em><tt
+                                            class="vam">发送消息</tt>
                                     </a>
                                 </li>
                             </ul>

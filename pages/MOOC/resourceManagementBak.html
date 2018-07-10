@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Xenon Boostrap Admin Panel" />
+	<meta name="author" content="" />
+    <link href="/styleFromTemplate/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <!-- Custom CSS -->
+    <link href="/styleFromTemplate/css/style.css" rel='stylesheet' type='text/css' />
+    <!--link href="/styleFromTemplate/css/font-awesome.css" rel="stylesheet"-->
+    <!--link rel="stylesheet" href="/styleFromTemplate/css/icon-font.min.css" type='text/css' /-->
+
+    <link href="/styleFromTemplate/css/animate.css" rel="stylesheet" type="text/css" media="all">
+
+    <script src="/styleFromTemplate/js/wow.min.js"></script>
+    <script src="/styleFromTemplate/js/jquery-1.10.2.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib-bak.js"></script>
+
+    <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/maintain/alert.css" />
+
+    <script type="text/javascript" src="/scripts/jquery.alert.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src="/scripts/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="/scripts/htmleditor/kindeditor.js"></script>
+    <script type="text/javascript" src="/scripts/htmleditor/lang/zh_CN.js"></script>
+    <!--下面是为了实现标题的颜色选择器添加的插件 -->
+    <link rel="stylesheet" type="text/css" href="/CSS/iColor.css" />
+    <script type="text/javascript" src="/scripts/iColor-min.js"></script>
+    <script>
+      function fileSpaceManagement(){
+	  $("#mainContent").html("");
+	  var paras = "pageNumber=1";
+	  paras += "$^@^$pageSize=9";
+	  paras += "$^@^$infoType=";
+	  //loadFromWS("adminUsers/fileSpaceManagement.template",paras,"mainContent");
+	  loadFromWS("zyMooc/zyFileSpaceManagement.template",paras,"mainContent");
+        }
+    
+	</script>
+
+	<script>
+		//防止未登录直接输入网址访问该网页
+	    var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
+        var classification = localStorage.getItem('classification');
+        var loginName = localStorage.getItem('loginName');
+        if(!userId || !userToken || !classification || !loginName ){
+
+            location.href="login.html";
+       		}
+
+
+	</script>
+	<title>mooc后台管理</title>
+
+	<link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css">
+	<link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/xenon-core.css">
+	<link rel="stylesheet" href="assets/css/xenon-forms.css">
+	<link rel="stylesheet" href="assets/css/xenon-components.css">
+	<link rel="stylesheet" href="assets/css/xenon-skins.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+
+
+	<script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+
+	<script>
+
+	var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
+        var classification = localStorage.getItem('classification');
+        var loginName = localStorage.getItem('loginName');
+        if(!userId || !userToken || !classification || !loginName){
+
+            location.href="login.html";
+   		}
+
+	</script>
+
+
+</head>
+<style>
+.showInfo{
+  border:none;
+  outline: none;
+}
+.editbutton{
+    background-color: #68b828;
+    color: #ffffff;
+    outline: none;
+}
+</style>
+<body class="page-body">
+<script>
+
+	//保持(被选中的)侧边栏高亮
+    function keepActive(){
+        $("#a_resourceManagement").parent().addClass('active');
+    }
+	jQuery(document).ready(function($) {
+		$(".user-info-menu #loginName").html(localStorage.getItem("loginName"));
+		var userInfoArray = new Array();	
+		var userInfoResult = function(){//admin,汤汤,123456789,武汉大学,super
+			var id = userInfoArray[0].split(',')[0];
+			var loginName = userInfoArray[0].split(',')[1];
+			var name = userInfoArray[0].split(',')[2];
+			var phone_number = userInfoArray[0].split(',')[3];
+			var address = userInfoArray[0].split(',')[4];
+			var roleName = userInfoArray[0].split(',')[5];
+			$("#userName").text(name+" , 您好，欢迎进入MOOC系统后台管理");
+			$("#IDS").text(id);  
+			$("#trueNameS").text(name);
+			$("#loginNameS").text(loginName);
+			$("#roleS").text(roleName);
+			$("#telephoneS").text(phone_number);
+			$("#addressS").text(address); 
+			//$("#IDS").val(id);
+			//$("#trueNameS").val(name);
+			//$("#loginNameS").val(loginName);
+			//$("#roleS").val(roleName);
+			//$("#telephoneS").val(phone_number);
+			//$("#addressS").val(address);
+			var html = new Array();
+			var htmlResult = function(){
+				$("#main-menu").append(html[0]);
+				keepActive();
+			};
+			getFromWS("mainmooc/getNav.template","classification="+classification, html, htmlResult);
+			 fileSpaceManagement()
+
+		};
+		
+		var login_name=loginName;
+		getFromWS("mainmooc/getUserInfo.template", "operation=getUserInfo$^@^$loginNname="+login_name, userInfoArray, userInfoResult);
+
+	});
+</script>
+	<div class="page-container">
+		<div class="sidebar-menu toggle-others fixed">
+			<div class="sidebar-menu-inner">
+				<header class="logo-env">
+					<div class="logo">
+						<a href="#" class="logo-expanded">
+							<img src="assets/images/logo@2x.png" width="80" alt="" />
+						</a>
+						<a href="#" class="logo-collapsed">
+							<img src="assets/images/logo-collapsed@2x.png" width="40" alt="" />
+						</a>
+					</div>
+
+					<div class="mobile-menu-toggle visible-xs">
+						<a href="#" data-toggle="user-info-menu">
+							<i class="fa-bell-o"></i>
+							<span class="badge badge-success">7</span>
+						</a>
+
+						<a href="#" data-toggle="mobile-menu">
+							<i class="fa-bars"></i>
+						</a>
+					</div>
+				</header>
+
+				<ul id="main-menu" class="main-menu">
+
+				</ul>
+
+			</div>
+
+		</div>
+
+		<div class="main-content">
+
+
+			<nav class="navbar user-info-navbar" role="navigation">
+				<ul class="user-info-menu left-links list-inline list-unstyled">
+		            <li class="hidden-sm hidden-xs">
+		                <a href="#" data-toggle="sidebar">
+		                    <i class="fa-bars"></i>
+		                </a>
+		            </li>
+	            </ul>
+				<ul class="user-info-menu left-links list-inline list-unstyled">
+					<a href="#" data-toggle="sidebar" title="武汉大学出版社">
+						<img src="images/logo.png" width="170" alt="武汉大学出版社" />
+					</a>
+				</ul>
+
+				<ul class="user-info-menu right-links list-inline list-unstyled">
+
+					<li class="dropdown user-profile">
+						<a href="#" data-toggle="dropdown">
+							<img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
+							<span id="loginName"></span>
+						</a>
+					</li>
+
+					<li>
+						<a href="javaScript:logout()">
+							<i class="fa-power-off"  style="color:red;font-size:18px;"></i>
+						</a>
+					</li>
+
+				</ul>
+
+			</nav>
+
+			<div class="page-title">
+				<div class="title-env">
+					<h1 class="title">资源管理</h1>
+					<!--<p class="description">management of resource</p>--></div>
+				<div class="breadcrumb-env">
+					<ol class="breadcrumb bc-1">
+						<li>
+							<a href="articleManagement.html">
+								<i class="fa-home"></i>首页</a>
+						</li>
+						<li class="active">
+							<strong>资源管理</strong></li>
+					</ol>
+				</div>
+			</div>
+
+
+
+<script type="text/javascript">
+function digmodal(number) {
+    var idd=$("#IDS").html();//alert(""+idd);
+
+	if(1==number){
+    	$('#editmodalPhone').modal('show');
+		var phone=$("#telephoneS").html();//alert(""+phone);取电话的值
+		$('#newPhone').val(phone);
+
+		$('#editsavePhone').on('click', function () {
+			//alert(nid);
+			var newPhone = $("#newPhone").val();
+			if (!newPhone) {
+			    alert("输入不能为空！");
+			    return;
+			}
+		 var obj_update = new Array();
+			var processResult_update = function () {
+			    if("ok"!=obj_update[0]){
+			    	alert(obj_update[0]);
+			    }
+			    location.reload(true);
+			}
+			getFromWS("mianmooc/saveUserInfo.template", "operation=editPhone$^@^$id=" + idd + "$^@^$phone=" + newPhone, obj_update, processResult_update);
+			$('#editmodalPhone').modal('hide');
+		})
+		}
+	else if(number==2){
+    	$('#editmodalEmail').modal('show');
+		var addr=$("#addressS").html();//alert(""+addr);
+		$('#newEmail').val(addr);
+
+		$('#editsaveEmail').on('click', function () {
+			//alert(nid);
+			var newEmail = $("#newEmail").val();//alert(newAddr);
+			if (!newEmail) {
+			    alert("输入不能为空！");
+			    return;
+			}
+		 	var obj_update = new Array();
+			var processResult_update = function () {
+			    if("ok"!=obj_update[0]){
+			    	alert(obj_update[0]);
+			    }
+			    location.reload(true);
+			}
+			getFromWS("mianmooc/saveUserInfo.template", "operation=editAddr$^@^$id=" + idd + "$^@^$email=" + newEmail, obj_update, processResult_update);
+			$('#editmodalEmail').modal('hide');
+		})
+
+	}
+
+}
+
+function digpasswd(){
+    var idd=$("#IDS").html();
+    $('#editpasswd').modal('show');
+    var flag=true;
+    $('#editpwdsave').on('click', function () {
+	var loginname=$("#loginNameS").html();
+	var oldp=$("#oldpwd").val();
+    	var newp=$("#newpwd").val();
+        var newp2=$("#newpwd2").val();
+	var error="";
+	if (!oldp || !newp || !newp2) {
+		flag=false;
+		error=error+"输入的密码不能为空！\n";
+	}
+	if(newp!=newp2){
+		flag=false;
+		error=error+"两次输入的新密码不一致\n";
+	}
+	if(false==flag)
+	{
+		alert(error);
+		return;
+	}
+      var obj_update = new Array();
+      var processResult_update = function () {
+	if("ok"!=obj_update[0]){
+		alert("执行结果：\n"+obj_update[0]);
+	}else{
+		alert("修改成功，请重新登录");
+		logout()
+	}
+    }
+	getFromWS("mianmooc/saveUserInfo.template", "operation=editPwd$^@^$id=" + idd + "$^@^$login=" + loginname + "$^@^$old=" + oldp+ "$^@^$new=" + newp, obj_update, processResult_update);
+	$('#editpasswd').modal('hide');
+
+   })
+
+}
+
+</script>
+
+            <div class="graphs" id="mainContent">
+
+            </div>
+			<footer class="main-footer sticky footer-type-1">
+				<div class="footer-inner">
+					<div class="footer-text">&copy; 2017
+						<strong>MOOC服务</strong>
+						<a href="#" target="_blank">MOOC管理系统</a>- Collect from
+						<a href="#" title="国家网络安全学院" target="_blank">国家网络安全学院</a></div>
+					<div class="go-up">
+						<a href="#" rel="go-top">
+							<i class="fa-angle-up"></i>
+						</a>
+					</div>
+				</div>
+			</footer>
+        </div>
+
+
+
+		</div>
+	</div>
+
+
+<div class="modal fade" id="editmodalPhone" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">修改电话号码</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">电话</label>
+                                <input type="text" class="form-control" id="newPhone" name='departmentname'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" id="editsavePhone">确定</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editmodalEmail" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">修改Email</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label" >Email</label>
+                                <input type="text" class="form-control" id="newEmail" name='departmentname'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" id="editsaveEmail">确定</button>
+                </div>
+            </div>
+        </div>
+</div>
+
+<div class="modal fade" id="editpasswd" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">修改密码</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="field-5" class="control-label">请输入原始密码：</label>
+                                <input type="text" class="form-control" id="oldpwd" name='departmentname'>
+                            </div>
+			    <div class="form-group">
+                                <label for="field-5" class="control-label">请输入新密码：</label>
+                                <input type="text" class="form-control" id="newpwd" name='departmentname'>
+                            </div>
+			    <div class="form-group">
+                                <label for="field-5" class="control-label">请再次输入新密码：</label>
+                                <input type="text" class="form-control" id="newpwd2" name='departmentname'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-info" id="editpwdsave">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+	<div class="page-loading-overlay">
+		<div class="loader-2"></div>
+	</div>
+
+	<!-- Bottom Scripts -->
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/TweenMax.min.js"></script>
+	<script src="assets/js/resizeable.js"></script>
+	<script src="assets/js/joinable.js"></script>
+	<script src="assets/js/xenon-api.js"></script>
+	<script src="assets/js/xenon-toggles.js"></script>
+
+	<!-- Imported scripts on this page -->
+	<script src="assets/js/xenon-widgets.js"></script>
+	<script src="assets/js/devexpress-web-14.1/js/globalize.min.js"></script>
+	<script src="assets/js/devexpress-web-14.1/js/dx.chartjs.js"></script>
+	<script src="assets/js/toastr/toastr.min.js"></script>
+
+	<!-- JavaScripts initializations and stuff -->
+	<script src="assets/js/xenon-custom.js"></script>
+</body>
+
+</html>

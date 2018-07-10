@@ -92,7 +92,6 @@ function getFromWS(url_str,post_data_,outargs_,callback_,asy){
 
 //之所以要使用回调函数，是因为调用web service本身采用的是异步模式
 function logout() {
-
     var obj = new Array();
     var passResult = function () {
         if (obj[0] == "ok") {

@@ -1,0 +1,7 @@
+<%
+debugMsg(:receiver#"update=================")
+:insertSql = "INSERT INTO mooc_message (id,sender,receiver,private_message,send_date,is_delete) VALUES (?,?,?,?,now(),1)"
+:aid = tuid();
+:x=execSQL(:insertSql,L(:aid),S(:sender),S(:receiver),S(:message))
+Exit(:x)
+%>

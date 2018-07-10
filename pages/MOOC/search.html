@@ -57,6 +57,7 @@
             var processResult = function () {
                 jQuery("#CategoryCourseDetail").html(obj[0]);
                 jQuery("#deanpage").html(obj[1]);
+                jQuery("#goodClass").html(obj[2]);
             }
             getFromWS("frontmooc/getSearchResult.template", paras, obj, processResult);
 
@@ -97,7 +98,7 @@
                         <ul class="nav">
                             <li><a href="default.html" title="首页" >首页</a></li>
                             <li><a href="showcoulist.html?id=2018112858180021535" title="录播" >课程</a></li>
-                            <li><a href="shoollist.html" title="直播" >名校</a></li>
+                            <!--<li><a href="shoollist.html" title="直播" >名校</a></li>-->
                             <li><a href="teacherlist.html" title="班级" >名师</a></li>
                             <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                             <li><a href="article.html" title="资讯" >资讯</a></li>
@@ -229,6 +230,22 @@
                         <div class="pgs cl" id="deanpage">
 
 
+                        </div>
+ <div class="of bg-f8">
+                            <section class="container">
+                                <header class="comm-title">
+                                    <span class="fr mt15 mr10 hyh"><a href="showcoulist.html?id=2018112858180021535" title="更多" class="c-master fsize14">更多 &gt;</a></span>
+                                    <h2 class="fl tac tit-header"><span class="c-333">推荐课程</span></h2>
+                                </header>
+                                <div>
+                                    <article class="comm-course-list">
+                                        <ul id="goodClass" class="current">
+
+                                        </ul>
+                                        <div class="clear"></div>
+                                    </article>
+                                </div>
+                            </section>
                         </div>
                         <!-- 公共分页 结束 -->
                         <form action="./showcoulist.html" id="searchForm" method="post">

@@ -26,7 +26,8 @@
     <script type="text/javascript" src="js/headerh5searchcommon.js"></script><script type="text/javascript" src="js/header.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
-
+    <script type="text/javascript" src="js/moocutil.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
     <script type="text/javascript">
         function killErrors() {
             return true;
@@ -61,31 +62,65 @@
         <div class="main-infor" >
             <!-- 公共头引入 -->
             <!-- /global header begin-->
-
             <header id="header" class="all-header">
                 <section class="container">
-                    <h1 id="logo" class="logo">
-                        <a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
-                        <a class="headerfanhui" style="display: none" href="javascript:void (0)"onclick="goHistory('')" title="武汉大学出版社">
-                            <img src="picture/mo-back.png">
-                        </a>
-                    </h1>
+                    <h1 id="logo" class="logo"><a class="headerlogo" style="display: none;" href="/" title="武汉大学出版社">
+                        <img
+                                src="picture/logo.png" width="100%" alt="武汉大学出版社"/> </a> <a class="headerfanhui"
+                                                                                            style="display: none"
+                                                                                            href="javascript:void (0)"
+                                                                                            onclick="goHistory('')"
+                                                                                            title="武汉大学出版社"> <img
+                            src="picture/mo-back.png"/> </a></h1>
                     <div class="h-r-nsl">
                         <ul class="nav">
                             <li><a href="default.html" title="首页">首页</a></li>
                             <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                            <li><a href="shoollist.html" title="直播">名校</a></li>
+                            <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
                             <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
                             <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                             <li><a href="article.html" title="资讯">资讯</a></li>
                         </ul>
                         <!-- / nav -->
-
+                        <ul class="h-r-login clearfix">
+                            <li class="undis h-login-li" id="no-login"><a href="javascript:showlogin()" title="登录"> <em
+                                    class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span> </a></li>
+                            <li class="tit-new-list undis h-login-li" id="is-login-one"><a href="myletter.html"
+                                                                                           title="消息"
+                                                                                           id="headerMsgCountId"> <em
+                                    class="news-icon">&nbsp;</em> </a> <q class="red-point" id="letterPoint"
+                                                                          style="display: none">&nbsp;</q>
+                                <div class="tit-n-warp">
+                                    <ol id="letter">
+                                    </ol>
+                                    <div class="new-tit-box tac mt10 mb20" style="display:none">
+                                        <a href="myletter.html" title="查看更多"
+                                           class="fsize16 c-master f-fM disIb">查看更多</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow"><a href="myinfo.html" title=""> <img
+                                    src=""
+                                    width="30"
+                                    height="30"
+                                    class="vam picImg"
+                                    alt=""/>
+                                <span class="vam disIb c-master" id="userName"></span> </a></li>
+                            <li class="h-r-user undis h-login-li loginedLiShow"><a href="#" title="帮助" class="vam">
+                                <span class="vam disIb c-fff">帮助</span> </a></li>
+                            <li class="h-r-user undis h-login-li loginedLiShow"><a href="javascript:void(0)" title="退出"
+                                                                                   onclick="exit();" class=" vam"> <span
+                                    class="vam disIb c-fff">退出</span> </a></li>
+                            <!-- /未登录显示第1 li；登录后显示第2，3 li -->
+                        </ul>
                         <aside class="h-r-search">
                             <div class="pr h-r-s-box-cx">
-                                <form action="/showcoulist" method="post" id="headerformSearch" onsubmit="return toSearch()">
-                                    <label class="h-r-s-box"><input type="text" value="" id="headerSearchName" name="queryCourse.courseName" placeholder="搜索...">
-                                        <button class="s-btn" type="submit"> <em class="icon18">&nbsp;</em> </button></label>
+                                <form action="search.html" method="get" id="headerformSearch"
+                                      onsubmit="return toSearch()">
+                                    <label class="h-r-s-box"><input type="text" value="" id="headerSearchName"
+                                                                    name="queryCourse.courseName" placeholder="搜索...">
+                                        <button class="s-btn" type="submit"><em class="icon18">&nbsp;</em></button>
+                                    </label>
                                 </form>
                             </div>
                         </aside>
@@ -96,14 +131,17 @@
                     <aside class="mw-nav-seach mw-nav-seach-d1">
                         <form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
                             <label>
-                                <input type="text" value="" placeholder="" id="h5HeaderSearchName" class="f-fM h1-mw-seach-input i_h_gb_s_input">
-                                <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();" class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+                                <input type="text" value="" placeholder="" id="h5HeaderSearchName"
+                                       class="f-fM h1-mw-seach-input i_h_gb_s_input">
+                                <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();"
+                                   class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
                             </label>
                         </form>
 
                         <div class="exam-mo-test-time tac">
                             <span class="time c-fff f-fM vam examTimer"></span>
-                            <a href="javascript:void(0)" onclick="timePause(this)" title="" class="de-over-btn timePauseTag"></a>
+                            <a href="javascript:void(0)" onclick="timePause(this)" title=""
+                               class="de-over-btn timePauseTag"></a>
                         </div>
 
                     </aside>
@@ -112,6 +150,99 @@
             </header>
             <!-- /global header end-->
             <!-- 公共头引入 -->
+            <!-- 登陆框引入-->
+             <div class="dialogWrap" id="loginfrom"
+                 style="position: absolute; overflow-x: hidden; overflow-y: auto; top: 264.5px; margin-left: -193px; display:none">
+                <div class="dialog-ele new-loigin">
+                    <h4 class="d-s-head pr new-header" style="width: 380px;"><a id="dClose" onclick="closewin()"
+                                                                                href="javascript:void(0)" title="关闭"
+                                                                                class="dClose icon16 pa new-close">&nbsp;</a><span
+                            id="d-s-head-tab" class="d-s-head-tab">
+      <a href="javascript:void(0)" onclick="showdialoglogin(this)" class="current">登录</a>
+      <a href="javascript:void(0)" onclick="showdialogRegister(this)">注册</a></span></h4>
+                    <div class="of">
+                        <div id="lrEleWrap" class="mt10 mb20 ml30 mr30">
+                            <div id="d-s-head-cont" class="lrWrap">
+                                <section class="dis e-login-ele" id="dl">
+                                    <div class="mt10">
+                                        <p class="e-l-jy"></p>
+                                    </div>
+                                    <div>
+                                        <ol class="e-login-options">
+                                            <li><em class="lo-ico zc-dl-ioc"> </em> <input id="focusId" type="hidden"/>
+                                                <input
+                                                        id="u-email" placeholder="请输入账户" name="" value=""
+                                                        onkeyup="$(this).next().html('');" type="text"/>
+                                                <p class="lr-tip-wrap"></p></li>
+                                            <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password"
+                                                                                           placeholder="请输入密码"
+                                                                                           name="" value=""
+                                                                                           onkeyup="$(this).next().html('');"
+                                                                                           type="password"/>
+                                                <p class="lr-tip-wrap"></p></li>
+                                        </ol>
+                                        <section class="hLh30 of pl10">
+                                            <label class="hand c-999 vam fl"> <input id="autoThirty"
+                                                                                     style="vertical-align: -2px;"
+                                                                                     checked="checked" type="checkbox"/>
+                                                自动登录
+                                            </label>
+                                            <a class="vam ml10 c-blue fr" title=""
+                                               href="/front/passwordRecovery">忘记密码?</a>
+                                        </section>
+                                        <section class="mt20 tac mb50">
+                                            <a class="e-login-btn" href="javascript:void(0)" title="登 录"
+                                               onclick="dialogLogin()">登
+                                                录</a>
+                                        </section>
+                                    </div>
+                                </section>
+                                <section class="undis e-login-ele" id="zc" style="display: none;">
+                                    <div class="mt10">
+                                        <p class="e-l-jy"></p>
+                                    </div>
+                                    <div>
+                                        <ol class="e-login-options">
+                                            <li><em class="lo-ico zc-dl-ioc"> </em> <input id="u-email-reg"
+                                                                                           placeholder="请输入邮箱"
+                                                                                           name="registerName"
+                                                                                           maxlength="50"
+                                                                                           value=""
+                                                                                           onkeyup="$(this).next().html('');"
+                                                                                           type="text"/>
+                                                <p class="lr-tip-wrap"></p></li>
+                                            <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-reg"
+                                                                                           placeholder="请输入密码"
+                                                                                           name="" value=""
+                                                                                           onkeyup="$(this).next().html('');"
+                                                                                           type="password"/>
+                                                <p class="lr-tip-wrap"></p></li>
+                                            <li><em class="zc-ico zc-dl-ioc"> </em> <input id="u-password-rep"
+                                                                                           placeholder="请确认密码"
+                                                                                           name="" value=""
+                                                                                           onkeyup="$(this).next().html('');"
+                                                                                           type="password"/>
+                                                <p class="lr-tip-wrap"></p></li>
+                                            <li><p class="lr-tip-wrap" style="clear: both;"></p></li>
+                                        </ol>
+                                        <section class="tac mt20">
+                                            <a class="e-login-btn" href="javascript: void(0)" onclick="dialogRegister()"
+                                               title="注 册">注 册</a>
+                                        </section>
+                                    </div>
+                                </section>
+                                <!--<div class="mt20 sf-lr-wrap tac">
+                                    <h6 class="hLh20 mb15"><span class="c-666 fsize14">第三方快捷登录</span></h6>
+                                    <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
+                                    <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
+                                    &lt;!&ndash;<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>&ndash;&gt;
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 登陆框引入结束-->
             <div id="aCoursesList" class="of index-bg">
                 <!-- /直播课程 开始 -->
                 <div class="of bg-f8">

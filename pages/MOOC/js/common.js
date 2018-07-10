@@ -757,7 +757,7 @@ function sendEmailRegister() {
 /**
  * 执行登录
  * jumpType 跳转类型 ucIndex 个人中心 reload 当前页面重新刷新 默认只动态加载头部信息
- */
+
 function dialogLogin(jumpType){
     var userName=$("#u-email").val();
     var pwd = $("#u-password").val();
@@ -808,7 +808,7 @@ function dialogLogin(jumpType){
 
 /**
  * 注册新用户
- */
+ *
 function dialogRegister(jumpType) {
     $(".e-login-options li").removeClass("err");
     $(".e-l-jy").html('');
@@ -850,11 +850,11 @@ function dialogRegister(jumpType) {
      $("#ep-randomcode-reg").next().next().next().html('<span class="c-orange"><em class="icon16 u-a-cw">&nbsp;</em>请输入邮箱验证码！</span>');
      return;
      }
-     }*/
+     }*
 
-    /*获取手机号*/
+    /*获取手机号*
     var mobileVal=$("#u-mobile-reg").val();
-    /*如果手机注册开关打开*/
+    /*如果手机注册开关打开*
     if (phoneRegister=="ON") {
         if(mobileVal==null|| mobileVal==""){
             $("#u-mobile-reg").next().html('<span class="c-orange"><em class="icon16 u-a-cw">&nbsp;</em>请输入用户手机号！</span>');
@@ -885,7 +885,7 @@ function dialogRegister(jumpType) {
     /*if($("#u-passwordre-reg").val().trim()==""){//验证确认密码是否为空
      $("#u-passwordre-reg").next().html('<span class="c-orange"><em class="icon16 u-a-cw">&nbsp;</em>请输入确认密码！</span>');
      return;
-     }*/
+     }*
     var mobileCode =$("#pp-randomcode-reg").val();
     if (phoneProving=="ON"){
         if (isEmpty(mobileCode)) {
@@ -916,20 +916,20 @@ function dialogRegister(jumpType) {
                     showUserInfo();//头部显示用户信息
                 }
             }else {
-                /*如果是验证码错误*/
+                /*如果是验证码错误*
                 if(result.entity=="randomcode"){
                     $("#u-randomcode-reg").next().next().next().html('<font class="fsize12 c-orange">'+result.message+'</font>');
                     $("#u-randomcode-reg").parent().addClass("err");
-                }else if(result.entity=="mobileRandomcode"){ /*如果是手机验证码错误*/
+                }else if(result.entity=="mobileRandomcode"){ /*如果是手机验证码错误*
                     $("#pp-randomcode-reg").next().next().html('<font class="fsize12 c-orange">'+result.message+'</font>');
                     $("#pp-randomcode-reg").parent().addClass("err");
-                }else if(result.entity=="name"){/*如果是账号错误*/
+                }else if(result.entity=="name"){/*如果是账号错误*
                     $("#u-name-reg").next().html('<font class="fsize12 c-orange">'+result.message+'</font>');
                     $("#u-name-reg").parent().addClass("err");
-                }else if(result.entity=="email"){/*如果是邮箱错误*/
+                }else if(result.entity=="email"){/*如果是邮箱错误*
                     $("#u-email-reg").next().html('<font class="fsize12 c-orange">'+result.message+'</font>');
                     $("#u-email-reg").parent().addClass("err");
-                }else if(result.entity=="mobile"){/*如果是手机号错误*/
+                }else if(result.entity=="mobile"){/*如果是手机号错误*
                     $("#u-mobile-reg").next().html('<font class="fsize12 c-orange">'+result.message+'</font>');
                     $("#u-mobile-reg").parent().addClass("err");
                 }else {
@@ -942,7 +942,7 @@ function dialogRegister(jumpType) {
         }
     });
 }
-
+*/
 /**
  * 学过此课程的用户
  */

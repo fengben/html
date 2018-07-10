@@ -1,0 +1,12 @@
+<%
+///根据classification判断是否是学生用户，是才显示链接
+debugMsg(:classification #"update=================")
+debugMsg(:loginName #"update=================")
+If :classification == "2018100654880024366"%>
+ <a href="resourceManagement.html" title="我的云盘">
+ <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em>
+ <tt class="vam">我的云盘</tt>
+ </a>
+ <%
+EndIf
+%>

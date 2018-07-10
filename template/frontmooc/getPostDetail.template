@@ -39,13 +39,13 @@ EndIf
 
                 <section class="isAct-list topic-t-attr pr">
                     <ul>
-                        <li><a class="isAct_a" rel="popUserCard" href="userInfo.html?id=<%=uid%>" > <img
+                        <li><a class="isAct_a" rel="popUserCard" href="otherInfo.html?id=<%=uid%>" > <img
                                 class="isAct-img" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" /></a>
                             <div class="isAct-attr">
                                 <div class="clearfix">
                                     <div class="fl isA-newtab-left">
                                         <a class="vam fsize14 c-master f-fM name"
-                                           href="userInfo.html?id=<%=uid%>"
+                                           href="otherInfo.html?id=<%=uid%>"
                                            title="author"><%=nickname%></a>
                                         <span class="vam fsize12 c-999 f-fM ml20 time"><%=publish_time%></span>
                                     </div>
@@ -213,9 +213,9 @@ EndIf
                     <img src="picture/lz-icon_1.png" width="66" height="66" class="lzIcon"
                          alt="楼主"/>
                     <div class="u-face-card">
-                        <a class="isAct_a" rel="popUserCard" href="userInfo.html?id=<%=uid%>" title="雷欧斯"> <img
+                        <a class="isAct_a" rel="popUserCard" href="otherInfo.html?id=<%=uid%>" title="雷欧斯"> <img
                                 class="isAct-img" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" /></a>
-                        <h6 class="hLh20 mt10"><a href="userInfo.html?id=<%=uid%>"
+                        <h6 class="hLh20 mt10"><a href="otherInfo.html?id=<%=uid%>"
                                                   title="author" class="fsize12 c-666 vam"><%=nickname%></a>
                             <% If sex=="女" %>
                             <em class="sex girl vam" title="girl">&nbsp;</em>

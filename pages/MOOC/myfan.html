@@ -48,8 +48,34 @@
         jQuery(document).ready(function () {
 
             showFanConetent(0);
-
+            showCourseManagent();
+            showNetworkDisk();
         });
+
+        //教师用户,显示后台链接
+        function showCourseManagent() {
+            var res = new Array();
+            var processResult = function () {
+                $("#isTeacher").html(res[0])
+            }
+            paras = "loginName=" +loginName;
+            getFromWS("frontmooc/teacherCourse.template",paras,res,processResult);
+        }
+
+        //学生用户，显示后台资源管理链接，即我的网盘
+        function showNetworkDisk(){
+            var loginName = localStorage.getItem('loginName');
+            var classification = localStorage.getItem('classification');
+            var res = new Array();
+            var obj = function () {
+                $("#isStudent").html(res[0]);
+                //alert(res[0]);
+            }
+            var paras = "loginName="+loginName;
+            paras += "$^@^$classification="+classification;
+            //alert(paras);
+            getFromWS("frontmooc/studentNetworkDisk.template",paras,res,obj);
+        }
         //operation = 0 显示我关注的,1显示关注我的
         function showFanConetent(operation) {
             var recentColumns = new Array();
@@ -189,7 +215,7 @@
                 <ul class="clearfix">
                     <li><a href="default.html" title="首页">首页</a></li>
                     <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
-                    <li><a href="shoollist.html" title="直播">名校</a></li>
+                    <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
                     <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
                     <li><a href="group.html" title="社区" target="_blank">学问</a></li>
                     <li><a href="article.html" title="资讯">资讯</a></li>
@@ -197,11 +223,11 @@
             </nav>
             <section class="u-m-dd">
                 <ul class="uM-list">
-                    <li>
-                        <a href="http://wx.inxedu.com/uc/index" title="我的课程">
-                            我的课程
-                        </a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="http://wx.inxedu.com/uc/index" title="我的课程">-->
+                            <!--我的课程-->
+                        <!--</a>-->
+                    <!--</li>-->
                     <li>
                         <a href="http://wx.inxedu.com/uc/ucExam" title="我的考试">
                             我的考试
@@ -405,13 +431,13 @@
                         </section>
                         <div>
                             <ul id="navList" class="uM-list">
-                                <li>
-                                    <a href="my.html" title="我的课程">
-                                        <em class="icon24 uM-kcb-ico uM-list-ico mr5">&nbsp;</em><tt
-                                            class="vam">我的课程</tt>
-                                    </a>
+                                <li id="isTeacher">
+
                                 </li>
 
+                                <li id="isStudent">
+
+                                </li>
                                 <li>
                                     <a href="myFav.html" title="我的收藏">
                                         <em class="icon24 uM-kcsc-ico uM-list-ico mr5">&nbsp;</em><tt

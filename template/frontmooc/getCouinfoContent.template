@@ -19,7 +19,7 @@ $_@_$
 ///课程内容
 <%
 debugMsg("-------------------------"#:id)
-:sql="select title, content,pic_id, publisher,appendix_id,article_type,course_start,count,course_end,course_addr from moocarticle where id= ?"
+:sql="select title, content,pic_id, publisher,appendix_id,article_type,school,course_start,count,course_end,course_addr from moocarticle where id= ?"
 :x=changeRecordSet(:sql,L(:id))
 debugMsg("--------------"#count)
 :count_num=count +1
@@ -67,10 +67,10 @@ debugMsg("--------------"#count)
                       </aside> </li>
                     </ol>
                    </section>
-                   <section class="c-attr-mt hLh30 of mt10">
-                    <tt class="c-999 fsize14 f-fM vam">主讲：</tt>
-                    <tt class="c-999 fsize14 f-fM vam"> <%=publisher%></tt>
-                   </section>
+ ///                <section class="c-attr-mt hLh30 of mt10">
+///                    <tt class="c-999 fsize14 f-fM vam">学校：</tt>
+ ///                   <tt class="c-999 fsize14 f-fM vam"> <%=school%></tt>
+ ///               </section>
                    <section class="c-attr-mt mt10">
                     <tt class="c-999 fsize14 f-fM vam">开课时间：<%=course_start%> ~ <%=course_end%></tt>
                     <tt class="c-999 fsize14 f-fM vam"> </tt>

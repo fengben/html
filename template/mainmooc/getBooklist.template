@@ -1,13 +1,13 @@
 <%
 If :operation=="getSomeArticle"
 		///:querystr= "select  A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A,mooccolumns as B where A.article_type=B.id and (B.id=? or B.parent_id=? or B.parent_id in (select id from mooccolumns where parent_id=?))  order by A.on_top desc,A.id desc"
-		:querystr="SELECT id,book_name,price,publishing_house, url FROM mooc_book where classification=? "
+		:querystr="SELECT id,book_name,price,img,classification,publishing_house, url FROM mooc_book where classification=? "
 		changeRecordSet(:querystr,:typeId)
 EndIf
 
 If :operation=="getAllArticle"
 		///:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id  order by A.on_top desc,A.id desc"
-		:querystr="SELECT id,book_name,price,publishing_house, url FROM mooc_book  "
+		:querystr="SELECT id,book_name,img,classification,price,publishing_house, url FROM mooc_book  "
 		changeRecordSet(:querystr)
 EndIf
 If recordCount()>0
@@ -17,6 +17,8 @@ If recordCount()>0
         		<tr>
         			<td>
         				<input type="checkbox" name="articleCheckBox" class="cbr" value="<%=id%>">
+        				<input id="type<%=id%>" value="<%=classification%>" style="display:none">
+        				<input style="display:none" id="picId<%=id%>"  value='<%=img%>'>
         			</td>
         			<td>
                          <%=book_name%>

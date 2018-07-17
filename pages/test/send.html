@@ -1,0 +1,23 @@
+<meta http-equiv="Content-Type" content="text/html"/>
+<script src="/pages/mainmooc/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script>
+    function f() {
+            $.ajax({
+                type: "POST",
+                url: homeAddress()+"one/"+"send.template",
+                data: {username: 1, content: 2},
+                dataType: "json",
+                success: function (res) {
+                    if (res==1)
+                    {
+                        alert("ok")
+                    }
+                    else {
+                        alert('in')
+                    }
+                }
+            });
+    }
+</script>
+<button onclick="f()">B</button>

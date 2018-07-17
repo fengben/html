@@ -9,7 +9,7 @@
 	      }
 	    );
             function initPage1(fileType,infoType,parentDirName, pageNumber, pageSize, contentDiv, tableWidth) {
-                var url = "zyMooc/zyFileList.template";
+                var url = "zyMooc/zyFileListBak.template";
                 var para = "pageNumber=" + pageNumber + "$^@^$pageSize=" + pageSize + "$^@^$fileType=" + fileType
                 + "$^@^$infoType=" + infoType + "$^@^$contentDiv=" + contentDiv + "$^@^$tableWidth=" + tableWidth
                 +"$^@^$parentDirName="+parentDirName+ "$^@^$publisher=" + localStorage.getItem('loginName')
@@ -74,13 +74,12 @@
             </TD>
         </TR>
         <!--文件列表-->
-	    ///<tr>
-         ///    <TD align="center">
-            ///     <div id="fileList" style=" margin-top:15px; height:400px;color:#fa8510;">
-              ///   </div>
-             ///</TD>
-	    ///</tr>
-
+	    <tr>
+             <TD align="center">
+              <div id="fileList" style=" margin-top:15px; height:400px;color:#fa8510;">
+               </div>
+             </TD>
+	   </tr>
         <TR>
             <TD align=left width="100%" height=25 >
 		        <div  style="display:inline;clear:both">

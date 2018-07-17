@@ -19,6 +19,8 @@
             hiBox('#viewbox',fileName,650,500,'');
         }else if(checkWord(fileName)){
             var html = '<center><object data="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" width="550" height="400"/></center>';
+               AsciiToUnicode(html);
+               UnicodeToUtf8(html);
                     $("#viewbox").html(html);
                         hiBox('#viewbox',fileName,650,500,'');
         }else if(checkPdf(fileName)){
@@ -36,6 +38,24 @@
 
         }
 
+    }
+    //ASCII 转换 Unicode
+    function AsciiToUnicode(content) {
+      result = '';
+      for (var i=0; i<content.length; i++)
+      result+='&#' + content.charCodeAt(i) + ';';
+      return result;
+    }
+    //unicode为1个接收数据，串口收到的字符编码放在该数组中
+    function UnicodeToUtf8(unicode) {
+      var uchar;
+      var utf8str = "";
+      var i;
+      for(i=0; i<unicode.length;i+=2){
+        uchar = (unicode[i]<<8) | unicode[i+1];        //UNICODE为2字节编码，一次读入2个字节
+        utf8str = utf8str + String.fromCharCode(uchar);  //使用String.fromCharCode强制转换
+      }
+      return utf8str;
     }
     function checkImg(filename){
     
@@ -65,11 +85,40 @@
     function checkWord(filename){
         var index = filename.lastIndexOf("."); //得到"."在第几位
         var fileType = filename.substring(index); //截断"."之前的，得到后缀
-        if(fileType==".txt"||fileType==".doc"||fileType==".docx"||fileType==".rtf"||fileType=="wps"){  //根据后缀，判断是否符合图片格式
-          return true;
-        }
+        ///if(fileType==".txt"||fileType==".doc"||fileType==".docx"||fileType==".rtf"||fileType=="wps"){  //根据后缀，判断是否符合文档格式
+         /// return true;
+      ///  }
+        if(fileType !=".txt"||fileType==".doc"){
+            alert("请上传格式为TXT或DOC的文件。");
+        }else{
+                    var reader = new FileReader;
+                    reader.readAsDataURL(file);
+                    reader.onload = function(evt){
+                        var data = evt.target.result;
+                        var encoding = checkEncoding(data);
+                        Papa.parse(file,{
+                            encoding : encoding,
+                            complete : function(res){
+                                var data = res.data;
+                                var str = data.join("<br/>");
+                                $("#result").html(str);
+                            }
+                        })
+                    }
+                }
         return false;
     }
+    ///   验证上传文件编码
+        function checkEncoding(base64Str){
+    ///       指定上传文件文本格式
+           var str = atob(base64Str.split(";base64,")[1]);
+           var encoding = jschardet.detect(str);
+           encoding = encoding.encoding;
+           if(encoding == "window-1252"){
+               encoding = "ANSI";
+           }
+           return encoding;
+        }
     function checkTv(filename){
         var index = filename.lastIndexOf("."); //得到"."在第几位
         var fileType = filename.substring(index); //截断"."之前的，得到后缀
@@ -173,17 +222,6 @@
             };
 	    hiConfirm('真的要删除这个文件吗?', '确认框', dealResult);
 	}
-	function copyResourceURL(fileId){
-        	    var url = "/one/downloadFile.spe?dtype=PostgresXL&mode=attachment&fileid="+fileId;
-        	    var oInput = document.createElement('input');
-        	    oInput.value = url;
-        	    document.body.appendChild(oInput);
-                oInput.select();
-                document.execCommand("Copy");
-                oInput.className = 'oInput';
-                oInput.style.display='none';
-                alert('复制成功');
-        	}
 	function downloadSearch(){
 
 	    refreshList1();
@@ -333,8 +371,8 @@
                 </button>
                 <% If :classification=="1"||(:classification=="2018096277110017073"&&publisher==:publisher)%>
                 <button style="height:30px" class="btn btn-sm btn-default" onclick="javascript:deleteRecord(<%=:i%>);">删除</button>
+                <button style="height:30px" class="btn btn-sm btn-default" onclick="viewFile('<%=file_id%>','<%=filename%>')">预览</button>
                 <% EndIf %>
-                 <button style="height:30px" class="btn btn-sm btn-default" onclick="javascript:copyResourceURL('<%=file_id%>');">资源链接</button>
              </td>
             <%:i=:i+1%>
         </tr>

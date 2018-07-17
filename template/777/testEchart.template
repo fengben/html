@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript"
+        src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+<%
+    :sql =  "SELECT id,x_axis,y_axis FROM echart"
+    :x = changeRecordSet(:sql)
+    debugMsg("================="#:x)
+    ///将XAxis ,YAxis 加入数组
+    If recordCount()>0
+        :i=0
+        Repeat
+            :x_data[:i] = x_axis
+            :y_data[:i] = y_axis
+            debugMsg("-------------------"#:x_data[:i]#"---"#:y_data[:i])
+            :i = :i + 1
+
+        EndRepeat
+    EndIf
+
+%>
+
+<script type="text/javascript">
+var dom = document.getElementById("container");
+var myChart = echarts.init(dom);
+var app = {};
+ var x = new Array();
+ var y = new Array();
+ x.push(<%=:x_data[0]%>);
+ x.push(<%=:x_data[1]%>);
+ x.push(<%=:x_data[2]%>);
+ y.push(<%=:y_data[0]%>);
+ y.push(<%=:y_data[1]%>);
+ y.push(<%=:y_data[2]%>);
+alert(x);
+alert(y);
+var xx=[10,11,15];
+var yy=[18,30,15];
+option = null;
+option = {
+    xAxis: {
+        type: 'value',
+        data:  xx,
+    },
+    yAxis: {
+        type: 'value'
+    },
+    series: [{
+        data: yy,
+        type: 'line',
+        smooth: true
+    }]
+};
+;
+if (option && typeof option === "object") {
+    myChart.setOption(option, true);
+}
+       </script></body>
+</html>

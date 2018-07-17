@@ -183,6 +183,7 @@
 
         var columnsArray = new Array();
         var processResult_columnsArray = function () {
+            // alert(columnsArray[0])
             type_zNodes = jQuery.parseJSON(columnsArray[0]);
             jQuery.fn.zTree.init(jQuery("#typeTree"), setting, type_zNodes);
 
@@ -197,7 +198,7 @@
             var str = '[' + jsonData + ']';
             var zNodes = JSON.parse(str);//[{},{},....,{}]
 
-            //alert(str);
+            // alert(str);
             var newTree = new Array();
 
             var firstTree = new Array();
@@ -208,14 +209,17 @@
                 json['id'] = zNodes[i].id;
                 json['nodes'] = new Array;
                 newTree.push(json);
-                //alert(json['text'] +  json['id']+ json['nodes']);
+                // alert(json['text'] +  json['id']+ json['nodes']);
             }	//将所有的{}放入newTree中
 
 
             for (var i = 0; i < zNodes.length; i++) {
 
                 firstTree.push(newTree[i]);
+
             }
+
+
             var allcolumnData = JSON.stringify(firstTree);
             var alength = 0;
             alength = allcolumnData.length;
@@ -250,12 +254,14 @@
 
                     }
                     getFromWS("mainmooc/getBooklist.template", "operation=getSomeArticle$^@^$typeId=" + node.id + "$^@^$classification=" + classification + "$^@^$loginName=" + loginName, obj, processResult);
+
                 },
 
             });
         }
 
         getFromWS("mainmooc/getBookClassification.template", "operation=getAllColumnsReadOnly$^@^$classification=" + classification + "$^@^$loginName=" + loginName, obj_tree, processResult_tree);
+
 
         var obj = new Array();
         var processResult = function () {
@@ -278,6 +284,7 @@
 
         }
         getFromWS("mainmooc/getBooklist.template", "operation=getAllArticle$^@^$classification=" + classification + "$^@^$loginName=" + loginName, obj, processResult);
+
 
     });
     var editor;
@@ -330,9 +337,10 @@
             }
         }
         var paras = "id=" + id;
-        paras += "$^@^$operation=deleteArticle";
         var picId = $("#picId" + id).val();
         paras += "$^@^$picId=" + picId;
+        paras += "$^@^$operation=deleteArticle";
+
         getFromWS("mainmooc/saveBook.template", paras, result, deleteResult);
     }
 
@@ -364,17 +372,17 @@
         $("#appendixName").val(getFileName($("#appendixInput").val()));
     }
 
-
     function createBook(flag) {
         $("#bufferArticleId").val(flag);
         if (editor) {
             editor.remove("#articleContent");
         }
         $("#modal-article #appendix-group").html("");
-        //新建文章
+        //新建
         if (flag == 0) {
             $("#modal-article #articleId").val(flag);
             $("#modal-article #bookName").val("");
+
             $("#publishingHouse").val("");
             $("#bookurl").val("");
             $("#bookprice").val("");
@@ -385,13 +393,10 @@
             $("#modal-article #picName").val("");
             $("#modal-article #picInput").val("");
             $("#modal-article #picId").val("0");
-
             $("#modal-article #picInput").removeAttr("disabled");
-
             jQuery('#modal-article').modal('show', {backdrop: 'static'});
 
         } else {  //编辑文章
-
 
             $("#modal-article #articleId").val(flag);
             $("#modal-article #bookName").val($("#book_name" + flag).html());
@@ -414,14 +419,21 @@
 
             //该文章对应的图片
             $("#modal-article #picId").val(picId);
-
+            // alert(picId)
 
             if (picId != 0) {
+                alert('in')
                 $("#modal-article #picInput").attr("disabled", "disabled");
                 $("#modal-article #picImg").css("display", "inline-block");
                 $("#modal-article #picImg").attr("src", "/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=" + picId);
+                // $("#modal-article #picImg").attr("src", "/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=" + 2018168955330001001);
 
             }
+            // else {
+            //     $("#modal-article #picInput").removeAttr("disabled");
+            //     $("#modal-article #picImg").css("display", "none");
+            //     $("#modal-article #picImg").attr("src", "");
+            // }
 
             createEditor();
             jQuery('#modal-article').modal('show', {backdrop: 'static'});
@@ -525,15 +537,14 @@
         var bookurl = $("#bookurl").val();
         var publishingHouse = $("#publishingHouse").val();
         var type = $("#type").val();
-        var picId = $("#modal-article #picId").val();
-        if (!bookName || !bookprice || !bookurl || !publishingHouse || (!$("#picInput").val() && !picId)) {
-            alert("请信息补充完整");
-            return;
-        }
 
-//如果是旅游信息则需要填写 主题，地区，花费，详细地址的信息
-        if ($("#bufferIfTravelInfo").val() == "yes" && (!theme || !district || !money || !address)) {
-            alert("请把主题，地区，花费，详细地址补充完整");
+        var picId = $("#modal-article #picId").val();
+
+        if (!bookName || !bookprice || !bookurl || !publishingHouse || (!$("#picInput").val() && !picId)) {
+            // alert(bookurl)
+            //alert(bookName)
+            // alert(bookprice)
+            alert("请信息补充完整");
             return;
         }
         if ($("#picInput").val()) {
@@ -552,16 +563,13 @@
     }
 
     function doSaveArticle(picId) {
-
         var id = $("#modal-article #articleId").val();
         var bookName = $("#bookName").val();
         var bookprice = $("#bookprice").val();
         var bookurl = $("#bookurl").val();
         var publishingHouse = $("#publishingHouse").val();
         var type = $("#modal-article #type").val();
-
         var picIds = $("#bufferPicIds").val();
-
 
         var operation;
         if (id == 0) {
@@ -577,7 +585,6 @@
         paras += "$^@^$publishingHouse=" + publishingHouse;
         paras += "$^@^$picId=" + picId;
 
-
         paras += "$^@^$operation=" + operation;
         var objs = new Array();
         var afterSaveArticle = function () {
@@ -589,6 +596,7 @@
                 alert("存储失败");
             }
         };
+        // alert(picId)
         getFromWS("mainmooc/saveBook.template", paras, objs, afterSaveArticle);
     }
 
@@ -659,7 +667,7 @@
     function saveBatchEdit() {
         var articleType = $("#batchEditModal #type2").val();
         if (articleType == "") {
-            alert("类型不能为空");
+            alert("文章类型不能为空");
             return;
         }
         var submitAids = "";
@@ -675,10 +683,9 @@
             $('#batchEditModal').modal("hide");
             location.reload();
         }
-        var paras = "Ids=" + submitAids;
-        paras += "$^@^$Type=" + articleType;
+        var paras = "articleIds=" + submitAids;
+        paras += "$^@^$articleType=" + articleType;
         paras += "$^@^$operation=bitchEdit";
-        alert(paras)
         getFromWS("mainmooc/saveBook.template", paras, obj, processResult);
     }
 
@@ -693,7 +700,7 @@
     function saveBatchCopy() {
         var articleType = $("#batchCopyModal #type3").val();
         if (articleType == "") {
-            alert("类型不能为空");
+            alert("文章类型不能为空");
             return;
         }
         var submitAids = "";
@@ -709,29 +716,13 @@
             $('#batchCopyModal').modal("hide");
             location.reload();
         }
-
-        var paras = "Ids=" + submitAids;
+        var paras = "articleIds=" + submitAids;
         paras += "$^@^$articleType=" + articleType;
         paras += "$^@^$operation=bitchCopy";
         getFromWS("mainmooc/saveBook.template", paras, obj, processResult);
     }
 
-    function ifTrabelInfoByColumnId(id) {
-        var paras = "columnId=" + id;
-        paras += "$^@^$operation=ifTravelInfoColumn";
-        var obj = new Array();
-        var processResult = function () {
-            if (obj[0] == "yes") {
-                $("#travelInfo").css("display", "block");
-                $("#bufferIfTravelInfo").val("yes");
-            } else {
-                $("#travelInfo").css("display", "none");
-                $("#bufferIfTravelInfo").val("no");
-            }
 
-        }
-        getFromWS("mainmooc/travelInfo.template", paras, obj, processResult);
-    }
 </script>
 <div style="display:none">
     <input type="text" value="0" id="bufferArticleId">
@@ -847,7 +838,7 @@
                                     <!--onclick="setArticle(0)"-->
 
                                     <i class="fa-plus" style="font-size:17px"></i>
-                                    <span>新增图书</span>
+                                    <span>新增书籍</span>
                                 </button>
                             </h4>
                             <div class="panel-body">
@@ -859,8 +850,8 @@
                                         </th>
                                         <th>书籍</th>
                                         <th>出版社</th>
-                                        <th>价格</th>
                                         <th>链接</th>
+                                        <th>价格</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>

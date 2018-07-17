@@ -1,0 +1,11 @@
+<%
+:a=1
+%>
+<script>
+    function f() {
+        var a = <%=:a%>
+        alert(a)
+        alert(<%=:a%>);
+    }
+</script>
+<button onclick="f()">aa</button>

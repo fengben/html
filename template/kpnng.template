@@ -1,0 +1,12 @@
+
+<script>
+    function fun() {
+        var bb = <%=:a%>
+        alert(bb)
+    }
+</script>
+<button onclick="fun()">aa</button>
+
+<%
+:a=1
+%>

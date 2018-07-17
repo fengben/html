@@ -1,0 +1,5 @@
+<%
+debugMsg("in------------------------------")
+debugMsg("data-----"#:username)
+Exit1
+%>

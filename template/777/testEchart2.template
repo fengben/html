@@ -41,15 +41,28 @@
     var app = {};
     var x = new Array();
     var y = new Array();
+    <%
+    While :i<arrayLength(&x_data)
+        %>
+        alert(<%:x_data[:i]%>);
+        <%
+        :i = :i + 1
+	EndWhile
+    %>
+    <%While :i<arrayLength(&x_data)%>
+		111
+	<%:i = :i+1 %>
+	<%EndWhile%>
 
+    alert(x)
     // TODO 提取一个模块,用来从template读取数组到js
     // 这很不优雅
-    x.push(<%=:x_data[0]%>);
-    x.push(<%=:x_data[1]%>);
-    x.push(<%=:x_data[2]%>);
-    y.push(<%=:y_data[0]%>);
-    y.push(<%=:y_data[1]%>);
-    y.push(<%=:y_data[2]%>);
+    //x.push(<%=:x_data[0]%>);
+    //x.push(<%=:x_data[1]%>);
+    //x.push(<%=:x_data[2]%>);
+    //y.push(<%=:y_data[0]%>);
+    //y.push(<%=:y_data[1]%>);
+    //y.push(<%=:y_data[2]%>);
 
     option = null;
     option = {

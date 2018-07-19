@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+    <script>
+        //防止未登录直接输入网址访问该网页
+        var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
+        var classification = localStorage.getItem('classification');
+        var loginName = localStorage.getItem('loginName');
+        if(!userId || !userToken || !classification || !loginName ){
+
+            location.href="login.html";
+        }
+    </script>
+    <title>mooc后台管理</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+    <!--link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/-->
+    <!--link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/-->
+    <link rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-core.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-forms.css"/>
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-components.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
+    <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css"/>
+    <link rel="stylesheet" href="assets/css/zTreeStyle.css"/>
+    <script src="resourceManagement/js/jquery-1.11.1.min.js"></script>
+    <script src="resourceManagement/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="resourceManagement/tree_files/font-awesome.min.css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
+    <link rel="stylesheet" href="resourceManagement/tree_files/ace.css">
+    <link rel="stylesheet" href="resourceManagement/css/bootstrap.css">
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script src="/scripts/StationJSLib.js"></script>
+    <script src="/scripts/uploadfile.js"></script>
+    <script src="/scripts/htmleditor/kindeditor.js"></script>
+    <script src="/scripts/htmleditor/lang/zh_CN.js"></script>
+    <script src="jquery/jquery.ztree.core.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+
+</head>
+
+<body class="page-body">
+<script>
+    //栏目树的定义
+    var myDataTable;
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            return unescape(r[2]);
+        }
+        return null;
+    }
+
+    //保持(被选中的)侧边栏高亮
+    function keepActive(){
+        $("#a_articleManagement").parent().addClass('active');
+    }
+    ///配置ztree,为了实现新建和编辑文章时选择类型（栏目）下拉列表树
+    var setting = {
+        view: {
+            dblClickExpand: false,
+            selectedMulti:false
+        },
+        data: {
+            simpleData: {
+                enable: true
+            }
+        },
+        callback: {
+            beforeClick: beforeClick,
+            onClick: clickNode
+        }
+    };
+    //用来存储下拉列表树(json)
+    var type_zNodes;
+    //点击下拉列表树之前
+    function beforeClick(treeId, treeNode) {
+        var check = (treeNode && !treeNode.isParent);
+        if (!check){
+            alert("不能选择该项");
+        }
+        return check;
+    }
+    //点击下拉列表树时执行的方法
+    function clickNode(e, treeId, treeNode) {
+        var zTree = $.fn.zTree.getZTreeObj("typeTree"),
+            nodes = zTree.getSelectedNodes(),
+            v = "";
+        typeId = "";
+        nodes.sort(function compare(a,b){return a.id-b.id;});
+        for (var i=0, l=nodes.length; i<l; i++) {
+            v += nodes[i].name + ",";
+            typeId += nodes[i].id + ",";
+        }
+        if (v.length > 0 ) v = v.substring(0, v.length-1);
+        if (typeId.length > 0 ) typeId = typeId.substring(0, typeId.length-1);
+        var typeObj = $("#typeSel");
+        typeObj.val(v);
+        $("#modal-article #type").val(typeId);
+        $("#type2").val(typeId);
+        $("#type2Sel").val(v);
+        $("#type3").val(typeId);
+        $("#type3Sel").val(v);
+        hideMenu();
+        ifTrabelInfoByColumnId(typeId);
+    }
+    ///显示下拉列表树
+    //参数flag用来区分是哪个下拉列表，有三个取值：编辑文章，批量复制，批量移动
+    function showMenu(flag) {
+        var typeObj;
+        var typeOffset;
+        if(flag == "文章编辑"){
+            typeObj = $("#typeSel");
+            typeOffset = $("#typeSel").offset();
+        }
+        if(flag == "批量复制"){
+            typeObj = $("#type3Sel");
+            typeOffset = $("#type3Sel").offset();
+        }
+        if(flag == "批量移动"){
+            typeObj = $("#type2Sel");
+            typeOffset = $("#type2Sel").offset();
+        }
+        $("#menuContent").css({left:typeOffset.left + "px", top:typeOffset.top + typeObj.outerHeight() + "px"}).slideDown("fast");
+        $("body").bind("mousedown", onBodyDown);
+    }
+    ///隐藏下拉列表树
+    function hideMenu() {
+        $("#menuContent").fadeOut("fast");
+        $("body").unbind("mousedown", onBodyDown);
+    }
+    ///点击列表区域外后，隐藏下拉列表树
+    function onBodyDown(event) {
+        if (!(event.target.id == "menuBtn" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
+            hideMenu();
+        }
+    }
+    jQuery(document).ready(function ($) {
+
+        var html = new Array();
+        var htmlResult = function(){
+            $("#main-menu").append(html[0]);
+            keepActive();
+        }
+        getFromWS("mainmooc/getNav.template","classification="+classification, html, htmlResult);
+
+        $(".user-info-menu #loginName").html(loginName);
+
+        // Replace checkboxes when they appear
+        var $state = $("#example-2 thead input[type='checkbox']");
+        $("#example-2").on('draw.dt', function()
+        {
+            cbr_replace();
+            $state.trigger('change');
+        });
+        // Script to select all checkboxes
+        $state.on('change', function(ev)
+        {
+            var $chcks = $("#example-2 tbody input[type='checkbox']");
+            if($state.is(':checked'))
+            {
+                $chcks.prop('checked', true).trigger('change');
+            }
+            else
+            {
+                $chcks.prop('checked', false).trigger('change');
+            }
+        });
+    });
+    var editor;
+    function createEditor() {
+
+
+        editor = KindEditor.create('textarea[id="articleContent"]', {
+            allowFileManager: true,
+            uploadJson: kindeditUploadUrl(),
+            afterUpload: kindeditAfterUpload,
+            imageTabIndex: 1,
+            pasteType: 1,  //无格式粘贴
+        });
+    }
+    function deleteArticle(id,type){
+        var result = new Array();
+        var deleteResult = function () {
+            if (result[0] == "ok") {
+                $('#deleteModal').modal('hide');
+                $('#batchDeleteModal').modal('hide');
+                //重新加载文章，并且定位到当前选中的栏目
+                if(type==""){
+                    location.reload();
+                }else{
+                    reloadArticle(type);
+                }
+
+            } else {
+                alert("删除失败");
+            }
+        }
+        var paras = "id=" + id;
+        paras += "$^@^$operation=deleteArticle";
+
+        getFromWS("mainmooc/saveArticle.template", paras, result, deleteResult);
+    }
+
+    //获取文件名称
+    function getFileName(path) {
+        var pos1 = path.lastIndexOf('/');
+        var pos2 = path.lastIndexOf('\\');
+        var pos = Math.max(pos1, pos2);
+        if (pos < 0) {
+            return path;
+        }
+        else {
+            return path.substring(pos + 1);
+        }
+    }
+    function updatePicName() {
+        $("#picName").val(getFileName($("#picInput").val()));
+        $("#modal-article #picImg").css("display","inline-block");
+//		$("#picImg").attr("src",$("#picInput").val());
+        var fr = new FileReader();
+        fr.onload = function() {
+            document.getElementById('picImg').src = fr.result;
+        };
+        fr.readAsDataURL($("#picInput")[0].files[0]);
+    }
+    function updateAppendixName() {
+        $("#appendixName").val(getFileName($("#appendixInput").val()));
+    }
+
+    //登陆edx Studio
+    function createCourse() {
+        email = localStorage.getItem("loginName");
+        passwd = localStorage.getItem("passWord");
+        if(!email || !passwd){
+            alert("服务器繁忙,请稍后继续")
+            return
+        }
+        createUrl = "//192.168.10.138/mylogin";
+        createUrl += "?email=";
+        createUrl += email;
+        createUrl += "&password=";
+        createUrl += passwd;
+        // ?email=staff@example.com&password=edx&redirect_url=dashboard
+        createUrl += "&redirect_url=//192.168.10.138:18010";
+        location.href = createUrl;
+    }
+
+    function setArticle(flag) {
+        $("#bufferArticleId").val(flag);
+        if (editor) {
+            editor.remove("#articleContent");
+        }
+        $("#modal-article #appendix-group").html("");
+        //新建文章
+        if (flag == 0) {
+            $("#modal-article #publisher").val(localStorage.getItem("loginName"));
+            $("#modal-article #articleId").val(flag);
+            $("#modal-article #title").val("");
+            $("#modal-article #topArticle").val("0");
+            $("#modal-article #school").val();
+            $("#modal-article #bufferPicIds").val("");
+            $("#modal-article #articleContent").val("");
+            $("#modal-article #picInput").val("");
+            $("#modal-article #appendixInput").val("");
+            $("#modal-article #picId").val("0");
+            $("#modal-article #picImg").attr("src","");
+            $("#modal-article #picImg").css("display","none");
+            $("#modal-article #appendixId").val("");
+            $("#modal-article #picName").val("");
+            $("#modal-article #appendixName").val("");
+
+            $("#modal-article #picInput").removeAttr("disabled");
+            $("#travelInfo #theme").val("");
+            $("#travelInfo #district").val("");
+            $("#travelInfo #money").val("");
+            $("#travelInfo #address").val("");
+
+            createEditor();
+            jQuery('#modal-article').modal('show', {backdrop: 'static'});
+
+        } else {  //编辑文章
+
+            //如果是旅游推荐模块则查询旅游推荐相关信息
+            var paras = "id=" + flag;
+            paras += "$^@^$columnId="+$("#type" + flag).val();
+            paras += "$^@^$operation=queryTravelInfo";
+            var obj = new Array();
+            var processResult = function(){
+                if(obj[0] !="no"){
+                    var travelArray = obj[0].split(";");
+                    $("#travelInfo #theme").val(travelArray[0]);
+                    $("#travelInfo #district").val(travelArray[1]);
+                    $("#travelInfo #money").val(travelArray[2]);
+                    $("#travelInfo #address").val(travelArray[3]);
+                    $("#travelInfo").css("display","block");
+                    $("#bufferIfTravelInfo").val("yes");
+                }else{
+                    $("#travelInfo").css("display","none");
+                    $("#bufferIfTravelInfo").val("no");
+                }
+            }
+            getFromWS("mainmooc/travelInfo.template",paras,obj,processResult);
+
+
+            $("#modal-article #articleId").val(flag);
+            $("#modal-article #title").val($("#title" + flag).html());
+            $("#modal-article #publisher").val($("#publisher" + flag).html());
+            $("#modal-article #type").val($("#type" + flag).val());
+            for(var i = 0; i < type_zNodes.length; i++){
+                if(type_zNodes[i].id==$("#type" + flag).val()){
+                    $("#modal-article #typeSel").val(type_zNodes[i].name);
+
+                }
+            }
+            //
+            //
+            //
+            // alert(flag);
+            $("#modal-article #topArticle").val($("#top" + flag).val());
+            $("#modal-article #school").val($("#school" + flag).val());
+            $("#modal-article #articleContent").val($("#content" + flag).val());
+            //副文本中的图片
+            $("#modal-article #bufferPicIds").val("");
+            $("#modal-article #picName").val("");
+            $("#modal-article #appendixName").val("");
+            var picId = $("#picId" + flag).val();
+            var appendixId = $("#appendixId" + flag).val();
+
+            //该文章对应的图片
+            $("#modal-article #picId").val(picId);
+
+            $("#modal-article #appendixId").val(appendixId);
+
+            if (picId != 0) {
+                $("#modal-article #picInput").attr("disabled", "disabled");
+                $("#modal-article #picImg").css("display","inline-block");
+                $("#modal-article #picImg").attr("src","/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid="+picId);
+            } else {
+                $("#modal-article #picInput").removeAttr("disabled");
+                $("#modal-article #picImg").css("display","none");
+                $("#modal-article #picImg").attr("src","");
+            }
+            ///如果有图片或者附件，则从数据库中查出相关文件的name
+            if (picId != 0 || appendixId != "") {
+                var result = new Array();
+                var queryResult = function () {
+                    if (result[0]) {
+
+                        var names = result[0].split("|");
+                        var picName = names[0];
+                        $("#modal-article #picName").val(picName);
+
+
+                        var parentDiv = document.getElementById("appendix-group");
+                        var articleId = $("#modal-article #articleId").val();
+                        if(appendixId !=""){
+                            var appendixIds = appendixId.split(";");
+                            var appendixNames = names[1].split(";");
+                            for(var i=0;i<appendixNames.length;i++){
+                                //动态创建div用来显示上传的附件名，以及删除和下载的标签
+
+                                var insertDiv = '<div id="appendixId' + appendixIds[i] + '"><span style="display:inline-block;width:200px;overflow: hidden;text-overflow: ellipsis;" id="appendixName'+appendixIds[i]+'">'+appendixNames[i]+'</span><a style="margin-left:30px;color:blue" href="javaScript:deleteAppendix(\''+appendixIds[i]+'\',\''+articleId+'\')">删除</a><a style="margin-left:50px;color:blue" href="/one/downloadFile.spe?dtype=PostgresXL&mode=attachment&fileid='+appendixIds[i]+'">下载</a></div>';
+                                parentDiv.innerHTML = parentDiv.innerHTML + insertDiv;
+                            }
+                        }
+                        createEditor();
+                        jQuery('#modal-article').modal('show', {backdrop: 'static'});
+                    }
+                }
+                var paras = "picId=" + picId;
+                paras += "$^@^$appendixId=" + appendixId;
+                paras += "$^@^$operation=getPicAndAppendixName";
+
+                getFromWS("mainmooc/saveArticle.template", paras, result, queryResult);
+            } else {
+                createEditor();
+                jQuery('#modal-article').modal('show', {backdrop: 'static'});
+            }
+        }
+    }
+    function deletePic() {
+        $("#picInput").val("");
+        $("#picName").val("");
+        $("#modal-article #picImg").attr("src","");
+        $("#modal-article #picImg").css("display","none");
+        var picId = $("#modal-article #picId").val();
+        if (picId != 0) {
+            var result = new Array();
+            var deleteResult = function () {
+                if (result[0] == "ok") {
+                    $("#modal-article #picId").val("0");
+                    $("#modal-article #picName").val("");
+                    $("#modal-article #picInput").val("");
+                    $("#picId" + $("#bufferArticleId").val()).val("0");
+                    $("#modal-article #picInput").removeAttr("disabled");
+                } else {
+                    alert("删除失败");
+                }
+            }
+            var paras = "id=" + picId;
+            paras += "$^@^$operation=deletePic";
+            getFromWS("mainmooc/saveArticle.template", paras, result, deleteResult);
+        }
+    }
+    function deleteAppendix(id,aid) {
+
+        if (id != "") {
+            var result = new Array();
+            var deleteResult = function () {
+
+                var father = document.getElementById("appendix-group");
+                var child = document.getElementById("appendixId"+id);
+                father.removeChild(child);
+                //删除一个附件后更新附件域
+                $("#modal-article #appendixId").val(result[0]);
+
+            }
+            var paras = "id=" + id;
+            paras += "$^@^$articleId="+aid;
+            paras += "$^@^$operation=deleteAppendix";
+
+            getFromWS("mainmooc/saveArticle.template", paras, result, deleteResult);
+        }else{
+            alert("wrong");
+        }
+
+
+    }
+    //上传附件
+    function uploadAppendix(){
+        var articleId = $("#modal-article #articleId").val();
+        if(!($("#modal-article #appendixInput").val())){
+            alert("请先选择文件");
+            return;
+        }
+        var setAppendixId = function (fileId) {
+            if (fileId) {
+
+                var appendixId = $("#modal-article #appendixId").val();
+                if(appendixId ==""){
+                    $("#modal-article #appendixId").val(fileId)
+                }else{
+                    $("#modal-article #appendixId").val(appendixId+";"+fileId)
+                }
+                var fileName = getFileName($("#appendixInput").val());
+
+                //动态创建div用来显示上传的附件名，以及删除和下载的标签
+                var insertDiv = '<div id="appendixId' + fileId + '"><span style="display:inline-block;width:200px;overflow: hidden;text-overflow: ellipsis;" id="appendixName'+fileId+'">'+fileName+'</span><a style="margin-left:30px;color:blue" href="javaScript:deleteAppendix(\''+fileId+'\',\''+articleId+'\')">删除</a><a style="margin-left:30px;color:blue" href="/one/downloadFile.spe?dtype=PostgresXL&mode=attachment&fileid='+fileId+'">下载</a></div>';
+                var parentDiv = document.getElementById("appendix-group");
+                parentDiv.innerHTML = parentDiv.innerHTML + insertDiv;
+
+                var result = new Array()
+                var processResult = function(){
+
+                    // alert(result[0]);
+                    $("#modal-article #appendixName").val("")
+                }
+                var paras = "appendixId=" + $("#modal-article #appendixId").val();
+                paras += "$^@^$articleId="+articleId;
+                paras += "$^@^$operation=updateAppendixId";
+                if(articleId !=0 && articleId !=""){
+                    getFromWS("mainmooc/saveArticle.template", paras, result, processResult);
+                }
+            }
+        }
+        uploadToDatabase("modal-article #appendixInput", setAppendixId, "databaseType=PostgresXL");
+    }
+
+    function doSave() {
+        var title = $("#modal-article #title").val();
+        var school = $("#modal-article #school").val();
+        //alert(school);
+        if(school!= ""){
+            //查询数据库是否有相应学校
+            var schoolcontent = new Array();
+            var contentResult = function(){
+                /* jQuery("#SchoolCourse").html(content[0]);*/
+
+                if(schoolcontent[0] !="no"){
+                    var schoollist = schoolcontent[0].split(";");
+                    $("#modal-article #school").val(schoollist[2]);
+                    //alert(schoollist[2]);
+                }esle
+                {
+                    $("#modal-article #school").val();
+                }
+            }
+            getFromWS("homemooc/getSchoolName.template","school="+school,schoolcontent,contentResult);
+        }
+        var type = $("#modal-article #type").val();
+        var content = editor.html();
+        var picId = $("#modal-article #picId").val();
+        var appendixId = $("#modal-article #appendixId").val();
+
+        var theme = $("#travelInfo #theme").val();
+        var district = $("#travelInfo #district").val();
+        var money = $("#travelInfo #money").val();
+        var address = $("#travelInfo #address").val();
+
+        if (!title ||!school || !type || !publisher || !content || (!$("#picInput").val()&&!picId)) {
+            alert("请把标题，学校，类型，文章内容，文章图片补充完整");
+            return;
+        }
+
+//如果是旅游信息则需要填写 主题，地区，花费，详细地址的信息
+        if($("#bufferIfTravelInfo").val()=="yes"&&(!theme || !district || !money || !address)){
+            alert("请把主题，地区，花费，详细地址补充完整");
+            return;
+        }
+        if ($("#picInput").val()) {
+            //上传图片
+            var setPicId = function (fileId_pic) {
+                if (fileId_pic) {
+                    picId = fileId_pic;
+                    doSaveArticle(picId);
+
+                }
+            }
+            uploadToDatabase("picInput", setPicId, "databaseType=PostgresXL");
+        } else {
+            doSaveArticle(picId);
+        }
+    }
+    function doSaveArticle(picId) {
+
+        var id = $("#modal-article #articleId").val();
+        var title = $("#modal-article #title").val();
+        var type = $("#modal-article #type").val();
+        var top = $("#modal-article #topArticle").val();
+        var school = $("#modal-article #school").val();
+        var publisher = localStorage.getItem("loginName");
+        var picIds = $("#bufferPicIds").val();
+        var content = editor.html();
+        var content_text = editor.text();
+//和旅游推荐有关的
+        var theme = $("#travelInfo #theme").val();
+        var district = $("#travelInfo #district").val();
+        var money = $("#travelInfo #money").val();
+        var address = $("#travelInfo #address").val();
+        var ifTravelInfo = $("#bufferIfTravelInfo").val();
+        var appendixId = $("#appendixId").val();
+
+        var operation;
+        if (id == 0) {
+            operation = "newArticle";
+        } else {
+            operation = "editArticle";
+        }
+        var paras = "id=" + id;
+        paras += "$^@^$title=" + title;
+        paras += "$^@^$type=" + type;
+        paras += "$^@^$top=" + top;
+        paras += "$^@^$school=" + school;
+        paras += "$^@^$publisher=" + publisher;
+        paras += "$^@^$content=" + content;
+        paras += "$^@^$content_text=" + content_text;
+        paras += "$^@^$picIds=" + picIds;
+        paras += "$^@^$picId=" + picId;
+        paras += "$^@^$appendixId=" + appendixId;
+
+        paras += "$^@^$theme=" + theme;
+        paras += "$^@^$district=" + district;
+        paras += "$^@^$money=" + money;
+        paras += "$^@^$address=" + address;
+        paras += "$^@^$ifTravelInfo=" + ifTravelInfo;
+
+        paras += "$^@^$operation=" + operation;
+        var objs = new Array();
+        var afterSaveArticle = function () {
+            if (objs[0] == "ok") {
+                $("#modal-article #bufferPicIds").val("");
+                $("#modal-article").modal('hide');
+                reloadArticle(type);
+            } else {
+                alert("存储失败");
+            }
+        };
+        getFromWS("mainmooc/saveArticle.template", paras, objs, afterSaveArticle);
+    }
+
+    //得到外部传来的数据]
+
+
+    function closeDia() {
+        var picIds = $("#modal-article #bufferPicIds").val();
+        if (picIds != "") {
+            var paras = "$^@^$picIds=" + picIds;
+            paras += "$^@^$operation=deleteFiles";
+            var objs = new Array();
+            var afterDelete = function () {
+                $("#modal-article").modal('hide');
+                var type = $("#modal-article #type").val();
+                reloadArticle(type);
+
+            };
+            getFromWS("mainmooc/saveArticle.template", paras, objs, afterDelete);
+        } else {
+            $("#modal-article").modal('hide');
+            var type = $("#modal-article #type").val();
+            reloadArticle(type);
+        }
+
+    }
+
+    //批量删除弹出框
+    function batchDelete(){
+
+        $('#bitchDeleteModal').modal();
+
+    }
+    //点击确定后，批量删除结果
+    function saveBatchDelete(){
+        var checkboxs = document.getElementsByName("articleCheckBox");
+        var ids = "";
+        for (var i = 0; i < checkboxs.length; i++) {
+            if (checkboxs[i].checked){
+                ids = ids + checkboxs[i].value + ";";
+
+            }
+        }
+        var result = new Array();
+        var deleteResult = function () {
+            if (result[0] == "ok") {
+                location.reload();
+            } else {
+                alert("删除失败");
+            }
+        }
+        var paras = "ids=" + ids;
+        paras += "$^@^$operation=batchDelete";
+
+        getFromWS("mainmooc/saveArticle.template", paras, result, deleteResult);
+    }
+    //弹出批量移动选择框
+    function batchEdit(){
+        $('#batchEditModal type2').val("");
+        $('#batchCopyModal type3Sel').val("");
+        $('#batchEditModal').modal();
+
+    }
+    //保存批量移动
+    function saveBatchEdit(){
+        var articleType = $("#batchEditModal #type2").val();
+        if(articleType == ""){
+            alert("文章类型不能为空");
+            return;
+        }
+        var submitAids = "";
+        var checkboxs = document.getElementsByName("articleCheckBox");
+        for (var i = 0; i < checkboxs.length; i++) {
+            if (checkboxs[i].checked){
+
+                submitAids = submitAids + checkboxs[i].value + ",";
+            }
+        }
+        var obj = new Array();
+        var processResult = function(){
+            $('#batchEditModal').modal("hide");
+            location.reload();
+        }
+        var paras = "articleIds=" + submitAids;
+        paras += "$^@^$articleType="+articleType;
+        paras += "$^@^$operation=bitchEdit";
+        getFromWS("mainmooc/saveArticle.template", paras, obj, processResult);
+    }
+    //弹出批量复制选择框
+    function batchCopy(){
+        $('#batchCopyModal type3').val("");
+        $('#batchCopyModal type3Sel').val("");
+        $('#batchCopyModal').modal();
+    }
+    //保存批量复制
+    function saveBatchCopy(){
+        var articleType = $("#batchCopyModal #type3").val();
+        if(articleType == ""){
+            alert("文章类型不能为空");
+            return;
+        }
+        var submitAids = "";
+        var checkboxs = document.getElementsByName("articleCheckBox");
+        for (var i = 0; i < checkboxs.length; i++) {
+            if (checkboxs[i].checked){
+
+                submitAids = submitAids + checkboxs[i].value + ",";
+            }
+        }
+        var obj = new Array();
+        var processResult = function(){
+            $('#batchCopyModal').modal("hide");
+            location.reload();
+        }
+        var paras = "articleIds=" + submitAids;
+        paras += "$^@^$articleType="+articleType;
+        paras += "$^@^$operation=bitchCopy";
+        getFromWS("mainmooc/saveArticle.template", paras, obj, processResult);
+    }
+
+    function ifTrabelInfoByColumnId(id){
+        var paras = "columnId=" + id;
+        paras += "$^@^$operation=ifTravelInfoColumn";
+        var obj = new Array();
+        var processResult = function(){
+            if(obj[0] == "yes"){
+                $("#travelInfo").css("display","block");
+                $("#bufferIfTravelInfo").val("yes");
+            }else{
+                $("#travelInfo").css("display","none");
+                $("#bufferIfTravelInfo").val("no");
+            }
+
+        }
+        getFromWS("mainmooc/travelInfo.template",paras,obj,processResult);
+    }
+</script>
+<div style="display:none">
+    <input type="text" value="0" id="bufferArticleId">
+    <input type="text" value="no" id="bufferIfTravelInfo">
+</div>
+<div class="page-container">
+    <div class="sidebar-menu toggle-others fixed">
+        <div class="sidebar-menu-inner">
+            <header class="logo-env">
+                <div class="logo">
+                    <a href="articleManagement.html" class="logo-expanded">
+                        <img src="assets/images/logo@2x.png" width="80" alt=""/></a>
+                    <a href="articleManagement.html" class="logo-collapsed">
+                        <img src="assets/images/logo-collapsed@2x.png" width="40" alt=""/></a>
+                </div>
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa-bell-o"></i>
+                        <span class="badge badge-success">7</span></a>
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+            <ul id="main-menu" class="main-menu">
+
+            </ul>
+        </div>
+    </div>
+    <div class="main-content">
+        <!-- User Info, Notifications and Menu Bar -->
+        <nav class="navbar user-info-navbar" role="navigation">
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <a href="#" data-toggle="sidebar" title="武汉大学出版社">
+                    <img src="images/logo.png" width="170" alt="武汉大学出版社" />
+                </a>
+            </ul>
+
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+                <li class="dropdown user-profile">
+                    <a href="#" data-toggle="dropdown">
+                        <img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32"
+                             width="28"/>
+                        <span id="loginName"></span></a>
+                </li>
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="fa-power-off" style="color:red;font-size:18px;"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+        <div class="page-title">
+            <div class="title-env">
+                <h1 class="title">课程管理</h1>
+                <!--<p class="description">management of article</p>--></div>
+            <div class="breadcrumb-env">
+                <ol class="breadcrumb bc-1">
+                    <li>
+                        <a href="articleManagement.html">
+                            <i class="fa-home">首页</i></a>
+                    </li>
+                    <li class="active">
+                        <strong>课程管理</strong></li>
+                </ol>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">资源管理</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h4 style="margin-top:20px;margin-bottom: 20px;">
+                            <span style="color:#000">文件列表</span>
+                        </h4>
+                        <div class="widget-box">
+                            <div class="widget-header header-color-green2">
+                                <h4 class="lighter smaller">Browse Files</h4>
+                            </div>
+                            <div class="widget-body">
+                                <div class="widget-main padding-8">
+                                    <div id="tree2" class="tree tree-unselectable">
+                                        <div class="tree-folder" style="display:none;">
+                                            <div class="tree-folder-header">
+                                                <i class="icon-folder-close"></i>
+                                                <div class="tree-folder-name"></div>
+                                            </div>
+                                            <div class="tree-folder-content"></div>
+                                            <div class="tree-loader" style="display: none;">
+                                            </div>
+                                        </div>
+                                        <div class="tree-item" style="display:none;">
+                                            <div class="tree-item-name"></div>
+                                        </div>
+                                        <div class="tree-folder" style="display: block;">
+                                            <div class="tree-folder-header">
+                                                <i class="icon-folder-close "></i>
+                                                <div class="tree-folder-name">Documents</div>
+                                            </div>
+                                            <div class="tree-folder-content"></div>
+                                            <div class="tree-loader" style="display: none;">
+                                                <div class="tree-loading">
+                                                    <i class="icon-refresh icon-spin "></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tree-item" style="display: block;">
+                                            <div class="tree-item-name">
+                                                <i class="icon-file-text "></i> ReadMe.txt</div>
+                                        </div>
+                                        <div class="tree-item" style="display: block;">
+                                            <div class="tree-item-name">
+                                                <i class="icon-book green"></i> Manual.html
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="panel-heading">
+                            <h4 style="margin-bottom:20px;">
+                                <span style="color:#000">文件浏览</span>
+                            </h4>
+                            <div>
+                <span>
+                  <button type="button" class="btn btn-default">
+                    <span class="">图片</span>
+                  </button>
+                  <button type="button" class="btn btn-default">
+                    <span class="">视频</span>
+                  </button>
+                  <button type="button" class="btn btn-default">
+                    <span class="">音频</span>
+                  </button>
+                  <button type="button" class="btn btn-default">
+                    <span class="">文件</span>
+                  </button>
+                  <form class="navbar-form navbar-right" role="search" style="margin-top: 0">
+                    <div class="form-group">
+                      <input type="text" class="form-control" />
+                    </div>
+                    <button type="text" class="btn btn-default">搜索</button>
+                  </form>
+                </span>
+                                <div style="margin-top:20px">
+                                    <span style="font-size: 19px">当前目录：/</span>
+                                    <div style="margin-left: 500px;display: inline;">
+                                        <button type="button" class="btn btn-default">
+                                            <span class="glyphicon glyphicon-arrow-up">上传</span>
+                                        </button>
+                                        <button type="button" class="btn btn-default">
+                                            <span class="">新建文件夹</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered table-striped" id="example-2">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-sorting">
+                                            <input type="checkbox" class="cbr">
+                                        </th>
+                                        <th>文件名</th>
+                                        <th>类型</th>
+                                        <th>操作</th>
+                                        <th>上传人</th>
+                                        <th>时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td> <input type="checkbox" class=""/> </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-folder-close">视频</span>
+                                            </button>
+                                        </td>
+                                        <td>txt</td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-eye-open">预览</span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-download-alt">下载</span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-trash"></span>删除
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
+                                            </button>
+                                        </td>
+                                        <td>管理员</td>
+                                        <td>2018/7/16</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="checkbox" class=""/></td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-folder-close">视频</span>
+                                            </button>
+                                        </td>
+                                        <td> audio </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-eye-open">预览</span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-download-alt">下载</span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-trash"></span>删除
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
+                                            </button>
+                                        </td>
+                                        <td>管理员</td>
+                                        <td>2018/7/15</td>
+                                    </tr>
+                                    <tr>
+                                        <td> <input type="checkbox" class=""/> </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-folder-close">视频</span>
+                                            </button>
+                                        </td>
+                                        <td> audio </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-eye-open">预览</span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-download-alt">下载</span>
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-trash"></span>删除
+                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm">
+                                                <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
+                                            </button>
+                                        </td>
+                                        <td> 管理员 </td>
+                                        <td> 2018/7/15 </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" align="center">
+                                            <ul class="pagination">
+                                                <li><a href="#">&laquo;</a></li>
+                                                <li><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">&raquo;</a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="main-footer sticky footer-type-1">
+                <div class="footer-inner">
+                    <div class="footer-text">&copy; 2017
+                        <strong>MOOC服务</strong>
+                        <a href="#" target="_blank">MOOC管理系统</a>- Collect from
+                        <a href="#" title="国家网络安全学院" target="_blank">国家网络安全学院</a></div>
+                    <div class="go-up">
+                        <a href="#" rel="go-top">
+                            <i class="fa-angle-up"></i>
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<!--[if !IE]> -->
+<script src="resourceManagement/tree_files/jquery-2.0.3.min.js"></script>
+<!-- <![endif]-->
+<script src="resourceManagement/tree_files/bootstrap.min.js"></script>
+<!-- page specific plugin scripts -->
+<script src="resourceManagement/tree_files/fuelux.tree-sampledata.js"></script>
+<script src="resourceManagement/tree_files/fuelux.tree.min.js"></script>
+<!-- ace scripts -->
+<script src="resourceManagement/tree_files/ace-elements.min.js"></script>
+<script src="resourceManagement/tree_files/ace.min.js"></script>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+    jQuery(function($){
+        $('#tree2').ace_tree({
+            dataSource: treeDataSource2 ,
+            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin green"></i></div>',
+            'open-icon' : 'icon-folder-open',
+            'close-icon' : 'icon-folder-close',
+            'selectable' : false,
+            'selected-icon' : null,
+            'unselected-icon' : null
+        });
+    });
+</script>
+<!-- Imported styles on this page -->
+<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
+<link rel="stylesheet" href="assets/css/bootstrap-treeview.css">
+<script src="assets/js/bootstrap-treeview.min.js"></script>
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+<!-- Imported scripts on this page -->
+<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
+</body>
+
+</html>

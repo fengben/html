@@ -232,7 +232,7 @@ EndIf
                         </section>
                         <section class="u-face-t-link">
                             <a href="javascript:void(0)"
-                               onclick="dialogFun(&quot;发私信&quot;,&quot;雷欧斯&quot;,3,&quot;3&quot;);"
+                               onclick="showletter();"
                                title="发消息" class="cBtn">发消息</a>
                             <a href="javascript:void(0)" onclick="toBrowseUserCenter(3)"
                                title="Ta的主页" class="cBtn">Ta的主页</a>
@@ -333,3 +333,56 @@ EndIf
     </aside>
     <div class="clear"></div>
 </section>
+
+$_@_$
+<%
+debugMsg("-------------22------------"#:id)
+:sql="select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,to_char(publish_time,'yyyy-mm-dd hh24:mi') as publish_time,nickname,head_portrait,city,sex from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where moocpost.id=?"
+:x=changeRecordSet(:sql,L(:id))
+%>
+                <div class="clearfix">
+                    <section class="fl u-acc-l">
+                        收件人：<div><%=author%></div>
+                        <br/><br/><br/>
+                        消息内容：
+                    </section>
+                    <br/><br/><br/><br/><br/><br/>
+                    <div class="commentHtml">
+                        <div>
+                            <section class="lh-bj-list pr replyhtml">
+                                <ul>
+                                    <li class="unBr">
+                                        <div class="of">
+                                            <section class="n-reply-wrap">
+                                                <div class="numb-box">
+                                                    <fieldset><textarea name="" placeholder="输入您要发送的消息"
+                                                                        id="messageContent" style="width: 675px;height: 150px;"></textarea>
+                                                    </fieldset>
+                                                </div>
+                                                <p class="of mt5 tar pl10 pr10">
+                                                                    <span class="fl ">
+                                                                        <tt
+                                                                                class="c-red commentContentmeg"
+                                                                                style="display: none;"></tt></span>
+                                                    <a href="javascript:void(0);" title="发送" onclick="sendMessage()" class="cBtn cb-send">发送</a>
+                                                </p>
+                                            </section>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </section>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+$_@_$
+<%
+debugMsg("-------------22------------"#:id)
+:sql="select moocpost.id as id,mooc_userprofile.id as uid,title,author,publish_data,body,view_num,comments,likes,is_top,is_hot,is_essence,to_char(publish_time,'yyyy-mm-dd hh24:mi') as publish_time,nickname,head_portrait,city,sex from moocpost INNER JOIN mooc_userprofile on moocpost.author = mooc_userprofile.email where moocpost.id=?"
+:x=changeRecordSet(:sql,L(:id))
+%>
+<%=author%>

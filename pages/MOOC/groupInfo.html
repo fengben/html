@@ -51,6 +51,8 @@
 
             function showPostsDetail() {
                 $("#postDetail").html(postArray[0]);
+                $("#Sendletter").html(postArray[1]);
+                receiver=postArray[2];
             }
 
             paras = "id=" + urlid;
@@ -65,6 +67,40 @@
                 $("#comments").html(commentArray[0]);
             }
             getFromWS("frontmooc/getComments.template", paras, commentArray, phraseComments);
+        }
+
+
+        function sendMessage(){
+            var loginName = localStorage.getItem("loginName");
+            // var id = getUrlString("id");
+            var message = $('#messageContent').val();
+            var receiver_ = receiver;
+            /* var receiver = document.getElementById('#receiver').innerText;
+             alert(receiver);*/
+
+            var paras = "sender=" + loginName;
+            paras += "$^@^$message=" + message;
+            paras += "$^@^$receiver=" + receiver_;
+ 
+
+            if (!message ) {
+                alert("发送内容不能为空");
+                return;
+            }
+            var objs = new Array();
+            var afterSaveResult = function () {
+                if (objs == "ok") {
+                    alert("发送成功");
+                    var body = $('#messageContent').val("");
+                }
+                else {
+                    alert("发送失败");
+                    return;
+                }
+            }
+            getFromWS("frontmooc/sendMessageContent.template", paras, objs, afterSaveResult);
+
+
         }
 
     </script>
@@ -333,6 +369,58 @@
             </script>
         </div>
     </div>
+
+    <div id="light" class="white_content" style="display: none; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; padding: 16px;  background-color: white; z-index:1002; overflow: auto;">
+        <div style="text-align: right; cursor: default; height: 40px;">
+            <span style="font-size: 16px;" onclick="closeletter()" >×</span>
+        </div>
+        <div class="u-r-all-box" id="p_tCont">
+            <!--发送信息，开始-->
+            <div class="u-account-box" id="Sendletter">
+                <!--<div class="clearfix">-->
+                    <!--<section class="fl u-acc-l">-->
+                        <!--收件人：<div id="receiver"></div>-->
+                        <!--<br/><br/><br/>-->
+                        <!--消息内容：-->
+                    <!--</section>-->
+                    <!--<br/><br/><br/><br/><br/><br/>-->
+                    <!--<div class="commentHtml">-->
+                        <!--<div>-->
+                            <!--<section class="lh-bj-list pr replyhtml">-->
+                                <!--<ul>-->
+                                    <!--<li class="unBr">-->
+                                        <!--<div class="of">-->
+                                            <!--<section class="n-reply-wrap">-->
+                                                <!--<div class="numb-box">-->
+                                                    <!--<fieldset><textarea name="" placeholder="输入您要发送的消息"-->
+                                                                        <!--id="messageContent" style="width: 835px;height: 200px;"></textarea>-->
+                                                    <!--</fieldset>-->
+                                                <!--</div>-->
+                                                <!--<p class="of mt5 tar pl10 pr10">-->
+                                                                    <!--<span class="fl ">-->
+                                                                        <!--<tt-->
+                                                                                <!--class="c-red commentContentmeg"-->
+                                                                                <!--style="display: none;"></tt></span>-->
+                                                    <!--<a href="javascript:void(0);" title="发送" onclick="sendMessage()" class="cBtn cb-send">发送</a>-->
+                                                <!--</p>-->
+                                            <!--</section>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</section>-->
+
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+
+                <!--</div>-->
+            </div>
+        </div>
+
+    </div>
+    <div id="fade" class="black_overlay" style="display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.6; opacity:.60; filter: alpha(opacity=60);" >
+    </div>
 </div>
 <div class="mo-footer">
     <footer id="footer">
@@ -423,7 +511,14 @@
                 getFromWS("frontmooc/saveComment.template", paras, resultArry, phraseResut);
             }
         }
-
+        function showletter(){
+            document.getElementById('light').style.display='block';
+            document.getElementById('fade').style.display='block'
+        }
+        function closeletter(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none'
+        }
     </script>
 </div>
 </body>

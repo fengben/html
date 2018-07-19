@@ -1,0 +1,40 @@
+<%
+    ///测试数据较少,一次性读出
+    :sql =  "SELECT id,x_axis,y_axis FROM echart"
+    :x = changeRecordSet(:sql)
+
+    debugMsg("================="#:x)
+    ///将XAxis ,YAxis 加入数组
+    If recordCount()>0
+        :i=0
+        Repeat
+            :x_data[:i] = x_axis
+            :y_data[:i] = y_axis
+            debugMsg("-------------------"#:x_data[:i]#"---"#:y_data[:i])
+            :i = :i + 1
+
+        EndRepeat
+    EndIf
+
+%>
+
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var app = {};
+    var x = new Array();
+    var y = new Array();
+    <%
+    While :i<arrayLength(&x_data)
+        %>
+        alert(<%:x_data[:i]%>);
+        <%
+        :i = :i + 1
+	EndWhile
+    %>
+    <%While :i<arrayLength(&x_data)%>
+		111
+		<%:i = :i+1%>
+	<%EndWhile%>
+
+    alert(x)
+</script>

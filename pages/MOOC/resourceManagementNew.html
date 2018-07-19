@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>资源库布局</title>
+  <script src="resourceManagement/js/jquery-1.11.1.min.js"></script>
+  <script src="resourceManagement/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="resourceManagement/tree_files/font-awesome.min.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
+  <link rel="stylesheet" href="resourceManagement/tree_files/ace.css">
+  <link rel="stylesheet" href="resourceManagement/css/bootstrap.css">
+</head>
+<body>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">资源管理</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-3">
+            <h4 style="margin-top:20px;margin-bottom: 20px;">
+              <span style="color:#000">文件列表</span>
+            </h4>
+            <div class="widget-box">
+              <div class="widget-header header-color-green2">
+                <h4 class="lighter smaller">Browse Files</h4>
+              </div>
+              <div class="widget-body">
+                <div class="widget-main padding-8">
+                  <div id="tree2" class="tree tree-unselectable">
+                    <div class="tree-folder" style="display:none;">
+                      <div class="tree-folder-header">
+                        <i class="icon-folder-close"></i>
+                        <div class="tree-folder-name"></div>
+                      </div>
+                      <div class="tree-folder-content"></div>
+                      <div class="tree-loader" style="display: none;">
+                      </div>
+                    </div>
+                    <div class="tree-item" style="display:none;">
+                      <div class="tree-item-name"></div>
+                    </div>
+                    <div class="tree-folder" style="display: block;">
+                      <div class="tree-folder-header">
+                        <i class="icon-folder-close "></i>
+                        <div class="tree-folder-name">Documents</div>
+                      </div>
+                      <div class="tree-folder-content"></div>
+                      <div class="tree-loader" style="display: none;">
+                        <div class="tree-loading">
+                          <i class="icon-refresh icon-spin "></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tree-item" style="display: block;">
+                      <div class="tree-item-name">
+                        <i class="icon-file-text "></i> ReadMe.txt</div>
+                    </div>
+                    <div class="tree-item" style="display: block;">
+                      <div class="tree-item-name">
+                        <i class="icon-book green"></i> Manual.html
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <div class="panel-heading">
+              <h4 style="margin-bottom:20px;">
+                <span style="color:#000">文件浏览</span>
+              </h4>
+              <div>
+                <span>
+                  <button type="button" class="btn btn-default">
+                    <span class="">图片</span>
+                  </button> 
+                  <button type="button" class="btn btn-default">
+                    <span class="">视频</span>
+                  </button> 
+                  <button type="button" class="btn btn-default">
+                    <span class="">音频</span>
+                  </button>
+                  <button type="button" class="btn btn-default">
+                    <span class="">文件</span>
+                  </button>
+                  <form class="navbar-form navbar-right" role="search" style="margin-top: 0">
+                    <div class="form-group">
+                      <input type="text" class="form-control" />
+                    </div>
+                    <button type="text" class="btn btn-default">搜索</button>
+                  </form>
+                </span>
+                <div style="margin-top:20px">
+                  <span style="font-size: 19px">当前目录：/</span>
+                  <div style="margin-left: 500px;display: inline;">
+                    <button type="button" class="btn btn-default">
+                      <span class="glyphicon glyphicon-arrow-up">上传</span>
+                    </button>
+                    <button type="button" class="btn btn-default">
+                      <span class="">新建文件夹</span>
+                    </button> 
+                  </div>
+                </div>
+              </div>
+              <div class="panel-body">
+                <table class="table table-bordered table-striped" id="example-2">
+                  <thead>
+                    <tr>
+                      <th class="no-sorting">
+                        <input type="checkbox" class="cbr">
+                      </th>
+                      <th>文件名</th>
+                      <th>类型</th>
+                      <th>操作</th>
+                      <th>上传人</th>
+                      <th>时间</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td> <input type="checkbox" class=""/> </td>
+                      <td> 
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-folder-close">视频</span>
+                        </button>
+                      </td>
+                      <td>txt</td>
+                      <td>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-eye-open">预览</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-download-alt">下载</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-trash"></span>删除
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
+                        </button>
+                      </td>
+                      <td>管理员</td>
+                      <td>2018/7/16</td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" class=""/></td>
+                      <td>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-folder-close">视频</span>
+                        </button>
+                      </td>
+                      <td> audio </td>
+                      <td> 
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-eye-open">预览</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-download-alt">下载</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-trash"></span>删除
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
+                        </button>
+                      </td>
+                      <td>管理员</td>
+                      <td>2018/7/15</td>
+                    </tr>
+                    <tr>
+                      <td> <input type="checkbox" class=""/> </td>
+                      <td>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-folder-close">视频</span>
+                        </button>
+                      </td>
+                      <td> audio </td>
+                      <td>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-eye-open">预览</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-download-alt">下载</span>
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-trash"></span>删除
+                        </button>
+                        <button type="button" class="btn btn-default btn-sm">
+                          <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
+                        </button>
+                      </td>
+                      <td> 管理员 </td>
+                      <td> 2018/7/15 </td>
+                    </tr>
+                    <tr>
+                      <td colspan="5" align="center">
+                        <ul class="pagination">
+                          <li><a href="#">&laquo;</a></li>
+                          <li><a href="#">1</a></li>
+                          <li><a href="#">2</a></li>
+                          <li><a href="#">3</a></li>
+                          <li><a href="#">4</a></li>
+                          <li><a href="#">5</a></li>
+                          <li><a href="#">&raquo;</a></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="main-footer sticky footer-type-1">
+        <div class="footer-inner">
+          <div class="footer-text">&copy; 2017
+            <strong>MOOC服务</strong>
+            <a href="#" target="_blank">MOOC管理系统</a>- Collect from
+            <a href="#" title="国家网络安全学院" target="_blank">国家网络安全学院</a></div>
+          <div class="go-up">
+            <a href="#" rel="go-top">
+              <i class="fa-angle-up"></i>
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+    <!--[if !IE]> -->
+<script src="resourceManagement/tree_files/jquery-2.0.3.min.js"></script>
+<!-- <![endif]-->
+<script src="resourceManagement/tree_files/bootstrap.min.js"></script>
+<!-- page specific plugin scripts -->
+<script src="resourceManagement/tree_files/fuelux.tree-sampledata.js"></script>
+<script src="resourceManagement/tree_files/fuelux.tree.min.js"></script>
+<!-- ace scripts -->
+<script src="resourceManagement/tree_files/ace-elements.min.js"></script>
+<script src="resourceManagement/tree_files/ace.min.js"></script>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+jQuery(function($){
+    $('#tree2').ace_tree({
+        dataSource: treeDataSource2 ,
+        loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin green"></i></div>',
+        'open-icon' : 'icon-folder-open',
+        'close-icon' : 'icon-folder-close',
+        'selectable' : false,
+        'selected-icon' : null,
+        'unselected-icon' : null
+    });
+});
+</script>
+</body>
+</html>

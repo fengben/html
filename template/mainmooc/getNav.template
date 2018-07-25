@@ -54,6 +54,14 @@
 		    </a>
 		</li>
     </ul>
+
+    	<ul id="loginManager">
+    		<li>
+    		 	<a href="loginManager.html" id="a_loginManager">
+    			<span class="title">日志管理</span>
+    			</a>
+    		</li>
+    </ul>
 </li>
 <li>
     <a href="resourceManagement.html" id="a_resourceManagement">

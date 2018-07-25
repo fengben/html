@@ -54,6 +54,10 @@
     function keepActive(){
         $("#a_pictureManagement").parent().addClass('active');
     }
+    //日志记录
+    function log() {
+        loadFromWS("home/bottomscripts.template", "sid=" + loginName + "$^@^$session=" + getAllSessionItems() + "$^@^$path=" + window.location.pathname);
+    }
 	jQuery(document).ready(function($) {
 		var userName = localStorage.getItem("loginName");
 		$(".user-info-menu #loginName").html(userName);
@@ -63,6 +67,7 @@
         var htmlResult = function(){
             $("#main-menu").append(html[0]);
             keepActive();
+            log();
         }
         getFromWS("mainmooc/getNav.template","classification="+classification +"$^@^$loginName="+loginName, html, htmlResult);
 

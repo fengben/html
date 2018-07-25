@@ -44,6 +44,51 @@
         }
     
 	</script>
+<script>
+
+    function checkImg(filename){
+
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".bmp"||fileType==".png"||fileType==".gif"||fileType==".jpg"||fileType==".jpeg"){  //根据后缀，判断是否符合图片格式
+            return true;
+        }
+        return false;
+    }
+    function checkPdf(filename){
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".pdf"){  //根据后缀，判断是否符合图片格式
+            return true;
+        }
+        return false;
+    }
+    function checkPpt(filename){
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".pptx"||fileType==".ppt"){  //根据后缀，判断是否符合图片格式
+            return true;
+        }
+        return false;
+    }
+    function checkWord(filename){
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".txt"||fileType==".doc"||fileType==".docx"||fileType==".rtf"||fileType=="wps"){  //根据后缀，判断是否符合图片格式
+            return true;
+        }
+        alert(hemm);
+        return false;
+    }
+    function checkTv(filename){
+        var index = filename.lastIndexOf("."); //得到"."在第几位
+        var fileType = filename.substring(index); //截断"."之前的，得到后缀
+        if(fileType==".mp4"||fileType==".avi"||fileType==".war"||fileType==".mov"||fileType==".flv"||fileType==".asf"||fileType==".rmvb"){ //根据后缀，判断是否符合视频格式
+            return true;
+        }
+        return false;
+    }
+</script>
 
 	<script>
 		//防止未登录直接输入网址访问该网页
@@ -142,6 +187,52 @@
 		var login_name=loginName;
 		getFromWS("mainmooc/getUserInfo.template", "operation=getUserInfo$^@^$loginNname="+login_name, userInfoArray, userInfoResult);
 
+        function viewFileB(fileId,fileName){
+			alert("in viewFile");
+            if(checkImg(fileName)){
+                var html = '<center><img width="550" height="400" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'"></center>';
+                $("#viewbox").html(html);
+                hiBox('#viewbox',fileName,650,500,'');
+            }else if(checkTv(fileName)){
+                var html = '<center><video src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'"  controls="true" width="550" height="400" autoplay="autoplay"/></center>';
+                $("#viewbox").html(html);
+                hiBox('#viewbox',fileName,650,500,'');
+            }else if(checkWord(fileName)){
+                alert('hello');
+                var request=null;
+                if(window.XMLHttpRequest){request=new XMLHttpRequest();}else if(window.ActiveXObject){request=new ActiveXObject("Microsoft.XMLHTTP");}
+                if(request){
+                    request.open("GET","/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=fileId",true);
+                    request.overrideMimeType("text/html;charset=gb2312");//设定以gb2312编码识别数据
+                    request.onreadystatechange=function(){
+                        if(request.readyState===4){
+                            if (request.status == 200 || request.status == 0){
+                                //var reader = new FileReader();
+                                alert(request.responseText);
+                                $("#viewbox").html(request.responseText);
+                                hiBox('#viewbox',fileName,650,500,'');
+                            }
+                        }
+                    }
+                    request.send(null);
+                }else{
+                    alert("error");
+                }
+            }else if(checkPdf(fileName)){
+                var html = '<center><object data="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" width="550" height="400"/></center>';
+                $("#viewbox").html(html);
+                hiBox('#viewbox',fileName,650,500,'');
+
+            }else if(checkPpt(fileName)){
+                var html = '<center><object data="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid='+fileId+'" width="550" height="400"/></center>';
+                $("#viewbox").html(html);
+                hiBox('#viewbox',fileName,650,500,'');
+            }
+            else{
+                alert("格式不支持预览");
+            }
+
+        }
 	});
 </script>
 	<div class="page-container">

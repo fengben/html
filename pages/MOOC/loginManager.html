@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Xenon Boostrap Admin Panel"/>
+    <meta name="author" content=""/>
+    <script>
+        //防止非超级管理员用户直接输入网址访问该网页
+        var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
+        var classification = localStorage.getItem('classification');
+        var loginName = localStorage.getItem('loginName');
+        if(!userId || !userToken || !classification || !loginName ||classification != 1){
+
+            location.href="articleManagement.html";
+        }
+
+
+    </script>
+    <title>mooc后台管理</title>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+    <link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/>
+    <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="assets/css/bootstrap.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-core.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-forms.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-components.css"/>
+    <link rel="stylesheet" href="assets/css/xenon-skins.css"/>
+    <link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
+    <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css" />
+
+    <script src="assets/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" src="/scripts/uploadfile.js"></script>
+    <script type="text/javascript" src="/scripts/htmleditor/kindeditor.js"></script>
+    <script type="text/javascript" src="/scripts/htmleditor/lang/zh_CN.js"></script>
+</head>
+<script>
+    jQuery(document).ready(function ($) {
+        var html = new Array();
+        var htmlResult = function(){
+            $("#main-menu").append(html[0]);
+            keepActive();
+            log();
+        }
+        getFromWS("mainmooc/getNav.template","classification="+classification, html, htmlResult);
+
+        //管理员名称显示
+        $(".user-info-menu #loginName").html(loginName);
+
+        //保持左侧栏目常亮
+        function keepActive(){
+            $("#a_articleManagement").parent().addClass('active');
+        }
+
+        //log日志
+        function log() {
+                 loadFromWS("home/bottomscripts.template", "sid=" + loginName + "$^@^$session=" + getAllSessionItems() + "$^@^$path=" + window.location.pathname);
+             }
+    })
+</script>
+<body class="page-body">
+
+
+
+<div class="page-container">
+    <div class="sidebar-menu toggle-others fixed">
+        <div class="sidebar-menu-inner">
+            <header class="logo-env">
+                <div class="logo">
+                    <a href="#" class="logo-expanded">
+                        <img src="assets/images/logo@2x.png" width="80" alt="" />
+                    </a>
+                    <a href="#" class="logo-collapsed">
+                        <img src="assets/images/logo-collapsed@2x.png" width="40" alt="" />
+                    </a>
+                </div>
+
+                <div class="mobile-menu-toggle visible-xs">
+                    <a href="#" data-toggle="user-info-menu">
+                        <i class="fa-bell-o"></i>
+                        <span class="badge badge-success">7</span>
+                    </a>
+
+                    <a href="#" data-toggle="mobile-menu">
+                        <i class="fa-bars"></i>
+                    </a>
+                </div>
+            </header>
+
+            <ul id="main-menu" class="main-menu">
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="main-content">
+        <!--相应的顶部导航区相应的内容-->
+        <nav class="navbar user-info-navbar" role="navigation">
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <li class="hidden-sm hidden-xs">
+                    <a href="#" data-toggle="sidebar">
+                        <i class="fa-bars"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="user-info-menu left-links list-inline list-unstyled">
+                <a href="#" data-toggle="sidebar" title="武汉大学出版社">
+                    <img src="images/logo.png" width="170" alt="武汉大学出版社"/>
+                </a>
+            </ul>
+
+            <ul class="user-info-menu right-links list-inline list-unstyled">
+                <li class="dropdown user-profile">
+                    <a href="#" data-toggle="dropdown">
+                        <img src="assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32"
+                             width="28"/>
+                        <span id="loginName"></span></a>
+                </li>
+                <li>
+                    <a href="#" onclick="logout()">
+                        <i class="fa-power-off" style="color:red;font-size:18px;"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+        <div class="page-title">
+
+            <div class="title-env">
+                <h1 class="title">日志管理</h1>
+            </div>
+
+            <div class="breadcrumb-env">
+
+                <ol class="breadcrumb bc-1">
+                    <li>
+                        <a href="articleManagement.html"><i class="fa-home"></i>首页</a>
+                    </li>
+                    <li>
+
+                        <a href="#">系统管理</a>
+                    </li>
+                    <li class="active">
+
+                        <strong>日志管理</strong>
+                    </li>
+                </ol>
+
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">日志列表</h3>
+
+
+            </div>
+            <div class="panel-body">
+                <style type="text/css">
+                    .month._select {
+                        background-color: #eee;
+                    }
+                </style>
+                <div class="panel-heading">
+
+                    <a href="javascript:void(0);" class="btn btn-danger btn-icon btn-icon-standalone" style="margin-left:0">
+                        <i class="fa-trash-o" style="font-size:17px"></i>
+                        <span onclick="jQuery('#deleteAllModal').modal('show', {backdrop: 'static'});">清空日志</span>
+
+
+                    </a>
+
+                    <div class="panel-options">
+
+                        <button class="btn btn-white month _select" onclick="allMonth();">查看全部</button><button class="btn btn-white month" onclick="lastMonth();">查看上月</button><button class="btn btn-white month" onclick="thisMonth();">查看本月</button>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    jQuery(document).ready(function($)
+                    {
+                        $("#example-2").dataTable({
+
+                            aoColumns: [
+                                {bSortable: false},
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                null
+                            ],
+                        });
+
+                        $(".month").click(function(){
+                            $(".month._select").removeClass("_select");
+                            $(this).addClass("_select");
+                        });
+
+                        var deleteAllModal = $("#deleteAllModal");
+                        deleteAllModal.on("show.bs.modal", function(e) {
+
+                            $("#removeAllItem").on('click', function(){
+                                $('#deleteAllModal').modal('hide');
+                                var result = new Array();
+                                var callback=function(){
+                                    var opts = {
+                                        "closeButton": true,
+                                        "debug": false,
+                                        "positionClass": "toast-bottom-right",
+                                        "onclick": null,
+                                        "showDuration": "300",
+                                        "hideDuration": "1000",
+                                        "timeOut": "5000",
+                                        "extendedTimeOut": "1000",
+                                        "showEasing": "swing",
+                                        "hideEasing": "linear",
+                                        "showMethod": "fadeIn",
+                                        "hideMethod": "fadeOut"
+                                    };
+                                    if (result[0] == "ok") {
+                                        toastr.success("清空成功", "", opts);
+                                        allMonth();
+                                    }
+                                    else{
+                                        toastr.error("清空失败", "检查您的登录是否超时", opts);
+                                    }
+
+                                }
+                                getFromWS("loginManager/login_delete.template","path=all", result,callback);
+                            });
+
+                        })
+
+                    });
+                </script>
+
+
+                <script>
+                    var obj= new Array();
+                    var data = [];
+                    //获取时间
+                    var now_date=new Date();
+                    var nextDate=new Date(now_date);
+                    nextDate.setDate(now_date.getDate()+1);
+
+
+                    function thisMonth(){
+
+                        var now_year=now_date.getFullYear();
+                        var now_month=now_date.getMonth()+1;
+                        var now_day=now_date.getDate();
+
+                        var next_year=nextDate.getFullYear();
+                        var next_month=nextDate.getMonth()+1;
+                        var next_day=nextDate.getDate();
+
+                        myDate=next_year+"-"+next_month+"-"+next_day;//以2018-3-31为例，应查出小于2018-4-1 0：0：0分的时间内的记录
+                        mypreDate=now_year+"-"+now_month+"-"+"1";
+
+
+                        var paras="";
+                        paras+="loginName="+sessionStorage.getItem('loginName');
+                        paras+="$^@^$userToken="+sessionStorage.getItem('userToken');
+                        paras+= "$^@^$userId="+sessionStorage.getItem('userId');
+                        paras+= "$^@^$StartDate="+mypreDate;
+                        paras+= "$^@^$EndDate="+myDate;
+
+
+
+                        loadFromWS("loginManager/login_info.template",paras,"info_content");
+
+
+                    }
+
+                    function lastMonth(){
+                        var now_year=now_date.getFullYear();
+                        var now_month=now_date.getMonth()+1;
+                        var now_day=now_date.getDate();
+
+                        var last_year;
+                        var last_month;
+                        if(now_month==1){
+                            last_year=now_year-1;
+                            last_month=12;
+                        }else{
+                            last_year=now_year;
+                            last_month=now_month-1;
+
+                        }
+                        mypreDate=last_year+"-"+last_month+"-"+"1";//以2018-1-29为例，上个月的记录应查询2017-12-1至2018-1-1
+                        myDate=now_year+"-"+now_month+"-"+"1";
+
+                        var paras="";
+                        paras+="loginName="+sessionStorage.getItem('loginName');
+                        paras+="$^@^$userToken="+sessionStorage.getItem('userToken');
+                        paras+= "$^@^$userId="+sessionStorage.getItem('userId');
+                        paras+= "$^@^$StartDate="+mypreDate;
+                        paras+= "$^@^$EndDate="+myDate;
+
+                        loadFromWS("loginManager/login_info.template",paras,"info_content");
+
+                    }
+
+
+
+                    function allMonth(){
+
+                        var paras="";
+                        paras+="loginName="+sessionStorage.getItem('loginName');
+                        paras+="$^@^$userToken="+sessionStorage.getItem('userToken');
+                        paras+= "$^@^$userId="+sessionStorage.getItem('userId');
+                        paras+= "$^@^$op="+"all";
+
+                        loadFromWS("loginManager/login_info.template",paras,"info_content");
+                    }
+
+                    $(document).ready(function(){
+                        allMonth();
+
+
+                    });
+
+                </script>
+
+                <style type="text/css">
+                    #info_content .dataTables_wrapper {
+                        position: relative;
+                        clear: both;
+                        zoom: 1;
+                        /*overflow-x: auto; */
+                    }
+                    #info_content table{min-width: 800px;}
+                    table td{word-break:break-all;}
+                    table  {table-layout:fixed；}
+                </style>
+                <div class="panel-body" id="info_content">
+
+                </div>
+
+            </div>
+        </div>
+
+
+        <footer class="main-footer sticky footer-type-1">
+
+            <div class="footer-inner">
+
+                <div class="footer-text">&copy; 2017
+                    <strong>MOOC服务</strong>
+                    <a href="#" target="_blank">MOOC管理系统</a>- Collect from
+                    <a href="#" title="国家网络安全学院" target="_blank">国家网络安全学院</a></div>
+
+
+                <div class="go-up">
+
+                    <a href="#" rel="go-top">
+                        <i class="fa-angle-up"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </footer>
+
+
+
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="deleteAllModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header noborder">
+
+                <h4 class="modal-title">确定清空记录？</h4>
+            </div>
+
+
+
+            <div class="modal-footer noborder">
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-info" style="margin-left:40px" id="removeAllItem">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<!-- Imported styles on this page -->
+<link rel="stylesheet" href="/assets/js/datatables/dataTables.bootstrap.css">
+
+
+
+<div class="bottom-script-inner" id="bottom-script-inner">
+</div>
+<!-- Imported styles on this page -->
+<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
+<link rel="stylesheet" href="assets/css/bootstrap-treeview.css">
+<script src="assets/js/bootstrap-treeview.min.js"></script>
+<!-- Bottom Scripts -->
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/TweenMax.min.js"></script>
+<script src="assets/js/resizeable.js"></script>
+<script src="assets/js/joinable.js"></script>
+<script src="assets/js/xenon-api.js"></script>
+<script src="assets/js/xenon-toggles.js"></script>
+<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+<!-- Imported scripts on this page -->
+<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script src="assets/js/toastr/toastr.min.js"></script>
+<!-- JavaScripts initializations and stuff -->
+<script src="assets/js/xenon-custom.js"></script>
+<script>
+    function getAllSessionItems(){
+        var session = {};
+        for (var i = sessionStorage.length - 1; i >= 0; i--) {
+            if (sessionStorage.key(i) != "userId" && sessionStorage.key(i) != "userToken" && sessionStorage.key(i) != "classification" && sessionStorage.key(i) != "_departId" && sessionStorage.key(i) != "userIp" && sessionStorage.key(i) != "loginName" && sessionStorage.key(i) != "_departdetail" && sessionStorage.key(i) != "_userName") {
+                session[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
+            }
+        }
+        return JSON.stringify(session);
+    }
+    // jQuery(document).ready(function($)
+    // {
+    //
+    //     var loadBottomScripts = function(){
+    //         loadFromWS("home/bottomscripts.template","sid="+sessionStorage.getItem('loginName')+"$^@^$session="+getAllSessionItems()+"$^@^$path="+window.location.pathname,"bottom-script-inner");
+    //     };
+    //     loadFromWS("Home/leftsidemenu.template","type=系统管理$^@^$item=日志管理$^@^$loginname="+sessionStorage.getItem('loginName'),"sidebar-menu-inner",loadBottomScripts);
+    //     //加载相应的公共页头
+    //     loadFromWS("Home/topNavContent.template","name="+sessionStorage.getItem('_userName')+"$^@^$loginname="+sessionStorage.getItem('loginName'),"nav-content-inner");
+    // });
+</script>
+
+
+
+
+<script>
+
+</script>
+</body>
+</html>

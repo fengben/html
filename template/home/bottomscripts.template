@@ -1,0 +1,5 @@
+   <%debugMsg("=========1111111=====")%>
+
+<%:Sql="insert into mooc_loginlog(logid,loginname,session,time,path) values(?,?,?,now(),?)"%>
+<%:aid = tuid();%>
+<%:x=execSQL(:Sql,S(:aid),S(:sid),S(:session),S(:path))%>

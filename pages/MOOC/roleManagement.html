@@ -9,11 +9,15 @@
     <meta name="author" content=""/>
 	<script>
 		//防止非超级管理员用户直接输入网址访问该网页
-		var loginName = localStorage.getItem('loginName');
+        var userId = localStorage.getItem('userId');
+        var userToken = localStorage.getItem('userToken');
         var classification = localStorage.getItem('classification');
-		if (loginName != "admin"){
-			location.href="articleManagement.html";
-		}
+        var loginName = localStorage.getItem('loginName');
+        if(!userId || !userToken || !classification || !loginName ||classification != 1){
+
+            location.href="articleManagement.html";
+        }
+
 	</script>
     <title>mooc后台管理</title>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
@@ -56,6 +60,10 @@
         $("#roleManagement").css("display", "block");
         $("#a_roleManagement").parent().addClass('active');
     }
+    //日志记录
+    function log() {
+        loadFromWS("home/bottomscripts.template", "sid=" + loginName + "$^@^$session=" + getAllSessionItems() + "$^@^$path=" + window.location.pathname);
+    }
 
     function init(){
         $(".user-info-menu #loginName").html(localStorage.getItem("loginName"));
@@ -64,6 +72,7 @@
         var htmlResult = function(){
             $("#main-menu").append(html[0]);
             keepActive();
+            log();
         }
         getFromWS("mainmooc/getNav.template","classification="+classification +"$^@^$loginName="+loginName, html, htmlResult);
     }
@@ -439,5 +448,16 @@
     <!-- JavaScripts initializations and stuff -->
     <script src="assets/js/xenon-custom.js"></script>
 </body>
+<script>
 
+    function getAllSessionItems(){
+        var session = {};
+        for (var i = sessionStorage.length - 1; i >= 0; i--) {
+            if (sessionStorage.key(i) != "userId" && sessionStorage.key(i) != "userToken" && sessionStorage.key(i) != "classification" && sessionStorage.key(i) != "_departId" && sessionStorage.key(i) != "userIp" && sessionStorage.key(i) != "loginName" && sessionStorage.key(i) != "_departdetail" && sessionStorage.key(i) != "_userName") {
+                session[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
+            }
+        }
+        return JSON.stringify(session);
+    }
+</script>
 </html>

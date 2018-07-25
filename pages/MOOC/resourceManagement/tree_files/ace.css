@@ -423,7 +423,7 @@ blockquote,blockquote.pull-right {
 }
 
 .red {
-	color: #69aa46!important
+	color: #a52a2a!important
 }
 
 .light-red {
@@ -431,7 +431,7 @@ blockquote,blockquote.pull-right {
 }
 
 .blue {
-	color: #69aa46!important
+	color: #a52a2a!important
 }
 
 .light-blue {
@@ -439,7 +439,7 @@ blockquote,blockquote.pull-right {
 }
 
 .green {
-	color: #69aa46!important
+	color: #a52a2a!important
 }
 
 .light-green {
@@ -447,7 +447,7 @@ blockquote,blockquote.pull-right {
 }
 
 .orange {
-	color: #69aa46!important
+	color: #a52a2a!important
 }
 
 .light-orange {
@@ -463,7 +463,7 @@ blockquote,blockquote.pull-right {
 }
 
 .pink {
-	color: #69aa46!important
+	color: #a52a2a!important
 }
 
 .pink2 {
@@ -471,7 +471,6 @@ blockquote,blockquote.pull-right {
 }
 
 .brown {
-	color: #a52a2a!important
 }
 
 .grey {
@@ -7617,12 +7616,12 @@ th .lbl:only-child,td .lbl:only-child {
 }
 
 .header-color-green2 {
-	background: #2e8965;
-	border-color: #2e8965
+	background: #666666;
+	border-color: #777
 }
 
 .header-color-green2+.widget-body {
-	border-color: #2e8965
+	border-color: #777
 }
 
 .header-color-green3 {

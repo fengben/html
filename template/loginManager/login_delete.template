@@ -1,0 +1,16 @@
+<%#include "common/commonFilter.template"%>
+
+<%
+	If :path != "login"
+		:sqlstr="delete from mooc_loginlog where path!='login'"
+	Else
+		:sqlstr="delete from mooc_loginlog where path='login'"
+	EndIf
+
+	:x=singleSQL(:sqlstr)
+%>
+<%=:x%>
+
+
+
+

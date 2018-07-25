@@ -1,0 +1,107 @@
+<%#include "common/commonFilter.template"%>
+
+<table class="table table-bordered table-striped" id="example-2" >
+			<thead>
+				<tr>
+								<th>时间</th>
+								    <th>人员</th>
+								    <%If :paths=="login"%>
+								    	<th>IP</th>
+									  <%Else%>
+									  	<th style="width:450px;">参数</th>
+									   <th>Path</th>
+									  <%EndIf%>
+									
+				</tr>
+			</thead>
+<tbody class="middle-align">
+
+<%
+	If :op=="all"
+		If :paths == "login"
+			:sqlstr="select logid, time, loginname, session from mooc_loginlog where path='login' and 1=? order by time desc"
+		Else
+			:sqlstr="select logid, time, loginname, session, path from mooc_loginlog where 1=? order by time desc"
+		EndIf
+		:f=changeRecordSet(:sqlstr, 1)
+	Else
+		If :paths == "login"
+			:sqlstr="select logid, time, loginname, session from mooc_loginlog where path='login' and time<=? and time>=? order by time desc"
+		Else 
+			:sqlstr="select logid, time, loginname, session, path from mooc_loginlog where time<=? and time>=? order by time desc"
+		EndIf
+		:f=changeRecordSet(:sqlstr,S(:EndDate),S(:StartDate))
+	EndIf
+%>
+
+
+<%Repeat%>
+<%:time=replace(time, "T", " ")%>
+                              
+	  <tr id=<%=logid%>>    									
+		  <td><%=:time%></td>
+		  <td><%=loginname%></td>
+		  <td><%
+		  		:session = session
+		  		If :session == "{}"
+		  			:session = "无"
+		  		EndIf
+		  		:path = path
+		  		If :path == "login"
+		  			:session = "ip: "#:session 
+		  		EndIf
+		  %><%=:session%></td>
+		  <%If :paths=="login"%>
+		  <%Else%>
+		  <td><%=path%></td>
+		  <%EndIf%>
+	</tr>
+      							
+       	<%EndRepeat%>
+
+
+
+
+			</tbody>
+		</table>
+<script>
+jQuery(document).ready(function($){
+$("#example-2").dataTable({
+	order:[0, "desc"]
+});
+
+// Replace checkboxes when they appear
+	var $state = $("#example-2 thead input[type='checkbox']");
+
+	$("#example-2").on('draw.dt', function()
+	{
+		cbr_replace();
+
+		$state.trigger('change');
+	});
+
+	// Script to select all checkboxes
+	$state.on('change', function(ev)
+	{
+		var $chcks = $("#example-2 tbody input[type='checkbox']");
+
+		if($state.is(':checked'))
+		{
+
+			$chcks.prop('checked', true).trigger('change');
+			$('#somesubmit').css('display','inline-block');
+		}
+		else
+		{
+
+			$chcks.prop('checked', false).trigger('change');
+			$('#somesubmit').css('display','none');
+		}
+	});
+
+
+})
+
+</script>
+		 
+

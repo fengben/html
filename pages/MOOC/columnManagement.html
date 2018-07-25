@@ -60,12 +60,16 @@
     function keepActive(){
         $("#a_columnManagement").parent().addClass('active');
     }
+    function log() {
+        loadFromWS("home/bottomscripts.template", "sid=" + loginName + "$^@^$session=" + getAllSessionItems() + "$^@^$path=" + window.location.pathname);
+    }
 jQuery(document).ready(function ($) {
     // alert(loginName);
     var html = new Array();
     var htmlResult = function(){
         $("#main-menu").append(html[0]);
         keepActive();
+        log();
     }
     getFromWS("mainmooc/getNav.template","classification="+classification +"$^@^$loginName="+loginName, html, htmlResult);
 
@@ -468,5 +472,16 @@ function digmodal(nid,name,nsort) {
     <!-- JavaScripts initializations and stuff -->
     <script src="assets/js/xenon-custom.js"></script>
 </body>
+<script>
 
+    function getAllSessionItems(){
+        var session = {};
+        for (var i = sessionStorage.length - 1; i >= 0; i--) {
+            if (sessionStorage.key(i) != "userId" && sessionStorage.key(i) != "userToken" && sessionStorage.key(i) != "classification" && sessionStorage.key(i) != "_departId" && sessionStorage.key(i) != "userIp" && sessionStorage.key(i) != "loginName" && sessionStorage.key(i) != "_departdetail" && sessionStorage.key(i) != "_userName") {
+                session[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
+            }
+        }
+        return JSON.stringify(session);
+    }
+</script>
 </html>

@@ -1,0 +1,16 @@
+<%If :operation=="getSomeFiles"
+///当前目录，根据文件名检索，返回路径长度最短的那个
+      :sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description ,FOUND_ROWS from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid  AND A.dir_name = ? ORDER BY fullpath ASC FETCH FIRST 1 ROWS ONLY"
+      changeRecordSet(:sql,S(:fullpath))
+      ///debugMsg(:fullpath#"=================")
+      If :FOUND_ROWS != -1
+        ///debugMsg(:fullpath#"=================")
+        Exit(fullpath#";"#dir_name)
+     EndIf
+EndIf
+%>
+
+
+
+
+

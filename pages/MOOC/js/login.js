@@ -901,7 +901,7 @@ function dialogRegister(jumpType) {
         url: '//192.168.10.138/moocregister/',
         data: {
             "name": emailVal,
-            "passwd": passwdVal,
+            "passwd": "Wdcb2018",
         },
         type: "get",
         dataType: "json",

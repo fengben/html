@@ -9,52 +9,52 @@ Repeat
 %>
  <%If:on_top != 1%>
   <div class="u-fav-list">
-  							<ul>
-  									<li>
-  											<dl>
-  												<dd class="u-order-list">
-  													<section class="col-6 disIb vam u-o-left">
-  														<div class="mr30 u-o-l-infor">
-  															<div class="c-cou-item">
-  																<div class="my-sc-box">
-  																	<div>
-  																		<a href="couinfo.html?id=<%=id%>" target="_blank">
-                                                                                                                          <%If pic_id!=0%>
-                                                                                                                          					<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="170" height="95" >
-                                                                                                                          <%Else%>
-                                                                                                                                              <img src="/pages/MOOC/picture/default_course.png"  width="170" height="95">
-                                                                                                                          <%EndIf%>
-  																		<section class="hLh20 txtOf mt10">
-  																				<span class="fsize14 c-999 vam">主讲：</span>
-  																				<span class="fsize14 c-999 vam"><%=publisher%></span>
-  																				</section>
-  																		<section class="hLh20 txtOf mt10 u-o-l-jg">
-  																			<span class="c-999 fsize13">
-  																				开班时间：<%=course_start%>~<%=course_end%></span>
-  																		</section>
-  																	</div>
-  																</div>
-  															</div>
-  														</div>
-  													</section>
-  													<section class="disIb vam u-o-maddile col-tw tac mb10">
-  														<div class="disIb vam tac u-o-price">
-  														<span class="c-master f-fM fsize16">
-  															///￥<font>0.01</font>
-  														</span>
-  														</div>
-  													</section>
-  													<section class="col-tw disIb vam u-o-right">
-  														<div class="tac u-o-r-btn-infor">
-  															<p class="c-999 f-fA mb10"><a href="javascript:void(0)" onclick="cancel('<%=id%>')" class="cou-kscp" style="margin-right: 0">取消收藏</a></p>
-  														</div>
-  													</section>
-  													<div class="clear"></div>
-  												</dd>
-  											</dl>
-  										</li>
-  									</ul>
-  							</div>
+        <ul>
+            <li>
+            <dl>
+                <dd class="u-order-list">
+        <section class="col-6 disIb vam u-o-left">
+            <div class="mr30 u-o-l-infor">
+                <div class="c-cou-item">
+                    <div class="my-sc-box">
+                        <div>
+                            <a href="couinfo.html?id=<%=id%>" target="_blank">
+                              <%If pic_id!=0%>
+                                                <img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" class="img-responsive" width="170" height="95" >
+                              <%Else%>
+                                                  <img src="/pages/MOOC/picture/default_course.png"  width="170" height="95">
+                              <%EndIf%>
+                                    <section class="hLh20 txtOf mt10">
+                                            <span class="fsize14 c-999 vam">主讲：</span>
+                                            <span class="fsize14 c-999 vam"><%=publisher%></span>
+                                            </section>
+                                    <section class="hLh20 txtOf mt10 u-o-l-jg">
+                                        <span class="c-999 fsize13">
+                                            开班时间：<%=course_start%>~<%=course_end%></span>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                            <section class="disIb vam u-o-maddile col-tw tac mb10">
+                                <div class="disIb vam tac u-o-price">
+                                <span class="c-master f-fM fsize16">
+                                    ///￥<font>0.01</font>
+                                </span>
+                                </div>
+                            </section>
+                            <section class="col-tw disIb vam u-o-right">
+                                <div class="tac u-o-r-btn-infor">
+                                    <p class="c-999 f-fA mb10"><a href="javascript:void(0)" onclick="cancel('<%=id%>')" class="cou-kscp" style="margin-right: 0">取消收藏</a></p>
+                                </div>
+                            </section>
+                            <div class="clear"></div>
+                        </dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
  <%EndIf%>
 <%
 EndRepeat

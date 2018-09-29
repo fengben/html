@@ -87,7 +87,7 @@ debugMsg("--------------"#count)
 
 
                             <form id="viewVideo" action="http://192.168.10.138/mylogin/" method="get">
-                             <a href="#" id="cou-shopcar" title="我要砍价" class="comm-btn c-btn-3 cou-buy-btn" > 立即参加</a>
+ ///                            <a href="#" id="cou-shopcar" title="我要砍价" class="comm-btn c-btn-3 cou-buy-btn" > 立即参加</a>
 
                             <input type="hidden" id="mooc_login_name" name="email" value=""/>
                             <input type="hidden" id="mooc_passwd" name="password" value=""/>

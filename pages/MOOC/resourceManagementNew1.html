@@ -19,82 +19,36 @@
         }
     </script>
     <title>mooc后台管理</title>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>-->
     <!--link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/-->
     <!--link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/-->
-    <link rel="stylesheet" href="assets/css/bootstrap.css"/>
     <link rel="stylesheet" href="assets/css/xenon-core.css"/>
     <link rel="stylesheet" href="assets/css/xenon-forms.css"/>
     <link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="assets/css/xenon-components.css"/>
     <link rel="stylesheet" href="assets/css/xenon-skins.css"/>
     <link rel="stylesheet" href="assets/css/foundsDeclareList.css"/>
-    <link rel="stylesheet" href="/scripts/htmleditor/themes/default/default.css"/>
-    <link rel="stylesheet" href="assets/css/zTreeStyle.css"/>
+    <link rel="stylesheet" href="/sscripts/htmleditor/themes/default/default.css"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/maintain/alert.css" />
     <script src="resourceManagement/js/jquery-1.11.1.min.js"></script>
-    <script src="resourceManagement/js/bootstrap.js"></script>
     <link rel="stylesheet" href="resourceManagement/tree_files/font-awesome.min.css">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300">
     <link rel="stylesheet" href="resourceManagement/tree_files/ace.css">
     <link rel="stylesheet" href="resourceManagement/css/bootstrap.css">
-    <script src="assets/js/jquery-1.11.1.min.js"></script>
-    <script src="/scripts/StationJSLib.js"></script>
-    <script src="/scripts/uploadfile.js"></script>
-    <script src="/scripts/htmleditor/kindeditor.js"></script>
-    <script src="/scripts/htmleditor/lang/zh_CN.js"></script>
-    <script src="jquery/jquery.ztree.core.js"></script>
+    <script src="/sscripts/StationJSLib.js"></script>
+    <script src="/sscripts/uploadfile.js"></script>
+    <!--<script src="/sscripts/htmleditor/kindeditor.js"></script>-->
+    <!--<script src="/sscripts/htmleditor/lang/zh_CN.js"></script>-->
+    <script src="/sscripts/jquery.alert.js"></script>
+    <script type="text/javascript" src="/sscripts/jquery-migrate-1.2.1.js"></script>
+    <!--<script type="text/javascript" src="/sscripts/jquery-ui.min.js"></script>-->
     <script type="text/javascript" src="js/jquery.cookie.js"></script>
-    <script>
-        function fileSpaceManagement(){
-            $("#mainContentnew").html("");
-            var paras = "pageNumber=1";
-            paras += "$^@^$pageSize=9";
-            paras += "$^@^$infoType=";
-            //loadFromWS("adminUsers/fileSpaceManagement.template",paras,"mainContent");
-            loadFromWS("zyMooc/zyFileSpaceManagementNew.template",paras,"mainContentnew");
-        }
-    </script>
+    <script type="text/javascript" src="js/resourceManagement.js"></script>
+            <script type="text/javascript" src="js/webutils.js"></script>
+
 </head>
 
 <body class="page-body">
-<script>
-    //保持(被选中的)侧边栏高亮
-    function keepActive(){
-        $("#a_resourceManagement").parent().addClass('active');
-    }
-    jQuery(document).ready(function ($) {
-
-        var html = new Array();
-        var htmlResult = function(){
-            $("#main-menu").append(html[0]);
-            keepActive();
-        }
-        getFromWS("mainmooc/getNav.template","classification="+classification, html, htmlResult);
-
-        $(".user-info-menu #loginName").html(loginName);
-
-        // Replace checkboxes when they appear
-        var $state = $("#example-2 thead input[type='checkbox']");
-        $("#example-2").on('draw.dt', function()
-        {
-            cbr_replace();
-            $state.trigger('change');
-        });
-        // Script to select all checkboxes
-        $state.on('change', function(ev)
-        {
-            var $chcks = $("#example-2 tbody input[type='checkbox']");
-            if($state.is(':checked'))
-            {
-                $chcks.prop('checked', true).trigger('change');
-            }
-            else
-            {
-                $chcks.prop('checked', false).trigger('change');
-            }
-        });
-    });
-</script>
 <div style="display:none">
     <input type="text" value="0" id="bufferArticleId">
     <input type="text" value="no" id="bufferIfTravelInfo">
@@ -147,14 +101,14 @@
                         <span id="loginName"></span></a>
                 </li>
                 <li>
-                    <a href="#" onclick="logout()">
+                    <a href="#" onclick="exit()">
                         <i class="fa-power-off" style="color:red;font-size:18px;"></i>
                     </a>
                 </li>
             </ul>
 
         </nav>
-        <div class="page-title">
+        <div class="page-title" style="margin-bottom:0px ;">
             <div class="title-env">
                 <h1 class="title">资源管理</h1>
                 <!--<p class="description">management of article</p>--></div>
@@ -170,55 +124,28 @@
             </div>
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">资源管理</h3>
-            </div>
-            <div class="panel-body">
+            <!--<div class="panel-heading">-->
+            <!--<h3 class="panel-title">资源管理</h3>-->
+            <!--</div>-->
+            <div class="panel-body" style="padding-top:0px;">
                 <div class="row" id="mainContentnew">
                     <div class="col-sm-3">
-                        <h4 style="margin-top:20px;margin-bottom: 20px;">
-                            <span style="color:#000">文件列表</span>
-                        </h4>
-                        <div class="widget-box">
-                            <div class="widget-header header-color-green2">
-                                <h4 class="lighter smaller">Browse Files</h4>
+                        <!--<h4 style="margin-top:20px;margin-bottom: 20px;">-->
+                        <!--<span style="color:#000">文件列表</span>-->
+                        <!--</h4>-->
+                        <div class="widget-box" style="margin:0px;">
+                            <div class="widget-header header-color-green2" style="background: #e6f3ee;
+                                    border-color: #e6f3ee;">
+                                <h4 class="lighter smaller" style="color:#333;"id="mulu">当前目录:/</h4>
                             </div>
-                            <div class="widget-body">
+                            <!--<span style="font-size: 19px" id="mulu">当前目录:/</span>-->
+                            <button type="button" class="btn btn-default" onclick="rootFolder();" style="margin-left: 100px;padding-left:0px;margin-top: 5px;" >
+                                　返回根目录
+                            </button>
+                            <div class="widget-body" style="border-color:#e6f3ee;border:none;">
                                 <div class="widget-main padding-8">
                                     <div id="tree2" class="tree tree-unselectable">
-                                        <div class="tree-folder" style="display:none;">
-                                            <div class="tree-folder-header">
-                                                <i class="icon-folder-close"></i>
-                                                <div class="tree-folder-name"></div>
-                                            </div>
-                                            <div class="tree-folder-content"></div>
-                                            <div class="tree-loader" style="display: none;">
-                                            </div>
-                                        </div>
-                                        <div class="tree-item" style="display:none;">
-                                            <div class="tree-item-name"></div>
-                                        </div>
-                                        <div class="tree-folder" style="display: block;">
-                                            <div class="tree-folder-header">
-                                                <i class="icon-folder-close "></i>
-                                                <div class="tree-folder-name">Documents</div>
-                                            </div>
-                                            <div class="tree-folder-content"></div>
-                                            <div class="tree-loader" style="display: none;">
-                                                <div class="tree-loading">
-                                                    <i class="icon-refresh icon-spin "></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tree-item" style="display: block;">
-                                            <div class="tree-item-name">
-                                                <i class="icon-file-text "></i> ReadMe.txt</div>
-                                        </div>
-                                        <div class="tree-item" style="display: block;">
-                                            <div class="tree-item-name">
-                                                <i class="icon-book green"></i> Manual.html
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -226,98 +153,31 @@
                     </div>
                     <div class="col-sm-9">
                         <div class="panel-heading">
-                            <h4 style="margin-bottom:20px;">
-                                <span style="color:#000">文件浏览</span>
-                            </h4>
+                            <!--<h4 style="">-->
+                            <!--<span style="color:#000">文件列表</span>-->
+                            <!--</h4>-->
                             <div>
-                <span>
-                  <button type="button" class="btn btn-default">
-                    <span class="">图片</span>
-                  </button>
-                  <button type="button" class="btn btn-default">
-                    <span class="">视频</span>
-                  </button>
-                  <button type="button" class="btn btn-default">
-                    <span class="">音频</span>
-                  </button>
-                  <button type="button" class="btn btn-default">
-                    <span class="">文件</span>
-                  </button>
-                  <form class="navbar-form navbar-right" role="search" style="margin-top: 0">
-                    <div class="form-group">
-                      <input type="text" class="form-control" />
-                    </div>
-                    <button type="text" class="btn btn-default">搜索</button>
-                  </form>
-                </span>
-                                <div style="margin-top:20px">
-                                    <span style="font-size: 19px">当前目录：/</span>
-                                    <div style="margin-left: 500px;display: inline;">
-                                        <button type="button" class="btn btn-default">
+                                <div style="">
+                                    <div style="display: inline">
+                                        <button type="button" class="btn btn-default" onclick="uploadFileNew();">
                                             <span class="glyphicon glyphicon-arrow-up">上传</span>
                                         </button>
-                                        <button type="button" class="btn btn-default">
-                                            <span class="">新建文件夹</span>
+                                        <button type="button" class="btn btn-default" onclick="newFileOrDir();">
+                                        <span class="">新建文件夹</span>
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="deleteTanKuang();" >
+                                        <span class="">删除文件夹</span>
+                                        </button>
+                                        <button type="button" class="btn btn-default" onclick="rootFolder();">
+                                            <span class="">返回根目录</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="panel-body">
-                                <table class="table table-bordered table-striped" id="example-2">
-                                    <thead>
-                                    <tr>
-                                        <th class="no-sorting">
-                                            <input type="checkbox" class="cbr">
-                                        </th>
-                                        <th>文件名</th>
-                                        <th>类型</th>
-                                        <th>操作</th>
-                                        <th>上传人</th>
-                                        <th>时间</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                            <!--文件列表-->
+                            <div class="panel-body" style="padding-top:5px;">
+                                <table class="table table-bordered table-striped" id="list">
 
-
-                                    <tr>
-                                        <td> <input type="checkbox" class=""/> </td>
-                                        <td>
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <span class="glyphicon glyphicon-folder-close">视频</span>
-                                            </button>
-                                        </td>
-                                        <td> audio </td>
-                                        <td>
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <span class="glyphicon glyphicon-eye-open">预览</span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <span class="glyphicon glyphicon-download-alt">下载</span>
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <span class="glyphicon glyphicon-trash"></span>删除
-                                            </button>
-                                            <button type="button" class="btn btn-default btn-sm">
-                                                <span class="glyphicon glyphicon-copyright-mark"></span>复制资源链接
-                                            </button>
-                                        </td>
-                                        <td> 管理员 </td>
-                                        <td> 2018/7/15 </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" align="center">
-                                            <ul class="pagination">
-                                                <li><a href="#">&laquo;</a></li>
-                                                <li><a href="#">1</a></li>
-                                                <li><a href="#">2</a></li>
-                                                <li><a href="#">3</a></li>
-                                                <li><a href="#">4</a></li>
-                                                <li><a href="#">5</a></li>
-                                                <li><a href="#">&raquo;</a></li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -340,49 +200,127 @@
         </div>
     </div>
 </div>
+<!--预览文件的框-->
+<div id = "viewbox" style="display:none; align:center">
+
+</div>
+<!--新建文件的框与上传文件的框-->
+<div id="modifybox" style="display:none; align:center">
+    <table cellspacing="0" cellpadding="0" border="0" >
+
+        <tr height=5></tr>
+        <tr id="dirNameTr" style="display:none">
+            <td width=100> 目录名：  </td>
+            <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyDirName" type="text"> </td>
+            <td></td>
+        </tr>
+        <tr id="fileNameTr" style="display:none">
+            <td width=100> 文件名：  </td>
+            <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyFileName" type="text"> </td>
+            <td></td>
+        </tr>
+        <tr height=5></tr>
+        <tr id="fullpathTr">
+            <td width=100>当前目录： </td>
+            <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyFullpath" type="text" readonly ></td>
+            <td></td>
+        </tr>
+        <tr height=5></tr>
+        <tr id="selectAttributeTr">
+            <td width=100> 文件属性：  </td>
+            <td>  <input  class="form-control1 input-sm" style="width:200px;height:30px" id="modifyAttribute" type="text" readonly ></td>
+            <td>
+            </td>
+        </tr>
+        <tr height=5></tr>
+        <tr id="selectFileTr">
+            <td width=100>上传文件： </td>
+            <td>  <input id="modifyUploadFile" type="file" style="width:450px" ></td> <td></td>
+        </tr>
+        <tr height=5></tr>
+        <tr>
+            <td width=100>描述： </td>
+            <td>
+                <textarea id="modifyDescription" class="form-control1" style="width:500px;height:100px;resize: none;" ></textarea>
+            </td> <td></td>
+        </tr>
+        <tr height=15></tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <button style="width:50px;height:30px" class="btn btn-sm btn-default" onclick="saveRecord();">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button  style="width:50px;height:30px" class="a_close btn btn-sm btn-default">取消</button>
+            </td>
+            <td></td><td></td>
+        </tr>
+    </table>
+</div>
+<div class="modal fade" id="deleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header noborder">
+                <h4 class="modal-title">确定删除此文件？</h4>
+            </div>
+            <div class="modal-footer noborder">
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-info" style="margin-left:40px" id="removeItem">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="deleteModalFolder">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header noborder">
+                <h4 class="modal-title">确定删除此文件夹？</h4>
+            </div>
+            <div class="modal-footer noborder">
+                <button type="button" class="btn btn-white" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-info" style="margin-left:40px" onclick="deleteFolder()">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
 <!--[if !IE]> -->
 <script src="resourceManagement/tree_files/jquery-2.0.3.min.js"></script>
 <!-- <![endif]-->
 <script src="resourceManagement/tree_files/bootstrap.min.js"></script>
 <!-- page specific plugin scripts -->
 <script src="resourceManagement/tree_files/fuelux.tree-sampledata.js"></script>
-<script src="resourceManagement/tree_files/fuelux.tree.min.js"></script>
+<script src="resourceManagement/tree_files/fuelux.tree.js"></script>
 <!-- ace scripts -->
 <script src="resourceManagement/tree_files/ace-elements.min.js"></script>
 <script src="resourceManagement/tree_files/ace.min.js"></script>
+<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/datatables/dataTables.bootstrap.js"></script>
+<script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
+<script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="js/folderOperation.js"></script>
+<script type="text/javascript" src="js/fileOperation.js"></script>
 <!-- inline scripts related to this page -->
-<script type="text/javascript">
-    jQuery(function($){
-        $('#tree2').ace_tree({
-            dataSource: treeDataSource2 ,
-            loadingHTML:'<div class="tree-loading"><i class="icon-refresh icon-spin green"></i></div>',
-            'open-icon' : 'icon-folder-open',
-            'close-icon' : 'icon-folder-close',
-            'selectable' : false,
-            'selected-icon' : null,
-            'unselected-icon' : null
-        });
-    });
-</script>
+
 <!-- Imported styles on this page -->
-<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
-<link rel="stylesheet" href="assets/css/bootstrap-treeview.css">
+<!--<link rel="stylesheet" href="assets/js/datatables/dataTables.bootstrap.css"/>
+
 <script src="assets/js/bootstrap-treeview.min.js"></script>
-<!-- Bottom Scripts -->
-<script src="assets/js/bootstrap.min.js"></script>
+&lt;!&ndash; Bottom Scripts &ndash;&gt;
 <script src="assets/js/TweenMax.min.js"></script>
 <script src="assets/js/resizeable.js"></script>
 <script src="assets/js/joinable.js"></script>
 <script src="assets/js/xenon-api.js"></script>
 <script src="assets/js/xenon-toggles.js"></script>
-<script src="assets/js/datatables/js/jquery.dataTables.min.js"></script>
-<!-- Imported scripts on this page -->
+
+&lt;!&ndash; Imported scripts on this page &ndash;&gt;
 <script src="assets/js/datatables/dataTables.bootstrap.js"></script>
 <script src="assets/js/datatables/yadcf/jquery.dataTables.yadcf.js"></script>
 <script src="assets/js/datatables/tabletools/dataTables.tableTools.min.js"></script>
 <script src="assets/js/toastr/toastr.min.js"></script>
-<!-- JavaScripts initializations and stuff -->
-<script src="assets/js/xenon-custom.js"></script>
+&lt;!&ndash; JavaScripts initializations and stuff &ndash;&gt;
+<script src="assets/js/xenon-custom.js"></script>-->
+
 </body>
 
 </html>

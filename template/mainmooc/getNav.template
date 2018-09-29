@@ -1,7 +1,13 @@
 
 <%debugMsg("in getNav classification is==========="#:classification)%>
 <%If :classification=="1"%>
-
+<li>
+    <a href="newManagement.html" id="a_newManagement">
+        <i class="linecons-note"></i>
+        <span class="title">新闻管理</span>
+       /// <div class="title" style="padding-left:30px">management of new</div>
+    </a>
+</li>
 <li>
     <a href="articleManagement.html" id="a_articleManagement">
         <i class="linecons-note"></i>
@@ -33,7 +39,7 @@
 	</a>
 </li>
 <li class="has-sub">
-	<a href="#">
+	<a href="personManagement.html">
 		<i class="linecons-user"></i>
 		<span class="title">系统管理</span>
 		///<div class="title" style="padding-left:30px">management of people</div>
@@ -64,7 +70,7 @@
     </ul>
 </li>
 <li>
-    <a href="resourceManagement.html" id="a_resourceManagement">
+    <a href="resourceManagementNew1.html" id="a_resourceManagement">
         <i class="linecons-note"></i>
         <span class="title">资源管理</span>
         ///<div class="title" style="padding-left:30px">management of resource</div>

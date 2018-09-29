@@ -35,7 +35,7 @@ If :totalNumber >0
                                         <ul>
                                             <li class="liv-fist-box">
                                                 <div class="d3-left-pic" >
-                                                 <a href="<%=urlstr%>" target="_blank">
+                                             ///    <a href="<%=urlstr%>" target="_blank">
                                                /// <%If pic_id!=0%>
                                                 ///			<img class="imgload" src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=id%>" width="220" height="500" >
                                               ///  <%Else%>

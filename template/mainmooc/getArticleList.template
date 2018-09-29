@@ -35,7 +35,7 @@ If :operation=="getSomeArticle"
 EndIf
 If :operation=="getAllArticle"
 	If :classification == 1
-		:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id  order by A.on_top desc,A.id desc"
+		:querystr="select A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A, mooccolumns as B where A.article_type=B.id and A.article_type !='2018088683860003597' order by A.on_top desc,A.id desc"
 		changeRecordSet(:querystr)
 	Else
 		:selectStr="select column_ids from role where id=? "
@@ -78,9 +78,9 @@ If recordCount()>0
 
         				<span  id="title<%=id%>" title="<%=title%>" style="display:none"> <%=title%></span>
         <%If on_top==1%>
-        				<a href="../view.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:red;"> <%=shortTitle(title,0,6)%></a>
+        				<a href="../MOOC/couinfo.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:red;"> <%=shortTitle(title,0,6)%></a>
         <%Else%>
-        				<a href="../view.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:#979898;"> <%=shortTitle(title,0,6)%></a>
+        				<a href="../MOOC/couinfo.html?id=<%=id%>" target="_blank" title="<%=title%>" style="display:inline-block;white-space: nowrap;overflow: hidden;text-overflow:ellipsis;color:#979898;"> <%=shortTitle(title,0,6)%></a>
         <%EndIf%>
                         <input style="display:none" id="school<%=id%>"  value='<%=school%>'>
         				<input style="display:none" id="content<%=id%>" value='<%=:recContent%>'>

@@ -1,8 +1,0 @@
-
-<%
-	If :operation == "saveOnlineSurvey"
-	:sql = "insert into onlinesurvey values(?, ?, ?, ?, now())"
-	:res = execSQL(:sql, tuid(), L(:id), S(:comment), S(:ip));
-	Exit :res
-	EndIf
-%>

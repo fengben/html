@@ -3,7 +3,7 @@
 <%If :operation == "getAllColumnsReadOnly"
     :allcolumnData=""
    If :classification == 1
-	:selectSql = "select id, name, parent_id from mooccolumns where id != 1 "
+	:selectSql = "select id, name, parent_id from mooccolumns where id != 1 and id != '2018088683860003597' "
    Else
     :selectStr="select column_ids from role where id= ? "
     		:column_ids=execSQL(:selectStr,:classification)

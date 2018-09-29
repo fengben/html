@@ -1,0 +1,23 @@
+///<%debugMsg(:childname#"update=================")%>
+<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid AND A.fullpath = ? AND A.file_id = 1" %>
+
+<%changeRecordSet(:sql,S(:childname))%>
+
+<%
+    :allfileData=""
+    If recordCount()>0
+        Repeat             
+        :allfileData = :allfileData#"{'dir_name':'"#dir_name#"','id':'"#id#"','file_id':'"#file_id#"'},"
+        ///:allcolumnData = :allcolumnData#dir_name#";"#id#";"#file_id
+        ///Exit(dir_name#";"#id#";"#file_id);
+         ///Exit(dir_name#";"#id#";"#money#";"#address);
+        EndRepeat
+        Exit(:allfileData);
+    Else
+    	Exit("no");
+    EndIf
+%>
+///'pictures'  : {name: 'Pictures',      type: 'folder',    'icon-class':'red'     }	,
+
+
+

@@ -1,5 +1,0 @@
-<%
-:sql =  "SELECT id,x_axis,y_axis FROM echart"
-    :x = changeRecordSet(:sql)
-    debugMsg("================="#:x)
-%>

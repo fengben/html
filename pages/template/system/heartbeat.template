@@ -1,6 +1,0 @@
-<%:x=writeGlobalVar(:varname,:varvalue,:owner,:ttl,:serverToken)%>
-<%If :x=="ok"%>
-    <%debugMsg("ttl has been updated")%>
-<%Else%>
-    <%debugMsg(:x)%>
-<%EndIf%>

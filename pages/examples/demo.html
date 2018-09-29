@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+
+这个例子演示了怎样用template编写websocket服务<br>
+下面的数字会每隔一秒钟增加1，直到1200结束<br>
+这是一个主动服务，它会创建一个在服务器端长期运行的websocket服务，其他的客户端可以连接这个服务并获取数据<br>
+<div id="show"></div>
+
+<div id="container" style="height: 100%"></div>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+<script type="text/javascript"
+        src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+
+
+<!--//zoolina-->
+<script type="text/javascript" src="/scripts/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/scripts/StationJSLib.js"></script>
+<script type="text/javascript" src="/scripts/jquery-migrate-1.2.1.js"></script>
+<script type="text/javascript" src="/scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/scripts/jquery.alert.js"></script>
+
+<script type="text/javascript">
+    var dom = document.getElementById("container");
+    var myChart = echarts.init(dom);
+    var app = {};
+    option = null;
+
+    function randomData(data) {
+        //now = new Date(+now + oneDay);
+        //value = value + Math.random() * 21 - 10;
+        ii++;
+        y = Math.sin(ii);
+        // y=data;
+        return {
+            name: ii,
+            value: y
+        }
+    }
+
+    var data = [];
+    //var now = +new Date(1997, 9, 3);
+    //var oneDay = 24 * 3600 * 1000;
+    //var value = Math.random() * 1000;
+    var ii = 0;
+    for (var i = 0; i < 100; i++) {
+        data.push(randomData());
+    }
+
+    option = {
+        title: {
+            text: '动态数据 + 时间坐标轴'
+        },
+
+        xAxis: {
+            type: 'category',
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+            type: 'value',
+            boundaryGap: [0, '100%'],
+            splitLine: {
+                show: false
+            }
+        },
+        series: [{
+            name: '模拟数据',
+            type: 'line',
+            showSymbol: false,
+            hoverAnimation: false,
+            data: data,
+            smooth: true
+        }]
+    };
+
+    // setInterval(function () {
+    //     //for (var i = 0; i < 5; i++) {
+    //     data.shift();
+    //     data.push(randomData());
+    //     //}
+    //
+    //     myChart.setOption({
+    //         series: [{
+    //             data: data
+    //         }]
+    //     });
+    // }, 1000);
+    ;
+    if (option && typeof option === "object") {
+        myChart.setOption(option, true);
+    }
+</script>
+<script>
+    function initialize_websocket(server_order) {
+        var socket_up;
+        var started;
+        var valid = true;
+        var homea = homeAddress(false);
+        var urlstr = "ws://" + homea + "ws" + server_order + "/unique?script=examples/websocket/websocket3.template&interval=1000&num=0";
+        if (typeof MozWebSocket != "undefined") {
+            socket_up = new MozWebSocket(urlstr);
+        }
+        else {
+            socket_up = new WebSocket(urlstr);
+        }
+        socket_up.onopen = function (evt) {
+            started = true;
+            $("#show").html("showing...");
+            socket_up.send("send normal");
+        };
+        socket_up.onclose = function (evt) {
+            if (started)
+                return;
+            if (!valid && evt.code == 1006) {  // can not connect
+                alert("Web socket connection failed!");
+            }
+        };
+ 
+        socket_up.onmessage = function (msg) {
+            if (msg.data == "heartbeat")
+                return;
+            $("#show").html( msg.data);
+            data.shift();
+            data.push(randomData(msg.data));
+            // alert(data[99].value);
+            myChart.setOption({
+                series: [{
+                    data: data
+                }]
+            })
+            if (msg.data == "30")
+                socket_up.close();
+        };
+
+        // socket_up.onmessage = function (msg) {
+        //     if (msg.data == "60")
+        //         socket_up.send("terminate");
+        //     else {
+        //         var sendmsg = function () {
+        //             socket_up.send("send normal");
+        //         };
+        //         setTimeout(sendmsg, 1000);
+        //     }
+        // };
+        // var iii = 1
+        // socket_up.onmessage = function (msg) {
+        //     var sendmsg = function () {
+        //         socket_up.send(iii++)
+        //     }
+        //     setTimeout(sendmsg, 1000);
+        // };
+        socket_up.close();
+        // socket_up.send("terminate");
+        socket_up.onerror = function (evt) {
+            //alert(evt.data);
+            valid = false;
+        };
+    }
+
+    $(function () {
+        var processResult = function (obj) {
+            initialize_websocket(obj[0]);
+        };
+        remoteService("serverOrder.spe?unique=examples/websocket/websocket3.template", processResult);
+    });
+</script>
+</body>
+</html>

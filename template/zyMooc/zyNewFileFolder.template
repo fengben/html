@@ -1,0 +1,31 @@
+///<%debugMsg(:parentDirName#"update=================")%>
+<%If :operation=="newdir"%>
+	<%:sqlStr = "select id from mooc_filespace where dir_name=? and fullpath=? " %>
+	<%changeRecordSet(:sqlStr,S(:dirName),S(:parentDirName))%>
+	<%:i=recordCount()%>
+	<%If :i>0%>
+		<%Exit "sameDir" %>
+	<%Else%>
+			<%:sqlStr = "insert into mooc_filespace(file_id,publish_date,fullpath,publisher,dir_name,description) values(?,now()::timestamp(0)without time zone,?,?,?,?) " %>
+			<%execSQL(:sqlStr,L(1),S(:parentDirName),S(:loginName),S(:dirName),S(:description))%>
+ 	<%EndIf%>
+<%EndIf%>
+<%If :operation=="deletefolder"%>
+	    <%:sqlStr = "select id from mooc_filespace where fullpath = ?" %>
+	    <%changeRecordSet(:sqlStr,S(:parentDirName))%>
+	    <%:i=recordCount()%>
+	    <%debugMsg(:dirName#"=======##############################################=======")%>
+	    <%If :i>0%>
+			<%Exit "isNotNullDir" %>
+	    <%Else%>
+	        <%:i=0%>
+			<%:sqlStr = "delete from mooc_filespace where dir_name = ? " %>
+			<%execSQL(:sqlStr,S(:dirName))%>
+   	    <%EndIf%>
+<%EndIf%>
+
+
+
+
+
+

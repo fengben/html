@@ -1,0 +1,83 @@
+<%If :operation=="getAllFiles"
+:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.publisher,A.publish_date,A.dir_name,A.description,FOUND_ROWS from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid AND A.file_id !=1"
+changeRecordSet(:sql)
+EndIf
+%>
+<%If :operation=="getSomeFiles"
+     :sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description ,FOUND_ROWS from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid  AND A.fullpath =? AND A.file_id !=1 "
+      changeRecordSet(:sql,S(:fullpath))
+      If :FOUND_ROWS == -1
+        :sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description ,FOUND_ROWS from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid  AND A.fullpath LIKE ? AND A.file_id !=1"
+        changeRecordSet(:sql,S("%"+:fullpath+"%"))
+      EndIf
+EndIf
+%>
+ <thead>
+     <tr>
+            <th>文件名</th>
+            <th>文件类型</th>
+            <th>操作</th>
+            <th>上传人</th>
+     </tr>
+</thead>
+ <tbody>
+<%If recordCount()>0%>
+    <%:i=1%>
+    <%Repeat%>
+     <tr>
+          <td>
+                <span id="filename<%=:i%>"></span>
+                <script type="text/javascript">
+                  var fielnameAndtype ='<%=filename%>';
+                   var index = fielnameAndtype.lastIndexOf("."); //得到"."在第几位
+                   if(index >=5){
+                   var fileName = fielnameAndtype.substring(0,5);
+                   fileName = fileName +'...';
+                   }else{
+                   var fileName = fielnameAndtype.substring(0,index);
+                   }
+                   $("#filename<%=:i%>").html(fileName);
+               </script>
+          </td>
+          <td style="width:60px;">
+                  <span  id="fileType<%=:i%>"></span>
+                  <script type="text/javascript">
+                         var fielnameAndtype ='<%=filename%>';
+                         var index = fielnameAndtype.lastIndexOf("."); //得到"."在第几位
+                         var fileType = fielnameAndtype.substring(index+1); //截断"."之前的，得到后缀
+                         $("#fileType<%=:i%>").html(fileType);
+                 </script>
+          </td>
+          <td>
+              <button type="button" class="btn btn-default btn-sm" onclick="viewFile('<%=file_id%>','<%=filename%>')">
+                  <span class="glyphicon glyphicon-eye-open">预览
+                  </span>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" style="margin-left:0px;">
+                  <span class="glyphicon glyphicon-download-alt">
+                  <a href="/one/downloadFile.spe?dtype=PostgresXL&mode=attachment&fileid=<%=file_id%>">下载
+                  </a>
+                  </span>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#deleteModal" data-id="<%=file_id%>" style="margin-left:0px;">
+                  <span class="glyphicon glyphicon-trash">删除</span>
+              </button>
+              <button type="button" class="btn btn-default btn-sm" onclick="copyResourceURL('<%=file_id%>');" style="margin-left:0px;">
+                  <span class="glyphicon glyphicon-copyright-mark">复制链接</span>
+              </button>
+          </td>
+          <td><%=publisher%></td>
+        <%:i=:i+1%>
+        </tr>
+    <%EndRepeat%>
+<%EndIf%>
+ </tbody>
+
+
+
+
+
+
+
+
+

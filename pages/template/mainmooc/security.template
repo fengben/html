@@ -1,3 +1,0 @@
-
-<%:x=checkLogin(:userId,:userToken)%>
-<%Exit(:x)%>

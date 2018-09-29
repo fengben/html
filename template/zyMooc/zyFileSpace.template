@@ -278,7 +278,7 @@
 			    paras += "$^@^$file_id=" + arr[0];			
 				var obj = new Array();
 				var processResult = function(){
-					alert(obj[0]);
+					// alert(obj[0]);
 					var fileList = $("#bufferPicIds")[0].value;
 					var pics = new Array();
 					pics = fileList.split(";");
@@ -303,7 +303,7 @@
 			    paras += "$^@^$file_id=" + $("#popup_message #fileId").val();;
 				var obj = new Array();
 				var processResult = function(){
-					alert(obj[0]);
+				//	alert(obj[0]);
 					var fileList = $("#bufferPicIds")[0].value;
 					var pics = new Array();
 					pics = fileList.split(";");

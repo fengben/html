@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html class="lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]>
+<html class="lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]>
+<html class="lt-ie9"><![endif]-->
+<!--[if IE 9]>
+<html class="lt-ie10"><![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui"/>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <title>中国十大难懂的方言你的家乡排第几？详情-武汉大学出版社-中国在线教育平台第一品牌</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="css/reset_3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/global_3.css"/>
+    <link rel="stylesheet" type="text/css" href="css/webstyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/mw_300_768.css"
+          media="screen and (min-width: 300px) and (max-width: 768px)"/>
+    <!--[if lt IE 9]>
+    <script src="js/html5_6.js"></script><![endif]-->
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script src="/scripts/StationJSLib.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/ueditor.all.min.js"></script>
+    <script src="js/tipiccommon.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
+    <script>
+        function getUrlParms(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null)
+                return unescape(r[2]);
+            return null;
+        }
+
+        var urlid = getUrlParms("id");
+
+        jQuery(document).ready(function () {
+            var postArray = new Array();
+
+            function showPostsDetail() {
+                $("#postDetail").html(postArray[0]);
+                $("#Sendletter").html(postArray[1]);
+                receiver=postArray[2];
+            }
+
+            paras = "id=" + urlid;
+            getFromWS("frontmooc/getPostDetail.template", paras, postArray, showPostsDetail);
+            showComments();
+        })
+
+        function showComments() {
+            var commentArray = new Array();
+
+            function phraseComments() {
+                $("#comments").html(commentArray[0]);
+            }
+            getFromWS("frontmooc/getComments.template", paras, commentArray, phraseComments);
+        }
+
+
+        function sendMessage(){
+            var loginName = localStorage.getItem("loginName");
+            // var id = getUrlString("id");
+            var message = $('#messageContent').val();
+            var receiver_ = receiver;
+            /* var receiver = document.getElementById('#receiver').innerText;
+             alert(receiver);*/
+
+            var paras = "sender=" + loginName;
+            paras += "$^@^$message=" + message;
+            paras += "$^@^$receiver=" + receiver_;
+
+
+            if (!message ) {
+                alert("发送内容不能为空");
+                return;
+            }
+            var objs = new Array();
+            var afterSaveResult = function () {
+                if (objs == "ok") {
+                    alert("发送成功");
+                    var body = $('#messageContent').val("");
+                }
+                else {
+                    alert("发送失败");
+                    return;
+                }
+            }
+            getFromWS("frontmooc/sendMessageContent.template", paras, objs, afterSaveResult);
+
+
+        }
+
+    </script>
+</head>
+<body>
+<div id="in-wrap">
+    <div class="h-mobile-mask"></div>
+    <div class="leftMenu-mobile">
+        <section class="leftMenu-box">
+            <section>
+                <div class="u-face-pic">
+                    <img src="picture/avatar-boy_6.gif" alt="" class="userImgPhoto cusImgClass"/>
+                </div>
+                <h4 class="hLh30 txtOf"><span class="userNameClass"> <span class="c-999"
+                                                                           onclick="lrFun(1)">登录</span> </span></h4>
+                <div class="hLh30">
+                    <a href="javascript:togouc('/groupuc/uinfo')" title="个人资料设置" class="c-999">个人资料设置</a>
+                </div>
+            </section>
+            <nav class="nav-mobile-ul">
+                <ul class="clearfix">
+                    <li><a href="default.html" title="首页">首页</a></li>
+                    <li><a href="showcoulist.html?id=2018112858180021535" title="录播">课程</a></li>
+                    <li><a href="shoollist.html" title="直播">名校</a></li>
+                    <li><a href="teacherlist.html?id=2018112858180021535 " title="班级">名师</a></li>
+                    <li><a href="group.html" title="社区" target="_blank">学问</a></li>
+                    <li><a href="article.html" title="资讯">资讯</a></li>
+
+
+                </ul>
+            </nav>
+
+        </section>
+    </div>
+    <div class="main-warp">
+        <div class="main-infor">
+         <header id="header" class="all-header" style="height: 67px;">
+                <section class="container">
+                    <h1 id="logo" class="logo">
+                        <a href="#" title="武大传媒"><img src="picture/logo.png" height="42" width="128"></a>
+                        <a class="headerfanhui" style="display: none" href="javascript:void (0)" onclick="goHistory('')"
+                           title="武汉大学出版社">
+                            <img src="picture/mo-back.png">
+                        </a>
+                    </h1>
+                    <div class="h-r-nsl">
+                        <ul class="nav">
+                            <li><a href="default.html" title="首页">首页</a></li>
+                            <li><a href="showcoulist.html" title="录播">课程</a></li>
+                            <!--<li><a href="shoollist.html" title="直播">名校</a></li>-->
+                            <li><a href="teacherlist.html" title="班级">名师</a></li>
+                            <li><a href="group.html" title="社区" target="_blank">学问</a></li>
+                            <li><a href="article.html" title="资讯">资讯</a></li>
+
+                        </ul>
+                        <!-- / nav -->
+                        <ul class="h-r-login clearfix">
+                            <li class="undis h-login-li" id="no-login">
+                                <a href="javascript:login()" title="登录">
+                                    <em class="icon18 login-icon">&nbsp;</em><span class="vam ml5">登录</span>
+                                </a>
+                            </li>
+                            <li class="tit-new-list undis h-login-li" id="is-login-one">
+                                <a href="#" title="消息" id="headerMsgCountId">
+                                    <em class="news-icon">&nbsp;</em>
+                                </a>
+                                <q class="red-point" id="letterPoint" style="display: none">&nbsp;</q>
+                                <div class="tit-n-warp">
+                                    <ol id="letter">
+
+                                    </ol>
+                                    <div class="new-tit-box tac mt10 mb20" style="display:none">
+                                        <a href="#" title="查看更多" class="fsize16 c-master f-fM disIb">查看更多</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow">
+                                <a href="#" title="">
+                                    <img src="" width="30" height="30" class="vam picImg" alt="">
+                                    <span class="vam disIb c-master" id="userName"></span>
+                                </a>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow">
+                                <a href="#" title="帮助" class="vam">
+                                    <span class="vam disIb c-fff">帮助</span>
+                                </a>
+                            </li>
+                            <li class="h-r-user undis h-login-li loginedLiShow">
+                                <a href="javascript:void(0)" title="退出" onclick="exit();" class=" vam">
+                                    <span class="vam disIb c-fff">退出</span>
+                                </a>
+                            </li>
+                            <!-- /未登录显示第1 li；登录后显示第2，3 li -->
+                        </ul>
+                        <aside class="h-r-search">
+
+                        </aside>
+                    </div>
+                    <aside class="mw-nav-btn">
+                        <div class="mw-nav-icon"></div>
+                    </aside>
+                    <aside class="mw-nav-seach mw-nav-seach-d1">
+                        <form action="#" method="post" id="headerformH5Search" onsubmit="searchKeyWord(this)">
+                            <label>
+                                <input type="text" value="" placeholder="" id="h5HeaderSearchName"
+                                       class="f-fM h1-mw-seach-input i_h_gb_s_input">
+                                <a href="javascript:void(0)" onclick="$('#headerformH5Search').submit();"
+                                   class="h2-mw-seach-ico h1-mw-seach-ico">&nbsp;</a>
+                            </label>
+                        </form>
+
+                        <div class="exam-mo-test-time tac">
+                            <span class="time c-fff f-fM vam examTimer"></span>
+                            <a href="javascript:void(0)" onclick="timePause(this)" title=""
+                               class="de-over-btn timePauseTag"></a>
+                        </div>
+
+                    </aside>
+                    <div class="clear mobile-clear"></div>
+                </section>
+            </header>
+            <section class="s-main">
+                <div class="viewport">
+                    <div class="mt10" id="postDetail">
+
+                    </div>
+                </div>
+            </section>
+            <script>
+                $(function () {
+                    rftFun();//左侧区域滚动固定
+                    topicCommentPaging();//一级评论分页和二级评论与回复分页
+                    groupHotTopic("10");//组热门话题
+                    browserRedirect();//用户信息悬浮显示
+                });
+
+
+            </script>
+        </div>
+    </div>
+
+    <div id="light" class="white_content" style="display: none; position: absolute; top: 25%; left: 25%; width: 50%; height: 50%; padding: 16px;  background-color: white; z-index:1002; overflow: auto;">
+        <div style="text-align: right; cursor: default; height: 40px;">
+            <span style="font-size: 16px;" onclick="closeletter()" >×</span>
+        </div>
+        <div class="u-r-all-box" id="p_tCont">
+            <!--发送信息，开始-->
+            <div class="u-account-box" id="Sendletter">
+                <!--<div class="clearfix">-->
+                    <!--<section class="fl u-acc-l">-->
+                        <!--收件人：<div id="receiver"></div>-->
+                        <!--<br/><br/><br/>-->
+                        <!--消息内容：-->
+                    <!--</section>-->
+                    <!--<br/><br/><br/><br/><br/><br/>-->
+                    <!--<div class="commentHtml">-->
+                        <!--<div>-->
+                            <!--<section class="lh-bj-list pr replyhtml">-->
+                                <!--<ul>-->
+                                    <!--<li class="unBr">-->
+                                        <!--<div class="of">-->
+                                            <!--<section class="n-reply-wrap">-->
+                                                <!--<div class="numb-box">-->
+                                                    <!--<fieldset><textarea name="" placeholder="输入您要发送的消息"-->
+                                                                        <!--id="messageContent" style="width: 835px;height: 200px;"></textarea>-->
+                                                    <!--</fieldset>-->
+                                                <!--</div>-->
+                                                <!--<p class="of mt5 tar pl10 pr10">-->
+                                                                    <!--<span class="fl ">-->
+                                                                        <!--<tt-->
+                                                                                <!--class="c-red commentContentmeg"-->
+                                                                                <!--style="display: none;"></tt></span>-->
+                                                    <!--<a href="javascript:void(0);" title="发送" onclick="sendMessage()" class="cBtn cb-send">发送</a>-->
+                                                <!--</p>-->
+                                            <!--</section>-->
+                                        <!--</div>-->
+                                    <!--</li>-->
+                                <!--</ul>-->
+                            <!--</section>-->
+
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+
+                <!--</div>-->
+            </div>
+        </div>
+
+    </div>
+    <div id="fade" class="black_overlay" style="display: none; position: absolute; top: 0%; left: 0%; width: 100%; height: 100%; background-color: black; z-index:1001; -moz-opacity: 0.6; opacity:.60; filter: alpha(opacity=60);" >
+    </div>
+</div>
+<div class="mo-footer">
+    <footer id="footer">
+        <section class="viewport">
+            <dl class="footer-elem">
+                <dt>
+                    <a href="#" title="武汉大学出版社"><img src="picture/logo.png"/></a>
+                </dt>
+                <dd>
+                    <ol class="footer-ol">
+                        <li><span>24小时服务热线：027-87215590 &nbsp;Email：cbs22@whu.edu.cn &nbsp;工作时间：9:00-18:00</span></li>
+                        <li><span>Copyright &copy;2013-2017 版权所有武大出版传媒股份公司  鄂ICP备15053495号 京公网安备11010802018055</span>
+                        </li>
+                        <li><span>Powered By <a target="_blank" href="#" title="网站开发技术支持(武汉大学出版社)" class="c-666">武汉大学国家网络安全学院</a></span>
+                        </li>
+                    </ol>
+                </dd>
+            </dl>
+            <div class="clear"></div>
+        </section>
+    </footer>
+    <section class="mo-foot">
+
+    </section>
+    <script type="text/javascript" src="js/webutils_6.js"></script>
+    <script type="text/javascript" src="js/common_6.js"></script>
+    <script type="text/javascript" src="js/group_top_3.js"></script>
+    <script src="js/group-commjs.js" type="text/javascript"></script>
+    <script src="js/popcard_3.js" type="text/javascript"></script>
+    <script>
+
+        var uploadServerUrl = '';
+
+        $(function () {
+
+            goTop();//返回顶部
+
+            fnShow();//公共下拉方法
+
+            //wmNavFun();//移动端导航显示与隐藏
+
+        });
+
+        function commentComment(pid,floor,nickname) {
+            //已废弃,前台无法展示对评论的评论
+           // $("#commentpid").val(pid);
+            fcFun();
+            $("#oneCommentContent").html("回复#"+floor+" "+nickname+":");
+            $("#oneCommentContent").focus();
+        }
+        function createComment() {
+            pid=$("#commentpid ").val();
+            if(pid==urlid){
+                type=0;
+            }else {
+                type=1;
+            }
+            // alert("pid:"+pid+" type"+type)
+            /*type=0,评论话题,type=1,评论评论
+            * */
+            // $(".cc-mm-ul").append('<li class="comment" style=""> <a class="isAct_a" href="javascript:void(0)" onclick="toBrowseUserCenter(533)" title="barrycom"><img class="isAct-img" src="http://wx.inxedu.com/static/gro/img/avatar-boy.gif" alt="barrycom" /></a> <div class="c-comm-title"> <span class="floor c-green">1楼</span> <a href="javascript:void(0)" onclick="toBrowseUserCenter(2)" title="barrycom" class="c-u-name c-master fsize14 vam">barrycom</a> <span class="c-time c-ccc vam">0秒前</span> </div> <div class="c-a-p clearfix"> <p>dfsfsdfsfdsfsd</p></div> <div class="isAct-attr of hLh30"> <a class="numb msg" href="javascript:void(0)" onclick="#" title="评论 0"> <em class="icon14">&nbsp;</em><span class="commentDto_comment_num_2">0</span> </a><a href="javascript:void(0)" onclick="commentPraise(2)" id="commentPraiseATitle_2" title="点赞 0" class="numb zan"> <em class="icon14">&nbsp;</em><span id="commentPraise_2">0</span> </a> <a href="javascript:void(0);" onclick="#" title="删除" class="jubao fsize12 c-ccc undis fr delMarkClass">删除</a> </div> </li>');
+            comment = $("#oneCommentContent").val();
+            if (!localStorage.getItem("loginName")) {
+                $("#oneCommentErrorMessage").html("请先登录").show();
+                return
+            }
+            if (comment == "") {
+                // alert("请输入内容");
+                $("#oneCommentErrorMessage").show();
+                return
+            } else {
+                var resultArry = new Array();
+
+                function phraseResut() {
+                    if (resultArry == "ok") {
+                        paras = "id=" + urlid;
+                        showComments();
+                    } else {
+                        $("#oneCommentErrorMessage").html("服务器繁忙").show();
+                    }
+                    // $("#comments").html(commentArray);
+                }
+
+                paras = "pid=" + pid;
+                paras += "$^@^$author=" + localStorage.getItem('loginName');
+                paras += "$^@^$body=" + comment;
+                paras += "$^@^$type=" + type;
+                getFromWS("frontmooc/saveComment.template", paras, resultArry, phraseResut);
+            }
+        }
+        function showletter(){
+            document.getElementById('light').style.display='block';
+            document.getElementById('fade').style.display='block'
+        }
+        function closeletter(){
+            document.getElementById('light').style.display='none';
+            document.getElementById('fade').style.display='none'
+        }
+    </script>
+</div>
+</body>
+</html>

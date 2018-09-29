@@ -27,17 +27,17 @@ function eraseFileInDatabase(fileid,formfield,callback){
             if(callback)  callback();
         };
         var urlstr = "/CoreService/writeIncFile?folder="+folder+"&template="+ templatef+"&targetfolder=../inc&incfile="+incfile;
-        alert(urlstr);
+  //      alert(urlstr);
         getFromWS(urlstr,null,refreshCurrent);
     }
 
     function kindeditAfterUpload(url,data,name){
         var picIds = $("#bufferPicIds")[0];
-        if(picIds){
-			if(picIds.value==""){
-				$("#bufferPicIds")[0].value = url.substr(url.length-19);
-			}else{
-				$("#bufferPicIds")[0].value += ";" + url.substr(url.length-19);
+        if(name == "image" && picIds){
+                if(picIds.value==""){
+                        $("#bufferPicIds")[0].value = url.substr(url.length-19);
+                }else{
+                        $("#bufferPicIds")[0].value += ";" + url.substr(url.length-19);
                 }
         }
     }
@@ -46,9 +46,9 @@ function eraseFileInDatabase(fileid,formfield,callback){
 //alert("here");
         var boxHeight = window.innerHeight;
         if(boxHeight>795)
-            boxHeight=775;
+            boxHeight=795;
         else
-            boxHeight -= 40;
+            boxHeight -= 20;
         hiBox("#"+dialogId, prmpt,1000,boxHeight,'','.a_close');
         var textareaHeight=600;
         if(boxHeight<795)
@@ -65,14 +65,10 @@ function eraseFileInDatabase(fileid,formfield,callback){
 
 
 //the remote server may be down, so try them in turn
-function oneUploadAction(server_total,server_id,current_server,taskId,paras){
-    if(current_server>server_total){
-        alert("None of websocket servers works!");
-        return;
-    }
+function oneUploadAction(server_order,taskId,paras){
     var started=false;
     var valid=true;
-    var urlstr = get_appropriate_ws_url(server_id) + "uploadfile?taskId=" +taskId;
+    var urlstr = get_appropriate_ws_url(server_order) + "uploadfile?taskId=" +taskId;
     alert(urlstr);
     var socket_up;
     if (typeof MozWebSocket != "undefined") {
@@ -89,18 +85,14 @@ function oneUploadAction(server_total,server_id,current_server,taskId,paras){
             $("#"+paras.process_div_id)[0].style.width = "0%";
             $("#"+paras.process_div_id)[0].innerHTML = "Uploading...";
         }
-        uploadToDatabase(paras.file,paras.callback,paras.additional_args,paras.target_fileid,server_id);
+        uploadToDatabase(paras.file,paras.callback,paras.additional_args,paras.target_fileid,server_order);
     };
 
     socket_up.onclose = function(evt) {
         if(started)
             return;
-        //alert(evt.code);
         if(!valid && evt.code==1006){  // can not connect
-            server_id++;
-            if(server_id>server_total)
-                server_id =1;
-            oneUploadAction(server_total,server_id,current_server+1,taskId,paras);
+            alert("Web socket connection failed!");
         }
     };
     
@@ -121,7 +113,7 @@ function oneUploadAction(server_total,server_id,current_server,taskId,paras){
 
 
 function uploadFile(input_file_id,callback,additional_args,target_fileid,process_div_id,process_div_id_width){
-    var server_total=2;
+    //var server_total=2;
     if(!target_fileid || target_fileid<1)
         target_fileid=0;
     var file_ctr = $("#"+input_file_id)[0];
@@ -129,32 +121,24 @@ function uploadFile(input_file_id,callback,additional_args,target_fileid,process
     var filename=file.name;
     if(filename.length>35)
         filename=filename.substr(0,35);
-    var taskId="upload"+ filename 
-//+ veriCode(10);
+    var taskId="upload"+ filename + veriCode(10);
     if(additional_args)
         additional_args += "&fifoname="+taskId;
     else
         additional_args = "fifoname="+taskId;
-    var server_id = 1+Math.floor(Math.random()*server_total); //1~server_total
+    //var server_id = 1+Math.floor(Math.random()*server_total); //1~server_total
     var paras={file:file,callback:callback,additional_args:additional_args,target_fileid:target_fileid,process_div_id:process_div_id};
     paras["process_div_id_width"]=process_div_id_width;
-    oneUploadAction(server_total,server_id,1,taskId,paras);
+    var obj = new Array();
+    var processResult= function()
+    {
+        var server_order = obj[0];
+        oneUploadAction(server_order,taskId,paras);
+    };
+    getFromWS("instant/serverOrder.spe","",obj,processResult);
 }
 
 function uploadToDatabase(file,callback,additional_args,target_fileid,server_id){
-    var userId = localStorage.getItem('userId');
-    var userToken = localStorage.getItem('userToken');
-    var obj = new Array();
-    var processResult = function(){
-        if(obj[0]!="ok"){
-	    alert("登陆超时，请重新登陆！");
-	    logout();
-	    return;
-        }
-    }
-    var paras = "$^@^$userId="+userId;
-    paras += "$^@^$userToken="+userToken;
-    getFromWS("mainmooc/security.template",paras,obj,processResult);
     if(typeof file == "string"){
         var file_ctr = $("#"+file)[0];
         file = file_ctr.files[0];
@@ -176,32 +160,23 @@ function uploadToDatabase(file,callback,additional_args,target_fileid,server_id)
         url_str = homeAddress()+"zs"+server_id+"/"+url_str;
     else 
         url_str = homeAddress()+url_str;
-    url_str += "&userId="+  userId + "&userToken=" + userToken;
+    url_str += "&userId="+  localStorage.getItem('userId') + "&userToken=" + localStorage.getItem('userToken');
     //alert(url_str);
     sendForm(url_str,form1,callback);
 }
 
     function kindeditUploadUrl(){
-
-		var obj = new Array();
-		var processResult = function(){
-		    if(obj[0]!="ok"){
-			alert("登陆超时，请重新登陆！");
-			logout();
-			return;
-		    }
-		}
-		getFromWS("mainmooc/security.template","",obj,processResult);
         var databaseType;
         var additional_args;
         var tmpEnt = $("#bufferDatabaseType");
         if(tmpEnt && tmpEnt.val() && tmpEnt.val()!="")
               databaseType = tmpEnt.val();
         else
-              databaseType = "PostgresXL";
+              databaseType = "Sqldb";
         additional_args = "databaseType="+databaseType;
-		additional_args += "&userId="+localStorage.getItem("userId");
-		additional_args += "&userToken="+localStorage.getItem("userToken");
-
+        tmpEnt = $("#bufferGeneratedId");
+        if(tmpEnt && tmpEnt.val() && tmpEnt.val()!="" && tmpEnt.val()!="0")
+              additional_args += "&relatedDoc=" + tmpEnt.val();
+        additional_args  += "&userId="+  localStorage.getItem('userId') + "&userToken=" + localStorage.getItem('userToken');
         return "/uploadFile.spe?requestSource=kindeditor&" + additional_args;
     }

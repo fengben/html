@@ -57,6 +57,7 @@
 
         //log日志
         function log() {
+                  alert(getAllSessionItems());
                  loadFromWS("home/bottomscripts.template", "sid=" + loginName + "$^@^$session=" + getAllSessionItems() + "$^@^$path=" + window.location.pathname);
              }
     })
@@ -431,7 +432,7 @@
     function getAllSessionItems(){
         var session = {};
         for (var i = sessionStorage.length - 1; i >= 0; i--) {
-            if (sessionStorage.key(i) != "userId" && sessionStorage.key(i) != "userToken" && sessionStorage.key(i) != "classification" && sessionStorage.key(i) != "_departId" && sessionStorage.key(i) != "userIp" && sessionStorage.key(i) != "loginName" && sessionStorage.key(i) != "_departdetail" && sessionStorage.key(i) != "_userName") {
+             if (sessionStorage.key(i) != "userId" && sessionStorage.key(i) != "userToken" && sessionStorage.key(i) != "classification" && sessionStorage.key(i) != "_departId" && sessionStorage.key(i) != "userIp" && sessionStorage.key(i) != "loginName" && sessionStorage.key(i) != "_departdetail" && sessionStorage.key(i) != "_userName") {
                 session[sessionStorage.key(i)] = sessionStorage.getItem(sessionStorage.key(i));
             }
         }

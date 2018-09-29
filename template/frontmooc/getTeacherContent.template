@@ -8,9 +8,9 @@ If recordCount()>0
 
   <section class="t-infor-pic">
 				  <%If head_portrait!=0%>
-        ///         	<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" class="img-responsive" width="110" height="110" >
+              	<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=head_portrait%>" width="280" height="280">
          ///暂时展示固定图片
-                         <img src="/pages/resouce/image/default.png"  width="280" height="280">
+         ///               <img src="/pages/resouce/image/default.png"  width="280" height="280">
                   <%Else%>
                      <img src="/pages/resouce/image/default.png"  width="110" height="110">
                   <%EndIf%>

@@ -19,7 +19,7 @@
        		}
 	</script>
     <title>mooc后台管理</title>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>-->
     <!--link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/-->
     <!--link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/-->
     <link rel="stylesheet" href="assets/css/bootstrap.css"/>
@@ -38,6 +38,8 @@
     <script src="/scripts/htmleditor/kindeditor.js"></script>
     <script src="/scripts/htmleditor/lang/zh_CN.js"></script>
     <script src="jquery/jquery.ztree.core.js"></script>
+        <script type="text/javascript" src="js/webutils.js"></script>
+
      <script type="text/javascript" src="js/jquery.cookie.js"></script>
 
     
@@ -300,8 +302,6 @@
     });
     var editor;
     function createEditor() {
-
-
         editor = KindEditor.create('textarea[id="articleContent"]', {
             allowFileManager: true,
             uploadJson: kindeditUploadUrl(),
@@ -324,6 +324,9 @@
 			myDataTable.fnClearTable();
 			myDataTable.fnDestroy();
 			$("#articlePanel").html(obj[0]);
+			myDataTable = $("#example-2").dataTable({
+//								"order": [2,"desc"]
+						});
 	    	}
 	  getFromWS("mainmooc/getArticleList.template", "operation=getSomeArticle$^@^$typeId=" + type + "$^@^$classification="+classification + "$^@^$loginName="+loginName, obj, processResult);
 	}
@@ -913,7 +916,9 @@ function ifTrabelInfoByColumnId(id){
                         <span id="loginName"></span></a>
                 </li>
                 <li>
-                    <a href="#" onclick="logout()">
+                    <!--<a href="#" onclick="logout(localStorage['userId'],localStorage['userToken'])">-->
+                    <a href="#" onclick="exit()">
+
                         <i class="fa-power-off" style="color:red;font-size:18px;"></i>
                     </a>
                 </li>

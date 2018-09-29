@@ -1,0 +1,28 @@
+
+
+<%If :operation=="newfile"%>
+	<%:sqlStr = "insert into mooc_filespace(file_id,publish_date,fullpath,publisher,description) values(?,now()::timestamp(0)without time zone,?,?,?) " %>
+	<%execSQL(:sqlStr,:fileId#"L",S(:parentDirName),S(:loginName),S(:description))%>
+	<%:sqlStr = "update uploadedfiles set relatedfile=-1 where filetuid=?" %>
+	<%execSQL(:sqlStr,:fileId#"L")%>
+<%EndIf%>
+<%If :operation=="isSameFile"%>
+	<%:sqlStr = "select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.publisher,A.publish_date,A.dir_name,A.description from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid AND B.filename =? AND A.fullpath = ? " %>
+	<%changeRecordSet(:sqlStr,S(:fileName),S(:fullpath))%>
+    <%:i=recordCount()%>
+    <%If :i>0%>
+        <%Exit "hasSameFile" %>
+    <%EndIf%>
+<%EndIf%>
+<%If :operation=="deletefile"%>
+<%debugMsg(:fileId#"update=================")%>
+        <%:sqlStr = "delete from mooc_filespace where file_id=?" %>
+        <%execSQL(:sqlStr,:fileId#"L")%>
+        <%:sqlStr = "delete from uploadedfiles where filetuid=? or relatedfile=? " %>
+        <%:x=execSQL(:sqlStr,:fileId#"L",:fileId#"L")%>
+        <%Exit(:x)%>
+<%EndIf%>
+
+
+
+

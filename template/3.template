@@ -1,6 +1,0 @@
-<%
-debugMsg("in---------------")
-:returnJson = jsonAddItem("","success",1)
-:returnJson = jsonAddItem(:returnJson,"error_info",S(""))
- =:returnJson
- %>

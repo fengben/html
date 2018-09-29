@@ -1,0 +1,24 @@
+<html>
+<head>
+    <script type="text/javascript" src="/Scripts/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="/Scripts/StationJSLib.js"></script>
+    <script>
+        function response(){
+            var file_ctr = $("#file1")[0];
+            var file = file_ctr.files[0];
+            var form1 = new FormData();
+            form1.append("i",12);
+            form1.append("FILE1",file);
+            //sendForm(homeAddress()+"examples/multipart.template",form1,"#clientArea");
+            loadFromWS("examples/feature/multipart.template",form1,"clientArea");
+        }
+    </script>
+</head>
+这个例子演示了如何通过表单将数据传递给template文件<br>
+表单通过javascript的FromData组件来构造，在表单中可以插入一般的数据，也可以插入文件<br>
+表单中的文件在templat中可以被识别出来，并且可以存入硬盘中<br>
+<input type="FILE" id="file1"><br>
+<input type="button" value="ok" onclick="javascript:response()">
+    <div id="clientArea">
+    </div>
+</htm>

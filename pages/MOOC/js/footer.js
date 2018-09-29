@@ -134,6 +134,7 @@ function deleteCartId(id,goodsid,type) {
  * 显示购物车数量
  */
 function showshopnums(){
+	return;
 	$.ajax({
 		url:"/shopcart/ajax/shopcartnums",
 		data:{"type":1},

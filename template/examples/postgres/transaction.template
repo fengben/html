@@ -1,0 +1,4 @@
+<%:sql1 = merge("insert into Person(city_id,name,age,company) values(?,?,?,?)", 4,'何斌大',98,'木材加工厂')%>
+<%:sql2 = merge("insert into City(name) values(?)",'南京')%>
+<%:r=execTransaction(:sql1,:sql2)%>
+<%=:r%>

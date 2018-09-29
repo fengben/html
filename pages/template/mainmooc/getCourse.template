@@ -1,8 +1,0 @@
-    ///根据edx传的信息检索课程   title:课程名,    publisher:课程创建者,     course_addr:课程唯一地址
-	<%:selectSql = "select id from  moocarticle where course_addr = ? " %>
-	<%
-	///:course_addr="148521321"
-	debugMsg("-----++++++++++-------------------"#S(:course_addr))
-    :x=changeRecordSet(:selectSql,S(:course_addr))
-	%>
-    <%Exit(:x)%>

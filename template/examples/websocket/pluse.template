@@ -1,0 +1,12 @@
+<%debugMsg("--------"+:user_message+"-------------")%>
+<%debugMsg(:service_type,"show_name")%>
+
+<%If :user_message=="terminate"%>
+    <%Exit "terminate websocket"%>
+<%EndIf%>
+<%If :service_type=="unique"%>
+    <%:data = :user_message%>
+    <%debugMsg("-data:-------"+:data+"-------------")%>
+<%EndIf%>
+<%=:data%>
+

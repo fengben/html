@@ -129,7 +129,7 @@ EndIf%>
 
 		If :flag==0
 		   debugMsg(id#"查询如果是三级==================")
-		   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(&"#id#"&)&><i class=&fa-trash& ></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(&"#id#"&,&"#name#"&,&"#sort#"&)&><i class=&fa-edit&></i>修改</span>'},"
+		   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(\'"#id#"\')&><i class=&fa-trash& ></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(\'"#id#"\',\'"#name#"\',\'"#sort#"\')&><i class=&fa-edit&></i>修改</span>'},"
 
 		Else
 			If parent_id ==0
@@ -139,7 +139,7 @@ EndIf%>
 			   :childCount=execSQL(:selectChildCountSql,id)
 			   :idxc = indexOf(:childCount,"=")
 			   :countChild = mid(:childCount,:idxc+1)
-			   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(&"#id#"&,&"#name#"&,&"#sort#"&)&><i class=&fa-edit&></i>修改</span><span class=&editorgan&  style=&color:#5ca323& onclick=&addmodal(&"#id#"&,&"#:countChild#"&)&><i class=&fa-plus&></i>新增</span>'},"
+			   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(&"#id#"&,\'"#name#"\',\'"#sort#"\')&><i class=&fa-edit&></i>修改</span><span class=&editorgan&  style=&color:#5ca323& onclick=&addmodal(\'"#id#"\',\'"#:countChild#"\')&><i class=&fa-plus&></i>新增</span>'},"
 			Else
 			   debugMsg(id#"查询如果是二级=================")
 			   ///查询出该id的子栏目数量
@@ -147,14 +147,15 @@ EndIf%>
 			   :childCount=execSQL(:selectChildCountSql,id)
 			   :idxc = indexOf(:childCount,"=")
 			   :countChild = mid(:childCount,:idxc+1)
-			   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(&"#id#"&)&><i class=&fa-trash&></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(&"#id#"&,&"#name#"&,&"#sort#"&)&><i class=&fa-edit&></i>修改</span><span class=&editorgan& style=&color:#5ca323& onclick=&addmodal(&"#id#"&,&"#:countChild#"&)&><i class=&fa-plus&></i>新增</span>'},"
+			   :allcolumnData = :allcolumnData#"{'id':"#id#",'pId':"#parent_id#",'text':'<span id=&text&>"#name#"</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(\'"#id#"\')&><i class=&fa-trash&></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(\'"#id#"\',\'"#name#"\',\'"#sort#"\')&><i class=&fa-edit&></i>修改</span><span class=&editorgan& style=&color:#5ca323& onclick=&addmodal(\'"#id#"\',\'"#:countChild#"\')&><i class=&fa-plus&></i>新增</span>'},"
 			EndIf
 
 		EndIf
 
     	EndRepeat
 	debugMsg(:allcolumnData#"=================")
-	
+	:allcolumnData = "{'id':1,'pId':1,'text':'<span id=&text&>所有栏目</span><span class=&editorgan& style=&color:#cc3f44& onclick=&deleteModalshow(&1&)&><i class=&fa-trash& ></i>删除</span><span class=&editorgan& style=&color:#18a8df& onclick=&digmodal(&1&,&所有栏目&,&0&)&><i class=&fa-edit&></i>修改</span>'},"
+	debugMsg(:allcolumnData#"222222222222222222=================")
 	
 	Exit(:allcolumnData)
 

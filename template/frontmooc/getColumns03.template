@@ -1,7 +1,8 @@
 ///获取栏目三课程数据
 <%
 :sql = "select id,name from mooccolumns WHERE  sort =3 "
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat
@@ -69,7 +70,8 @@ $_@_$
   ///获取计算机栏目一课程数据
   <%
   :sql = "select A.id, A.title, A.content_text, A.on_top,A.publish_date,A.school, A.count, A.pic_id, A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and (B.id=(select id from mooccolumns WHERE  sort =3) or B.parent_id=(select id from mooccolumns WHERE  sort =3)) order by A.on_top desc,A.id desc  limit 6 offset 0"
-  changeRecordSet(:sql);
+ /// changeRecordSet(:sql);
+  :x = singleSQL(:sql)
   :totalNumber = recordCount()
   If :totalNumber >0
   Repeat

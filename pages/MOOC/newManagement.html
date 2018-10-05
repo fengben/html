@@ -19,7 +19,7 @@
        		}
 	</script>
     <title>mooc后台管理</title>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>
+    <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic"/>-->
     <!--link rel="stylesheet" href="assets/css/fonts/linecons/css/linecons.css"/-->
     <!--link rel="stylesheet" href="assets/css/fonts/fontawesome/css/font-awesome.min.css"/-->
     <link rel="stylesheet" href="assets/css/bootstrap.css"/>
@@ -60,7 +60,7 @@
 
     //保持(被选中的)侧边栏高亮
     function keepActive(){
-        $("#a_articleManagement").parent().addClass('active');
+        $("#a_newManagement").parent().addClass('active');
     }
     //日志记录
    function log() {
@@ -302,8 +302,6 @@
     });
     var editor;
     function createEditor() {
-
-
         editor = KindEditor.create('textarea[id="articleContent"]', {
             allowFileManager: true,
             uploadJson: kindeditUploadUrl(),
@@ -344,14 +342,12 @@
 					}else{
 						reloadArticle(type);
 					}
-
                 } else {
                     alert("删除失败");
                 			}
             			}
             var paras = "id=" + id;
             paras += "$^@^$operation=deleteArticle";
-
             getFromWS("mainmooc/saveArticle.template", paras, result, deleteResult);
 	}
 
@@ -405,7 +401,7 @@
             editor.remove("#articleContent");
         	}
         $("#modal-article #appendix-group").html("");
-        //新建文章
+        //新建新闻
         if (flag == 0) {
             $("#modal-article #publisher").val(localStorage.getItem("loginName"));
             $("#modal-article #articleId").val(flag);
@@ -422,13 +418,11 @@
             $("#modal-article #appendixId").val("");
             $("#modal-article #picName").val("");
             $("#modal-article #appendixName").val("");
-
             $("#modal-article #picInput").removeAttr("disabled");
 			$("#travelInfo #theme").val("");
 			$("#travelInfo #district").val("");
 			$("#travelInfo #money").val("");
 			$("#travelInfo #address").val("");
-
             createEditor();
             jQuery('#modal-article').modal('show', {backdrop: 'static'});
 
@@ -621,52 +615,27 @@ function uploadAppendix(){
 
     function doSave() {
         var title = $("#modal-article #title").val();
-        //var school = $("#modal-article #school").val();
-        //alert(school);
-        // if(school!= ""){
-        //     //查询数据库是否有相应学校
-        //     var schoolcontent = new Array();
-        //     var contentResult = function(){
-        //         /* jQuery("#SchoolCourse").html(content[0]);*/
-        //
-        //         if(schoolcontent[0] !="no"){
-        //             var schoollist = schoolcontent[0].split(";");
-        //             $("#modal-article #school").val(schoollist[2]);
-        //             //alert(schoollist[2]);
-        //         }esle
-        //         {
-        //             $("#modal-article #school").val();
-        //         }
-        //     }
-        //     getFromWS("homemooc/getSchoolName.template","school="+school,schoolcontent,contentResult);
-        // }
         var type = $("#modal-article #type").val();
         var content = editor.html();
         var picId = $("#modal-article #picId").val();
         var appendixId = $("#modal-article #appendixId").val();
-	
 		var theme = $("#travelInfo #theme").val();
 		var district = $("#travelInfo #district").val();
 		var money = $("#travelInfo #money").val();
 		var address = $("#travelInfo #address").val();
-
         if (!title  || !type || !publisher || !content || (!$("#picInput").val()&&!picId)) {
             alert("请把标题，类型，文章内容，文章图片补充完整");
             return;
-        	}
-
-//如果是旅游信息则需要填写 主题，地区，花费，详细地址的信息
-		if($("#bufferIfTravelInfo").val()=="yes"&&(!theme || !district || !money || !address)){
-			alert("请把主题，地区，花费，详细地址补充完整");
-			return;
-		}
+        }
+　　　　
         if ($("#picInput").val()) {
             //上传图片
             var setPicId = function (fileId_pic) {
                 if (fileId_pic) {
+
                     picId = fileId_pic;
+                    console.log(picId);
                     doSaveArticle(picId);
-                    			
                 		}	
             		}
             uploadToDatabase("picInput", setPicId, "databaseType=PostgresXL");
@@ -679,17 +648,13 @@ function uploadAppendix(){
         var title = $("#modal-article #title").val();
         var type = $("#modal-article #type").val();
         var top = $("#modal-article #topArticle").val();
-        var school = $("#modal-article #school").val();
+        //var school = $("#modal-article #school").val();
         var publisher = localStorage.getItem("loginName");
         var picIds = $("#bufferPicIds").val();
         var content = editor.html();
 		var content_text = editor.text();
-//和旅游推荐有关的
-		var theme = $("#travelInfo #theme").val();
 		var district = $("#travelInfo #district").val();
-		var money = $("#travelInfo #money").val();
 		var address = $("#travelInfo #address").val();
-		var ifTravelInfo = $("#bufferIfTravelInfo").val();
 		var appendixId = $("#appendixId").val();
 
         var operation;
@@ -702,35 +667,30 @@ function uploadAppendix(){
         paras += "$^@^$title=" + title;
         paras += "$^@^$type=" + type;
         paras += "$^@^$top=" + top;
-        paras += "$^@^$school=" + school;
+        //paras += "$^@^$school=" + school;
         paras += "$^@^$publisher=" + publisher;
         paras += "$^@^$content=" + content;
 		paras += "$^@^$content_text=" + content_text;
         paras += "$^@^$picIds=" + picIds;
         paras += "$^@^$picId=" + picId;
         paras += "$^@^$appendixId=" + appendixId;
-
-		paras += "$^@^$theme=" + theme;
         paras += "$^@^$district=" + district;
-        paras += "$^@^$money=" + money;
         paras += "$^@^$address=" + address;
-        paras += "$^@^$ifTravelInfo=" + ifTravelInfo;
-
         paras += "$^@^$operation=" + operation;
         var objs = new Array();
         var afterSaveArticle = function () {
             if (objs[0] == "ok") {
         			$("#modal-article #bufferPicIds").val("");
 					$("#modal-article").modal('hide');                
-					reloadArticle(type);
+					reloadArticle('2018088683860003597');
             } else {
                 alert("存储失败");
             		}
         	};
-        getFromWS("mainmooc/saveArticle.template", paras, objs, afterSaveArticle);
+        getFromWS("mainmooc/saveNews.template", paras, objs, afterSaveArticle);
     }
 
-    //得到外部传来的数据]
+    //得到外部传来的数据
     function closeDia() {
         var picIds = $("#modal-article #bufferPicIds").val();
         if (picIds != "") {
@@ -740,13 +700,13 @@ function uploadAppendix(){
             var afterDelete = function () {
                 $("#modal-article").modal('hide');
         		var type = $("#modal-article #type").val();
-				reloadArticle(type);
+				reloadArticle('2018088683860003597');
             		};
-            getFromWS("mainmooc/saveArticle.template", paras, objs, afterDelete);
+            getFromWS("mainmooc/saveNews.template", paras, objs, afterDelete);
         } else {
             $("#modal-article").modal('hide');
 			var type = $("#modal-article #type").val();
-			reloadArticle(type);
+			reloadArticle('2018088683860003597');
         	}
     }
 
@@ -763,7 +723,6 @@ function saveBatchDelete(){
 		for (var i = 0; i < checkboxs.length; i++) {
 		    if (checkboxs[i].checked){
 				ids = ids + checkboxs[i].value + ";";
-
 		    	}
 		}
 	    var result = new Array();
@@ -841,23 +800,6 @@ function saveBatchCopy(){
 		paras += "$^@^$articleType="+articleType;
 		paras += "$^@^$operation=bitchCopy";
 		getFromWS("mainmooc/saveArticle.template", paras, obj, processResult);
-}
-
-function ifTrabelInfoByColumnId(id){
-	var paras = "columnId=" + id;
-	paras += "$^@^$operation=ifTravelInfoColumn";
-	var obj = new Array();
-	var processResult = function(){
-		if(obj[0] == "yes"){
-			$("#travelInfo").css("display","block");
-			$("#bufferIfTravelInfo").val("yes");
-		}else{
-			$("#travelInfo").css("display","none");
-			$("#bufferIfTravelInfo").val("no");
-		}
-	
-	}
-	getFromWS("mainmooc/travelInfo.template",paras,obj,processResult);
 }
 </script>
 <div style="display:none">
@@ -1082,7 +1024,6 @@ function ifTrabelInfoByColumnId(id){
                                    style="display:inline-block;width:70px;color: transparent;"
                                    onchange="updatePicName()">
                             <input type="button" value="删除图片" onclick="deletePic()">
-
                         </div>
 
                     </div>

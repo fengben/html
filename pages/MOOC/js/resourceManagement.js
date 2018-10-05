@@ -9,9 +9,10 @@ function catalogue() {
     var allFilesMap = new Array();
     var allFilesMapResult = function () {
         //channelsToTreeData()函数是构造ace_tree树
+        console.log(allFilesMap);
         var folderData = channelsToTreeData(allFilesMap);
         //treeDataSource是ace_tree的数据源
-        console.log(allFilesMap);
+        
         treeDataSource = new DataSourceTree({data: folderData});
         jQuery(function($){
             $("#tree2").removeData("tree");
@@ -30,7 +31,6 @@ function catalogue() {
         });
     }
     getFromWS("zyMooc/zyFileSpaceNew.template", allFilesMap, allFilesMapResult);
-
 }
 //右侧资源列表全部加载
 function allFileList(){

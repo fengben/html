@@ -1,7 +1,8 @@
 
 <%
 :sql = "SELECT NAME,id  FROM mooccolumns WHERE parent_id =  2018112858180021535 ORDER BY ID LIMIT 5 OFFSET 0"
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat

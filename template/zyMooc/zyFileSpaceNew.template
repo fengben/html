@@ -1,16 +1,14 @@
 
-<%:sql="select B.filename,B.size,B.contenttype,A.id,A.fullpath,A.file_id,A.dir_name,A.publisher,A.publish_date,A.description from mooc_filespace as A, uploadedfiles as B where A.file_id=B.filetuid AND A.fullpath = '/'" %>
+<%:sql="select id,fullpath,file_id,dir_name,publisher,publish_date,description from mooc_filespace where fullpath = '/'" %>
 
 <%changeRecordSet(:sql)%>
 
 <%
     :allfileData=""
     If recordCount()>0
-        Repeat             
+        Repeat
+        ///:allcolumnData = :allcolumnData#"{'id':'"#id#"','pId':'"#parent_id#"','text':'"#name#"'},"
         :allfileData = :allfileData#"{'dir_name':'"#dir_name#"','id':'"#id#"','file_id':'"#file_id#"'},"
-        ///:allcolumnData = :allcolumnData#dir_name#";"#id#";"#file_id
-        ///Exit(dir_name#";"#id#";"#file_id);
-         ///Exit(dir_name#";"#id#";"#money#";"#address);
         EndRepeat
         Exit(:allfileData);
     Else

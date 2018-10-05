@@ -1,6 +1,7 @@
 <%
 :sql = "select mooc_userprofile.id,head_portrait,mooc_userprofile.email, mooc_userprofile.name, school, major_id,nickname, birthday, age, sex, introduction,classification  from mooc_userprofile INNER JOIN user_passports on mooc_userprofile.email = user_passports.login_name WHERE classification=2018096277110017073  limit 4 offset 0"
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat

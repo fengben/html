@@ -1,7 +1,8 @@
 <%
 ///新闻资讯图片展示
 :sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 and A.pic_id !=0 order by A.on_top desc,A.id desc limit 2 offset 0"
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber>0
 	Repeat
@@ -31,7 +32,8 @@ $_@_$
 <%
 ///新闻资讯标题展示
 :sql = "select A.id, B.name, A.title, A.content_text, A.pic_id,A.publish_date from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 order by A.on_top desc,A.id desc limit 8 offset 0"
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber>0
 	Repeat
@@ -51,7 +53,8 @@ $_@_$
 <%
 ///全部新闻展示
 :sql = "select A.id, B.name, A.title, A.content_text, A.pic_id from moocarticle as A, mooccolumns as B where A.article_type=B.id and B.id=2018088683860003597 order by A.on_top desc,A.id desc limit 4 offset 0"
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber>0
 	Repeat

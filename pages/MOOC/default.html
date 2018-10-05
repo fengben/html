@@ -86,6 +86,9 @@
                 jQuery("#Columns_pic2").html(recentHomeRotationMap[2]);
                 //栏目三图
                 jQuery("#Columns_pic3").html(recentHomeRotationMap[3]);
+
+                //回调相应的幻灯对应的图片
+               sSwiperFun(); //幻灯片调取
             }
             getFromWS("frontmooc/getPictureList.template", recentHomeRotationMap, HomeRotationMapResult);
             //首页全部分类展示
@@ -94,48 +97,12 @@
 
                 jQuery("#allColumnsList").html(allColumnsMap[0]);
             }
-            // getFromWS("frontmooc/getAllColumnsResult.template", allColumnsMap, allColumnsMapResult);
-
-            // var allSecondColumnsMap = new Array();
-            // var  allSecondColumnsMapResult = function () {
-            //     jQuery("#allSecondColumnsList1").html(allSecondColumnsMap[0]);
-            //     jQuery("#allSecondColumnsList2").html(allSecondColumnsMap[1]);
-            //     jQuery("#allSecondColumnsList3").html(allSecondColumnsMap[2]);
-            //     jQuery("#allSecondColumnsList4").html(allSecondColumnsMap[3]);
-            //     jQuery("#allSecondColumnsList5").html(allSecondColumnsMap[4]);
-            // }
-            // $("#2018112858650021541").mouseover(function(){
-            //     //首页三级分类展示
-            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            // });
-            // $("#2018112859970021584").mouseover(function(){
-            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            //
-            // });
-            // $("#2018112860600021632").mouseover(function(){
-            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            // });
-            // $("#2018112861090021663").mouseover(function(){
-            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            // });
-            // $("#2018112861680021689").mouseover(function(){
-            //     getFromWS("frontmooc/getSecondColumnsResult.template",allSecondColumnsMap, allSecondColumnsMapResult);
-            // });
-
-            //推荐194所高校
-            // var recentUniversity = new Array();
-            // var processUnResult = function () {
-            //
-            //     jQuery("#AllUniversity").html(recentUniversity[0]);
-            // }
-            // getFromWS("frontmooc/getUniversity.template", recentUniversity, processUnResult);
+             getFromWS("frontmooc/getAllColumnsResult.template", allColumnsMap, allColumnsMapResult);
 
             //推荐课程
             var recentRecommendCourse = new Array();
             var processRecommendCourseResult = function () {
-
                 jQuery("#goodClass").html(recentRecommendCourse[0]);
-
             }
             getFromWS("frontmooc/getReCourse.template", recentRecommendCourse, processRecommendCourseResult);
             //名师讲坛
@@ -160,8 +127,6 @@
             var processCoResult01 = function () {
                 jQuery("#ColumnsResult01").html(recentColumns01[0]);
                 jQuery("#AllCourse01").html(recentColumns01[1]);
-
-
             }
             getFromWS("frontmooc/getColumns01.template", recentColumns01, processCoResult01);
 
@@ -170,8 +135,6 @@
             var processCoResult02 = function () {
                 jQuery("#ColumnsResult02").html(recentColumns02[0]);
                 jQuery("#AllCourse02").html(recentColumns02[1]);
-
-
             }
             getFromWS("frontmooc/getColumns02.template", recentColumns02, processCoResult02);
 
@@ -189,8 +152,6 @@
             var processCoResult04 = function () {
                 jQuery("#ColumnsResult04").html(recentColumns04[0]);
                 jQuery("#AllCourse04").html(recentColumns04[1]);
-
-
             }
             getFromWS("frontmooc/getColumns04.template", recentColumns04, processCoResult04);
 
@@ -199,8 +160,6 @@
             var processCoResult05 = function () {
                 jQuery("#ColumnsResult05").html(recentColumns05[0]);
                 jQuery("#AllCourse05").html(recentColumns05[1]);
-
-
             }
             getFromWS("frontmooc/getColumns05.template", recentColumns05, processCoResult05);
 
@@ -235,22 +194,6 @@
                 //alert(paras);
             }
         }
-
-        //收藏变红色
-       /* function add(obj)
-
-        {
-
-            /!*$('.').find('a').each(function() {
-                //tmp = $(this).text();
-                $(this).css("background-color","#cb2020");
-            });*!/
-            //$(obj).addClass("current");
-            //$(obj).parent().attr("class","hover")
-            //$(obj).parent.attr("class","visited");
-           $(obj).on("mouseover")
-        }
-*/
     </script>
 </head>
 <body class="W-body">
@@ -324,12 +267,6 @@
                             </section>
                         </div>
                     </section>
-                    <!--<div class="mt20 sf-lr-wrap tac">
-                        <h6 class="hLh20 mb15"><span class="c-666 fsize14">第三方快捷登录</span></h6>
-                        <a class="qq-sf" href="javascript:thirdPartyLogin('QQ')" title="QQ登录"> </a>
-                        <a class="wb-sf" href="javascript:thirdPartyLogin('SINA')" title="微博登录"> </a>
-                        &lt;!&ndash;<a class="wx-sf" href="javascript:thirdPartyLogin('WEIXIN')" title="微信登录"> </a>&ndash;&gt;
-                    </div>-->
                 </div>
             </div>
         </div>
@@ -427,23 +364,7 @@
                                     </div>
                                     <div class="n-i-m-bottom"　 id="allColumnsList">
 
-                                        <section class="i-j-item i-j-it-all" style="visibility: hidden">
-                                            <div class="i-j-item-bx">
-                                                <div class="i-j-it-txt">
-                                                    <a class="i-j-item-first-a fsize16 c-fff"
-                                                       href="showcoulist.html?id=<%=id%>">计算机</a>
-                                                </div>
-                                            </div>
-                                        </section>
-                                        <section class="n-i-m-more i-j-it-all">
-                                            <div class="i-j-item-bx">
-                                                <div class="DT-arrow">
-                                                    <em>◆</em>
-                                                    <span>◆</span>
-                                                </div>
-                                                <a class="f-fM" href="showcoulist.html?id=2018112858180021535">更多分类</a>
-                                            </div>
-                                        </section>
+
 
                                     </div>
                                 </section>
@@ -653,21 +574,7 @@
                 </div>
                 <!--分类课程结束  -->
                 <!-- /网校名师 开始 -->
-                <div class="of bg-f8">
-                    <section class="container">
-                        <header class="comm-title">
-                            <span class="fr mt15 mr10 hyh"><a href="teacherlist.html?id=2018112858180021535" title="更多"
-                                                              class="c-master fsize14">更多 &gt;</a></span>
-                            <h2 class="fl tac tit-header"><span class="c-333">名家讲师</span></h2>
-                        </header>
-                        <article class="live-no-title">
-                            <div class="demo-teach-warp">
-                                <ul class="clearfix demo-teach-list" id="AllTeacher">
-                                </ul>
-                            </div>
-                        </article>
-                    </section>
-                </div>
+                
                 <!-- /网校名师 结束 -->
                 <div class="bg-fff of">
                     <section class="container">

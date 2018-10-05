@@ -1,6 +1,6 @@
 var theme_color=$("#theme_color").val();
 $(function() {
-	sSwiperFun(); //幻灯片调取
+
 	upSlideFun("#iQuestion");//向上滚动互动
 	scrollLoad(); //响应滚动加载课程图片
 	slideScroll("#live-box-in", "#live-box-in .lv-prev", "#live-box-in .lv-next", "#i-live-cou-list", 5, true); //首页直播预告滚动

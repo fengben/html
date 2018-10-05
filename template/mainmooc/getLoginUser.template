@@ -5,13 +5,17 @@
 <%
 
     :x=changeRecordSet(:selectSql,S(:clean_account))
-     :banner_url="my.html?id="#id
-    :k =jsonAddItem("","userId",id)
-    :k =jsonAddItem(:k,"displayName",S(nickname))
-    :k =jsonAddItem(:k,"email",S(email))
-    :k =jsonAddItem(:k,"picImg",S(head_portrait))
-    :k =jsonAddItem(:k,"bannerUrl",S(:banner_url))
-    debugMsg("-------"#:k)
+    If :x == "ok"
+        :banner_url="my.html?id="#id
+        :k =jsonAddItem("","userId",id)
+        :k =jsonAddItem(:k,"displayName",S(nickname))
+        :k =jsonAddItem(:k,"email",S(email))
+        :k =jsonAddItem(:k,"picImg",S(head_portrait))
+        :k =jsonAddItem(:k,"bannerUrl",S(:banner_url))
+        debugMsg("-------"#:k)
+    Else
+        Exit
+    EndIf
 %>
 <%=:k%>
 

@@ -23,7 +23,7 @@ If :totalNumber>0
 									</a>
 								</div>
 								<a href="articleinfo.html?id=<%=id%>" target="_blank" class="pic-a-n">
-<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>"  >								</a>
+<img src="/one/downloadFile.spe?dtype=PostgresXL&mode=html&fileid=<%=pic_id%>" style="height:380px;">								</a>
 								<a href="articleinfo.html?id=<%=id%>" target="_blank" class="name-a-n">
 									<span class="txtOf"><%=title%></span>
 								</a>

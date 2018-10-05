@@ -27,7 +27,7 @@ function localStorageArgsIntoFormData(form1){
 //invoke a web method, and then pass values to several variables
 //in in-parameter, '$^@^$' is used to separate parameters
 //in response data, '$_@_$' is used to separate values
-function getFromWS(url_str,post_data_,outargs_,callback_){
+function getFromWS(url_str,post_data_,outargs_,callback_,asy){
     var argc = arguments.length;
     if(argc<3){
         alert("no enough arguments in getFromWS()");
@@ -70,72 +70,11 @@ function getFromWS(url_str,post_data_,outargs_,callback_){
     if (xmlhttp!=null){
         try{
             xmlhttp.onreadystatechange=state_Change;
-            xmlhttp.open("POST", homeAddress()+"one/"+url_str, true);
-            if(typeof post_data ==="string")
-                post_data += localStorageArgs();
-            else
-                localStorageArgsIntoFormData(post_data);
-            xmlhttp.send(post_data);
-        }
-        catch(exception){
-            alert("xmlHttp Fail");
-        }
-    }
-    else{
-        alert("Your browser does not support XMLHTTP.");
-    }
-}
-
-//invoke a web method, and then pass values to several variables
-//in in-parameter, '$^@^$' is used to separate parameters
-//in response data, '$_@_$' is used to separate values
-function remoteService(url_str,post_data_,callback_){
-    var argc = arguments.length;
-    if(argc<2 || argc>3){
-        alert("Invalid number of arguments in remoteService()");
-        return;
-    }
-    var post_data;
-    var callback;
-    if(argc==2){
-        post_data="";
-        callback = post_data_;
-    }
-    else{
-        post_data= post_data_;
-        callback = callback_;
-    }
-    var outargs = new Array();
-    var xmlhttp=null;
-    var state_Change=function(){
-        if (xmlhttp.readyState==4){// 4 = "loaded"
-            if (xmlhttp.status==200){// 200 = OK
-                if(outargs){
-                    var htmlstr =  xmlhttp.responseText;
-                    var q = htmlstr.split('$_@_$');
-                    for(var i=0;i<q.length;i++){            
-                        outargs[i] = q[i];
-                    }
-                }
-                if(callback)
-                    callback(outargs);
-            }
-	    else{
-                //alert("in getfromws("+url_str+")");
-                //alert("Problem retrieving XML data");
-	    }
-        }
-    };
-    if (window.XMLHttpRequest){// code for all new browsers
-        xmlhttp=new XMLHttpRequest();
-    }
-    else if (window.ActiveXObject){// code for IE5 and IE6
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-    }
-    if (xmlhttp!=null){
-        try{
-            xmlhttp.onreadystatechange=state_Change;
-            xmlhttp.open("POST", homeAddress()+"one/"+url_str, true);
+			if(asy){
+            	xmlhttp.open("POST", homeAddress()+"one/"+url_str, true);
+			}else{
+            	xmlhttp.open("POST", homeAddress()+"one/"+url_str, asy);
+			}
             if(typeof post_data ==="string")
                 post_data += localStorageArgs();
             else
@@ -152,30 +91,31 @@ function remoteService(url_str,post_data_,callback_){
 }
 
 //之所以要使用回调函数，是因为调用web service本身采用的是异步模式
-function logout(id,token,callback){
-    if(arguments.length<2){
-        alert("no enough arguments in logout()");
-        return;
-    }
-    var obj = new Array();
-    var processResult = function(){
-        if(obj[0]=="ok"){
-            for(var i=1;i<obj.length;i++)
-                localStorage.removeItem(obj[i]);
-            callback();
-        }
-        else {
-            localStorage.clear();
-        }
-    };
-    try {
-        getFromWS("/CoreService/logout", "", obj, processResult);
-        throw "error"
-    }catch (e) {
-        // alert("err");
-        //解决长时间不操作，服务器退出，页面没有登出
-        localStorage.clear();
-    }
+function logout(){
+
+	var obj = new Array();
+	var passResult = function(){
+	    if(obj[0]=="ok"){	
+		    var result = new Array();
+		    var processResult = function(){
+			if(result[0]=="ok"){
+			    for(var i=1;i<result.length;i++)
+					localStorage.removeItem(result[i]);
+					location.href = "login.html";
+		       		}
+		    	};    
+		    getFromWS("/CoreService/logout","",result,processResult);
+	    }else{
+			localStorage.removeItem("userId");
+			localStorage.removeItem("userToken");
+			localStorage.removeItem("classification");
+			localStorage.removeItem("loginName");
+			location.href = "login.html";
+		}
+	}
+	getFromWS("maintain/security.template",localStorageArgs(),obj,passResult);
+
+
 }
 
 
@@ -231,7 +171,7 @@ function normalContentType(){
 }
 
 
-function homeAddress(need_protocol){
+function homeAddress(){
     var addressHead = window.location.href;
     var buf;
     buf = addressHead.substr(0,6);
@@ -245,12 +185,9 @@ function homeAddress(need_protocol){
     }
     var index = buf.indexOf("/");
     if(index<0)
-        buf = buf+"/";
-    else
-        buf = buf.substr(0,index+1);
-    if(arguments.length==0 || need_protocol)
-        return addressHead+buf;
-    return buf;
+        return addressHead+buf+"/";
+    buf = buf.substr(0,index+1);
+    return addressHead+buf;
 }
 
 // invoke a web method, and then pass html to several DIVs
@@ -364,21 +301,21 @@ function sendForm(urlstr,form1,callback){
         if(xrq.readyState==4){// 4 = "loaded"
             if(xrq.status==200){// 200 = OK
                 if(typeof args[2]==="function"){
-                    // alert(xrq.responseText);
+//                    alert(xrq.responseText);  
                     callback(xrq.responseText);
                 }else{
                     var divcontent=xrq.responseText.split('$_@_$');
                     if(divN>divcontent.length)
                         divN=divcontent.length;
                     for(var i=0;i<divN;i++)
-                        $(args[i+2]).html(divcontent[i]);
+                        $("#"+args[i+2]).html(divcontent[i]);
                 }
             }
             else{
-                // alert("in sendform");
+                alert("in sendform");
                 alert("Problem retrieving XML data:"+xrq.status);
         }}};
-    //alert(urlstr);
+//    alert(urlstr);
     xrq.open("POST",urlstr);
     xrq.send(form1);
 }

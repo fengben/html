@@ -95,7 +95,7 @@ function oneUploadAction(server_order,taskId,paras){
             alert("Web socket connection failed!");
         }
     };
-
+    
     socket_up.onmessage = function(msg) {
         if(msg.data=="heartbeat")
             return;
@@ -158,7 +158,7 @@ function uploadToDatabase(file,callback,additional_args,target_fileid,server_id)
     }
     if(server_id)
         url_str = homeAddress()+"zs"+server_id+"/"+url_str;
-    else
+    else 
         url_str = homeAddress()+url_str;
     url_str += "&userId="+  localStorage.getItem('userId') + "&userToken=" + localStorage.getItem('userToken');
     //alert(url_str);

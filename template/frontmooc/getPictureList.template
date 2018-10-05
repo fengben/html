@@ -1,7 +1,8 @@
  ///首页轮播图
 <%
 	:sql = "select id,urlstr from mooc_index_pic_info where title ='首页轮播图'; "
-	changeRecordSet(:sql)
+	///changeRecordSet(:sql)
+	:x = singleSQL(:sql)
     :totalNumber = recordCount()
     If :totalNumber >0
      Repeat
@@ -24,7 +25,8 @@ $_@_$
 ///栏目一展示图
 <%
 	:sql = "select id,urlstr from mooc_index_pic_info where title ='栏目一'; "
-	changeRecordSet(:sql)
+	:x = singleSQL(:sql)
+	/// changeRecordSet(:sql)
     :totalNumber = recordCount()
     If :totalNumber >0
      Repeat
@@ -44,7 +46,8 @@ $_@_$
 ///栏目二展示图
 <%
 	:sql = "select id,urlstr from mooc_index_pic_info where title ='栏目二'; "
-	changeRecordSet(:sql)
+	:x = singleSQL(:sql)
+	/// changeRecordSet(:sql)
     :totalNumber = recordCount()
     If :totalNumber >0
      Repeat
@@ -64,7 +67,8 @@ $_@_$
 ///栏目三展示图
 <%
 	:sql = "select id,urlstr from mooc_index_pic_info where title ='栏目三'; "
-	changeRecordSet(:sql)
+	:x = singleSQL(:sql)
+	/// changeRecordSet(:sql)
     :totalNumber = recordCount()
     If :totalNumber >0
      Repeat

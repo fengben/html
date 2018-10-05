@@ -237,10 +237,8 @@
 
         function getPicturlSrc(context) {
             var re = /<img.*?(?:>|\/>)/gi;
-            res = context.match(re);
-            if (!res){
-                return ''
-            }
+            res = context.match(re)
+            top5img = "";
             for (var i = 0; i < res.length; i++) {
                 top5img += "<span class=\"topic_img_box\">"
                     + res[i].slice(0, 4) + " class=\"topic_content_img\"" + res[i].slice(4)
@@ -250,12 +248,12 @@
         }
 
         function createEditor() {
+
+
             editor = KindEditor.create('textarea[id="articleContent"]', {
                 allowFileManager: true,
                 uploadJson: kindeditUploadUrl(),
                 afterUpload: kindeditAfterUpload,
-                afterUpload: function(){this.sync();}, //图片上传后，将上传内容同步到textarea中
-                afterBlur: function(){this.sync()},  ////失去焦点时，将上传内容同步到textarea中
                 imageTabIndex: 1,
                 pasteType: 1,  //无格式粘贴
             });
@@ -302,13 +300,14 @@
                     if (fileId_pic) {
                         picId = fileId_pic;
                         doSaveArticle(picId);
+
                     }
                 }
                 uploadToDatabase("picInput", setPicId, "databaseType=PostgresXL");
             } else {
-                doSaveArticle(picId);
 
             }
+            doSaveArticle(picId);
         }
 
         function doSaveArticle(picId) {
@@ -321,7 +320,7 @@
             // var picIds = $("#bufferPicIds").val();
             // var content = editor.html();
             var content_text = editor.text();
-            //alert(content_text);
+            alert(content_text);
             top5img = getPicturlSrc(content_text);
             // return
             //kindeditor中嵌入文章中的图片,音频,视频等保存的是路径
@@ -346,7 +345,6 @@
             // paras += "$^@^$picId=" + picId;
             // paras += "$^@^$appendixId=" + appendixId;
             paras += "$^@^$top5img=" + top5img;
-            // alert(top5img)
             paras += "$^@^$operation=" + operation;
             var objs = new Array();
             var afterSavePost = function () {
@@ -843,19 +841,14 @@
                 var filterParam = "";//z置顶、精华、火热  筛选条件
                 var relationIds = "";//关联内容
                 var kpointId = "";//关联课时Id
-                // $(function () {
-                //     tSwiperFun();//热门小组滚动方法
-                //     groupHotTopic("0");//热门话题
-                //     getAllTopic(0, 1);//推荐/话题/活动  list
-                //     ssFun();//展开推荐/话题/活动
-                //
-                // });
-                window.onload = function() {
-                 tSwiperFun();//热门小组滚动方法
+                $(function () {
+                    tSwiperFun();//热门小组滚动方法
                     groupHotTopic("0");//热门话题
                     getAllTopic(0, 1);//推荐/话题/活动  list
                     ssFun();//展开推荐/话题/活动
-                }
+
+                });
+
                 //热门小组滚动方法
                 function tSwiperFun() {
                     var _sWrap = $('.swiper-container'),

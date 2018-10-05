@@ -302,6 +302,8 @@
     });
     var editor;
     function createEditor() {
+
+
         editor = KindEditor.create('textarea[id="articleContent"]', {
             allowFileManager: true,
             uploadJson: kindeditUploadUrl(),
@@ -324,9 +326,6 @@
 			myDataTable.fnClearTable();
 			myDataTable.fnDestroy();
 			$("#articlePanel").html(obj[0]);
-			myDataTable = $("#example-2").dataTable({
-//								"order": [2,"desc"]
-						});
 	    	}
 	  getFromWS("mainmooc/getArticleList.template", "operation=getSomeArticle$^@^$typeId=" + type + "$^@^$classification="+classification + "$^@^$loginName="+loginName, obj, processResult);
 	}

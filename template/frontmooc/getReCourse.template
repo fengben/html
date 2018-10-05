@@ -1,12 +1,13 @@
 ///推荐课程
 <%
 :sql = "select A.id, A.title, A.content_text, A.publish_date,A.on_top,A.school, A.count, A.pic_id,A.course_start,A.course_end,B.name from moocarticle as A, mooccolumns as B  where A.article_type = B.id and B.id !=2018088683860003597 order by A.count desc limit 4 offset 0"
-changeRecordSet(:sql);
+///changeRecordSet(:sql);
+:x = singleSQL(:sql)
 :totalNumber = recordCount()
 If :totalNumber >0
 Repeat
 %>
- <%If:on_top != 1%>
+ <%If A.on_top != 1%>
   <li class="">
   		<div class="cc-l-wrap">
   			<section class="course-img">

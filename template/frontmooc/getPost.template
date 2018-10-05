@@ -94,9 +94,9 @@ $_@_$
 
 <div>
              <%If :pageNumber-1!=0%>
-             <a href="javascript:goToPage(1)">首页</a>
+             <a href="javascript:goToPage(1)" style="width:40px;height:40px;">首页</a>
              <%Else%>
-             <a class="undisable" href="javascript:goToPage(1)">首页</a>
+             <a class="undisable" href="javascript:goToPage(1)" style="width:40px;height:40px;">首页</a>
              <%EndIf%>
 
             <%If :pageNumber-1 !=0%>
@@ -112,9 +112,9 @@ $_@_$
             <%EndIf%>  ///:pageNumber等于totalPage，就会放弃这一行
 
              <%If :pageNumber!=:totalPage && :totalPage != 0%>
-             <a href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+             <a href="javascript:goToPage(<%=:totalPage%>)" style="width:40px;height:40px;">尾页</a>
               <%Else%>
-              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)">尾页</a>
+              <a class="undisable" href="javascript:goToPage(<%=:totalPage%>)" style="width:40px;height:40px;">尾页</a>
              <%EndIf%>   ///:pageNumber等于totalPage，就会放弃这一行
 
            <div class="clear">

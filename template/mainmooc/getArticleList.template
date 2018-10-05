@@ -6,7 +6,7 @@ debugMsg("-----++++++++++-------------------------------------------------------
 If :operation=="getSomeArticle"
 	If :classification == 1
 		:querystr= "select  A.id, A.title, A.publisher, A.modify_date, A.content, A.on_top, A.article_type, A.pics, A.pic_id, A.appendix_id, A.school, B.name from moocarticle as A,mooccolumns as B where A.article_type=B.id and (B.id=? or B.parent_id=? or B.parent_id in (select id from mooccolumns where parent_id=?))  order by A.on_top desc,A.id desc"
-		changeRecordSet(:querystr,:typeId,:typeId,:typeId)
+		changeRecordSet(:querystr,L(:typeId),L(:typeId),L(:typeId))
 
 	Else
 		:selectStr="select column_ids from role where id=? "

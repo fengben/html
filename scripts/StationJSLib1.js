@@ -86,40 +86,102 @@ function getFromWS(url_str,post_data_,outargs_,callback_){
     }
 }
 
-//之所以要使用回调函数，是因为调用web service本身采用的是异步模式
-//弃用, 与station.js重复
-function _logout(){
-
-    var obj = new Array();
-    var passResult = function(){
-        if(obj[0]=="ok"){
-            var result = new Array();
-            var processResult = function(){
-                if(result[0]=="ok"){
-                    for(var i=1;i<result.length;i++)
-                        localStorage.removeItem(result[i]);
-                    location.href = "default.html";
+//invoke a web method, and then pass values to several variables
+//in in-parameter, '$^@^$' is used to separate parameters
+//in response data, '$_@_$' is used to separate values
+function remoteService(url_str,post_data_,callback_){
+    var argc = arguments.length;
+    if(argc<2 || argc>3){
+        alert("Invalid number of arguments in remoteService()");
+        return;
+    }
+    var post_data;
+    var callback;
+    if(argc==2){
+        post_data="";
+        callback = post_data_;
+    }
+    else{
+        post_data= post_data_;
+        callback = callback_;
+    }
+    var outargs = new Array();
+    var xmlhttp=null;
+    var state_Change=function(){
+        if (xmlhttp.readyState==4){// 4 = "loaded"
+            if (xmlhttp.status==200){// 200 = OK
+                if(outargs){
+                    var htmlstr =  xmlhttp.responseText;
+                    var q = htmlstr.split('$_@_$');
+                    for(var i=0;i<q.length;i++){            
+                        outargs[i] = q[i];
+                    }
                 }
-            };
-            getFromWS("/CoreService/logout","",result,processResult);
-        }else{
-            localStorage.removeItem("userId");
-            localStorage.removeItem("userToken");
-            localStorage.removeItem("classification");
-            localStorage.removeItem("loginName");
-            location.href = "login.html";
+                if(callback)
+                    callback(outargs);
+            }
+	    else{
+                //alert("in getfromws("+url_str+")");
+                //alert("Problem retrieving XML data");
+	    }
+        }
+    };
+    if (window.XMLHttpRequest){// code for all new browsers
+        xmlhttp=new XMLHttpRequest();
+    }
+    else if (window.ActiveXObject){// code for IE5 and IE6
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if (xmlhttp!=null){
+        try{
+            xmlhttp.onreadystatechange=state_Change;
+            xmlhttp.open("POST", homeAddress()+"one/"+url_str, true);
+            if(typeof post_data ==="string")
+                post_data += localStorageArgs();
+            else
+                localStorageArgsIntoFormData(post_data);
+            xmlhttp.send(post_data);
+        }
+        catch(exception){
+            alert("xmlHttp Fail");
         }
     }
-    getFromWS("maintain/security.template",localStorageArgs(),obj,passResult);
+    else{
+        alert("Your browser does not support XMLHTTP.");
+    }
+}
 
-
+//之所以要使用回调函数，是因为调用web service本身采用的是异步模式
+function logout(id,token,callback){
+    if(arguments.length<2){
+        alert("no enough arguments in logout()");
+        return;
+    }
+    var obj = new Array();
+    var processResult = function(){
+        if(obj[0]=="ok"){
+            for(var i=1;i<obj.length;i++)
+                localStorage.removeItem(obj[i]);
+            callback();
+        }
+        else {
+            localStorage.clear();
+        }
+    };
+    try {
+        getFromWS("/CoreService/logout", "", obj, processResult);
+        throw "error"
+    }catch (e) {
+        // alert("err");
+        //解决长时间不操作，服务器退出，页面没有登出
+        localStorage.clear();
+    }
 }
 
 
 //send loginname and password, to get userid and usertoken and classification
 //returning data are:id token classification
-//弃用,与station.js重复
-function _login(loginName,passwd,callback){
+function login(loginName,passwd,callback){
     if(arguments.length<3){
         alert("no enough arguments in login()");
         return;
@@ -140,6 +202,8 @@ function _login(loginName,passwd,callback){
     };
     getFromWS("/CoreService/login","loginName="+loginName+"$^@^$passwd="+passwd,obj,processResult);
 }
+
+
 
 //用随机数产生验证码
 function veriCode(retlen){
@@ -166,7 +230,8 @@ function normalContentType(){
     return "text/xml; charset=utf-8";
 }
 
-function homeAddress(){
+
+function homeAddress(need_protocol){
     var addressHead = window.location.href;
     var buf;
     buf = addressHead.substr(0,6);
@@ -180,9 +245,12 @@ function homeAddress(){
     }
     var index = buf.indexOf("/");
     if(index<0)
-        return addressHead+buf+"/";
-    buf = buf.substr(0,index+1);
-    return addressHead+buf;
+        buf = buf+"/";
+    else
+        buf = buf.substr(0,index+1);
+    if(arguments.length==0 || need_protocol)
+        return addressHead+buf;
+    return buf;
 }
 
 // invoke a web method, and then pass html to several DIVs
@@ -296,8 +364,7 @@ function sendForm(urlstr,form1,callback){
         if(xrq.readyState==4){// 4 = "loaded"
             if(xrq.status==200){// 200 = OK
                 if(typeof args[2]==="function"){
-                    //返回文件id
-                    //alert(xrq.responseText);
+                    alert(xrq.responseText);  
                     callback(xrq.responseText);
                 }else{
                     var divcontent=xrq.responseText.split('$_@_$');
@@ -308,10 +375,10 @@ function sendForm(urlstr,form1,callback){
                 }
             }
             else{
-                alert("in sendform");
+                // alert("in sendform");
                 alert("Problem retrieving XML data:"+xrq.status);
         }}};
-
+    //alert(urlstr);
     xrq.open("POST",urlstr);
     xrq.send(form1);
 }
@@ -344,200 +411,3 @@ function get_appropriate_ws_url(server_id)
 	return urlstr;
 }
 
-//the remote server may be down, so try them in turn
-function oneUploadAction(server_total,server_id,current_server,taskId,paras){
-    if(current_server>server_total){
-        alert("None of websocket servers works!");
-        return;
-    }
-    var valid=true;
-    //var urlstr = get_appropriate_ws_url(server_id) + taskId;
-    var urlstr = get_appropriate_ws_url(server_id) + "uploadfile?taskId=" +taskId;
-    //alert(urlstr);
-    var socket_up;
-    if (typeof MozWebSocket != "undefined") {
-       socket_up = new MozWebSocket(urlstr);
-    }
-    else {
-        socket_up = new WebSocket(urlstr);
-    }
-
-    socket_up.onopen = function(evt) {
-        if(paras.process_div_id){
-            $("#"+paras.process_div_id)[0].style.backgroundColor = "#40ff40";
-            $("#"+paras.process_div_id)[0].style.width = "0%";
-            $("#"+paras.process_div_id)[0].innerHTML = "Uploading...";
-        }
-        uploadToDatabase(paras.file,paras.callback,paras.additional_args,paras.target_fileid,server_id);
-    };
-
-    socket_up.onclose = function(evt) {
-        if(!valid && evt.code!=1000){
-            server_id++;
-            if(server_id>server_total)
-                server_id =1;
-            oneUploadAction(server_total,server_id,current_server+1,taskId,paras);
-        }
-    };
-    
-    socket_up.onmessage = function(msg) {
-        var pwidth = 0.01 * msg.data * paras.process_div_id_width;
-        $("#"+paras.process_div_id)[0].style.width = pwidth+"px";
-        $("#"+paras.process_div_id)[0].style.textAlign = "center";
-        $("#"+paras.process_div_id)[0].value = msg.data+"%";
-    };
-
-    socket_up.onerror = function(evt) {
-        valid=false;
-    };
-}
-
-function uploadFile(input_file_id,callback,additional_args,target_fileid,process_div_id,process_div_id_width){
-    var server_total=2;
-    if(!target_fileid || target_fileid<1)
-        target_fileid=0;
-    var file_ctr = $("#"+input_file_id)[0];
-    var file = file_ctr.files[0];
-    var filename=file.name;
-    if(filename.length>35)
-        filename=filename.substr(0,35);
-    var taskId="upload"+ filename + veriCode(10);
-    if(additional_args)
-        additional_args += "&fifoname="+taskId;
-    else
-        additional_args = "fifoname="+taskId;
-    var server_id = 1+Math.floor(Math.random()*server_total); //1-server_total
-    var paras={file:file,callback:callback,additional_args:additional_args,target_fileid:target_fileid,process_div_id:process_div_id};
-    paras["process_div_id_width"]=process_div_id_width;
-    oneUploadAction(server_total,server_id,1,taskId,paras);
-}
-
-function uploadToDatabase(file,callback,additional_args,target_fileid,server_id){
-
-    var userId = localStorage.getItem('userId');
-    var userToken = localStorage.getItem('userToken');
-    var obj = new Array();
-    var processResult = function(){
-        if(obj[0]!="ok"){
-	    alert("登陆超时，请重新登陆！");
-	    logout();
-	    return;
-        }
-    }
-    var paras = "$^@^$userId="+userId;
-    paras += "$^@^$userToken="+userToken;
-    getFromWS("zyMooc/security.template",paras,obj,processResult);
-    if(typeof file == "string"){
-        var file_ctr = $("#"+file)[0];
-        file = file_ctr.files[0];
-    }
-    var form1 = new FormData();
-    form1.append("FILE1",file);
-    var url_str="";
-    if(target_fileid && target_fileid>0)
-        url_str = "replaceFile.spe?fileid="+target_fileid;
-    else
-        url_str = "uploadFile.spe";
-    if(additional_args){
-        if(url_str=="uploadFile.spe")
-            url_str += "?"+additional_args;
-        else
-            url_str += "&"+additional_args;
-    }
-    if(server_id)
-        url_str = homeAddress()+"zs"+server_id+"/"+url_str;
-    else 
-        url_str = homeAddress()+url_str;
-    url_str += "&userId="+  userId + "&userToken=" + userToken;
-    sendForm(url_str,form1,callback);
-}
-
-
-function eraseFileInDatabase(fileid,formfield,callback){
-    if(arguments.length==0){
-        alert("invalid number of arguments in eraseFileInDatabase()");
-        return;
-    }
-    var paras = "fileid="+fileid;
-    var obj = new Array();
-    var processResult= function()
-    {
-        if(obj[0]=="ok"){
-            if(!callback) alert("deleted!");
-        }
-        else{
-            if(!cb_exist) alert("file no longer exists!");
-        }
-        if(formfield)
-            $("#" + formfield)[0].value="";
-        if(callback) callback();
-    };
-    getFromWS("CoreService/deleteFile",paras,obj,processResult);
-}
-
-    function updateIncFile(folder,templatef,incfile,callback){
-        var refreshCurrent = function(){
-            if(refreshList)  refreshList();
-            if(callback)  callback();
-        };
-        var urlstr = "/CoreService/writeIncFile?folder="+folder+"&template="+ templatef+"&targetfolder=../inc&incfile="+incfile;
-//        alert(urlstr);
-        getFromWS(urlstr,null,refreshCurrent);
-    }
-
-    function kindeditUploadUrl(){
-	var userId = localStorage.getItem('userId');
-	var userToken = localStorage.getItem('userToken');
-	var obj = new Array();
-	var processResult = function(){
-	    if(obj[0]!="ok"){
-//		alert("登陆超时，请重新登陆！");
-//		ry_logout();
-		return;
-	    }
-	}
-	var paras = "$^@^$userId="+userId;
-    	paras += "$^@^$userToken="+userToken;
-	getFromWS("zyMooc/security.template",paras,obj,processResult);
-        var databaseType;
-        var additional_args;
-        var tmpEnt = $("#bufferDatabaseType");
-        if(tmpEnt && tmpEnt.val() && tmpEnt.val()!="")
-              databaseType = tmpEnt.val();
-        else
-              databaseType = "PostgresXL";
-        additional_args = "databaseType="+databaseType;
-        tmpEnt = $("#bufferGeneratedId");
-        if(tmpEnt && tmpEnt.val() && tmpEnt.val()!="" && tmpEnt.val()!="0")
-              additional_args += "&relatedDoc=" + tmpEnt.val();
-        additional_args  += "&userId="+  userId + "&userToken=" + userToken;
-        return "/uploadFile.spe?requestSource=kindeditor&" + additional_args;
-    }
-
-    function kindeditAfterUpload(url,data,name){
-        var picIds = $("#bufferPicIds")[0];
-        if(picIds){
-                if(picIds.value==""){
-                        $("#bufferPicIds")[0].value = url.substr(url.length-19);
-                }else{
-                        $("#bufferPicIds")[0].value += ";" + url.substr(url.length-19);
-                }
-        }
-    }
-
-    function showHiBox(dialogId,prmpt,modifyContentId){
-//alert("here");
-        var boxHeight = window.innerHeight;
-        if(boxHeight>795)
-            boxHeight=770;
-        else
-            boxHeight -= 45;
-        hiBox("#"+dialogId, prmpt,1000,boxHeight,'','.a_close');
-        var textareaHeight=600;
-        if(boxHeight<765)
-            textareaHeight -= 765-boxHeight;
-        if($("#bufferPicpath").val() != ""){
-            textareaHeight -= 25;
-        }
-        $("#popup_message #"+modifyContentId)[0].style.height = textareaHeight+"px";
-    }
